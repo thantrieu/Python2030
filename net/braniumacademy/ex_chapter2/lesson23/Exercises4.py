@@ -8,4 +8,4 @@ for i in range(1, t + 1):
         s = 0.0
         for x in range(1, n + 1):
             s += 1 / x
-        print(round(s, 3))  # in xuống dòng
+        print("{0:.3f}".format(s))  # in xuống dòng

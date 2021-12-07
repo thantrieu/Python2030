@@ -1,8 +1,6 @@
 day_str, month_str = input().split()
 day = int(day_str)
 month = int(month_str)
-day = int(day_str)
-month = int(month_str)
 
 match month:
     case 1:
