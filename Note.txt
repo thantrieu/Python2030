@@ -1,0 +1,4 @@
+Cú pháp chạy file python cụ thể:
+    py C:\Users\trieu\PycharmProjects\Example\net\braniumacademy\ex_chapter2\lesson23\Exercises15.py
+Cú pháp chạy và đẩy kết quả vào file khác:
+    py C:\Users\trieu\PycharmProjects\Example\net\braniumacademy\ex_chapter2\lesson23\Exercises15.py > output.txt
