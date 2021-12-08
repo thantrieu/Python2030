@@ -1,7 +1,6 @@
 option = "Nhập tháng 1-12.\nNhập 0 để thoát:\n"
 while True:
     month = int(input(option))
-    result = ""
     match month:
         case 0:
             print("Cảm ơn quý vị đã sử dụng dịch vụ!")
