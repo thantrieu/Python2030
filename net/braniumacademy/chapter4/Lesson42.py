@@ -19,31 +19,26 @@ def pop(m_queue):
 
 
 def front(m_queue):
-    """This function return leftmost element of queue.
-       Return None if queue is empty.
-    """
+    """This function return leftmost element of queue"""
     if is_empty(m_queue):
         return None
     return m_queue[0]
 
 
 def back(m_queue):
-    """This function return rightmost element of queue.
-       Return None if queue is empty.
-    """
+    """This function return rightmost element of queue"""
     if is_empty(m_queue):
         return None
     return m_queue[size(m_queue) - 1]
 
 
 def size(m_queue):
-    """This function return queue's size"""
     return len(m_queue)
 
 
-option = "=============== OPTIONS ===============\n" \
+option = "====================== OPTIONS ======================\n" \
          "1. Add new item.\n2. Get leftmost element.\n" \
-         "3. Get right most element.\n4. Pop leftmost element.\n" \
+         "3. Get rightmost element.\n4. Pop leftmost element.\n" \
          "5. Check queue is empty.\n6. Get queue's size.\n" \
          "0. Exit.\nYour choice? "
 queue = deque()
@@ -65,6 +60,6 @@ while True:
         case 5:
             print(f"Is queue empty? {is_empty(queue)}")
         case 6:
-            print(f"queue's size: {size(queue)}")
+            print(f"Queue's size: {size(queue)}")
         case _:
-            print("Wrong option. Please try again!")
+            print("Wrong option.Please try again!")
