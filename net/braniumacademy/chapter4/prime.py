@@ -16,9 +16,9 @@ def is_prime(n):
                 return False
         return True
 
-#
-# if __name__ == '__main__':
-#     import sys
-#
-#     num = int(sys.argv[1])
-#     print(f'{num} is prime number? {is_prime(num)}')
+
+if __name__ == '__main__':
+    import sys
+
+    num = int(sys.argv[1])
+    print(f'{num} is prime number? {is_prime(num)}')
