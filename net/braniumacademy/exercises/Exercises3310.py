@@ -15,4 +15,3 @@ for x in range(1, t + 1, 1):
     n = int(input("Nhập n: "))
     result = sum(n)
     print(f"Test {x}: {round(result, 3)}")
-

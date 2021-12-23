@@ -3,7 +3,6 @@ name = "Linh"
 gpa = 3.25
 a = 5 + 3j
 
-
 # print("Type of variable age: ", type(age))
 # print("Type of variable name: ", type(name))
 # print("Type of variable gpa: ", type(gpa))

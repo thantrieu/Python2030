@@ -30,10 +30,11 @@ def print_student_info(first, last, mid="", age=20):
 print_student_info(age=18, first="Nam", mid="Thanh", last="Hoang")
 print_student_info(first="Ngan", last="Ly")
 
+
 def print_info(**info):
     print(f"Name: {info['name']}")
     print(f"Age: {info['age']}")
     print(f"Salary: {info['salary']}")
 
 
-print_info(age = 20, salary=18500, name="Truong Viet Hoang")
+print_info(age=20, salary=18500, name="Truong Viet Hoang")

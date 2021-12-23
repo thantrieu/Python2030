@@ -22,6 +22,7 @@ print(f'{6} is prime number? {check_prime_number(6)}')
 # F1 = 1
 
 import prime
+
 print(dir(prime))
 # Kết quả:
 # ['F0', 'F1', '__builtins__', '__cached__',

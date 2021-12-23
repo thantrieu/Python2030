@@ -61,7 +61,7 @@ option = "=============== OPTIONS ===============\n" \
          "1. Add new item at the end queue.\n" \
          "2. Add new item at the front queue.\n" \
          "3. Get leftmost element.\n4. Get rightmost element.\n" \
-         "5. Get queue's size.\n6. Get queue's size.\n" \
+         "5. Get queue's size.\n6. Check queue is empty.\n" \
          "7. Pop leftmost element\n8. Pop rightmost element.\n" \
          "9. Print queue's elements.\n" \
          "0. Exit.\nYour choice? "
@@ -91,7 +91,7 @@ while True:
         case 8:
             print(f"Removed rightmost element: {pop_back(queue)}")
         case 9:
-            print("Elements of queue:")
+            print("Elements of queue: ")
             print_elements(queue)
         case _:
             print("Wrong option. Please try again!")

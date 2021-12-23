@@ -1,5 +1,5 @@
 import math
-from random import random
+
 c = 360
 a = round(c * math.sin(math.radians(35)), 3)
 b = round(c * math.cos(math.radians(35)), 3)

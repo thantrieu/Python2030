@@ -7,4 +7,3 @@ def fibo(n):
 
 k = int(input("Enter an interger number >= 0: "))
 print(f"F{k} = {fibo(k)}")
-

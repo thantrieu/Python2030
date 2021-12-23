@@ -7,5 +7,3 @@ def sum(n):
 
 m = int(input("Enter an integer number > 0: "))
 print(f"S = {sum(m)}")
-    
-
