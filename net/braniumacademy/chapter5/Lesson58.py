@@ -1,4 +1,6 @@
 class FullName:
+    """Lớp mô tả thông tin họ và tên đầy đủ."""
+
     def __init__(self, fname):
         self.__first_name = ''
         self.__mid_name = ''
@@ -12,11 +14,17 @@ class FullName:
         for i in range(1, len(words) - 1):
             self.__mid_name += words[i] + ' '
 
+    @property
+    def first_name(self):
+        return self.__first_name
+
     def __str__(self):
         return f'{self.__last_name} {self.__mid_name}{self.__first_name}'
 
 
 class BirthDate:
+    """Lớp này mô tả thông tin ngày tháng năm sinh."""
+
     def __init__(self, dob):
         self.__day = 0
         self.__month = 0
@@ -29,6 +37,10 @@ class BirthDate:
         self.__month = data[1]
         self.__year = data[2]
 
+    @property
+    def year(self):
+        return self.__year
+
     def __str__(self):
         return f'{self.__day}/{self.__month}/{self.__year}'
 
@@ -39,6 +51,18 @@ class Person:
         self.__gender = gender
         self.__birth_date = BirthDate(dob)
 
+    @property
+    def full_name(self):
+        return self.__full_name
+
+    @full_name.setter
+    def full_name(self, value):
+        self.full_name = value
+
+    @property
+    def birth_date(self):
+        return self.__birth_date
+
     def eat(self, food):
         print(f'{self.__full_name} is eating {food}')
 
@@ -46,60 +70,7 @@ class Person:
         return f'[{self.__full_name}, {self.__gender}, {self.__birth_date}]'
 
 
-huong = Person('Tran Thi Thu Huong', 'Female', '28/08/2005')
+huong = Person('Tran Thi Thu Huong', 'Female', '22/10/2005')
 print(huong)
-huong.eat('Fish')
-
-class BankCard:
-    def __init__(self, acc_num, balance, owner):
-        self.acc_number = acc_num
-        self.balance = balance
-        self.owner = owner
-
-    def withdraw(self, amount):
-        """Phương thức thực hiện việc rút tiền và trả về số tiền đã rút"""
-        if amount > self.balance:
-            return -1
-        else:
-            self.balance -= amount
-            return amount
-
-
-class ATM:
-    transaction_id = 100
-
-    def __init__(self, atm_id, bank, address):
-        self.atm_id = atm_id
-        self.bank_owner = bank
-        self.address = address
-        self.sessions = dict()
-
-    def withdraw_transaction(self, card):
-        """Phương thức liên kết thực hiện giao dịch rút tiền trong thẻ."""
-        amount = int(input("Enter amount you want to withdraw: "))
-        result = card.withdraw(amount)
-        self.sessions[ATM.transaction_id] = 'Sucessfully' if result > 0 else 'Failed'
-        header = f'Transaction ref id \'{ATM.transaction_id}\'' \
-                 f' was {self.sessions.get(ATM.transaction_id)}.'
-        detail = f'-{result}$. Your current balance: {card.balance}$' if result > 0 \
-            else f'-{0}$. Your current balance: {card.balance}$'
-        self.push_notification(header, detail)
-        ATM.transaction_id += 1
-
-    def push_notification(self, header, detail):
-        print(header)
-        print(detail)
-
-
-card = BankCard(acc_num='0021000842687', balance=15000, owner='TRAN THANH TUNG')
-atm = ATM(1025374, 'VCB', '125, Center Point, Wakanda')
-atm.withdraw_transaction(card)
-
-# Kết quả:
-# Enter amount you want to withdraw: 1250
-# Transaction ref id '100' was Sucessfully.
-# -1250$. Your current balance: 13750$
-# Enter amount you want to withdraw: 16000
-# Transaction ref id '100' was Failed.
-# -0$. Your current balance: 15000$
-
+print(f'Name: {huong.full_name.first_name}')
+print(f'Birth year: {huong.birth_date.year}')
