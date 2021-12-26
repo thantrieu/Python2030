@@ -21,7 +21,7 @@ class BankAccount:
 
     def check_balance(self):
         """Phương thức kiểm tra số dư tài khoản."""
-        print(f'Your current balance is: {self.balance}')
+        print(f'Account {self.acc_number}\'s current balance is: {self.balance}$')
 
     def payment(self, service, amount):
         """Phương thức thanh toán dịch vụ nào đó có mức phí amount."""
@@ -40,8 +40,10 @@ class BankAccount:
         if len(other.acc_number) > 0 and amount < self.balance:
             self.balance -= amount
             other.balance += amount
-            print(f'Transfer success: -{amount}$')
+            print(f'Transfer success!\nAccount {self.acc_number}: -{amount}$')
             self.check_balance()
+            print(f'Account {other.acc_number}: +{amount}$')
+            other.check_balance()
             return amount
         else:
             print('Transaction failed.')
