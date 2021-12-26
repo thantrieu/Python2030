@@ -1,7 +1,7 @@
 class TestSchedule:
     """This class describe test schedule info and behaviors."""
 
-    def __int__(self, sid, time, date, room, subject='', num_of_student=0):
+    def __init__(self, sid, time, date, room, subject, num_of_student):
         self.id = sid
         self.time = time
         self.date = date

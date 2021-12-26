@@ -3,7 +3,7 @@ from net.braniumacademy.ex_chapter5.lesson52.exercises3 import utils
 
 option = '===================== TÙY CHỌN =====================\n' \
          '1. Thêm mới một tài khoản vào danh sách tài khoản.\n' \
-         '2. hiển thị danh sách tài khoản ra màn hình.\n' \
+         '2. Hiển thị danh sách tài khoản ra màn hình.\n' \
          '3. Nạp tiền vào tài khoản.\n' \
          '4. Rút tiền khỏi tài khoản.\n' \
          '5. Chuyển khoản.\n6. Tìm tài khoản theo tên tài khoản.\n' \
