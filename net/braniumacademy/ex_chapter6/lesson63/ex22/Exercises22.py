@@ -20,11 +20,17 @@ def show_rect(matrix):
     print()
 
 
-row_str, col_str = input().split()
-row = int(row_str)
-col = int(col_str)
-if row <= 0 or col <= 0:
-    print('ERROR')
-else:
-    rectangle = draw_rect(row, col)
-    show_rect(rectangle)
+with open('input22.txt') as reader:
+    data = reader.readline()
+    while True:
+        if data == '':
+            break
+        row_str, col_str = data.split()
+        row = int(row_str)
+        col = int(col_str)
+        if row <= 0 or col <= 0:
+            print('ERROR')
+        else:
+            rectangle = draw_rect(row, col)
+            show_rect(rectangle)
+        data = reader.readline()

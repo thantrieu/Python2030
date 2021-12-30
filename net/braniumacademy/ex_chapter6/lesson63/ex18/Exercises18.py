@@ -1,8 +1,8 @@
-def read_matrix(mrow):
+def read_matrix(mreader, mrow):
     """Hàm đọc vào ma trận từ bàn phím"""
     matrix = []
-    for i in range(mrow):
-        matrix.append([int(x) for x in input().split()])
+    for index in range(mrow):
+        matrix.append([int(x) for x in mreader.readline().split()])
     return matrix
 
 
@@ -21,20 +21,29 @@ def transposition(matrix):
     mrow = len(matrix)
     mcol = len(matrix[0])
     result = []
-    for i in range(mcol):
+    for index in range(mcol):
         result.append([])
         for j in range(mrow):
-            result[i].append(matrix[j][i])
+            result[index].append(matrix[j][index])
     return result
 
 
-row_str, col_str = input().split()
-row = int(row_str)
-col = int(col_str)
-if row <= 0 or col <= 0:
-    print('ERROR')
-else:
-    matrix_integer = read_matrix(row)
-    show_matrix(matrix_integer)
-    trans_matrix = transposition(matrix_integer)
-    show_matrix(trans_matrix)
+with open('input18.txt') as reader:
+    data = reader.readline()
+    while True:
+        if data == '':
+            break
+        row_str, col_str = data.split()
+        row = int(row_str)
+        col = int(col_str)
+        if row <= 0 or col <= 0:
+            print('ERROR')
+            row = abs(row)
+            for i in range(row):
+                reader.readline()
+        else:
+            matrix_integer = read_matrix(reader, row)
+            show_matrix(matrix_integer)
+            trans_matrix = transposition(matrix_integer)
+            show_matrix(trans_matrix)
+        data = reader.readline()

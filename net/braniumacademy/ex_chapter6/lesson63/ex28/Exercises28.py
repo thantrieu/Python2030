@@ -17,12 +17,17 @@ def show_rect(matrix):
         for e in x:
             print(f'{e}', end='')
         print()
-    print()
 
 
-h = int(input())
-if h <= 0:
-    print('ERROR')
-else:
-    rectangle = draw_rect(h)
-    show_rect(rectangle)
+with open('input28.txt') as reader:
+    data = reader.readline()
+    while True:
+        if data == '':
+            break
+        h = int(data)
+        if h <= 0:
+            print('ERROR')
+        else:
+            rectangle = draw_rect(h)
+            show_rect(rectangle)
+        data = reader.readline()

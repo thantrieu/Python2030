@@ -1,6 +1,6 @@
 path = 'input.txt'
 
-# Hiển thị 4 dòng đầu trong file input.txt
+# Hiển thị 4 dòng đầu trong file input21.txt
 with open(path, 'r', encoding='UTF-8') as reader:
     lines = reader.readlines()
     print(lines[:4])  # In ra 4 phần tử đầu tiên trong list
@@ -11,7 +11,7 @@ with open(path, 'r', encoding='UTF-8') as reader:
     for line in lines:
         print(line.strip())
 
-# Đọc 4 dòng đầu trong file input.txt
+# Đọc 4 dòng đầu trong file input21.txt
 with open(path, 'r', encoding='UTF-8') as reader:
     for i in range(4):
         print(reader.readline().strip())

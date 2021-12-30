@@ -14,12 +14,17 @@ def show_triangle(matrix):
         for e in x:
             print(f'{e}', end='')
         print()
-    print()
 
 
-h = int(input())
-if h <= 0:
-    print('ERROR')
-else:
-    triangle = draw_triangle(h)
-    show_triangle(triangle)
+with open('input23.txt') as reader:
+    data = reader.readline()
+    while True:
+        if data == '':
+            break
+        h = int(data)
+        if h <= 0:
+            print('ERROR')
+        else:
+            triangle = draw_triangle(h)
+            show_triangle(triangle)
+        data = reader.readline()
