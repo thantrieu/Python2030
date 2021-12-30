@@ -1,0 +1,6 @@
+Test 1:
+N INVALID
+Test 2:
+NO
+Test 3:
+YES

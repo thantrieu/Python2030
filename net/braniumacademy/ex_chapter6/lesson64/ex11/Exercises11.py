@@ -7,16 +7,16 @@ def is_symmetry(array):
     return True
 
 
-with open('input11.txt') as reader:
+with open('input11.txt') as reader, open('output11.txt', 'w') as writer:
     t = int(reader.readline())
     for i in range(1, t + 1):
         n = int(reader.readline())
         arr = [int(x) for x in reader.readline().split()]
         if n <= 0:
-            print(f"Test {i}:\nN INVALID")
+            writer.write(f"Test {i}:\nN INVALID\n")
         else:
-            print(f"Test {i}:", end="")
+            writer.write(f"Test {i}:\n")
             if is_symmetry(arr):
-                print("YES")
+                writer.write("YES\n")
             else:
-                print("NO")
+                writer.write("NO\n")
