@@ -8,23 +8,23 @@ def draw_triangle(height):
     return mtriangle
 
 
-def show_triangle(matrix):
+def write_triangle(mwriter, matrix):
     """Hàm hiển thị các phần tử trong ma trận"""
     for x in matrix:
         for e in x:
-            print(f'{e}', end='')
-        print()
+            mwriter.write(f'{e}')
+        mwriter.write('\n')
 
 
-with open('input23.txt') as reader:
+with open('input23.txt') as reader, open('output23.txt', 'w') as writer:
     data = reader.readline()
     while True:
         if data == '':
             break
         h = int(data)
         if h <= 0:
-            print('ERROR')
+            writer.write('ERROR\n')
         else:
             triangle = draw_triangle(h)
-            show_triangle(triangle)
+            write_triangle(writer, triangle)
         data = reader.readline()

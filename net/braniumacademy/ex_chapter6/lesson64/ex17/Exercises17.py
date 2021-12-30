@@ -9,16 +9,15 @@ def read_matrix(mrow, mcol, mreader):
     return matrix
 
 
-def show_matrix(matrix):
+def write_matrix(mwriter, matrix):
     """Hàm hiển thị các phần tử trong ma trận"""
     for x in matrix:
         for e in x:
-            print(f'{e} ', end='')
-        print()
-    print()
+            mwriter.write(f'{e} ')
+        mwriter.write('\n')
 
 
-with open('input17.txt') as reader:
+with open('input17.txt') as reader, open('output17.txt', 'w') as writer:
     while True:
         data = reader.readline()
         if data == '':
@@ -28,8 +27,8 @@ with open('input17.txt') as reader:
         col = int(col_str)
         if row <= 0 or col <= 0:
             reader.readline()  # đọc bỏ dòng data
-            print('ERROR')
+            writer.write('ERROR\n')
         else:
             matrix_integer = read_matrix(row, col, reader)
-            print(f'{row} {col}')
-            show_matrix(matrix_integer)
+            writer.write(f'{row} {col}\n')
+            write_matrix(writer, matrix_integer)

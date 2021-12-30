@@ -6,14 +6,13 @@ def read_matrix(mreader, mrow):
     return matrix
 
 
-def show_matrix(matrix):
+def write_matrix(mwriter, matrix):
     """Hàm hiển thị các phần tử trong ma trận"""
-    print(f'{len(matrix)} {len(matrix[0])}')
+    mwriter.write(f'{len(matrix)} {len(matrix[0])}\n')
     for x in matrix:
         for e in x:
-            print(f'{e} ', end='')
-        print()
-    print()
+            mwriter.write(f'{e} ')
+        mwriter.write('\n')
 
 
 def add_two_matrix(input_matrix1, input_matrix2):
@@ -28,7 +27,7 @@ def add_two_matrix(input_matrix1, input_matrix2):
     return result
 
 
-with open('input19.txt') as reader:
+with open('input19.txt') as reader, open('output19.txt', 'w') as writer:
     data = reader.readline()
     while True:
         if data == '':
@@ -41,8 +40,8 @@ with open('input19.txt') as reader:
         matrix1 = read_matrix(reader, row)
         matrix2 = read_matrix(reader, row2)
         if row != row2 or col != col2:
-            print('INVALID ACTION')
+            writer.write('INVALID ACTION\n')
         else:
             matrix_sum = add_two_matrix(matrix1, matrix2)
-            show_matrix(matrix_sum)
+            write_matrix(writer, matrix_sum)
         data = reader.readline()

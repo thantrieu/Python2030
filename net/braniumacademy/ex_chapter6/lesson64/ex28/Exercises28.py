@@ -11,23 +11,23 @@ def draw_rect(edge):
     return rect
 
 
-def show_rect(matrix):
+def writer_rect(mwriter, matrix):
     """Hàm hiển thị các phần tử trong ma trận"""
     for x in matrix:
         for e in x:
-            print(f'{e}', end='')
-        print()
+            mwriter.write(f'{e}')
+        mwriter.write('\n')
 
 
-with open('input28.txt') as reader:
+with open('input28.txt') as reader, open('output28.txt', 'w') as writer:
     data = reader.readline()
     while True:
         if data == '':
             break
         h = int(data)
         if h <= 0:
-            print('ERROR')
+            writer.write('ERROR\n')
         else:
             rectangle = draw_rect(h)
-            show_rect(rectangle)
+            writer_rect(writer, rectangle)
         data = reader.readline()

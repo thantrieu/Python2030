@@ -6,14 +6,13 @@ def read_matrix(mreader, mrow):
     return matrix
 
 
-def show_matrix(matrix):
+def write_matrix(writer, matrix):
     """Hàm hiển thị các phần tử trong ma trận"""
-    print(f'{len(matrix)} {len(matrix[0])}')
+    writer.write(f'{len(matrix)} {len(matrix[0])}\n')
     for x in matrix:
         for e in x:
-            print(f'{e} ', end='')
-        print()
-    print()
+            writer.write(f'{e} ')
+        writer.write('\n')
 
 
 def transposition(matrix):
@@ -28,7 +27,7 @@ def transposition(matrix):
     return result
 
 
-with open('input18.txt') as reader:
+with open('input18.txt') as reader, open('output18.txt', 'w') as writer:
     data = reader.readline()
     while True:
         if data == '':
@@ -37,13 +36,13 @@ with open('input18.txt') as reader:
         row = int(row_str)
         col = int(col_str)
         if row <= 0 or col <= 0:
-            print('ERROR')
+            writer.write('ERROR\n')
             row = abs(row)
             for i in range(row):
                 reader.readline()
         else:
             matrix_integer = read_matrix(reader, row)
-            show_matrix(matrix_integer)
+            write_matrix(writer, matrix_integer)
             trans_matrix = transposition(matrix_integer)
-            show_matrix(trans_matrix)
+            write_matrix(writer, trans_matrix)
         data = reader.readline()

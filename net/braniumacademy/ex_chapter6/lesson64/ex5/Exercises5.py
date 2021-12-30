@@ -17,14 +17,13 @@ def listed_squares(mwriter, array):
     mwriter.write('\n')
 
 
-with open('input5.txt') as reader:
-    with open('output5.txt', 'w') as writer:
-        t = int(reader.readline())
-        for i in range(1, t + 1):
-            n = int(reader.readline())
-            arr = [int(x) for x in reader.readline().split()]
-            if n <= 0:
-                writer.write(f"Test {i}:\nN INVALID\n")
-            else:
-                writer.write(f"Test {i}:\n")
-                listed_squares(writer, arr)
+with open('input5.txt') as reader, open('output5.txt', 'w') as writer:
+    t = int(reader.readline())
+    for i in range(1, t + 1):
+        n = int(reader.readline())
+        arr = [int(x) for x in reader.readline().split()]
+        if n <= 0:
+            writer.write(f"Test {i}:\nN INVALID\n")
+        else:
+            writer.write(f"Test {i}:\n")
+            listed_squares(writer, arr)

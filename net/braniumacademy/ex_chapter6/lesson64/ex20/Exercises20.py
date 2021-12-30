@@ -14,14 +14,14 @@ def draw_plus_sign(row, col):
     return rect
 
 
-def show_rect(matrix):
+def write_rect(matrix):
     """Hàm hiển thị các phần tử trong ma trận"""
-    for x in matrix:
-        for e in x:
-            print(f'{e}', end='')
-        print()
-    print()
+    with open('output20.txt', 'w') as writer:
+        for x in matrix:
+            for e in x:
+                writer.write(f'{e}')
+            writer.write('\n')
 
 
 plus_sign = draw_plus_sign(9, 13)
-show_rect(plus_sign)
+write_rect(plus_sign)

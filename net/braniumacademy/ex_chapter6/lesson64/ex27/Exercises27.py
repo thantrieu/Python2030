@@ -14,14 +14,14 @@ def draw_heart(width, height):
     return heart
 
 
-def show_heart(matrix):
+def writer_heart(matrix):
     """Hàm hiển thị các phần tử trong ma trận"""
-    for x in matrix:
-        for e in x:
-            print(f'{e}', end='')
-        print()
-    print()
+    with open('output27.txt', 'w') as writer:
+        for x in matrix:
+            for e in x:
+                writer.write(f'{e}')
+            writer.write('\n')
 
 
 result = draw_heart(7, 6)
-show_heart(result)
+writer_heart(result)

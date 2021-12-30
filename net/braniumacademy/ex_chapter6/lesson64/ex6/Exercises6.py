@@ -18,8 +18,7 @@ def listed_reverse_numbers(mwriter, array):
     mwriter.write('\n')
 
 
-with open('input6.txt') as reader:
-    with open('output6.txt', 'w') as writer:
+with open('input6.txt') as reader, open('output6.txt', 'w') as writer:
         t = int(reader.readline())
         for i in range(1, t + 1):
             n = int(reader.readline())

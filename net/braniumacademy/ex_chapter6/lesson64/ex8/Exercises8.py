@@ -44,18 +44,17 @@ def find_min2(array):
     return second
 
 
-with open('input8.txt') as reader:
-    with open('output8.txt', 'w') as writer:
-        t = int(reader.readline())
-        for i in range(1, t + 1):
-            n = int(reader.readline())
-            arr = [int(x) for x in reader.readline().split()]
-            if n <= 0:
-                writer.write(f"Test {i}:\nN INVALID\n")
+with open('input8.txt') as reader, open('output8.txt', 'w') as writer:
+    t = int(reader.readline())
+    for i in range(1, t + 1):
+        n = int(reader.readline())
+        arr = [int(x) for x in reader.readline().split()]
+        if n <= 0:
+            writer.write(f"Test {i}:\nN INVALID\n")
+        else:
+            min2 = find_min2(arr)
+            max2 = find_max2(arr)
+            if min2 == max2:
+                writer.write(f"Test {i}:\nNOT AVAILABLE\n")
             else:
-                min2 = find_min2(arr)
-                max2 = find_max2(arr)
-                if min2 == max2:
-                    writer.write(f"Test {i}:\nNOT AVAILABLE\n")
-                else:
-                    writer.write(f"Test {i}:\n{min2} {max2}\n")
+                writer.write(f"Test {i}:\n{min2} {max2}\n")

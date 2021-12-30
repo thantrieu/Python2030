@@ -1,14 +1,14 @@
-def print_list(my_list):
-    """This function print all elements in the list"""
+def write_list(mwriter, my_list):
+    """This function write all elements in the list"""
     for x in my_list:
-        print(f"{x} ", end="")
-    print()
+        mwriter.write(f"{x} ")
+    mwriter.write('\n')
 
 
-with open('input15.txt') as reader:
+with open('input15.txt') as reader, open('output15.txt', 'w') as writer:
     t = int(reader.readline())
     for i in range(1, t + 1):
         arr = [x for x in reader.readline().split()]
         arr.sort(key=lambda x: len(x))  # sort elements in list by length of elements
-        print(f'Test {i}:')
-        print_list(arr)
+        writer.write(f'Test {i}:\n')
+        write_list(writer, arr)
