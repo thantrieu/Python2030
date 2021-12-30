@@ -1,0 +1,8 @@
+Test 1:
+N INVALID
+Test 2:
+K INVALID
+Test 3:
+5
+Test 4:
+0

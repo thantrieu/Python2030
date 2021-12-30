@@ -1,0 +1,6 @@
+Test 1:
+N INVALID
+Test 2:
+6
+Test 3:
+26
