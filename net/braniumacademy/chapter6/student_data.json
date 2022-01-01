@@ -1,0 +1,66 @@
+[
+  {
+    "id": "SV001",
+    "age": 20,
+    "major": "CNTT",
+    "gpa": 3.25,
+    "full_name": {
+      "first": "Ngọc",
+      "mid": "Văn",
+      "last": "Nguyễn"
+    },
+    "address": {
+      "wards": "Xuân Phương",
+      "district": "Nam Từ Liêm",
+      "city": "Hà Nội"
+    }
+  },
+  {
+    "id": "SV002",
+    "age": 20,
+    "major": "CNTT",
+    "gpa": 3.75,
+    "full_name": {
+      "first": "Linh",
+      "mid": "Thị Mỹ",
+      "last": "Đỗ"
+    },
+    "address": {
+      "wards": "Minh Khai",
+      "district": "Bắc Từ Liêm",
+      "city": "Hà Nội"
+    }
+  },
+  {
+    "id": "SV003",
+    "age": 20,
+    "major": "CNTT",
+    "gpa": 3.45,
+    "full_name": {
+      "first": "Khánh",
+      "mid": "Ngọc",
+      "last": "Nguyễn"
+    },
+    "address": {
+      "wards": "Cổ Nhuế",
+      "district": "Bắc Từ Liêm",
+      "city": "Hà Nội"
+    }
+  },
+  {
+    "id": "SV004",
+    "age": 20,
+    "major": "CNTT",
+    "gpa": 3.15,
+    "full_name": {
+      "first": "Tuấn",
+      "mid": "Công",
+      "last": "Lê"
+    },
+    "address": {
+      "wards": "Bách Khoa",
+      "district": "Hai Bà Trưng",
+      "city": "Hà Nội"
+    }
+  }
+]
