@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student>
+        <id>SV001</id>
+        <age>20</age>
+        <major>CNTT</major>
+        <gpa>3.25</gpa>
+        <fullname>
+            <first>Ngọc</first>
+            <mid>Văn</mid>
+            <last>Nguyễn</last>
+        </fullname>
+        <address>
+            <wards>Xuân Phương</wards>
+            <district>Nam Từ Liêm</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+    <student>
+        <id>SV002</id>
+        <age>20</age>
+        <major>CNTT</major>
+        <gpa>3.75</gpa>
+        <fullname>
+            <first>Linh</first>
+            <mid>Thị Mỹ</mid>
+            <last>Đỗ</last>
+        </fullname>
+        <address>
+            <wards>Minh Khai</wards>
+            <district>Bắc Từ Liêm</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+    <student>
+        <id>SV003</id>
+        <age>20</age>
+        <major>CNTT</major>
+        <gpa>3.45</gpa>
+        <fullname>
+            <first>Khánh</first>
+            <mid>Ngọc</mid>
+            <last>Nguyễn</last>
+        </fullname>
+        <address>
+            <wards>Cổ Nhuế</wards>
+            <district>Bắc Từ Liêm</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+    <student>
+        <id>SV004</id>
+        <age>20</age>
+        <major>CNTT</major>
+        <gpa>3.15</gpa>
+        <fullname>
+            <first>Tuấn</first>
+            <mid>Công</mid>
+            <last>Lê</last>
+        </fullname>
+        <address>
+            <wards>Bách Khoa</wards>
+            <district>Hai Bà Trưng</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+    <student>
+        <id>SV005</id>
+        <age>21</age>
+        <major>CNTT</major>
+        <gpa>3.55</gpa>
+        <fullname>
+            <first>Tuấn</first>
+            <mid>Thanh</mid>
+            <last>Hoàng</last>
+        </fullname>
+        <address>
+            <wards>Bách Khoa</wards>
+            <district>Hai Bà Trưng</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+    <student>
+        <id>SV006</id>
+        <age>21</age>
+        <major>CNTT</major>
+        <gpa>3.45</gpa>
+        <fullname>
+            <first>Liên</first>
+            <mid>Kim</mid>
+            <last>Phùng</last>
+        </fullname>
+        <address>
+            <wards>Liễu Giai</wards>
+            <district>Ba Đình</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+    <student>
+        <id>SV007</id>
+        <age>20</age>
+        <major>CNTT</major>
+        <gpa>3.65</gpa>
+        <fullname>
+            <first>Duy</first>
+            <mid>Quang</mid>
+            <last>Đỗ</last>
+        </fullname>
+        <address>
+            <wards>Ao Sen</wards>
+            <district>Hà Đông</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+    <student>
+        <id>SV008</id>
+        <age>20</age>
+        <major>CNTT</major>
+        <gpa>3.45</gpa>
+        <fullname>
+            <first>Mai</first>
+            <mid>Thị Như</mid>
+            <last>Phạm</last>
+        </fullname>
+        <address>
+            <wards>Mai Dịch</wards>
+            <district>Cầu Giấy</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+    <student>
+        <id>SV009</id>
+        <age>20</age>
+        <major>CNTT</major>
+        <gpa>3.95</gpa>
+        <fullname>
+            <first>Như</first>
+            <mid>Thị Quỳnh</mid>
+            <last>Trần</last>
+        </fullname>
+        <address>
+            <wards>Thanh Chương</wards>
+            <district>Tây Hồ</district>
+            <city>Hà Nội</city>
+        </address>
+    </student>
+</students>
