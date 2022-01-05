@@ -1,0 +1,102 @@
+[
+  {
+    "id": "HS001",
+    "name": "Cánh Gà Chiên Xù",
+    "birth_date": {
+      "day": 20,
+      "month": 10,
+      "year": 2009
+    },
+    "gpa": 7.25
+  },
+  {
+    "id": "HS002",
+    "name": "Thịt Hun Khói",
+    "birth_date": {
+      "day": 24,
+      "month": 6,
+      "year": 2009
+    },
+    "gpa": 7.95
+  },
+  {
+    "id": "HS003",
+    "name": "Mì Xào Chua Cay",
+    "birth_date": {
+      "day": 14,
+      "month": 11,
+      "year": 2009
+    },
+    "gpa": 9.25
+  },
+  {
+    "id": "HS004",
+    "name": "Trứng Cút Lộn",
+    "birth_date": {
+      "day": 10,
+      "month": 10,
+      "year": 2009
+    },
+    "gpa": 8.25
+  },
+  {
+    "id": "HS005",
+    "name": "Hướng Dương Xào Tỏi",
+    "birth_date": {
+      "day": 28,
+      "month": 2,
+      "year": 2009
+    },
+    "gpa": 8.47
+  },
+  {
+    "id": "HS006",
+    "name": "Trà Đá Gốc Me",
+    "birth_date": {
+      "day": 15,
+      "month": 5,
+      "year": 2009
+    },
+    "gpa": 7.95
+  },
+  {
+    "id": "HS007",
+    "name": "Chanh Muối Xả Tắc",
+    "birth_date": {
+      "day": 14,
+      "month": 8,
+      "year": 2009
+    },
+    "gpa": 8.85
+  },
+  {
+    "id": "HS008",
+    "name": "Đậu Bắp Rang Bơ",
+    "birth_date": {
+      "day": 10,
+      "month": 9,
+      "year": 2009
+    },
+    "gpa": 9.50
+  },
+  {
+    "id": "HS009",
+    "name": "Quất Dấm Xoài Xanh",
+    "birth_date": {
+      "day": 8,
+      "month": 10,
+      "year": 2009
+    },
+    "gpa": 7.25
+  },
+  {
+    "id": "HS010",
+    "name": "Dưa Leo Chấm Muối",
+    "birth_date": {
+      "day": 5,
+      "month": 5,
+      "year": 2009
+    },
+    "gpa": 9.15
+  }
+]

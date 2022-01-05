@@ -1,0 +1,34 @@
+<students>
+	<student>
+		<id>SV001</id>
+		<age>20</age>
+		<major>CNTT</major>
+		<gpa>3.56</gpa>
+		<address>
+			<wards>Giáp Bát</wards>
+			<district>Hoàng Mai</district>
+			<city>Hà Nội</city>
+		</address>
+		<full_name>
+			<first>Thanh</first>
+			<mid>Văn</mid>
+			<last>Hoàng</last>
+		</full_name>
+	</student>
+	<student>
+		<id>SV002</id>
+		<age>20</age>
+		<major>CNTT</major>
+		<gpa>3.87</gpa>
+		<address>
+			<wards>Giáp Bát</wards>
+			<district>Hoàng Mai</district>
+			<city>Hà Nội</city>
+		</address>
+		<full_name>
+			<first>Linh</first>
+			<mid>Mai</mid>
+			<last>Trần</last>
+		</full_name>
+	</student>
+</students>
