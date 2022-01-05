@@ -13,9 +13,9 @@ class CD:
         self.__company = company
 
     def __str__(self):
-        return f'CD[title={self.__title}, artist={self.__artist},' \
-               f'country={self.__country}, company={self.__company}, ' \
-               f'price={self.__price}, year={self.__year}]'
+        return f'{self.__title:25}{self.__artist:20}' \
+               f'{self.__country:12}{self.__company:15}' \
+               f'{self.__price:<6}{self.__year:6}'
 
     @property
     def price(self):
@@ -85,7 +85,7 @@ def statistics_by_year(catalog):
 
 def print_statistics(dct):
     for key in dct.keys():
-        print(f'{key}: {dct.get(key)}')
+        print(f'{key:<10}: {dct.get(key)}')
 
 
 if __name__ == '__main__':
