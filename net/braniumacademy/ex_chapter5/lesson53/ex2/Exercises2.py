@@ -128,3 +128,4 @@ if __name__ == '__main__':
     lecturer.receive_salary(16800)
     lecturer.mark_exam('ASP.NET')
     print('-------------------------------------------------------------')
+
