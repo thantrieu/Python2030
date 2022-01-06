@@ -51,7 +51,8 @@ class Developer(Employee):
         print(f'Dev {self.full_name} is receiving task {task}.')
 
     def report(self, to, typeof):
-        print(f'Dev {self.full_name} is sending a report of {typeof} to {to}.')
+        print(f'Dev {self.full_name} '
+              f'is sending a report of {typeof} to {to}.')
 
 
 class ProjectManager(Developer):
@@ -99,14 +100,16 @@ class Tester(Employee):
 if __name__ == '__main__':
     # tạo nhân viên
     print('=================================================================')
-    emp = Employee('EMP001', 'Hoàng Văn Công', 'cong@xmail.com', '0356698754', 15200)
+    emp = Employee('EMP001', 'Hoàng Văn Công',
+                   'cong@xmail.com', '0356698754', 15200)
     emp.work('Cooking')
     emp.checkin('08:00')
     emp.checkout('17:00')
 
     # tạo giám đốc
     print('=================================================================')
-    director = Director('Marketing director', '2025-2030', name='Trương Văn Hồng')
+    director = Director('Marketing director', '2025-2030',
+                        name='Trương Văn Hồng')
     director.meeting('14:00')
     director.sign('Contract')
     director.calculate_salary('...')
@@ -121,7 +124,8 @@ if __name__ == '__main__':
 
     # tạo tester
     print('=================================================================')
-    tester = Tester('Automation test', 'Selenium', 200, 350, name='Lee Thị Hồng Nhung')
+    tester = Tester('Automation test', 'Selenium', 200, 350,
+                    name='Lee Thị Hồng Nhung')
     tester.receive_project('ATM of VCB')
     tester.test('Transfer at ATM')
     tester.write_testcase()
@@ -131,7 +135,8 @@ if __name__ == '__main__':
     print('=================================================================')
     projmanager = ProjectManager(manage_proj=20, manage_emp=30,
                                  manage_buget=154000,
-                                 major='Core technical manager', name='Mai Thanh Hà')
+                                 major='Core technical manager',
+                                 name='Mai Thanh Hà')
     projmanager.join_meeting('15:00')
     projmanager.release_product('ATM of VCB', '15:00')
     projmanager.disbursing('14000')
