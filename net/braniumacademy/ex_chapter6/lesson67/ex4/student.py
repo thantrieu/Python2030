@@ -20,8 +20,7 @@ class Address:
 
     @property
     def address(self):
-        maddress = self.__wards + ', ' + self.__district + ', ' + self.__city
-        return f'{maddress:35}'
+        return self.__wards + ', ' + self.__district + ', ' + self.__city
 
 
 class FullName:
@@ -46,8 +45,7 @@ class FullName:
 
     @property
     def full_name(self):
-        mfull_name = self.__last + ' ' + self.__mid + ' ' + self.__first
-        return f'{mfull_name:25}'
+        return self.__last + ' ' + self.__mid + ' ' + self.__first
 
 
 class Student:
@@ -87,5 +85,5 @@ class Student:
 
     def __str__(self):
         return f'{self.__student_id:10}{self.major:10}' \
-               f'{self.__age:<10}{self.fullname.full_name:25}{self.address.address:25}' \
-               f'{self.__gpa:<10}'
+               f'{self.__age:<10}{self.fullname.full_name:25}' \
+               f'{self.address.address:35}{self.__gpa:<10}'
