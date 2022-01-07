@@ -95,7 +95,11 @@ class BankAcc:
         self.status = 1
 
     def __str__(self):
-        return f''
+        return f'acc_num={self.acc_number}, owner={self.owner}, ' \
+               f'bank={self.bank}, balance={self.balance}, ' \
+               f'start={self.start}, end={self.end}, ' \
+               f'avg_balance={self.avg_balance}, total={self.total}, ' \
+               f'status={self.status}'
 
 
 class DomesticCard(BankAcc):
@@ -132,7 +136,7 @@ class DomesticCard(BankAcc):
             return -1
 
     def __str__(self):
-        return f''
+        return f'DomesticCard[{super().__str__()}, limit={self.limit}]'
 
 
 class VisaCard(BankAcc):
@@ -198,7 +202,9 @@ class VisaCard(BankAcc):
             return -1
 
     def __str__(self):
-        return f''
+        return f'VisaCard[{super().__str__()}, anual_fee={self.anual_fee}, ' \
+               f'transaction_fee={self.transaction_fee}, limit={self.limit}, ' \
+               f'uuid={self.uuid}]'
 
 
 def create_dom_acc():
