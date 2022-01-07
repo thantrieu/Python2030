@@ -18,7 +18,7 @@ class BankAcc:
         if self.status == 1:
             print(f'Account number: {self.acc_number}')
             print(f'Owner: {self.owner}')
-            print(f'Balance: {self.balance}$')
+            print(f'Balance: {self.balance}đ')
         else:
             print('Your account locked. Please unlock and try again.')
 
@@ -57,6 +57,7 @@ class BankAcc:
                 self.balance -= amount
                 return amount
             else:
+                print('Your balance is not enough.')
                 return -1
         else:
             print('Your account locked. Please unlock and try again.')
@@ -66,10 +67,12 @@ class BankAcc:
         """Thanh toán hóa đơn."""
         if self.status == 1:
             if 0 < amount < self.balance - BankAcc.DEFAULT_BALANCE:
-                print(f'Pay for {bill} {amount}$')
+                print(f'Pay for {bill} {amount}đ')
                 self.balance -= amount
+                return amount
             else:
                 print('Your balance is not enough.')
+                return -1
         else:
             print('Your account locked. Please unlock and try again.')
             return -1
@@ -78,7 +81,7 @@ class BankAcc:
         """Gửi tiết kiệm."""
         if self.status == 1:
             if 0 < amount < self.balance - BankAcc.DEFAULT_BALANCE:
-                print(f'Saving {amount}$')
+                print(f'Saving {amount}đ')
                 self.balance -= amount
             else:
                 print('Your balance is not enough.')
@@ -193,6 +196,7 @@ class VisaCard(BankAcc):
         if inter is True and result > 0 and \
                 self.balance > self.balance - BankAcc.DEFAULT_BALANCE:
             self.balance -= self.transaction_fee * VisaCard.EXCHANGE_RATE
+        return result
 
     def transfer(self, other, amount):
         if self.total < self.limit:
@@ -210,7 +214,7 @@ class VisaCard(BankAcc):
 def create_dom_acc():
     """Tạo và trả về thông tin thẻ thanh toán nội địa."""
     acc_num = input('Nhập số tài khoản: ')
-    owner = input('Nhập tên chủ TK: ')
+    owner = input('Nhập tên chủ TK: ').upper()
     bank = input('Ngân hàng phát hành thẻ(tên viết tắt tiếng Anh): ')
     start = input('Bắt đầu có hiệu lực từ: ')
     end = input('Ngày hết hiệu lực: ')
@@ -222,7 +226,7 @@ def create_dom_acc():
 def create_visa_acc():
     """Tạo và trả về thông tin thẻ thanh toán quốc tế."""
     acc_num = input('Nhập số tài khoản: ')
-    owner = input('Nhập tên chủ TK: ')
+    owner = input('Nhập tên chủ TK: ').upper()
     bank = input('Ngân hàng phát hành thẻ(tên viết tắt tiếng Anh): ')
     start = input('Bắt đầu có hiệu lực từ: ')
     end = input('Ngày hết hiệu lực: ')
@@ -264,11 +268,11 @@ def withdraw(accounts):
     is_success = False
     for acc in accounts:
         if acc.acc_number == acc_number:
+            is_success = True
             amount = int(input('Nhập số tiền muốn rút: '))
             if acc.withdraw(amount, acc.bank) > 0:
                 print('==> Giao dịch thành công.')
                 acc.check_balance()
-                is_success = True
             else:
                 print('==> Giao dịch thất bại.')
             break
@@ -323,6 +327,9 @@ def transfer(accounts):
             dst = input('Nhập số tài khoản đích: ')
             for acc_dst in accounts:
                 if acc_dst.acc_number == dst:
+                    if acc_dst.bank != acc.bank:
+                        print('==> Tài khoản khác ngân hàng.')
+                        break
                     amount = int(input('Nhập số tiền muốn chuyển: '))
                     if acc.transfer(acc_dst, amount) > 0:
                         print('==> Giao dịch thành công.')
@@ -344,6 +351,9 @@ def transfer_other_bank(accounts):
             dst = input('Nhập số tài khoản đích: ')
             for acc_dst in accounts:
                 if acc_dst.acc_number == dst:
+                    if acc_dst.bank == acc.bank:
+                        print('==> Tài khoản cùng ngân hàng.')
+                        break
                     amount = int(input('Nhập số tiền muốn chuyển: '))
                     if acc.transfer(acc_dst, amount) > 0:
                         print('==> Giao dịch thành công.')
@@ -351,7 +361,7 @@ def transfer_other_bank(accounts):
                         is_success = True
                     else:
                         print('==> Giao dịch thất bại.')
-                break
+                    break
             break
     if is_success is False:
         print('==> Giao dịch thất bại. Không tìm thấy tài khoản nguồn hoặc đích.')
@@ -404,7 +414,7 @@ def transfer_international(accounts):
                         is_success = True
                     else:
                         print('==> Giao dịch thất bại.')
-                break
+                    break
             break
     if is_success is False:
         print('==> Giao dịch thất bại. Không tìm thấy tài khoản nguồn hoặc đích.')
