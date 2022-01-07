@@ -94,6 +94,9 @@ class BankAcc:
         """Kích hoạt tài khoản."""
         self.status = 1
 
+    def __str__(self):
+        return f''
+
 
 class DomesticCard(BankAcc):
     INTRA_FEE = 1100
@@ -127,6 +130,9 @@ class DomesticCard(BankAcc):
         else:
             print('Your account has exceeded its transaction limit.')
             return -1
+
+    def __str__(self):
+        return f''
 
 
 class VisaCard(BankAcc):
@@ -191,6 +197,9 @@ class VisaCard(BankAcc):
             print('Your account has exceeded its daily transaction limit.')
             return -1
 
+    def __str__(self):
+        return f''
+
 
 def create_dom_acc():
     """Tạo và trả về thông tin thẻ thanh toán nội địa."""
@@ -218,6 +227,181 @@ def create_visa_acc():
     uuid = int(input('Số định danh quốc tế: '))
     return VisaCard(acc_num, owner, bank, start, end,
                     balance, anual_fee, transaction_fee, limit, uuid)
+
+
+def check_balance(accounts):
+    acc_number = input('Nhập số tài khoản: ')
+    for acc in accounts:
+        if acc.acc_number == acc_number:
+            acc.check_balance()
+
+
+def deposit(accounts):
+    acc_number = input('Nhập số tài khoản: ')
+    is_success = False
+    for acc in accounts:
+        if acc.acc_number == acc_number:
+            amount = int(input('Nhập số tiền muốn nộp: '))
+            if acc.deposit(amount) > 0:
+                print('==> Giao dịch thành công.')
+                acc.check_balance()
+                is_success = True
+            else:
+                print('==> Giao dịch thất bại.')
+            break
+    if is_success is False:
+        print('==> Giao dịch thất bại. Không tìm thấy tài khoản đích.')
+
+
+def withdraw(accounts):
+    acc_number = input('Nhập số tài khoản: ')
+    is_success = False
+    for acc in accounts:
+        if acc.acc_number == acc_number:
+            amount = int(input('Nhập số tiền muốn rút: '))
+            if acc.withdraw(amount, acc.bank) > 0:
+                print('==> Giao dịch thành công.')
+                acc.check_balance()
+                is_success = True
+            else:
+                print('==> Giao dịch thất bại.')
+            break
+    if is_success is False:
+        print('==> Giao dịch thất bại. Không tìm thấy tài khoản đích.')
+
+
+def pay_the_bill(accounts):
+    bill_name = input('Nhập tên hóa đơn: ')
+    acc_number = input('Nhập số tài khoản: ')
+    is_success = False
+    for acc in accounts:
+        if acc.acc_number == acc_number:
+            amount = int(input('Nhập số tiền cần thanh toán: '))
+            if acc.pay_bill(bill_name, amount) > 0:
+                print('==> Giao dịch thành công.')
+                acc.check_balance()
+                is_success = True
+            else:
+                print('==> Giao dịch thất bại.')
+            break
+    if is_success is False:
+        print('==> Giao dịch thất bại. Không tìm thấy tài khoản đích.')
+
+
+def pay_the_international_bill(accounts):
+    bill_name = input('Nhập tên hóa đơn: ')
+    acc_number = input('Nhập số tài khoản: ')
+    is_success = False
+    for acc in accounts:
+        if acc.acc_number == acc_number:
+            if isinstance(acc, DomesticCard):
+                print('Tài khoản thanh toán nội địa không thể chuyển tiền quốc tế.')
+                break
+            amount = int(input('Nhập số tiền cần thanh toán: '))
+            if acc.pay_bill(bill_name, amount, True) > 0:
+                print('==> Giao dịch thành công.')
+                acc.check_balance()
+                is_success = True
+            else:
+                print('==> Giao dịch thất bại.')
+            break
+    if is_success is False:
+        print('==> Giao dịch thất bại. Không tìm thấy tài khoản đích.')
+
+
+def transfer(accounts):
+    src = input('Nhập số tài khoản nguồn: ')
+    is_success = False
+    for acc in accounts:
+        if acc.acc_number == src:
+            dst = input('Nhập số tài khoản đích: ')
+            for acc_dst in accounts:
+                if acc_dst.acc_number == dst:
+                    amount = int(input('Nhập số tiền muốn chuyển: '))
+                    if acc.transfer(acc_dst, amount) > 0:
+                        print('==> Giao dịch thành công.')
+                        acc.check_balance()
+                        is_success = True
+                    else:
+                        print('==> Giao dịch thất bại.')
+                    break
+            break
+    if is_success is False:
+        print('==> Giao dịch thất bại. Không tồn tại tài khoản nguồn hoặc đích.')
+
+
+def transfer_other_bank(accounts):
+    src = input('Nhập số tài khoản nguồn: ')
+    is_success = False
+    for acc in accounts:
+        if acc.acc_number == src:
+            dst = input('Nhập số tài khoản đích: ')
+            for acc_dst in accounts:
+                if acc_dst.acc_number == dst:
+                    amount = int(input('Nhập số tiền muốn chuyển: '))
+                    if acc.transfer(acc_dst, amount) > 0:
+                        print('==> Giao dịch thành công.')
+                        acc.check_balance()
+                        is_success = True
+                    else:
+                        print('==> Giao dịch thất bại.')
+                break
+            break
+    if is_success is False:
+        print('==> Giao dịch thất bại. Không tìm thấy tài khoản nguồn hoặc đích.')
+
+
+def active_account(accounts):
+    src = input('Nhập số tài khoản nguồn: ')
+    is_success = False
+    for acc in accounts:
+        if acc.acc_number == src:
+            acc.active()
+            print('==> Kích hoạt tài khoản thành công.')
+            break
+    if is_success is False:
+        print('==> Không tìm thấy tài khoản đích.')
+
+
+def find_account_by_balance(accounts):
+    balance = int(input('Nhập số dư: '))
+    counter = 0
+    for acc in accounts:
+        if acc.balance == balance:
+            print(acc)
+            counter += 1
+    if counter == 0:
+        print('==> Không tìm thấy kết quả.')
+
+
+def listed_accounts(accounts):
+    print('==> Danh sách tài khoản hiện có: ')
+    for acc in accounts:
+        print(acc)
+
+
+def transfer_international(accounts):
+    src = input('Nhập số tài khoản nguồn: ')
+    is_success = False
+    for acc in accounts:
+        if acc.acc_number == src:
+            if isinstance(acc, DomesticCard):
+                print('Tài khoản thanh toán nội địa không thể chuyển tiền quốc tế.')
+                break
+            dst = input('Nhập số tài khoản đích: ')
+            for acc_dst in accounts:
+                if acc_dst.acc_number == dst:
+                    amount = int(input('Nhập số tiền muốn chuyển: '))
+                    if acc.transfer(acc_dst, amount) > 0:
+                        print('==> Giao dịch thành công.')
+                        acc.check_balance()
+                        is_success = True
+                    else:
+                        print('==> Giao dịch thất bại.')
+                break
+            break
+    if is_success is False:
+        print('==> Giao dịch thất bại. Không tìm thấy tài khoản nguồn hoặc đích.')
 
 
 if __name__ == '__main__':
@@ -252,28 +436,65 @@ if __name__ == '__main__':
                 acc = create_visa_acc()
                 accounts.append(acc)
             case 3:
-                pass
+                if len(accounts) > 0:
+                    check_balance(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 4:
-                pass
+                if len(accounts) > 0:
+                    deposit(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 5:
-                pass
+                if len(accounts) > 0:
+                    withdraw(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 6:
-                pass
+                if len(accounts) > 0:
+                    pay_the_bill(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 7:
-                pass
+                if len(accounts) > 0:
+                    pay_the_international_bill(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 8:
-                pass
+                if len(accounts) > 0:
+                    transfer(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 9:
-                pass
+                if len(accounts) > 0:
+                    transfer_other_bank(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 10:
-                pass
+                if len(accounts) > 0:
+                    transfer_international(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 11:
-                pass
+                if len(accounts) > 0:
+                    active_account(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 12:
-                pass
+                if len(accounts) > 0:
+                    listed_accounts(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 13:
-                pass
+                if len(accounts) > 0:
+                    accounts.sort(key=lambda x: (-x.balance, x.owner[x.owner.rfind(' ') + 1:]))
+                    listed_accounts(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case 14:
-                pass
+                if len(accounts) > 0:
+                    find_account_by_balance(accounts)
+                else:
+                    print('==> Danh sách tài khoản rỗng.')
             case _:
                 print('==> Chức năng không hợp lệ. Vui lòng chọn lại! <==')
