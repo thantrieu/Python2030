@@ -351,6 +351,7 @@ def transfer_other_bank(accounts):
             dst = input('Nhập số tài khoản đích: ')
             for acc_dst in accounts:
                 if acc_dst.acc_number == dst:
+                    is_success = True
                     if acc_dst.bank == acc.bank:
                         print('==> Tài khoản cùng ngân hàng.')
                         break
@@ -358,7 +359,6 @@ def transfer_other_bank(accounts):
                     if acc.transfer(acc_dst, amount) > 0:
                         print('==> Giao dịch thành công.')
                         acc.check_balance()
-                        is_success = True
                     else:
                         print('==> Giao dịch thất bại.')
                     break
@@ -407,11 +407,11 @@ def transfer_international(accounts):
             dst = input('Nhập số tài khoản đích: ')
             for acc_dst in accounts:
                 if acc_dst.acc_number == dst:
+                    is_success = True
                     amount = int(input('Nhập số tiền muốn chuyển: '))
                     if acc.transfer(acc_dst, amount) > 0:
                         print('==> Giao dịch thành công.')
                         acc.check_balance()
-                        is_success = True
                     else:
                         print('==> Giao dịch thất bại.')
                     break
