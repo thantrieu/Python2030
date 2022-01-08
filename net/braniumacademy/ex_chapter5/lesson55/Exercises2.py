@@ -31,7 +31,7 @@ class Fraction:
     def __mul__(self, other):
         """This function overloading operator to multiple two fractions."""
         result = Fraction()
-        result.denominator = self.denominator, other.denominator
+        result.denominator = self.denominator * other.denominator
         result.numerator = self.numerator * other.numerator
         result.simplify()
         return result
@@ -39,7 +39,7 @@ class Fraction:
     def __truediv__(self, other):
         """This function overloading operator to divide two fractions."""
         result = Fraction()
-        result.denominator = self.denominator, other.numerator
+        result.denominator = self.denominator * other.numerator
         result.numerator = self.numerator * other.denominator
         result.simplify()
         return result
@@ -93,6 +93,11 @@ class Fraction:
         return f"{self.numerator}/{self.denominator}"
 
 
+def create_fractions(ith):
+    str1, str2 = input(f'Nhập phân số thứ {ith}, dạng tử/mẫu: ').split('/')
+    return Fraction(int(str1), int(str2))
+
+
 if __name__ == '__main__':
     option = '================= MENU =================\n' \
              '1. Tổng 2 phân số.\n' \
@@ -107,29 +112,52 @@ if __name__ == '__main__':
              '10. So sánh >= hai phân số.\n' \
              '11. Thoát chương trình.\n' \
              'Xin mời chọn: '
-    choice = int(input(option))
-    match choice:
-        case 1:
-            pass
-        case 2:
-            pass
-        case 3:
-            pass
-        case 4:
-            pass
-        case 5:
-            pass
-        case 6:
-            pass
-        case 7:
-            pass
-        case 8:
-            pass
-        case 9:
-            pass
-        case 10:
-            pass
-        case 11:
-            pass
-        case _:
-            print('==> Sai chức năng. Vui lòng chọn lại! <==')
+    while True:
+        choice = int(input(option))
+        match choice:
+            case 1:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} + {p2} = {p1 + p2}')
+            case 2:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} - {p2} = {p1 - p2}')
+            case 3:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                p3 = p1 * p2
+                print(f'{p1} * {p2} = {p3}')
+            case 4:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} / {p2} = {p1 / p2}')
+            case 5:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} == {p2} ? {p1 == p2}')
+            case 6:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} != {p2} ? {p1 != p2}')
+            case 7:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} < {p2} ? {p1 < p2}')
+            case 8:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} > {p2} ? {p1 > p2}')
+            case 9:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} <= {p2} ? {p1 <= p2}')
+            case 10:
+                p1 = create_fractions(1)
+                p2 = create_fractions(2)
+                print(f'{p1} >= {p2} ? {p1 >= p2}')
+            case 11:
+                print('==> Chương trình kết thúc <==')
+                break
+            case _:
+                print('==> Sai chức năng. Vui lòng chọn lại! <==')
