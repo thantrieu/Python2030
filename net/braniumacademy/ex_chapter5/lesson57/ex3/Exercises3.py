@@ -1,4 +1,7 @@
-class BankAcc:
+from abc import abstractmethod, ABC
+
+
+class BankAcc(ABC):
     DEFAULT_BALANCE = 70000
 
     def __init__(self, acc_num, owner, start, end,
@@ -101,8 +104,11 @@ class BankAcc:
             print('Your account locked. Please unlock and try again.')
             return -1
 
+    @abstractmethod
     def withdraw(self, amount, bank):
-        """Rút tiền."""
+        """ Rút tiền. Phương thức triển khai mặc định ở lớp cha.
+            Lớp con phải override lại để sử dụng.
+        """
         if self.status == 1:
             if 0 < amount < self.balance - BankAcc.DEFAULT_BALANCE \
                     and len(bank) > 0:
@@ -149,12 +155,9 @@ class BankAcc:
         """Kích hoạt tài khoản."""
         self.status = 1
 
+    @abstractmethod
     def __str__(self):
-        return f'acc_num={self.acc_number}, owner={self.__owner}, ' \
-               f'bank={self.bank}, balance={self.balance}, ' \
-               f'start={self.__start}, end={self.__end}, ' \
-               f'avg_balance={self.avg_balance}, total={self.total}, ' \
-               f'status={self.status}'
+        pass
 
 
 class DomesticCard(BankAcc):
@@ -195,7 +198,12 @@ class DomesticCard(BankAcc):
             return -1
 
     def __str__(self):
-        return f'DomesticCard[{super().__str__()}, limit={self.limit}]'
+        super_info = f'acc_num={self.acc_number}, owner={self.owner}, ' \
+                     f'bank={self.bank}, balance={self.balance}, ' \
+                     f'start={self.start}, end={self.end}, ' \
+                     f'avg_balance={self.avg_balance}, total={self.total}, ' \
+                     f'status={self.status}'
+        return f'DomesticCard[{super_info}, limit={self.limit}]'
 
 
 class VisaCard(BankAcc):
@@ -278,7 +286,12 @@ class VisaCard(BankAcc):
             return -1
 
     def __str__(self):
-        return f'VisaCard[{super().__str__()}, anual_fee={self.anual_fee}, ' \
+        super_info = f'acc_num={self.acc_number}, owner={self.owner}, ' \
+                     f'bank={self.bank}, balance={self.balance}, ' \
+                     f'start={self.start}, end={self.end}, ' \
+                     f'avg_balance={self.avg_balance}, total={self.total}, ' \
+                     f'status={self.status}'
+        return f'VisaCard[{super_info}, anual_fee={self.anual_fee}, ' \
                f'transaction_fee={self.__transaction_fee}, limit={self.limit}, ' \
                f'uuid={self.__uuid}]'
 
