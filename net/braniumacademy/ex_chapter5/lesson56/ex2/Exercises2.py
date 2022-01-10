@@ -6,22 +6,42 @@ class Person:
         self.__email = email
         self.__birth_date = dob
 
+    @property
+    def person_id(self):
+        return self.__person_id
+
+    @property
+    def full_name(self):
+        return self.__full_name
+
+    @property
+    def address(self):
+        return self.__address
+
+    @property
+    def email(self):
+        return self.__email
+
+    @property
+    def birth_date(self):
+        return self.__birth_date
+
     def eat(self):
-        print(f'{self.__full_name} is eating some food...')
+        print(f'{self.full_name} is eating some food...')
 
     def sleep(self):
-        print(f'{self.__full_name} is sleeping on the bed.')
+        print(f'{self.full_name} is sleeping on the bed.')
 
     def relax(self, thing):
-        print(f'{self.__full_name} is relaxing with {thing}.')
+        print(f'{self.full_name} is relaxing with {thing}.')
 
     def work(self, task):
-        print(f'{self.__full_name} is doing {task}.')
+        print(f'{self.full_name} is doing {task}.')
 
     def show_info(self):
-        print(f'Person[id={self.__person_id}, full_name={self.__full_name},\n'
-              f'address={self.__address}, email={self.__email},'
-              f' birth_date={self.__birth_date}]')
+        print(f'Person[id={self.person_id}, full_name={self.full_name},\n'
+              f'address={self.address}, email={self.email},'
+              f' birth_date={self.birth_date}]')
 
 
 class Student(Person):
@@ -31,20 +51,32 @@ class Student(Person):
         self.__gpa = gpa
         self.__major = major
 
+    @property
+    def gpa(self):
+        return self.__gpa
+
+    @property
+    def student_id(self):
+        return self.__student_id
+
+    @property
+    def major(self):
+        return self.__major
+
     def do_homework(self, subject):
-        print(f'Student {self.__full_name} is doing {subject}\' homework.')
+        print(f'Student {self.full_name} is doing {subject}\' homework.')
 
     def do_exam(self, subject):
-        print(f'Student {self.__full_name} is doing {subject}\' final exam.')
+        print(f'Student {self.full_name} is doing {subject}\' final exam.')
 
     def payfee(self, amount):
-        print(f'Student {self.__full_name} paid {amount}$ for tuition fee.')
+        print(f'Student {self.full_name} paid {amount}$ for tuition fee.')
 
     def show_info(self):
-        print(f'Student[student_id={self.__student_id}, gpa={self.__gpa},\n'
-              f'major={self.__major}, id={self.__person_id},\n'
-              f'full_name={self.__full_name}, address={self.__address},\n'
-              f'email={self.__email}, birth_date={self.__birth_date}]')
+        print(f'Student[student_id={self.student_id}, gpa={self.gpa},\n'
+              f'major={self.major}, id={self.person_id},\n'
+              f'full_name={self.full_name}, address={self.address},\n'
+              f'email={self.email}, birth_date={self.birth_date}]')
 
 
 class GraduatedStudent(Student):
@@ -55,23 +87,35 @@ class GraduatedStudent(Student):
         super().__init__(pid, full_name, address,
                          email, sid, gpa, major, dob)
         self.__salary = salary
-        self.__salary = year
+        self.__year = year
         self.__capacity = capacity
 
+    @property
+    def salary(self):
+        return self.__salary
+
+    @property
+    def year(self):
+        return self.__year
+
+    @property
+    def capacity(self):
+        return self.__capacity
+
     def goto_work(self, by):
-        print(f'{self.__full_name} going to work by {by}')
+        print(f'{self.full_name} going to work by {by}')
 
     def receive_certificate(self, level):
-        print(f'{self.__full_name} receiving his {level} certificate.')
+        print(f'{self.full_name} receiving his {level} certificate.')
 
     def show_info(self):
-        print(f'GraduatedStudent[student_id={self.__student_id}, '
-              f'gpa={self.__gpa}, '
-              f'major={self.__major}, id={self.__person_id},\n'
-              f'full_name={self.__full_name}, address={self.__address},\n'
-              f'email={self.__email}, birth_date={self.__birth_date},\n'
-              f'year={self.__salary}, capacity={self.__capacity}, '
-              f'salary={self.__salary}]')
+        print(f'GraduatedStudent[student_id={self.student_id}, '
+              f'gpa={self.gpa}, '
+              f'major={self.major}, id={self.person_id},\n'
+              f'full_name={self.full_name}, address={self.address},\n'
+              f'email={self.email}, birth_date={self.birth_date},\n'
+              f'year={self.year}, capacity={self.capacity}, '
+              f'salary={self.salary}]')
 
 
 class UnderGraduatedStudent(Student):
@@ -79,25 +123,33 @@ class UnderGraduatedStudent(Student):
                  address='', email='', sid='', gpa=0.0,
                  major='CNTT', dob='01/01/2020'):
         super().__init__(pid, full_name, address, email, sid, gpa, major, dob)
-        self.__salary = year
+        self.__year = year
         self.__failed = failed
 
+    @property
+    def year(self):
+        return self.__year
+
+    @property
+    def failed(self):
+        return self.__failed
+
     def register(self, subject):
-        print(f'Student {self.__full_name} is registering {subject}')
+        print(f'Student {self.full_name} is registering {subject}')
 
     def do_intern(self, company):
-        print(f'Student {self.__full_name} is working at {company}.')
+        print(f'Student {self.full_name} is working at {company}.')
 
     def restudy(self, subject):
-        print(f'Student {self.__full_name} is restudying {subject}')
+        print(f'Student {self.full_name} is restudying {subject}')
 
     def show_info(self):
-        print(f'UnderGraduatedStudent[student_id={self.__student_id}, '
-              f'gpa={self.__gpa}, '
-              f'major={self.__major}, id={self.__person_id},\n'
-              f'full_name={self.__full_name}, address={self.__address},\n'
-              f'email={self.__email}, birth_date={self.__birth_date},\n'
-              f'year={self.__salary}, failed={self.__failed}]')
+        print(f'UnderGraduatedStudent[student_id={self.student_id}, '
+              f'gpa={self.gpa}, '
+              f'major={self.major}, id={self.person_id},\n'
+              f'full_name={self.full_name}, address={self.address},\n'
+              f'email={self.email}, birth_date={self.birth_date},\n'
+              f'year={self.major}, failed={self.failed}]')
 
 
 class Lecturer(Person):
@@ -110,25 +162,41 @@ class Lecturer(Person):
         self.__role = role
         self.__level = level
 
+    @property
+    def lecturer_id(self):
+        return self.__lecturer_id
+
+    @property
+    def salary(self):
+        return self.__salary
+
+    @property
+    def role(self):
+        return self.__role
+
+    @property
+    def level(self):
+        return self.__level
+
     def teach(self, subject):
-        print(f'Lecturer {self.__full_name} is teaching {subject}.')
+        print(f'Lecturer {self.full_name} is teaching {subject}.')
 
     def receive_salary(self, amount):
-        print(f'Lecturer {self.__full_name}\'s '
+        print(f'Lecturer {self.full_name}\'s '
               f'real salary this month is {amount}.')
 
     def mark_exam(self, subject):
-        print(f'Lecturer {self.__full_name} is marking {subject} exam.')
+        print(f'Lecturer {self.full_name} is marking {subject} exam.')
 
     def create_exam(self, subject):
-        print(f'Lecturer {self.__full_name} '
+        print(f'Lecturer {self.full_name} '
               f'is creating {subject}\'s final exam.')
 
     def show_info(self):
-        print(f'Lecturer[lecturer_id={self.__lecturer_id}, level={self.__level},\n'
-              f'salary={self.__salary}, role={self.__role}, id={self.__person_id},\n'
-              f'full_name={self.__full_name}, address={self.__address},\n'
-              f'email={self.__email}, birth_date={self.__birth_date}]')
+        print(f'Lecturer[lecturer_id={self.level}, level={self.level},\n'
+              f'salary={self.salary}, role={self.role}, id={self.person_id},\n'
+              f'full_name={self.full_name}, address={self.address},\n'
+              f'email={self.email}, birth_date={self.birth_date}]')
 
 
 if __name__ == '__main__':

@@ -1,10 +1,25 @@
 import math
+from abc import ABC, abstractmethod
 
 
-class Shape:
+class Shape(ABC):
     def __init__(self, x, y):
         self.__x = x
         self.__y = y
+
+    @abstractmethod
+    def calculate_perimeter(self):
+        """Phương thức tính chu vi của hình 2d."""
+        pass
+
+    @abstractmethod
+    def calculate_area(self):
+        """Phương thức tính diện tích của hình 2d."""
+        pass
+
+    @abstractmethod
+    def show_info(self):
+        pass
 
     @property
     def x(self):
@@ -13,17 +28,6 @@ class Shape:
     @property
     def y(self):
         return self.__y
-
-    def calculate_perimeter(self):
-        """Phương thức tính chu vi của hình 2d."""
-        return 0.0
-
-    def calculate_area(self):
-        """Phương thức tính diện tích của hình 2d."""
-        return 0.0
-
-    def show_info(self):
-        print(f'Đây là hình 2d. Tọa độ tâm ({self.x, self.y})')
 
 
 class Circle(Shape):
@@ -86,10 +90,6 @@ class Triangle(Shape):
 
 # Đoạn code chạy chương trình:
 if __name__ == '__main__':
-    print('==> Hình 2d:')
-    shape = Shape(10, 58)  # tạo đối tượng shape
-    shape.show_info()
-
     print('==> Hình tròn: ')
     circle = Circle(0, 0, 25.25)  # tạo đối tượng circle
     print(f'Chu vi: {circle.calculate_perimeter()}')

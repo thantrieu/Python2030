@@ -1,4 +1,7 @@
-class Employee:
+from abc import ABC, abstractmethod
+
+
+class Employee(ABC):
     def __init__(self, eid, name, email, phone, salary):
         self.__emp_id = eid
         self.__full_name = name
@@ -35,8 +38,9 @@ class Employee:
     def work(self, task):
         print(f'{self.full_name} is doing {task}')
 
+    @abstractmethod
     def calculate_salary(self, work_day):
-        return self.__salary * work_day / 22
+        pass
 
 
 class Director(Employee):
@@ -54,7 +58,7 @@ class Director(Employee):
         print(f'Director {self.full_name} is attending a meeting at {time}.')
 
     def calculate_salary(self, work_day):
-        return super().calculate_salary(work_day) + 0.8 * self.__quater_salary
+        return self.salary * work_day / 22 + 0.8 * self.__quater_salary
 
 
 class Developer(Employee):
@@ -79,7 +83,7 @@ class Developer(Employee):
         print(f'Dev {self.full_name} is sending a report of {typeof} to {to}.')
 
     def calculate_salary(self, work_day):
-        real_salary = super().calculate_salary(work_day)
+        real_salary = self.salary * work_day / 22
         return real_salary + 0.3 * (real_salary * self.__kpi / 100)
 
 
@@ -115,7 +119,7 @@ class ProjectManager(Developer):
         print(f'Project manager is rewarding {amount}$ for team member.')
 
     def calculate_salary(self, work_day):
-        return super().calculate_salary(work_day) + 0.2 * self.salary
+        return self.salary * work_day / 22 + 0.2 * self.salary
 
 
 class Tester(Employee):
@@ -140,21 +144,12 @@ class Tester(Employee):
         print(f'Tester {self.full_name} sent report to {to}.')
 
     def calculate_salary(self, work_day):
-        real_salary = super().calculate_salary(work_day)
+        real_salary = self.salary * work_day / 22
         return real_salary + 0.2 * real_salary * self.__completed_testcase / 100 \
                + 50 * self.__bug
 
 
 if __name__ == '__main__':
-    # tạo nhân viên
-    print('=================================================================')
-    emp = Employee('EMP001', 'Hoàng Văn Công',
-                   'cong@xmail.com', '0356698754', 15200)
-    emp.work('Cooking')
-    emp.checkin('08:00')
-    emp.checkout('17:00')
-    print(f'Salary: {emp.calculate_salary(20)}')
-
     # tạo giám đốc
     print('=================================================================')
     director = Director('Marketing director', '2025-2030',
