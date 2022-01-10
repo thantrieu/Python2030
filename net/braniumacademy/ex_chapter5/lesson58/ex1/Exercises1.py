@@ -19,15 +19,18 @@ class FullName:
     def last_name(self):
         return self.__last
 
+    @property
+    def full_name(self):
+        return self.__str__()
+
     def __str__(self):
         return f'{self.last_name} {self.mid_name} {self.first_name}'
 
 
 class Person:
-    def __init__(self, pid, full_name, address, dob):
+    def __init__(self, pid, full_name, dob):
         self.__person_id = pid
         self.__full_name = full_name
-        self.__address = address
         self.__birth_date = dob
 
     @property
@@ -39,10 +42,6 @@ class Person:
         return self.__full_name
 
     @property
-    def address(self):
-        return self.__address
-
-    @property
     def birth_date(self):
         return self.__birth_date
 
@@ -50,16 +49,23 @@ class Person:
         print(f'{self.full_name} is doing {task}.')
 
     def show_info(self):
-        print(f'Person[id={self.person_id}, full_name={self.full_name},\n'
-              f'address={self.address}, birth_date={self.birth_date}]')
+        print(self)
+
+    def __str__(self):
+        return f'{self.person_id:15}{self.full_name.full_name:25}' \
+               f'{self.birth_date:12}'
 
 
 class Student(Person):
     AUTO_ID = 1000
 
-    def __init__(self, pid, full_name, address, dob, gpa, major):
-        super().__init__(pid, full_name, address, dob)
-        self.__student_id = self.__create_id()
+    def __init__(self, pid='', full_name=None,
+                 dob=None, gpa=0.0, major='', student_id=None):
+        super().__init__(pid, full_name, dob)
+        if student_id is None:
+            self.student_id = self.__student_id = self.__create_id()
+        else:
+            self.student_id = student_id
         self.__gpa = gpa
         self.__major = major
 
@@ -74,6 +80,10 @@ class Student(Person):
     @property
     def student_id(self):
         return self.__student_id
+
+    @student_id.setter
+    def student_id(self, value):
+        self.__student_id = value.upper()
 
     @property
     def major(self):
@@ -91,17 +101,25 @@ class Student(Person):
         print(f'Student {self.full_name} registered subject {subject}.')
 
     def show_info(self):
-        print(f'Student[student_id={self.student_id}, gpa={self.gpa},\n'
-              f'major={self.major}, id={self.person_id},\n'
-              f'full_name={self.full_name}, address={self.address}, \n'
-              f'birth_date={self.birth_date}]')
+        print(self)
+
+    def __str__(self):
+        return f'{super().__str__()}{self.student_id:10}{self.gpa:<10}' \
+               f'{self.major:15}'
+
+    def __eq__(self, other):
+        """Hai sinh viên coi là trùng nhau nếu cùng mã sinh viên."""
+        return other.student_id == self.student_id
 
 
 class Subject:
     AUTO_ID = 1000
 
-    def __init__(self, name, credit):
-        self.__subject_id = self.__create_subject_id()
+    def __init__(self, name='', credit=0, subject_id=0):
+        if subject_id == 0:
+            self.__subject_id = self.__create_subject_id()
+        else:
+            self.__subject_id = subject_id
         self.__name = name
         self.__credit = credit
 
@@ -121,6 +139,13 @@ class Subject:
         sid = Subject.AUTO_ID
         Subject.AUTO_ID += 1
         return sid
+
+    def __str__(self):
+        return f'{self.subject_id:<10}{self.name:15}{self.credit:<10}'
+
+    def __eq__(self, other):
+        """Hai môn học gọi là trùng khớp nếu chúng cùng mã môn."""
+        return self.subject_id == other.subject_id
 
 
 class Register:
@@ -161,3 +186,12 @@ class Register:
     def student(self, value):
         self.__student = value
 
+    def __str__(self):
+        return f'{self.register_id:<10}{self.student.student_id:10}' \
+               f'{self.student.full_name:25}' \
+               f'{self.subject.subject_id:<10}{self.subject.name:15}' \
+               f'{self.register_date:35}'
+
+    def __eq__(self, other):
+        """Hai bản đăng ký gọi là trùng khớp nếu chúng cùng mã."""
+        return self.register_id == other.register_id

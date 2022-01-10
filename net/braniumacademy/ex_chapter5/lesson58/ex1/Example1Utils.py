@@ -1,6 +1,68 @@
 import datetime
 
-from .Exercises1 import Subject, Student, Register
+from Exercises1 import Subject, Student, Register, FullName
+
+
+def create_student():
+    print('============ Nhập thông tin sinh viên ============')
+    pid = input('Số CMND/CCCD: ')
+    last = input('Họ: ')
+    mid = input('Đệm: ')
+    first = input('Name: ')
+    birth_date = input('Ngày sinh: ')
+    major = input('Chuyên ngành: ')
+    gpa = float(input('Điểm TB: '))
+    full_name = FullName(first, mid, last)
+    return Student(pid, full_name, birth_date, gpa, major)
+
+
+def create_subject():
+    name = input('Tên môn học: ')
+    credit = int('Số tín chỉ: ')
+    return Subject(name, credit)
+
+
+def create_register(mstudents, msubjects):
+    student_id = input('Mã sinh viên: ')
+    subject_id = int(input('Mã môn học(số nguyên 3 chữ số): '))
+    student = None
+    subject = None
+    for e in mstudents:
+        if e.student_id == student_id:
+            student = e
+            break
+    for item in msubjects:
+        if item.subject_id == subject_id:
+            subject = item
+            break
+    if student is None:
+        print(f'==> Sinh viên mã \'{student_id}\' không tồn tại.')
+        return None
+    if subject is None:
+        print(f'==> Môn học mã \'{subject_id}\' không tồn tại.')
+        return None
+    return Register(student=student, subject=subject)
+
+
+def show_students(students):
+    print('==> Danh sách sinh viên:')
+    print(f'{"CMND/CC":15}{"Họ và tên":25}{"Ngày sinh":12}'
+          f'{"Mã SV":10}{"Điểm TB":10}{"C.Ngành":15}')
+    for e in students:
+        print(e)
+
+
+def show_subjects(subjects):
+    print('==> Danh sách môn học:')
+    for s in subjects:
+        print(s)
+
+
+def show_registers(registers):
+    print('==> Danh sách đăng ký:')
+    for r in registers:
+        print(r)
+
 
 if __name__ == '__main__':
     students = []
@@ -27,23 +89,54 @@ if __name__ == '__main__':
         choice = int(input(option))
         match choice:
             case 1:
-                pass
+                new_student = create_student()
+                students.append(new_student)
             case 2:
-                pass
+                new_subject = create_subject()
+                subjects.append(new_subject)
             case 3:
-                pass
+                new_register = create_register(students, subjects)
+                if new_register is not None:
+                    registers.append(new_register)
             case 4:
-                pass
+                if len(students) > 0:
+                    students.sort(key=lambda x: (x.full_name.first, x.full_name.last))
+                    print('==> Danh sách sinh viên sau khi sắp xếp: ')
+                    show_students(students)
+                else:
+                    print('==> Danh sách sinh viên rỗng <==')
             case 5:
-                pass
+                if len(subjects) > 0:
+                    subjects.sort(key=lambda x: x.name)
+                    print('==> Danh sách môn học sau khi sắp xếp: ')
+                    show_subjects(subjects)
+                else:
+                    print('==> Danh sách môn học rỗng <==')
             case 6:
-                pass
+                if len(registers) > 0:
+                    registers.sort(key=lambda x:
+                    (x.register_date.year, x.register_date.month,
+                     x.register_date.day, x.register_date.hour,
+                     x.register_date.minute, x.register_date.second))
+                    print('==> Danh sách đăng ký sau khi sắp xếp: ')
+                    show_registers(registers)
+                else:
+                    print('==> Danh sách đăng ký rỗng <==')
             case 7:
-                pass
+                if len(students) > 0:
+                    show_students(students)
+                else:
+                    print('==> Danh sách sinh viên rỗng <==')
             case 8:
-                pass
+                if len(subjects) > 0:
+                    show_subjects(subjects)
+                else:
+                    print('==> Danh sách môn học rỗng <==')
             case 9:
-                pass
+                if len(registers) > 0:
+                    show_registers(registers)
+                else:
+                    print('==> Danh sách đăng ký rỗng <==')
             case 10:
                 pass
             case 11:
