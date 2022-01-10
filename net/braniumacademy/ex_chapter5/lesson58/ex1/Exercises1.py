@@ -149,10 +149,15 @@ class Register:
     def subject(self):
         return self.__subject
 
+    @subject.setter
+    def subject(self, value):
+        self.__subject = value
+
     @property
     def student(self):
         return self.__student
 
+    @student.setter
+    def student(self, value):
+        self.__student = value
 
-if __name__ == '__main__':
-    print(datetime.datetime.now())
