@@ -60,13 +60,19 @@ class Matrix:
         return True
 
     def __str__(self):
-        return f'[row={self.row}, col={self.col}\n]'
+        matrix = f'[row={self.row}, col={self.col}]\n'
+        for row in self.data:
+            for element in row:
+                matrix += f'{element:<5}'
+            matrix += '\n'
+        return matrix
+
 
 def create_matrix(matrix):
     str1, str2 = input('Nhập vào cấp của ma trận: ').split()
     row = int(str1)
     col = int(str2)
-    if str1 > 0 and str2 > 0:
+    if row > 0 and col > 0:
         data = []
         for i in range(row):
             data.append([])
@@ -84,33 +90,38 @@ if __name__ == '__main__':
              '2. Nhập vào ma trận 2.\n' \
              '3. Tính tổng hai ma trận.\n' \
              '4. Tính hiệu hai ma trận.\n' \
-             '5. Tính tích hai ma trận.' \
-             '6. So sánh hai ma trận bằng nhau.' \
+             '5. Tính tích hai ma trận.\n' \
+             '6. So sánh hai ma trận bằng nhau.\n' \
              '7. So sánh hai ma trận không bằng nhau.\n' \
              '8. Thoát chương trình.\n' \
              'Xin mời chọn: '
+    matrix1 = Matrix()
+    matrix2 = Matrix()
     while True:
         choice = int(input(option))
-        matrix1 = Matrix()
-        matrix2 = Matrix()
         match choice:
             case 1:
                 print('Nhập vào ma trận thứ nhất: ')
                 create_matrix(matrix1)
+                print(matrix1)
             case 2:
                 print('Nhập vào ma trận thứ hai: ')
                 create_matrix(matrix2)
+                print(matrix2)
             case 3:
-                pass
+                matrix_sum = matrix1 + matrix2
+                print(matrix_sum)
             case 4:
-                pass
+                matrix_dif = matrix1 - matrix2
+                print(matrix_dif)
             case 5:
-                pass
+                matrix_product = matrix1 * matrix2
+                print(matrix_product)
             case 6:
-                pass
+                print(f'Hai ma trận bằng nhau? {matrix1 == matrix2}')
             case 7:
-                pass
+                print(f'Hai ma trận khác nhau? {matrix1 != matrix2}')
             case 8:
-                pass
+                print('==> Chương trình kết thúc. <==')
             case _:
                 print('==> Sai chức năng. Vui lòng chọn lại. <==')
