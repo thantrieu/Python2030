@@ -1,4 +1,5 @@
-import datetime
+from collections import OrderedDict
+from operator import itemgetter
 
 from Exercises1 import Subject, Student, Register, FullName
 
@@ -18,7 +19,7 @@ def create_student():
 
 def create_subject():
     name = input('Tên môn học: ')
-    credit = int('Số tín chỉ: ')
+    credit = int(input('Số tín chỉ: '))
     return Subject(name, credit)
 
 
@@ -44,24 +45,112 @@ def create_register(mstudents, msubjects):
     return Register(student=student, subject=subject)
 
 
-def show_students(students):
+def is_register_exist(mregisters, r):
+    """Kiểm tra xem bản đăng ký đã tồn tại trước đó chưa."""
+    for item in mregisters:
+        if item == r:
+            return True
+    return False
+
+
+def show_students(mstudents):
     print('==> Danh sách sinh viên:')
     print(f'{"CMND/CC":15}{"Họ và tên":25}{"Ngày sinh":12}'
           f'{"Mã SV":10}{"Điểm TB":10}{"C.Ngành":15}')
-    for e in students:
+    for e in mstudents:
         print(e)
 
 
-def show_subjects(subjects):
+def show_subjects(msubjects):
     print('==> Danh sách môn học:')
-    for s in subjects:
+    print(f'{"Mã môn":10}{"Tên môn":15}{"Số tín":<10}')
+    for s in msubjects:
         print(s)
 
 
-def show_registers(registers):
+def show_registers(mregisters):
     print('==> Danh sách đăng ký:')
-    for r in registers:
+    print(f'{"Mã ĐK":10}{"Mã SV":10}{"Tên SV":25}'
+          f'{"Mã Môn":<10}{"Tên Môn":15}{"Thời Gian ĐK":25}')
+    for r in mregisters:
         print(r)
+
+
+def find_registed_subject(mregisters):
+    sort_registers(mregisters)
+    student_id = input('Nhập mã sinh viên: ')
+    result = []
+    for r in mregisters:
+        if r.student.student_id == student_id:
+            result.append(r.subject)
+    if len(result) > 0:
+        print(f'==> Danh sách môn học sinh viên mã {student_id} đã đăng ký: ')
+        show_subjects(result)
+    else:
+        print(f'==> Sinh viên mã {student_id} không đăng ký môn học nào.')
+
+
+def sort_registers(mregisters):
+    mregisters.sort(key=lambda x: (x.register_date.year, x.register_date.month,
+                                   x.register_date.day, x.register_date.hour,
+                                   x.register_date.minute, x.register_date.second)
+                    )
+
+
+def find_student_by_subject(mregisters):
+    subject_id = int(input('Nhập mã môn học(số nguyên 3 chữ số): '))
+    result = []
+    for r in mregisters:
+        if r.subject.subject_id == subject_id:
+            result.append(r.subject)
+    if len(result) > 0:
+        show_students(result)
+    else:
+        print(f'==> Môn học mã {subject_id} không có sinh viên đăng ký.')
+
+
+def get_list_item(data, key):
+    for d in data:
+        if d.subject_id == key:
+            return d
+    return None
+
+
+def print_statistic(order_dct, msubjects):
+    print(f'{"Tên môn":15}{"Số SV ĐK":10}')
+    for item in order_dct.keys():
+        subject = get_list_item(msubjects, item)
+        print(f'{subject.name:15}:{order_dct[item]:10}')
+
+
+def statistics_by_subject(mregisters, msubjects):
+    subject_dct = {}
+    for r in mregisters:
+        if r.subject.subject_id not in subject_dct:
+            subject_dct[r.subject.subject_id] = 1
+        else:
+            subject_dct[r.subject.subject_id] += 1
+    order_dct = OrderedDict(sorted(subject_dct.items(), key=itemgetter(1), reverse=True))
+    print_statistic(order_dct, msubjects)
+
+
+def earliest_register(mregisters):
+    result = []
+    for r in mregisters:
+        if r.register_date == mregisters[0].register_date:
+            result.append(r)
+    print('==> Bản đăng ký sớm nhất: ')
+    show_registers(result)
+
+
+def latest_register(mregisters):
+    result = []
+    size = len(mregisters)
+    for r in mregisters:
+        if r.register_date == mregisters[size - 1].register_date:
+            result.append(r)
+    print('==> Bản đăng ký muộn nhất: ')
+    show_registers(result)
 
 
 if __name__ == '__main__':
@@ -97,10 +186,17 @@ if __name__ == '__main__':
             case 3:
                 new_register = create_register(students, subjects)
                 if new_register is not None:
-                    registers.append(new_register)
+                    if not is_register_exist(registers, new_register):
+                        registers.append(new_register)
+                    else:
+                        print(f'==> Sinh viên mã '
+                              f'{new_register.student.student_id} '
+                              f'đã đăng ký môn học này.')
+                else:
+                    print('==> Tạo bản đăng ký thất bại.')
             case 4:
                 if len(students) > 0:
-                    students.sort(key=lambda x: (x.full_name.first, x.full_name.last))
+                    students.sort(key=lambda x: (x.full_name.first_name, x.full_name.last_name))
                     print('==> Danh sách sinh viên sau khi sắp xếp: ')
                     show_students(students)
                 else:
@@ -114,10 +210,7 @@ if __name__ == '__main__':
                     print('==> Danh sách môn học rỗng <==')
             case 6:
                 if len(registers) > 0:
-                    registers.sort(key=lambda x:
-                    (x.register_date.year, x.register_date.month,
-                     x.register_date.day, x.register_date.hour,
-                     x.register_date.minute, x.register_date.second))
+                    sort_registers(registers)
                     print('==> Danh sách đăng ký sau khi sắp xếp: ')
                     show_registers(registers)
                 else:
@@ -138,16 +231,34 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
             case 10:
-                pass
+                if len(registers) > 0:
+                    find_registed_subject(registers)
+                else:
+                    print('==> Danh sách đăng ký rỗng <==')
             case 11:
-                pass
+                if len(registers) > 0:
+                    find_student_by_subject(registers)
+                else:
+                    print('==> Danh sách đăng ký rỗng <==')
             case 12:
-                pass
+                if len(registers) > 0:
+                    statistics_by_subject(registers, subjects)
+                else:
+                    print('==> Danh sách đăng ký rỗng <==')
             case 13:
-                pass
+                if len(registers) > 0:
+                    sort_registers(registers)
+                    earliest_register(registers)
+                else:
+                    print('==> Danh sách đăng ký rỗng <==')
             case 14:
-                pass
+                if len(registers) > 0:
+                    sort_registers(registers)
+                    latest_register(registers)
+                else:
+                    print('==> Danh sách đăng ký rỗng <==')
             case 15:
                 print('==> Chương trình kết thúc <==')
+                break
             case _:
                 print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-15. <==')

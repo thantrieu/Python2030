@@ -56,6 +56,12 @@ class Person:
                f'{self.birth_date:12}'
 
 
+def create_id():
+    student_id = f'SV{Student.AUTO_ID}'
+    Student.AUTO_ID += 1
+    return student_id
+
+
 class Student(Person):
     AUTO_ID = 1000
 
@@ -63,7 +69,7 @@ class Student(Person):
                  dob=None, gpa=0.0, major='', student_id=None):
         super().__init__(pid, full_name, dob)
         if student_id is None:
-            self.student_id = self.__student_id = self.__create_id()
+            self.student_id = self.__student_id = create_id()
         else:
             self.student_id = student_id
         self.__gpa = gpa
@@ -89,11 +95,6 @@ class Student(Person):
     def major(self):
         return self.__major
 
-    def __create_id(self):
-        student_id = f'SV{Student.AUTO_ID}'
-        Student.AUTO_ID += 1
-        return student_id
-
     def do_exam(self, subject):
         print(f'Student {self.full_name} is doing {subject}\' final exam.')
 
@@ -112,12 +113,18 @@ class Student(Person):
         return other.student_id == self.student_id
 
 
+def create_subject_id():
+    sid = Subject.AUTO_ID
+    Subject.AUTO_ID += 1
+    return sid
+
+
 class Subject:
     AUTO_ID = 1000
 
     def __init__(self, name='', credit=0, subject_id=0):
         if subject_id == 0:
-            self.__subject_id = self.__create_subject_id()
+            self.__subject_id = create_subject_id()
         else:
             self.__subject_id = subject_id
         self.__name = name
@@ -135,11 +142,6 @@ class Subject:
     def subject_id(self):
         return self.__subject_id
 
-    def __create_subject_id(self):
-        sid = Subject.AUTO_ID
-        Subject.AUTO_ID += 1
-        return sid
-
     def __str__(self):
         return f'{self.subject_id:<10}{self.name:15}{self.credit:<10}'
 
@@ -148,19 +150,20 @@ class Subject:
         return self.subject_id == other.subject_id
 
 
+def create_register_id():
+    rid = Register.AUTO_ID
+    Register.AUTO_ID += 1
+    return rid
+
+
 class Register:
     AUTO_ID = 100
 
     def __init__(self, student=None, subject=None):
-        self.__register_id = self.create_register_id()
+        self.__register_id = create_register_id()
         self.__register_date = datetime.datetime.now()  # Thời gian đăng ký lấy từ hệ thống
         self.__subject = subject
         self.__student = student
-
-    def create_register_id(self):
-        rid = Register.AUTO_ID
-        Register.AUTO_ID += 1
-        return rid
 
     @property
     def register_id(self):
@@ -187,11 +190,17 @@ class Register:
         self.__student = value
 
     def __str__(self):
+        date_str = f'{self.register_date.day:02}/{self.register_date.month:02}/' \
+                   f'{self.register_date.year:4} {self.register_date.hour:02}:' \
+                   f'{self.register_date.minute:02}:{self.register_date.second:02}'
         return f'{self.register_id:<10}{self.student.student_id:10}' \
-               f'{self.student.full_name:25}' \
+               f'{self.student.full_name.full_name:25}' \
                f'{self.subject.subject_id:<10}{self.subject.name:15}' \
-               f'{self.register_date:35}'
+               f'{date_str:25}'
 
     def __eq__(self, other):
-        """Hai bản đăng ký gọi là trùng khớp nếu chúng cùng mã."""
-        return self.register_id == other.register_id
+        """Hai bản đăng ký gọi là trùng khớp nếu chúng thuộc về cùng
+            1 sinh viên và cùng môn học.
+        """
+        return self.subject.subject_id == other.subject.subject_id and \
+            self.student.student_id == other.student.student_id
