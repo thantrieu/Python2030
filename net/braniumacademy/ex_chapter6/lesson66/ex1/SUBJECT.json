@@ -1,0 +1,42 @@
+[
+  {
+    "subject_id": 1000,
+    "subject_name": "Lập trình C#",
+    "credit": 4
+  },
+  {
+    "subject_id": 1001,
+    "subject_name": "Lập trình C++",
+    "credit": 3
+  },
+  {
+    "subject_id": 1002,
+    "subject_name": "Lập trình Java",
+    "credit": 3
+  },
+  {
+    "subject_id": 1003,
+    "subject_name": "Lập trình PHP",
+    "credit": 4
+  },
+  {
+    "subject_id": 1004,
+    "subject_name": "Phân tích thiết kế hệ thống",
+    "credit": 4
+  },
+  {
+    "subject_id": 1005,
+    "subject_name": "Hệ điều hành Window 11",
+    "credit": 7
+  },
+  {
+    "subject_id": 1006,
+    "subject_name": "Lập trình ứng dụng di động iOS",
+    "credit": 5
+  },
+  {
+    "subject_id": 1007,
+    "subject_name": "Vi xử lý",
+    "credit": 3
+  }
+]

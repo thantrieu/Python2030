@@ -1,6 +1,6 @@
 import json
-from net.braniumacademy.chapter6.Lesson65 import decode_student
-from net.braniumacademy.chapter6.student import FullName, Address, Student
+from Lesson65 import decode_student
+from student import FullName, Address, Student
 
 
 def create_student():
