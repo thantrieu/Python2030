@@ -24,8 +24,8 @@ def create_subject():
 
 
 def create_register(mstudents, msubjects):
-    student_id = input('Mã sinh viên: ')
-    subject_id = int(input('Mã môn học(số nguyên 3 chữ số): '))
+    student_id = input('Mã sinh viên: ').upper()
+    subject_id = int(input('Mã môn học(số nguyên 4 chữ số): '))
     student = None
     subject = None
     for e in mstudents:
@@ -78,7 +78,7 @@ def show_registers(mregisters):
 
 def find_registed_subject(mregisters):
     sort_registers(mregisters)
-    student_id = input('Nhập mã sinh viên: ')
+    student_id = input('Nhập mã sinh viên: ').upper()
     result = []
     for r in mregisters:
         if r.student.student_id == student_id:
@@ -98,11 +98,11 @@ def sort_registers(mregisters):
 
 
 def find_student_by_subject(mregisters):
-    subject_id = int(input('Nhập mã môn học(số nguyên 3 chữ số): '))
+    subject_id = int(input('Nhập mã môn học(số nguyên 4 chữ số): '))
     result = []
     for r in mregisters:
         if r.subject.subject_id == subject_id:
-            result.append(r.subject)
+            result.append(r.student)
     if len(result) > 0:
         show_students(result)
     else:
