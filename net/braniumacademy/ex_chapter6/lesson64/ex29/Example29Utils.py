@@ -93,7 +93,7 @@ def read_subjects_from_file():
 
 def create_register(mstudents, msubjects):
     student_id = input('Mã sinh viên: ').upper()
-    subject_id = int(input('Mã môn học(số nguyên 3 chữ số): '))
+    subject_id = int(input('Mã môn học(số nguyên 4 chữ số): '))
     student = None
     subject = None
     for e in mstudents:
@@ -195,7 +195,7 @@ def sort_registers(mregisters):
 
 
 def find_student_by_subject(mregisters):
-    subject_id = int(input('Nhập mã môn học(số nguyên 3 chữ số): '))
+    subject_id = int(input('Nhập mã môn học(số nguyên 4 chữ số): '))
     result = []
     for r in mregisters:
         if r.subject.subject_id == subject_id:
