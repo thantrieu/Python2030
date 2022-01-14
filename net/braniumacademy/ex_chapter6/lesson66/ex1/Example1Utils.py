@@ -1,10 +1,11 @@
 import json
 from collections import OrderedDict
-from datetime import datetime
 from operator import itemgetter
 from Exercises1 import Subject, Student, Register, FullName
 from decoders import decode_student, decode_subject
 from net.braniumacademy.ex_chapter6.lesson66.ex1.decoders import decode_register
+from net.braniumacademy.ex_chapter6.lesson66.ex1.encoders \
+    import StudentEncoder, RegisterEncoder, SubjectEncoder
 
 
 def create_student():
@@ -30,14 +31,9 @@ def load_students():
 
 
 def write_file_student(list_student):
-    with open('STUDENT.DAT', 'w', encoding='UTF-8') as writer:
-        for s in list_student:
-            writer.write(f'{s.person_id}\n')
-            writer.write(f'{s.full_name}\n')
-            writer.write(f'{s.birth_date}\n')
-            writer.write(f'{s.student_id}\n')
-            writer.write(f'{s.gpa}\n')
-            writer.write(f'{s.major}\n')
+    with open('STUDENT.json', 'w', encoding='UTF-8') as writer:
+        encoded_data = json.dumps(list_student, cls=StudentEncoder, indent=4, ensure_ascii=False)
+        writer.write(encoded_data)
 
 
 def create_subject():
@@ -54,11 +50,9 @@ def load_subjects():
 
 
 def write_file_subject(list_subject):
-    with open('SUBJECT.DAT', 'w', encoding='UTF-8') as writer:
-        for s in list_subject:
-            writer.write(f'{s.subject_id}\n')
-            writer.write(f'{s.name}\n')
-            writer.write(f'{s.credit}\n')
+    with open('SUBJECT.json', 'w', encoding='UTF-8') as writer:
+        encoded_data = json.dumps(list_subject, cls=SubjectEncoder, indent=4, ensure_ascii=False)
+        writer.write(encoded_data)
 
 
 def create_register(mstudents, msubjects):
@@ -108,13 +102,9 @@ def load_registers(mstudents, msubjects):
 
 
 def write_file_register(list_register):
-    with open('REGISTER.DAT', 'w', encoding='UTF-8') as writer:
-        for r in list_register:
-            writer.write(f'{r.register_id}\n')
-            writer.write(f'{r.subject.subject_id}\n')
-            writer.write(f'{r.student.student_id}\n')
-            mformat = '%d/%m/%Y %H:%M:%S'
-            writer.write(f'{r.register_time.strftime(mformat)}\n')
+    with open('REGISTER.json', 'w', encoding='UTF-8') as writer:
+        encoded_data = json.dumps(list_register, cls=RegisterEncoder, indent=4, ensure_ascii=False)
+        writer.write(encoded_data)
 
 
 def is_register_exist(mregisters, r):
@@ -246,7 +236,7 @@ if __name__ == '__main__':
              '14. Cho biết thông tin bản ghi đăng ký muộn nhất.\n' \
              '15. Lưu các danh sách vào file.\n' \
              '16. Kết thúc chương trình.\n' \
-             'Xin mời chọn chức năng(1-15): '
+             'Xin mời chọn chức năng(1-16): '
     while True:
         choice = int(input(option))
         match choice:

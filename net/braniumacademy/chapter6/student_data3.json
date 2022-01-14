@@ -1,146 +1,146 @@
 [
     {
-        "address": {
-            "city": "Hà Nội",
-            "district": "Nam Từ Liêm",
-            "wards": "Xuân Phương"
-        },
-        "age": 20,
+        "student_id": "SV001",
         "full_name": {
             "first": "Ngọc",
-            "last": "Nguyễn",
-            "mid": "Văn"
-        },
-        "gpa": 3.25,
-        "major": "CNTT",
-        "student_id": "SV001"
-    },
-    {
-        "address": {
-            "city": "Hà Nội",
-            "district": "Bắc Từ Liêm",
-            "wards": "Minh Khai"
+            "mid": "Văn",
+            "last": "Nguyễn"
         },
         "age": 20,
+        "major": "CNTT",
+        "address": {
+            "wards": "Xuân Phương",
+            "district": "Nam Từ Liêm",
+            "city": "Hà Nội"
+        },
+        "gpa": 3.25
+    },
+    {
+        "student_id": "SV002",
         "full_name": {
             "first": "Linh",
-            "last": "Đỗ",
-            "mid": "Thị Mỹ"
-        },
-        "gpa": 3.75,
-        "major": "CNTT",
-        "student_id": "SV002"
-    },
-    {
-        "address": {
-            "city": "Hà Nội",
-            "district": "Bắc Từ Liêm",
-            "wards": "Cổ Nhuế"
+            "mid": "Thị Mỹ",
+            "last": "Đỗ"
         },
         "age": 20,
+        "major": "CNTT",
+        "address": {
+            "wards": "Minh Khai",
+            "district": "Bắc Từ Liêm",
+            "city": "Hà Nội"
+        },
+        "gpa": 3.75
+    },
+    {
+        "student_id": "SV003",
         "full_name": {
             "first": "Khánh",
-            "last": "Nguyễn",
-            "mid": "Ngọc"
-        },
-        "gpa": 3.45,
-        "major": "CNTT",
-        "student_id": "SV003"
-    },
-    {
-        "address": {
-            "city": "Hà Nội",
-            "district": "Hai Bà Trưng",
-            "wards": "Bách Khoa"
+            "mid": "Ngọc",
+            "last": "Nguyễn"
         },
         "age": 20,
-        "full_name": {
-            "first": "Tuấn",
-            "last": "Lê",
-            "mid": "Công"
-        },
-        "gpa": 3.15,
         "major": "CNTT",
-        "student_id": "SV004"
+        "address": {
+            "wards": "Cổ Nhuế",
+            "district": "Bắc Từ Liêm",
+            "city": "Hà Nội"
+        },
+        "gpa": 3.45
     },
     {
+        "student_id": "SV004",
+        "full_name": {
+            "first": "Tuấn",
+            "mid": "Công",
+            "last": "Lê"
+        },
+        "age": 20,
+        "major": "CNTT",
         "address": {
-            "city": "Hà Nội",
+            "wards": "Bách Khoa",
             "district": "Hai Bà Trưng",
-            "wards": "Bách Khoa"
+            "city": "Hà Nội"
+        },
+        "gpa": 3.15
+    },
+    {
+        "student_id": "SV005",
+        "full_name": {
+            "first": "Tuấn",
+            "mid": "Thanh",
+            "last": "Hoàng"
         },
         "age": 21,
-        "full_name": {
-            "first": "Tuấn",
-            "last": "Hoàng",
-            "mid": "Thanh"
-        },
-        "gpa": 3.55,
         "major": "CNTT",
-        "student_id": "SV005"
+        "address": {
+            "wards": "Bách Khoa",
+            "district": "Hai Bà Trưng",
+            "city": "Hà Nội"
+        },
+        "gpa": 3.55
     },
     {
-        "address": {
-            "city": "Hà Nội",
-            "district": "Ba Đình",
-            "wards": "Liễu Giai"
-        },
-        "age": 20,
+        "student_id": "SV006",
         "full_name": {
             "first": "Liên",
-            "last": "Phùng",
-            "mid": "Kim"
-        },
-        "gpa": 3.45,
-        "major": "CNTT",
-        "student_id": "SV006"
-    },
-    {
-        "address": {
-            "city": "Hà Nội",
-            "district": "Hà Đông",
-            "wards": "Ao Sen"
+            "mid": "Kim",
+            "last": "Phùng"
         },
         "age": 20,
+        "major": "CNTT",
+        "address": {
+            "wards": "Liễu Giai",
+            "district": "Ba Đình",
+            "city": "Hà Nội"
+        },
+        "gpa": 3.45
+    },
+    {
+        "student_id": "SV007",
         "full_name": {
             "first": "Duy",
-            "last": "Đỗ",
-            "mid": "Quang"
-        },
-        "gpa": 3.65,
-        "major": "CNTT",
-        "student_id": "SV007"
-    },
-    {
-        "address": {
-            "city": "Hà Nội",
-            "district": "Cầu Giấy",
-            "wards": "Mai Dịch"
+            "mid": "Quang",
+            "last": "Đỗ"
         },
         "age": 20,
+        "major": "CNTT",
+        "address": {
+            "wards": "Ao Sen",
+            "district": "Hà Đông",
+            "city": "Hà Nội"
+        },
+        "gpa": 3.65
+    },
+    {
+        "student_id": "SV008",
         "full_name": {
             "first": "Mai",
-            "last": "Phạm",
-            "mid": "Thị Như"
-        },
-        "gpa": 3.45,
-        "major": "CNTT",
-        "student_id": "SV008"
-    },
-    {
-        "address": {
-            "city": "Hà Nội",
-            "district": "Tây Hồ",
-            "wards": "Thanh Chương"
+            "mid": "Thị Như",
+            "last": "Phạm"
         },
         "age": 20,
+        "major": "CNTT",
+        "address": {
+            "wards": "Mai Dịch",
+            "district": "Cầu Giấy",
+            "city": "Hà Nội"
+        },
+        "gpa": 3.45
+    },
+    {
+        "student_id": "SV009",
         "full_name": {
             "first": "Như",
-            "last": "Lê",
-            "mid": "Thị Quỳnh"
+            "mid": "Thị Quỳnh",
+            "last": "Lê"
         },
-        "gpa": 3.95,
+        "age": 20,
         "major": "CNTT",
-        "student_id": "SV009"
+        "address": {
+            "wards": "Thanh Chương",
+            "district": "Tây Hồ",
+            "city": "Hà Nội"
+        },
+        "gpa": 3.95
     }
 ]

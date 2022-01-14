@@ -250,4 +250,4 @@ class Register:
             1 sinh viên và cùng môn học.
         """
         return self.subject.subject_id == other.subject.subject_id and \
-               self.student.student_id == other.student.student_id
+            self.student.student_id == other.student.student_id

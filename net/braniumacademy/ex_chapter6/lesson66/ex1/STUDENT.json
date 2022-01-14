@@ -1,130 +1,130 @@
 [
-  {
-    "id": "09123456780",
-    "full_name": {
-      "first": "Quý",
-      "mid": "Minh",
-      "last": "Hoàng"
+    {
+        "id": "09123456787",
+        "full_name": {
+            "first": "Anh",
+            "mid": "Quỳnh",
+            "last": "Lý"
+        },
+        "birth_date": {
+            "day": 11,
+            "month": 11,
+            "year": 2005
+        },
+        "student_id": "SV1007",
+        "gpa": 3.14,
+        "major": "CNTT"
     },
-    "birth_date": {
-      "day": 20,
-      "month": 5,
-      "year": 2005
+    {
+        "id": "09123456784",
+        "full_name": {
+            "first": "Mạnh",
+            "mid": "Đức",
+            "last": "Vũ"
+        },
+        "birth_date": {
+            "day": 10,
+            "month": 10,
+            "year": 2005
+        },
+        "student_id": "SV1004",
+        "gpa": 3.75,
+        "major": "CNTT"
     },
-    "student_id": "SV1000",
-    "gpa": 3.65,
-    "major": "CNTT"
-  },
-  {
-    "id": "09123456781",
-    "full_name": {
-      "first": "Nguyên",
-      "mid": "Trung",
-      "last": "Lê"
+    {
+        "id": "09123456781",
+        "full_name": {
+            "first": "Nguyên",
+            "mid": "Trung",
+            "last": "Lê"
+        },
+        "birth_date": {
+            "day": 24,
+            "month": 11,
+            "year": 2004
+        },
+        "student_id": "SV1001",
+        "gpa": 3.15,
+        "major": "CNTT"
     },
-    "birth_date": {
-      "day": 24,
-      "month": 11,
-      "year": 2004
+    {
+        "id": "09123456780",
+        "full_name": {
+            "first": "Quý",
+            "mid": "Minh",
+            "last": "Hoàng"
+        },
+        "birth_date": {
+            "day": 20,
+            "month": 5,
+            "year": 2005
+        },
+        "student_id": "SV1000",
+        "gpa": 3.65,
+        "major": "CNTT"
     },
-    "student_id": "SV1001",
-    "gpa": 3.15,
-    "major": "CNTT"
-  },
-  {
-    "id": "09123456782",
-    "full_name": {
-      "first": "Thanh",
-      "mid": "Thị Kim",
-      "last": "Trần"
+    {
+        "id": "09123456783",
+        "full_name": {
+            "first": "Quỳnh",
+            "mid": "Thúy",
+            "last": "Mai"
+        },
+        "birth_date": {
+            "day": 19,
+            "month": 4,
+            "year": 2005
+        },
+        "student_id": "SV1003",
+        "gpa": 3.31,
+        "major": "CNTT"
     },
-    "birth_date": {
-      "day": 16,
-      "month": 9,
-      "year": 2005
+    {
+        "id": "09123456782",
+        "full_name": {
+            "first": "Thanh",
+            "mid": "Thị Kim",
+            "last": "Trần"
+        },
+        "birth_date": {
+            "day": 16,
+            "month": 9,
+            "year": 2005
+        },
+        "student_id": "SV1002",
+        "gpa": 3.36,
+        "major": "CNTT"
     },
-    "student_id": "SV1002",
-    "gpa": 3.36,
-    "major": "CNTT"
-  },
-  {
-    "id": "09123456783",
-    "full_name": {
-      "first": "Quỳnh",
-      "mid": "Thúy",
-      "last": "Mai"
+    {
+        "id": "09123456785",
+        "full_name": {
+            "first": "Trang",
+            "mid": "Thị Thùy",
+            "last": "Đặng"
+        },
+        "birth_date": {
+            "day": 13,
+            "month": 12,
+            "year": 2005
+        },
+        "student_id": "SV1005",
+        "gpa": 3.35,
+        "major": "CNTT"
     },
-    "birth_date": {
-      "day": 19,
-      "month": 4,
-      "year": 2005
-    },
-    "student_id": "SV1003",
-    "gpa": 3.31,
-    "major": "CNTT"
-  },
-  {
-    "id": "09123456784",
-    "full_name": {
-      "first": "Mạnh",
-      "mid": "Đức",
-      "last": "Vũ"
-    },
-    "birth_date": {
-      "day": 10,
-      "month": 10,
-      "year": 2005
-    },
-    "student_id": "SV1004",
-    "gpa": 3.75,
-    "major": "CNTT"
-  },
-  {
-    "id": "09123456785",
-    "full_name": {
-      "first": "Trang",
-      "mid": "Thị Thùy",
-      "last": "Đặng"
-    },
-    "birth_date": {
-      "day": 13,
-      "month": 12,
-      "year": 2005
-    },
-    "student_id": "SV1005",
-    "gpa": 3.35,
-    "major": "CNTT"
-  },
-  {
-    "id": "09123456786",
-    "full_name": {
-      "first": "Tuấn",
-      "mid": "Kim",
-      "last": "Trần"
-    },
-    "birth_date": {
-      "day": 19,
-      "month": 1,
-      "year": 2005
-    },
-    "student_id": "SV1006",
-    "gpa": 3.04,
-    "major": "CNTT"
-  },
-  {
-    "id": "09123456787",
-    "full_name": {
-      "first": "Anh",
-      "mid": "Quỳnh",
-      "last": "Lý"
-    },
-    "birth_date": {
-      "day": 11,
-      "month": 11,
-      "year": 2005
-    },
-    "student_id": "SV1007",
-    "gpa": 3.14,
-    "major": "CNTT"
-  }
+    {
+        "id": "09123456786",
+        "full_name": {
+            "first": "Tuấn",
+            "mid": "Kim",
+            "last": "Trần"
+        },
+        "birth_date": {
+            "day": 19,
+            "month": 1,
+            "year": 2005
+        },
+        "student_id": "SV1006",
+        "gpa": 3.04,
+        "major": "CNTT"
+    }
 ]

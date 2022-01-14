@@ -271,7 +271,7 @@ if __name__ == '__main__':
              '14. Cho biết thông tin bản ghi đăng ký muộn nhất.\n' \
              '15. Lưu các danh sách vào file.\n' \
              '16. Kết thúc chương trình.\n' \
-             'Xin mời chọn chức năng(1-15): '
+             'Xin mời chọn chức năng(1-16): '
     while True:
         choice = int(input(option))
         match choice:
