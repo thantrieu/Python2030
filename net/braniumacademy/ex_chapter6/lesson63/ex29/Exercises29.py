@@ -72,6 +72,7 @@ class Student(Person):
             self.student_id = self.__student_id = create_id()
         else:
             self.student_id = student_id
+            Student.AUTO_ID = int(student_id[len(student_id) - 4:]) + 1
         self.__gpa = gpa
         self.__major = major
 
@@ -127,6 +128,7 @@ class Subject:
             self.__subject_id = create_subject_id()
         else:
             self.__subject_id = subject_id
+            Subject.AUTO_ID = subject_id + 1
         self.__name = name
         self.__credit = credit
 
@@ -143,7 +145,7 @@ class Subject:
         return self.__subject_id
 
     def __str__(self):
-        return f'{self.subject_id:<10}{self.name:15}{self.credit:<10}'
+        return f'{self.subject_id:<10}{self.name:35}{self.credit:<10}'
 
     def __eq__(self, other):
         """Hai môn học gọi là trùng khớp nếu chúng cùng mã môn."""
@@ -159,9 +161,16 @@ def create_register_id():
 class Register:
     AUTO_ID = 100
 
-    def __init__(self, student=None, subject=None):
-        self.__register_id = create_register_id()
-        self.__register_date = datetime.datetime.now()  # Thời gian đăng ký lấy từ hệ thống
+    def __init__(self, reg_id=0, student=None, subject=None, reg_time=None):
+        if reg_id == 0:
+            self.__register_id = create_register_id()
+        else:
+            self.__register_id = reg_id
+            Register.AUTO_ID = reg_id + 1
+        if reg_time is None:
+            self.__register_date = datetime.datetime.now()  # Thời gian đăng ký lấy từ hệ thống
+        else:
+            self.__register_date = reg_time
         self.__subject = subject
         self.__student = student
 
@@ -170,7 +179,7 @@ class Register:
         return self.__register_id
 
     @property
-    def register_date(self):
+    def register_time(self):
         return self.__register_date
 
     @property
@@ -190,12 +199,12 @@ class Register:
         self.__student = value
 
     def __str__(self):
-        date_str = f'{self.register_date.day:02}/{self.register_date.month:02}/' \
-                   f'{self.register_date.year:4} {self.register_date.hour:02}:' \
-                   f'{self.register_date.minute:02}:{self.register_date.second:02}'
+        date_str = f'{self.register_time.day:02}/{self.register_time.month:02}/' \
+                   f'{self.register_time.year:4} {self.register_time.hour:02}:' \
+                   f'{self.register_time.minute:02}:{self.register_time.second:02}'
         return f'{self.register_id:<10}{self.student.student_id:10}' \
                f'{self.student.full_name.full_name:25}' \
-               f'{self.subject.subject_id:<10}{self.subject.name:15}' \
+               f'{self.subject.subject_id:<10}{self.subject.name:35}' \
                f'{date_str:25}'
 
     def __eq__(self, other):

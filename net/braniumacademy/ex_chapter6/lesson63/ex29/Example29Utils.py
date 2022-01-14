@@ -1,3 +1,4 @@
+from datetime import datetime
 from collections import OrderedDict
 from operator import itemgetter
 
@@ -18,7 +19,7 @@ def create_student():
 
 
 def read_students_from_file():
-    students = []
+    mstudents = []
     with open('STUDENT.DAT', encoding='UTF-8') as student_reader:
         pid = student_reader.readline().strip()
         while pid != '':
@@ -33,15 +34,30 @@ def read_students_from_file():
             gpa = float(student_reader.readline().strip())
             major = student_reader.readline().strip()
             full_name = FullName(first, mid, last)
-            students.append(Student(pid, full_name, birth_date, gpa, major, student_id=student_id))
+            mstudents.append(
+                Student(pid, full_name, birth_date,
+                        gpa, major, student_id=student_id)
+            )
             pid = student_reader.readline().strip()
-    return students
+    return mstudents
 
 
 def create_subject():
     name = input('Tên môn học: ')
     credit = int(input('Số tín chỉ: '))
     return Subject(name, credit)
+
+
+def read_subjects_from_file():
+    msubjects = []
+    with open('SUBJECT.DAT', encoding='UTF-8') as subj_reader:
+        subj_id = subj_reader.readline().strip()
+        while subj_id != '':
+            name = subj_reader.readline().strip()
+            credit = int(subj_reader.readline().strip())
+            msubjects.append(Subject(name, credit, subject_id=int(subj_id)))
+            subj_id = subj_reader.readline().strip()
+    return msubjects
 
 
 def create_register(mstudents, msubjects):
@@ -66,6 +82,35 @@ def create_register(mstudents, msubjects):
     return Register(student=student, subject=subject)
 
 
+def read_registers_from_file(mstudents, msubjects):
+    mregisters = []
+    with open('REGISTER.DAT', encoding='UTF-8') as reg_reader:
+        reg_id_str = reg_reader.readline().strip()
+        while reg_id_str != '':
+            reg_id = int(reg_id_str)
+            subject_id = int(reg_reader.readline().strip())
+            student_id = reg_reader.readline().strip()
+            # để chuyển đổi ngày giờ, ví dụ 14/02/2025 12:36:48, dùng định dạng sau:
+            mformat = '%d/%m/%Y %H:%M:%S'
+            date_time_str = reg_reader.readline().strip()
+            reg_time = datetime.strptime(date_time_str, mformat)
+            student = None
+            subject = None
+            for e in mstudents:
+                if e.student_id == student_id:
+                    student = e
+                    break
+            for item in msubjects:
+                if item.subject_id == subject_id:
+                    subject = item
+                    break
+            mregisters.append(Register(reg_id=reg_id,
+                                       student=student,
+                                       subject=subject, reg_time=reg_time))
+            reg_id_str = reg_reader.readline().strip()
+    return mregisters
+
+
 def is_register_exist(mregisters, r):
     """Kiểm tra xem bản đăng ký đã tồn tại trước đó chưa."""
     for item in mregisters:
@@ -84,7 +129,7 @@ def show_students(mstudents):
 
 def show_subjects(msubjects):
     print('==> Danh sách môn học:')
-    print(f'{"Mã môn":10}{"Tên môn":15}{"Số tín":<10}')
+    print(f'{"Mã môn":10}{"Tên môn":35}{"Số tín":<10}')
     for s in msubjects:
         print(s)
 
@@ -92,7 +137,7 @@ def show_subjects(msubjects):
 def show_registers(mregisters):
     print('==> Danh sách đăng ký:')
     print(f'{"Mã ĐK":10}{"Mã SV":10}{"Tên SV":25}'
-          f'{"Mã Môn":<10}{"Tên Môn":15}{"Thời Gian ĐK":25}')
+          f'{"Mã Môn":<10}{"Tên Môn":35}{"Thời Gian ĐK":25}')
     for r in mregisters:
         print(r)
 
@@ -176,8 +221,8 @@ def latest_register(mregisters):
 
 if __name__ == '__main__':
     students = read_students_from_file()
-    subjects = []
-    registers = []
+    subjects = read_subjects_from_file()
+    registers = read_registers_from_file(students, subjects)
     option = '============================ OPTION ============================\n' \
              '1. Thêm mới sinh viên vào danh sách.\n' \
              '2. Thêm mới môn học vào danh sách.\n' \
