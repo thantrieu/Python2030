@@ -108,34 +108,6 @@ def listed_students_by_gpa(mstudents):
         print(f'{key}: {result_dict[key]}')
 
 
-def find_max(mstudents):
-    result_dict = {}
-    for student in mstudents:
-        if student.age in result_dict:
-            result_dict[student.age] += 1
-        else:
-            result_dict[student.age] = 1
-    max_value = 0
-    for e in result_dict:
-        if result_dict.get(e) > max_value:
-            max_value = e
-    return max_value
-
-
-def find_min(mstudents):
-    result_dict = {}
-    for student in mstudents:
-        if student.age in result_dict:
-            result_dict[student.age] += 1
-        else:
-            result_dict[student.age] = 1
-    min_value = find_max(mstudents)
-    for e in result_dict:
-        if result_dict.get(e) > min_value:
-            min_value = e
-    return min_value
-
-
 def get_name(fname):
     """Hàm tách lấy tên trong họ và tên."""
     words = fname.split()
@@ -170,6 +142,49 @@ def listed_student_with_givent_gpa(mstudents):
     listed_students(result)
 
 
+def listed_student_by_birth_month(mstudents):
+    result_dict = {}
+    for student in mstudents:
+        if student.birth_date.month in result_dict:
+            result_dict[student.birth_date.month] += 1
+        else:
+            result_dict[student.birth_date.month] = 1
+    ordered_dict = OrderedDict(sorted(result_dict.items(), key=itemgetter(1)))
+    # Hiện kết quả
+    print('==> Số lượng học sinh theo tháng sinh: ')
+    for key in ordered_dict.keys():
+        print(f'{key:<2}{ordered_dict[key]:10}')
+
+
+def listed_student_by_birth_day(mstudents):
+    result_dict = {}
+    for student in mstudents:
+        if student.birth_date.day in result_dict:
+            result_dict[student.birth_date.day] += 1
+        else:
+            result_dict[student.birth_date.day] = 1
+    ordered_dict = OrderedDict(sorted(result_dict.items(), key=itemgetter(1), reverse=True))
+    # Hiện kết quả
+    print('==> Số lượng học sinh theo ngày sinh: ')
+    for key in ordered_dict.keys():
+        print(f'{key:<2}{ordered_dict[key]:10}')
+
+
+def remove_by_id(mstudents):
+    student_id = input('Nhập mã học sinh: ').upper()
+    success = False
+    for x in range(len(mstudents)):
+        if mstudents[x].student_id == student_id:
+            mstudents.pop(x)
+            success = True
+            break  # xóa xong thì kết thúc vòng lặp vì chỉ có tối đa duy nhất 01 học sinh có mã đã nhập
+    if success is True:
+        print('==> Xóa thành công! <==')
+    else:
+        print('==> Xóa thất bạ! <==')
+    return success
+
+
 if __name__ == '__main__':
     source = 'data3.json'
     with open(source, encoding='UTF-8') as json_reader:
@@ -182,7 +197,7 @@ if __name__ == '__main__':
              '5. Liệt kê các học sinh có điểm bằng x.\n' \
              '6. Liệt kê các học sinh theo tháng sinh.\n' \
              '7. Liệt kê các học sinh theo ngày sinh.\n' \
-             '8. Liệt kê các học sinh theo ngày sinh tăng dần, tháng sinh giảm dần.\n' \
+             '8. Liệt kê các học sinh theo ngày sinh tăng, tháng sinh giảm.\n' \
              '9. Xóa bỏ một học sinh theo mã.\n' \
              '0. Thoát chương trình.\n' \
              'Xin mời chọn: '
@@ -227,25 +242,29 @@ if __name__ == '__main__':
                     print('==> Danh sách học sinh rỗng <==')
             case 6:
                 if len(students) > 0:
-
+                    listed_student_by_birth_month(students)
                     print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 7:
                 if len(students) > 0:
-
+                    listed_student_by_birth_day(students)
                     print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 8:
                 if len(students) > 0:
-
+                    students.sort(key=lambda x: (x.birth_date.day, -x.birth_date.month))
+                    print('==> Danh sách học sinh sau khi sắp xếp:')
+                    listed_students(students)
                     print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 9:
                 if len(students) > 0:
-
+                    if remove_by_id(students) is True:
+                        print('==> Danh sách học sinh sau khi xóa: ')
+                        listed_students(students)
                     print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
