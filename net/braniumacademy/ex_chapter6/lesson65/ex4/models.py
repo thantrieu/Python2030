@@ -138,6 +138,6 @@ class Student:
         self.__gpa = value
 
     def __str__(self):
-        return f'{self.__student_id}{self.__full_name}' \
-               f'{self.__age}{self.__major}{self.__address}' \
-               f'{self.__gpa}'
+        return f'{self.__student_id:10}{self.full_name.full_name:30}' \
+               f'{self.__age:<10}{self.address.address:35}{self.__gpa:<10.2f}' \
+               f'{self.__major:15}'

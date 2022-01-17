@@ -190,7 +190,8 @@ if __name__ == '__main__':
     with open(source, encoding='UTF-8') as json_reader:
         data = json_reader.read()
         students = json.loads(data, object_hook=decode_student)
-    option = '1. Liệt kê danh sách học sinh.\n' \
+    option = '======================= CÁC TÙY CHỌN =======================\n' \
+             '1. Liệt kê danh sách học sinh.\n' \
              '2. Sắp xếp danh sách học sinh theo điểm giảm dần.\n' \
              '3. Liệt kê thông tin các học sinh có điểm TB cao nhất.\n' \
              '4. Liệt kê số lượng học sinh theo đầu điểm.\n' \
@@ -211,7 +212,6 @@ if __name__ == '__main__':
                 if len(students) > 0:
                     print('==> Các học sinh có trong file: ')
                     listed_students(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 2:
@@ -219,37 +219,31 @@ if __name__ == '__main__':
                     students.sort(key=lambda x: (-x.gpa, get_name(x.name)))
                     print('==> Danh sách học sinh sau khi sắp xếp: ')
                     listed_students(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 3:
                 if len(students) > 0:
                     find_student_max_gpa(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 4:
                 if len(students) > 0:
                     listed_students_by_gpa(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 5:
                 if len(students) > 0:
                     listed_student_with_givent_gpa(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 6:
                 if len(students) > 0:
                     listed_student_by_birth_month(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 7:
                 if len(students) > 0:
                     listed_student_by_birth_day(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 8:
@@ -257,7 +251,6 @@ if __name__ == '__main__':
                     students.sort(key=lambda x: (x.birth_date.day, -x.birth_date.month))
                     print('==> Danh sách học sinh sau khi sắp xếp:')
                     listed_students(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case 9:
@@ -265,7 +258,6 @@ if __name__ == '__main__':
                     if remove_by_id(students) is True:
                         print('==> Danh sách học sinh sau khi xóa: ')
                         listed_students(students)
-                    print("============================================================")
                 else:
                     print('==> Danh sách học sinh rỗng <==')
             case _:
