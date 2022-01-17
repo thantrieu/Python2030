@@ -1,5 +1,5 @@
 import json
-from net.braniumacademy.chapter6.student import Address, FullName, Student
+from student import Address, FullName, Student
 
 
 def decode_address(address):
