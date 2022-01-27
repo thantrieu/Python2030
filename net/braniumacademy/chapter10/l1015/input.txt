@@ -1,0 +1,50 @@
+SV1000
+Trần Bá Nam
+Nam
+Công nghệ thông tin
+3.26
+SV1001
+Lê Công Tuấn
+Nam
+Công nghệ thông tin
+3.37
+SV1002
+Trương Quỳnh Anh
+Nữ
+Công nghệ thông tin
+3.29
+SV1003
+Lê Văn Hồng
+Nam
+Công nghệ thông tin
+3.46
+SV1004
+Ngô Trọng Nhân
+Nam
+Công nghệ thông tin
+3.66
+SV1005
+Nguyễn Khánh Toàn
+Nam
+Công nghệ thông tin
+3.35
+SV1006
+Mai Hắc My
+Nữ
+Quản trị kinh doanh
+3.71
+SV1007
+Lại Thu Hương
+Nữ
+An toàn thông tin
+3.57
+SV1008
+Ngô Thị Quỳnh
+Nữ
+Công nghệ sinh học
+3.18
+SV1009
+Hồ Văn Mãi
+Nam
+Công nghệ thông tin
+3.85
