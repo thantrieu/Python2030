@@ -41,7 +41,6 @@ class LearnTreeview(tk.Tk):
         self.table.heading('gender', text='Giới tính')
         self.table.heading('gpa', text='Điểm TB')
         self.table.heading('major', text='Chuyên ngành')
-        self.table.insert()
         self.table.grid(row=0, column=0, sticky=tk.NSEW, pady=4, padx=4, columnspan=2)
         # add scrollbar
         scrollbar = ttk.Scrollbar(orient=tk.VERTICAL, command=self.table.yview)
