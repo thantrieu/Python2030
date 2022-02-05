@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<subjects>
+	<subject>
+		<id>1000</id>
+		<name>Java OOP</name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<id>1001</id>
+		<name>Java Android</name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<id>1002</id>
+		<name>C++</name>
+		<credit>3</credit>
+	</subject>
+	<subject>
+		<id>1003</id>
+		<name>C#</name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<id>1004</id>
+		<name>SQL</name>
+		<credit>3</credit>
+	</subject>
+	<subject>
+		<id>1005</id>
+		<name>Lập trình C</name>
+		<credit>2</credit>
+	</subject>
+	<subject>
+		<id>1006</id>
+		<name>Kotlin</name>
+		<credit>3</credit>
+	</subject>
+	<subject>
+		<id>1007</id>
+		<name>Cấu trúc dữ liệu giải thuật</name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<id>1008</id>
+		<name>Lập trình nhúng</name>
+		<credit>3</credit>
+	</subject>
+</subjects>
