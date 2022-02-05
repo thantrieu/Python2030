@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<registers>
+	<register>
+		<id>1000</id>
+		<subject_id>1000</subject_id>
+		<student_id>SV1001</student_id>
+		<reg_time>20/02/2025 00:01:34</reg_time>
+	</register>
+	<register>
+		<id>1001</id>
+		<subject_id>1001</subject_id>
+		<student_id>SV1001</student_id>
+		<reg_time>20/02/2025 00:01:36</reg_time>
+	</register>
+	<register>
+		<id>1002</id>
+		<subject_id>1002</subject_id>
+		<student_id>SV1001</student_id>
+		<reg_time>20/02/2025 00:01:38</reg_time>
+	</register>
+	<register>
+		<id>1003</id>
+		<subject_id>1003</subject_id>
+		<student_id>SV1001</student_id>
+		<reg_time>20/02/2025 00:01:39</reg_time>
+	</register>
+	<register>
+		<id>1004</id>
+		<subject_id>1004</subject_id>
+		<student_id>SV1001</student_id>
+		<reg_time>20/02/2025 00:01:45</reg_time>
+	</register>
+	<register>
+		<id>1005</id>
+		<subject_id>1000</subject_id>
+		<student_id>SV1002</student_id>
+		<reg_time>20/02/2025 00:01:30</reg_time>
+	</register>
+	<register>
+		<id>1006</id>
+		<subject_id>1001</subject_id>
+		<student_id>SV1002</student_id>
+		<reg_time>20/02/2025 00:01:34</reg_time>
+	</register>
+	<register>
+		<id>1007</id>
+		<subject_id>1002</subject_id>
+		<student_id>SV1002</student_id>
+		<reg_time>20/02/2025 00:01:37</reg_time>
+	</register>
+	<register>
+		<id>1008</id>
+		<subject_id>1003</subject_id>
+		<student_id>SV1002</student_id>
+		<reg_time>20/02/2025 00:01:45</reg_time>
+	</register>
+	<register>
+		<id>1009</id>
+		<subject_id>1000</subject_id>
+		<student_id>SV1003</student_id>
+		<reg_time>20/02/2025 00:01:34</reg_time>
+	</register>
+	<register>
+		<id>1010</id>
+		<subject_id>1001</subject_id>
+		<student_id>SV1003</student_id>
+		<reg_time>20/02/2025 00:01:39</reg_time>
+	</register>
+	<register>
+		<id>1011</id>
+		<subject_id>1002</subject_id>
+		<student_id>SV1004</student_id>
+		<reg_time>20/02/2025 00:01:32</reg_time>
+	</register>
+	<register>
+		<id>1012</id>
+		<subject_id>1003</subject_id>
+		<student_id>SV1004</student_id>
+		<reg_time>20/02/2025 00:02:57</reg_time>
+	</register>
+	<register>
+		<id>1013</id>
+		<subject_id>1004</subject_id>
+		<student_id>SV1004</student_id>
+		<reg_time>20/02/2025 00:03:23</reg_time>
+	</register>
+	<register>
+		<id>1014</id>
+		<subject_id>1006</subject_id>
+		<student_id>SV1005</student_id>
+		<reg_time>20/02/2025 00:03:57</reg_time>
+	</register>
+	<register>
+		<id>1015</id>
+		<subject_id>1007</subject_id>
+		<student_id>SV1005</student_id>
+		<reg_time>20/02/2025 00:04:57</reg_time>
+	</register>
+</registers>
