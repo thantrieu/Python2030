@@ -1,12 +1,10 @@
 import abc
-import json
 import re
 from abc import abstractmethod
 from datetime import datetime
 
 from net.braniumacademy.chapter10.l1024.model.student import Student, FullName
 from net.braniumacademy.chapter10.l1024.error.exceptions import *
-from net.braniumacademy.chapter10.l1024.controller.utils import StudentEncoder
 
 
 class IStudentController(abc.ABC):
