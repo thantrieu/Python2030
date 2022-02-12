@@ -83,8 +83,8 @@ class HomeView(tk.Tk):
 
     def create_student_view(self):
         self.student_view = StudentView(self.frm_student)
-        # pass
 
     def create_student(self):
-        popup = StudentPopup()
+        popup = StudentPopup(self.student_view)
+        popup.attributes('-topmost', True)  # showing popup alway on top of master frame
         popup.mainloop()
