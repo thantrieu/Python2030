@@ -89,22 +89,49 @@ class StudentController(IStudentController):
         pass
 
     def remove(self, students: list[Student], _id: str) -> bool:
-        pass
+        index = 0
+        for student in students:
+            if student.student_id == _id:
+                students.pop(index)
+                return True
+            index += 1
+        return False
 
     def search_by_name(self, students: list[Student], key: str) -> list[Student]:
-        pass
+        result = []
+        for student in students:
+            matcher = re.search(f'.*{key}.*', student.full_name.first_name)
+            if matcher:
+                result.append(student)
+        return result
 
     def search_by_gpa(self, students: list[Student], key: float) -> list[Student]:
-        pass
+        result = []
+        for student in students:
+            if student.gpa == key:
+                result.append(student)
+        return result
 
     def search_by_birth_date(self, students: list[Student], key: int) -> list[Student]:
-        pass
+        result = []
+        for student in students:
+            if student.birth_date.day == key:
+                result.append(student)
+        return result
 
     def search_by_birth_month(self, students: list[Student], key: int) -> list[Student]:
-        pass
+        result = []
+        for student in students:
+            if student.birth_date.month == key:
+                result.append(student)
+        return result
 
     def search_by_birth_year(self, students: list[Student], key: int) -> list[Student]:
-        pass
+        result = []
+        for student in students:
+            if student.birth_date.year == key:
+                result.append(student)
+        return result
 
     def sort_by_name(self, students: list[Student]):
         students.sort(key=lambda x: (x.full_name.first_name, x.full_name.last_name))
@@ -113,7 +140,7 @@ class StudentController(IStudentController):
         students.sort(key=lambda x: x.gpa, reverse=True)
 
     def sort_by_birth_date(self, students: list[Student]):
-        students.sort(key=lambda x: x.birth_date.totalseconds())
+        students.sort(key=lambda x: (x.birth_date - datetime.strptime('01/01/1970', '%d/%m/%Y')).total_seconds())
 
     def sort_by_name_gpa(self, students: list[Student]):
         students.sort(key=lambda x: (-x.gpa, x.full_name.first_name, x.full_name.last_name))
