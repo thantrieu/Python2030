@@ -5,9 +5,9 @@ from tkinter.messagebox import showinfo
 from net.braniumacademy.chapter10.l1024.controller.studentcontroller import StudentController
 
 
-class StudentPopup(tkinter.Tk):
+class AddNewStudentView(tkinter.Tk):
     def __init__(self, master):
-        super(StudentPopup, self).__init__()
+        super(AddNewStudentView, self).__init__()
         self.master = master
         self.resizable(False, False)
         self.title('Add New Student Popup')

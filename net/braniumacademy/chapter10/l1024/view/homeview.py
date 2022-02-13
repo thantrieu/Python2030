@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, Menu
-from net.braniumacademy.chapter10.l1024.view.addnewstudentview import StudentPopup
+from net.braniumacademy.chapter10.l1024.view.addnewstudentview import AddNewStudentView
 from net.braniumacademy.chapter10.l1024.view.studentview import StudentView
 
 
@@ -87,7 +87,7 @@ class HomeView(tk.Tk):
         self.student_view = StudentView(self.frm_student)
 
     def create_student(self):
-        popup = StudentPopup(self.student_view)
+        popup = AddNewStudentView(self.student_view)
         popup.attributes('-topmost', True)  # showing popup alway on top of master frame
         popup.mainloop()
 
