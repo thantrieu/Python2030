@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter.messagebox import showerror, askyesno, showinfo
 from net.braniumacademy.chapter10.l1024.utils import *
 from net.braniumacademy.chapter10.l1024.controller.studentcontroller import StudentController
+from net.braniumacademy.chapter10.l1024.view.editstudentview import EditStudentView
 
 
 class StudentView:
@@ -57,8 +58,7 @@ class StudentView:
 
     def load_student(self):
         self.students.clear()
-        file_name = 'STUDENT.DAT'
-        self.students = self.controller.read_file(file_name)
+        self.students = self.controller.read_file(STUDENT_FILE_NAME)
         self.show_students()
 
     def show_students(self):
@@ -81,8 +81,10 @@ class StudentView:
             ans = askyesno(title, message)
             if ans:
                 for item in item_selected:
-                    self.tbl_student.delete(item)
-                    # TODO update into students list
+                    index = int(item[1:], 16) - 1 # lấy vị trí hàng cần xóa - 1 có được vị trí phần tử trong danh sách
+                    self.controller.remove(self.students, index)  # xóa phần tử trong danh sách sinh viên
+                    self.tbl_student.delete(item)  # xóa phần tử trong bảng
+                self.controller.write_file(STUDENT_FILE_NAME, self.students)  # update file
                 showinfo(title='Infomation', message='Delete successfully!')
         else:
             showerror(title='Error', message='Please select a row to delete first!')
@@ -90,17 +92,9 @@ class StudentView:
     def edit_student(self):
         item_selected = self.tbl_student.selection()
         if len(item_selected) > 0:
-            # create a view to edit selected student's gpa
-            title = 'Confirmation'
-            message = 'Are you sure to save the change?'
-            ans = askyesno(title, message)
-            if ans:
-                # TODO edit gpa for selected student
-                # for item in item_selected:
-                #     self.tbl_student.delete(item)
-                showinfo(title='Infomation', message='Update GPA successfully!')
-        else:
-            showerror(title='Error', message='Please select a Student to edit first!')
+            item = item_selected[0]
+            index = (int(item[1:], 16) - 1) % len(self.students)
+            EditStudentView(self, self.students[index]).attributes('-topmost', True)
 
     def create_student(self, student: Student):
         self.students.append(student)
@@ -124,5 +118,5 @@ class StudentView:
         self.show_students()
 
     def save(self):
-        self.controller.write_file('STUDENT.DAT', students=self.students)
+        self.controller.write_file(STUDENT_FILE_NAME, students=self.students)
         showinfo('Successfully', 'Save students data to file successfully!')

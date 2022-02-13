@@ -1,5 +1,7 @@
 from net.braniumacademy.chapter10.l1024.model.student import Student
 
+STUDENT_FILE_NAME = 'STUDENT.DAT'
+
 
 def student_to_tuple(student: Student) -> tuple[str | str, ...]:
     """ Hàm tiện ích thực hiện chuyển đổi thông tin sinh viên thành một

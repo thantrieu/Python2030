@@ -60,6 +60,7 @@ class LearnMenu(tk.Tk):
     def change_background_color(self, color):
         self.configure(background=color)
 
+
 if __name__ == '__main__':
     obj = LearnMenu()
     obj.mainloop()

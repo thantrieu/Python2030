@@ -14,11 +14,11 @@ class IStudentController(abc.ABC):
         pass
 
     @abstractmethod
-    def edit(self, student: Student) -> Student:
+    def edit(self, student: Student, gpa: float) -> Student:
         pass
 
     @abstractmethod
-    def remove(self, students: list[Student], _id: str) -> bool:
+    def remove(self, students: list[Student], index: int) -> bool:
         pass
 
     @abstractmethod
@@ -116,16 +116,17 @@ class StudentController(IStudentController):
             showerror('GPA Error!', message=e.__str__())
         return None
 
-    def edit(self, student: Student) -> Student:
-        pass
+    def edit(self, student: Student, gpa: float) -> Student:
+        if self.check_gpa_valid(gpa):
+            student.gpa = gpa
+            return student
+        else:
+            raise GpaError(gpa)
 
-    def remove(self, students: list[Student], _id: str) -> bool:
-        index = 0
-        for student in students:
-            if student.student_id == _id:
-                students.pop(index)
-                return True
-            index += 1
+    def remove(self, students: list[Student], index: int) -> bool:
+        if 0 <= index < len(students):
+            students.pop(index)
+            return True
         return False
 
     def search_by_name(self, students: list[Student], key: str) -> list[Student]:
@@ -240,7 +241,7 @@ class StudentController(IStudentController):
                 if person_id == '':
                     break
         students.sort(key=lambda x: x.student_id)
-        self.update_student_id(students[len(students)-1].student_id)
+        self.update_student_id(students[len(students) - 1].student_id)
         return students
 
     def write_file(self, file_name: str, students: list[Student]):

@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, Menu
-from net.braniumacademy.chapter10.l1024.view.popup import StudentPopup
+from net.braniumacademy.chapter10.l1024.view.addnewstudentview import StudentPopup
 from net.braniumacademy.chapter10.l1024.view.studentview import StudentView
 
 
