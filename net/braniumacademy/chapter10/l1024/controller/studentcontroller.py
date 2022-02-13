@@ -2,6 +2,7 @@ import abc
 import re
 from abc import abstractmethod
 from datetime import datetime
+from tkinter.messagebox import showerror
 
 from net.braniumacademy.chapter10.l1024.model.student import Student, FullName
 from net.braniumacademy.chapter10.l1024.error.exceptions import *
@@ -9,7 +10,7 @@ from net.braniumacademy.chapter10.l1024.error.exceptions import *
 
 class IStudentController(abc.ABC):
     @abstractmethod
-    def add(self) -> Student:
+    def add(self, person_id, full_name, birth_date_str, email, gpa_str, major) -> Student:
         pass
 
     @abstractmethod
@@ -80,10 +81,40 @@ class IStudentController(abc.ABC):
     def write_file(self, file_name: str, students: list[Student]):
         pass
 
+    @abstractmethod
+    def update_student_id(self, current_id: str):
+        pass
+
 
 class StudentController(IStudentController):
-    def add(self) -> Student:
-        pass
+    def add(self, person_id, full_name,
+            birth_date_str, email, gpa_str, major) -> Student | None:
+        gpa = 0.0
+        gpa_pattern = r'\d.\d'
+        matcher = re.search(gpa_pattern, gpa_str)
+        if matcher:
+            gpa = float(gpa_str)
+        else:
+            showerror('Invlalid GPA', message='GPA can only float number.')
+        if person_id == '':
+            showerror('Person ID Error', message='Person id cannot be blank.')
+        try:
+            self.check_name_valid(full_name)
+            self.check_birth_date_valid(birth_date_str)
+            self.check_email_valid(email)
+            self.check_gpa_valid(gpa)
+            return Student(person_id, full_name,
+                           datetime.strptime(birth_date_str, '%d/%m/%Y'),
+                           None, email, gpa, major)
+        except NameInvalidError as e:
+            showerror('NameInvalidError', message=e.__str__())
+        except BirthdateError as e:
+            showerror('BirthdateError', message=e.__str__())
+        except EmailError as e:
+            showerror('EmailError', message=e.__str__())
+        except GpaError as e:
+            showerror('GPA Error!', message=e.__str__())
+        return None
 
     def edit(self, student: Student) -> Student:
         pass
@@ -208,6 +239,8 @@ class StudentController(IStudentController):
                 person_id = reader.readline().strip()
                 if person_id == '':
                     break
+        students.sort(key=lambda x: x.student_id)
+        self.update_student_id(students[len(students)-1].student_id)
         return students
 
     def write_file(self, file_name: str, students: list[Student]):
@@ -220,3 +253,9 @@ class StudentController(IStudentController):
                 writer.write(f'{student.email}\n')
                 writer.write(f'{student.gpa}\n')
                 writer.write(f'{student.major}\n')
+
+    def update_student_id(self, current_id: str):
+        if current_id is not None:
+            id_number_str = current_id[2:]
+            id_number = int(id_number_str) + 1
+            Student.AUTO_ID = id_number

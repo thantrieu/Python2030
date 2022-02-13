@@ -64,10 +64,16 @@ class Person:
 
 
 class Student(Person):
+    AUTO_ID = 1000
+
     def __init__(self, person_id, full_name,
                  birth_date, student_id, email, gpa, major):
         super().__init__(person_id, full_name, birth_date)
-        self.__student_id = student_id
+        if student_id is None:
+            self.student_id = f'SV{Student.AUTO_ID}'
+            Student.AUTO_ID += 1
+        else:
+            self.__student_id = student_id
         self.__email = email
         self.__gpa = gpa
         self.__major = major

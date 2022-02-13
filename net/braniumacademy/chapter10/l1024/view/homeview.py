@@ -75,6 +75,8 @@ class HomeView(tk.Tk):
         submenu_sort_by.add_command(label='By GPA Decrement & Name Increment',
                                     command=lambda: self.student_view.sort_by_gpa_and_name())
         file_menu.add_cascade(label='Sort...', menu=submenu_sort_by)
+        # save menu item
+        file_menu.add_command(label='Save', command=lambda : self.save())
         # other menu items
         file_menu.add_separator()
         file_menu.add_command(label='Exit', underline=0, command=self.destroy)
@@ -88,3 +90,6 @@ class HomeView(tk.Tk):
         popup = StudentPopup(self.student_view)
         popup.attributes('-topmost', True)  # showing popup alway on top of master frame
         popup.mainloop()
+
+    def save(self):
+        self.student_view.save()

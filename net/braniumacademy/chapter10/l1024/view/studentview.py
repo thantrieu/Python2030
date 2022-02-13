@@ -102,11 +102,9 @@ class StudentView:
         else:
             showerror(title='Error', message='Please select a Student to edit first!')
 
-    def create_student(self):
-        # popup = StudentPopup()
-        # self.frame.wait_window(tk.TOP)
-        # popup.mainloop()
-        pass
+    def create_student(self, student: Student):
+        self.students.append(student)
+        self.show_students()
 
     def sort_by_name(self):
         self.controller.sort_by_name(self.students)
@@ -124,3 +122,7 @@ class StudentView:
     def sort_by_gpa_and_name(self):
         self.controller.sort_by_name_gpa(self.students)
         self.show_students()
+
+    def save(self):
+        self.controller.write_file('STUDENT.DAT', students=self.students)
+        showinfo('Successfully', 'Save students data to file successfully!')

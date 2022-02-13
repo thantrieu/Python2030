@@ -1,9 +1,8 @@
 import tkinter
 from tkinter import ttk
-from tkinter.messagebox import showerror
+from tkinter.messagebox import showinfo
 
 from net.braniumacademy.chapter10.l1024.controller.studentcontroller import StudentController
-from net.braniumacademy.chapter10.l1024.error.exceptions import NameInvalidError, BirthdateError
 
 
 class StudentPopup(tkinter.Tk):
@@ -49,15 +48,7 @@ class StudentPopup(tkinter.Tk):
         email = self.entry_email.get()
         gpa_str = self.entry_gpa.get()
         major = self.entry_major.get()
-        if person_id == '':
-            showerror('Person ID Error', message='Person id cannot be blank.')
-            raise Exception()
-        try:
-            controller.check_name_valid(full_name)
-        except NameInvalidError as e:
-            showerror('NameInvalidError', message=e.__str__())
-        try:
-            controller.check_birth_date_valid(birth_date)
-        except BirthdateError as e:
-            showerror('BirthdateError', message=e.__str__())
-        self.master.create_student()
+        student = controller.add(person_id, full_name, birth_date, email, gpa_str, major)
+        if student is not None:
+            self.master.create_student(student)
+            showinfo('Completion', message='Add new student successfully!')
