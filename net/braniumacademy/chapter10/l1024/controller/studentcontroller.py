@@ -132,7 +132,8 @@ class StudentController(IStudentController):
     def search_by_name(self, students: list[Student], key: str) -> list[Student]:
         result = []
         for student in students:
-            matcher = re.search(f'.*{key}.*', student.full_name.first_name)
+            matcher = re.search(f'.*{key}.*',
+                                student.full_name.first_name, flags=re.IGNORECASE)
             if matcher:
                 result.append(student)
         return result

@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, Menu
 from net.braniumacademy.chapter10.l1024.view.addnewstudentview import AddNewStudentView
+from net.braniumacademy.chapter10.l1024.view.searchstudentview import SearchStudent
 from net.braniumacademy.chapter10.l1024.view.studentview import StudentView
 
 
@@ -58,11 +59,16 @@ class HomeView(tk.Tk):
                               command=lambda: self.create_student())
         # find by submenu
         submenu_find_by = Menu(file_menu, tearoff=False)
-        submenu_find_by.add_command(label='By Name')
-        submenu_find_by.add_command(label='By GPA')
-        submenu_find_by.add_command(label='By Birth Day')
-        submenu_find_by.add_command(label='By Birth Month')
-        submenu_find_by.add_command(label='By Birth Year')
+        submenu_find_by.add_command(label='By Name',
+                                    command=lambda: self.search_by_name())
+        submenu_find_by.add_command(label='By GPA',
+                                    command=lambda: self.search_by_gpa())
+        submenu_find_by.add_command(label='By Birth Day',
+                                    command=lambda: self.search_by_birth_date())
+        submenu_find_by.add_command(label='By Birth Month',
+                                    command=lambda: self.search_by_birth_month())
+        submenu_find_by.add_command(label='By Birth Year',
+                                    command=lambda: self.search_by_birth_year())
         file_menu.add_cascade(label='Find...', menu=submenu_find_by)
         # sort by submenu
         submenu_sort_by = Menu(file_menu, tearoff=False)
@@ -76,7 +82,7 @@ class HomeView(tk.Tk):
                                     command=lambda: self.student_view.sort_by_gpa_and_name())
         file_menu.add_cascade(label='Sort...', menu=submenu_sort_by)
         # save menu item
-        file_menu.add_command(label='Save', command=lambda : self.save())
+        file_menu.add_command(label='Save', command=lambda: self.save())
         # other menu items
         file_menu.add_separator()
         file_menu.add_command(label='Exit', underline=0, command=self.destroy)
@@ -93,3 +99,83 @@ class HomeView(tk.Tk):
 
     def save(self):
         self.student_view.save()
+
+    def search_by_name(self):
+        frm = tk.Tk()
+        frm.title('Search By Name')
+        frm.resizable(False, False)
+        ttk.Label(frm, text='Key: ').\
+            grid(row=0, column=0, sticky=tk.W, padx=8, pady=4)
+        entry = ttk.Entry(frm)
+        entry.grid(row=0, column=1, pady=4, padx=8)
+        ttk.Button(frm, text='Cancel', command=frm.destroy).\
+            grid(row=1, column=0, padx=8, pady=4)
+        ttk.Button(frm, text='Search',
+                   command=lambda: self.student_view.search_by_name(entry.get())).\
+            grid(row=1, column=1, padx=8, pady=4)
+        frm.mainloop()
+        frm.attributes('-topmost', True)
+
+    def search_by_gpa(self):
+        frm = tk.Tk()
+        frm.title('Search By GPA')
+        frm.resizable(False, False)
+        ttk.Label(frm, text='GPA: '). \
+            grid(row=0, column=0, sticky=tk.W, padx=8, pady=4)
+        entry = ttk.Entry(frm)
+        entry.grid(row=0, column=1, pady=4, padx=8)
+        ttk.Button(frm, text='Cancel', command=frm.destroy). \
+            grid(row=1, column=0, padx=8, pady=4)
+        ttk.Button(frm, text='Search',
+                   command=lambda: self.student_view.search_by_gpa(float(entry.get()))). \
+            grid(row=1, column=1, padx=8, pady=4)
+        frm.mainloop()
+        frm.attributes('-topmost', True)
+
+    def search_by_birth_date(self):
+        frm = tk.Tk()
+        frm.title('Search By Birth Day')
+        frm.resizable(False, False)
+        ttk.Label(frm, text='Day: '). \
+            grid(row=0, column=0, sticky=tk.W, padx=8, pady=4)
+        entry = ttk.Entry(frm)
+        entry.grid(row=0, column=1, pady=4, padx=8)
+        ttk.Button(frm, text='Cancel', command=frm.destroy). \
+            grid(row=1, column=0, padx=8, pady=4)
+        ttk.Button(frm, text='Search',
+                   command=lambda: self.student_view.search_by_birth_date(int(entry.get()))). \
+            grid(row=1, column=1, padx=8, pady=4)
+        frm.mainloop()
+        frm.attributes('-topmost', True)
+
+    def search_by_birth_month(self):
+        frm = tk.Tk()
+        frm.title('Search By Birth Month')
+        frm.resizable(False, False)
+        ttk.Label(frm, text='Month: '). \
+            grid(row=0, column=0, sticky=tk.W, padx=8, pady=4)
+        entry = ttk.Entry(frm)
+        entry.grid(row=0, column=1, pady=4, padx=8)
+        ttk.Button(frm, text='Cancel', command=frm.destroy). \
+            grid(row=1, column=0, padx=8, pady=4)
+        ttk.Button(frm, text='Search',
+                   command=lambda: self.student_view.search_by_birth_month(int(entry.get()))). \
+            grid(row=1, column=1, padx=8, pady=4)
+        frm.mainloop()
+        frm.attributes('-topmost', True)
+
+    def search_by_birth_year(self):
+        frm = tk.Tk()
+        frm.title('Search By Birth Year')
+        frm.resizable(False, False)
+        ttk.Label(frm, text='Year: '). \
+            grid(row=0, column=0, sticky=tk.W, padx=8, pady=4)
+        entry = ttk.Entry(frm)
+        entry.grid(row=0, column=1, pady=4, padx=8)
+        ttk.Button(frm, text='Cancel', command=frm.destroy). \
+            grid(row=1, column=0, padx=8, pady=4)
+        ttk.Button(frm, text='Search',
+                   command=lambda: self.student_view.search_by_birth_year(int(entry.get()))). \
+            grid(row=1, column=1, padx=8, pady=4)
+        frm.mainloop()
+        frm.attributes('-topmost', True)

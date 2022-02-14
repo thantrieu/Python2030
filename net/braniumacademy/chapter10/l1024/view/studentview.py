@@ -53,13 +53,14 @@ class StudentView:
             grid(row=1, column=0, ipady=4, ipadx=4)
         ttk.Button(self.frame, text='Edit GPA', command=self.edit_student). \
             grid(row=1, column=1, ipady=4, ipadx=4)
-        ttk.Button(self.frame, text='Remove Items', command=self.remove_student). \
+        ttk.Button(self.frame, text='Remove Items', command=self.remove). \
             grid(row=1, column=2, ipady=4, ipadx=4)
 
-    def load_student(self):
+    def load_student(self, display=True):
         self.students.clear()
         self.students = self.controller.read_file(STUDENT_FILE_NAME)
-        self.show_students()
+        if display:
+            self.show_students()
 
     def show_students(self):
         clear_treeview(self.tbl_student)
@@ -73,7 +74,7 @@ class StudentView:
             self.tbl_student.insert('', tk.END, values=student_to_tuple(student), tags=(tag,))
             index += 1
 
-    def remove_student(self):
+    def remove(self):
         item_selected = self.tbl_student.selection()
         if len(item_selected) > 0:
             title = 'Confirmation'
@@ -120,3 +121,53 @@ class StudentView:
     def save(self):
         self.controller.write_file(STUDENT_FILE_NAME, students=self.students)
         showinfo('Successfully', 'Save students data to file successfully!')
+
+    def search_by_name(self, key: str):
+        self.load_student(False)  # reload student
+        result = self.controller.search_by_name(self.students, key)
+        if len(result) == 0:
+            showinfo('Search Result', 'No result found!')
+        else:
+            self.students.clear()
+            self.students = result.copy()
+            self.show_students()
+
+    def search_by_gpa(self, key: float):
+        self.load_student(False)  # reload student
+        result = self.controller.search_by_gpa(self.students, key)
+        if len(result) == 0:
+            showinfo('Search Result', 'No result found!')
+        else:
+            self.students.clear()
+            self.students = result.copy()
+            self.show_students()
+
+    def search_by_birth_date(self, key: int):
+        self.load_student(False)  # reload student
+        result = self.controller.search_by_birth_date(self.students, key)
+        if len(result) == 0:
+            showinfo('Search Result', 'No result found!')
+        else:
+            self.students.clear()
+            self.students = result.copy()
+            self.show_students()
+
+    def search_by_birth_month(self, key: int):
+        self.load_student(False)  # reload student
+        result = self.controller.search_by_birth_month(self.students, key)
+        if len(result) == 0:
+            showinfo('Search Result', 'No result found!')
+        else:
+            self.students.clear()
+            self.students = result.copy()
+            self.show_students()
+
+    def search_by_birth_year(self, key: int):
+        self.load_student(False)  # reload student
+        result = self.controller.search_by_birth_year(self.students, key)
+        if len(result) == 0:
+            showinfo('Search Result', 'No result found!')
+        else:
+            self.students.clear()
+            self.students = result.copy()
+            self.show_students()
