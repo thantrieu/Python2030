@@ -12,7 +12,7 @@ class EditStudentView(tkinter.Tk):
         self.master = master
         self.student = student
         self.resizable(False, False)
-        self.title('Add New Student Popup')
+        self.title('Edit GPA')
         self.create_widgets()
 
     def create_widgets(self):
