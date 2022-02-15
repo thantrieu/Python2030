@@ -181,8 +181,8 @@ class StudentController(IStudentController):
     def check_name_valid(self, name: str) -> bool:
         # Họ tên gồm chữ cái, dấu cách, dài 2-40 kí tự
         # cho phép tên tiếng Việt
-        pattern = pattern = '^([a-zẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠ' \
-                            'ỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ]+\\s?){2,40}$'
+        pattern = '^([a-zẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠ' \
+                  'ỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ]+\\s?){2,40}$'
         matcher = re.search(pattern, name, flags=re.IGNORECASE)
         if len(name) > 40:
             msg = 'Name too long. Permit only up to 40 characters long'
