@@ -19,7 +19,8 @@ class LearnFrameLabel(tk.Tk):
         self.create_submit_button()
 
     def create_submit_button(self):
-        ttk.Button(text='Submit', command=self.show_result).\
+        self.img_search = tk.PhotoImage(file='search.png')
+        self.btn = ttk.Button(text='Submit', command=self.show_result, image=self.img_search, compound=tk.LEFT).\
             grid(row=1, column=0, columnspan=2, sticky=tk.EW, padx=4, pady=4)
 
     def create_frame_tshirt(self):
