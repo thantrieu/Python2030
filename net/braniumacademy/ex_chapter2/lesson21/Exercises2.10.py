@@ -9,7 +9,7 @@ if 0.0 <= mark <= 10.0:
     elif mark >= 5.0:
         level = "C"
     elif mark >= 4.0:
-        level = "C"
+        level = "D"
     else:
         level = "F"
 print(level)
