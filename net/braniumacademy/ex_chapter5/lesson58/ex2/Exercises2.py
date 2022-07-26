@@ -193,7 +193,7 @@ class Teacher(Person):
         self.__expertise = value
 
     def __str__(self):
-        return f'{super().__str__()}{self.teacher_id:10}{self.salary < 10}' \
+        return f'{super().__str__()}{self.teacher_id:10}{round(self.salary, 0):<10}' \
                f'{self.expertise:20}'
 
     def __eq__(self, other):
