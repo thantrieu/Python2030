@@ -1,4 +1,4 @@
-mark = input("Nhập vào giá trị 1-7: ")
+mark = input("Nhập vào một giá trị a-f: ")
 match mark:
     case 'a' | 'A':
         print("Giỏi")
