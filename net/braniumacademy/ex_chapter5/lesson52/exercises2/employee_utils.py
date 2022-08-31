@@ -101,3 +101,22 @@ def find_employee_by_phone_number(employees, phone_num):
     for x in employees:
         if x.phone_number.find(phone_num, len(x.phone_number) - 3) != -1:
             print_employee_info(x)
+
+
+def find_range_of_salary(employees):
+    salary_range = []
+    for x in employees:
+        if salary_range.__contains__(x.salary):
+            continue
+        else:
+            salary_range.append(x.salary)
+    return salary_range
+
+
+def listed_salary_range(employees):
+    salary_range = find_range_of_salary(employees)
+    for s in salary_range:
+        print(f'Các nhân viên có mức lương {s}đ:')
+        for e in employees:
+            if e.salary == s:
+                print_employee_info(e)
