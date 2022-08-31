@@ -9,10 +9,11 @@ option = "========================= CÁC LỰA CHỌN =========================\
          "06. Sắp xếp danh sách nhân viên theo tên tăng dần a-z.\n" \
          "07. Sắp xếp danh sách nhân viên theo lương giảm, tên tăng, họ tăng.\n" \
          "08. Liệt kê các nhân viên có lương cao nhất.\n" \
-         "09. Liệt kê các nhân viên có tên x nhập vào từ bàn phím.\n" \
-         "10. Liệt kê các nhân viên có tuổi x nhập vào từ bàn phím.\n" \
-         "11. Liệt kê các nhân viên có n năm kinh nghiệm.\n" \
-         "12. Tìm nhân viên theo 3 chữ số cuối số điện thoại.\n" \
+         "09. Liệt kê các nhân viên có cùng mức lương trong hợp đồng.\n" \
+         "10. Liệt kê các nhân viên có tên x nhập vào từ bàn phím.\n" \
+         "11. Liệt kê các nhân viên có tuổi x nhập vào từ bàn phím.\n" \
+         "12. Liệt kê các nhân viên có n năm kinh nghiệm.\n" \
+         "13. Tìm nhân viên theo 3 chữ số cuối số điện thoại.\n" \
          "0. Thoát chương trình.\nBạn chọn? "
 employees = []
 while True:
@@ -76,23 +77,28 @@ while True:
                 print('==> Danh sách nhân viên rỗng <==')
         case 9:
             if len(employees) > 0:
+                utils.listed_salary_range(employees)
+            else:
+                print('==> Danh sách nhân viên rỗng <==')
+        case 10:
+            if len(employees) > 0:
                 name = input('Nhập tên nhân viên cần tìm: ')
                 utils.find_employee_by_name(employees, name)
             else:
                 print('==> Danh sách nhân viên rỗng <==')
-        case 10:
+        case 11:
             if len(employees) > 0:
                 age = int(input('Nhập tuổi nhân viên cần tìm: '))
                 utils.find_employee_by_age(employees, age)
             else:
                 print('==> Danh sách nhân viên rỗng <==')
-        case 11:
+        case 12:
             if len(employees) > 0:
                 age = float(input('Nhập số năm kinh nghiệm nhân viên cần tìm: '))
                 utils.find_employee_by_experience(employees, age)
             else:
                 print('==> Danh sách nhân viên rỗng <==')
-        case 12:
+        case 13:
             if len(employees) > 0:
                 phone_number = input('Nhập 3 chữ số cuối số điện thoại nhân viên cần tìm: ')
                 utils.find_employee_by_phone_number(employees, phone_number)
