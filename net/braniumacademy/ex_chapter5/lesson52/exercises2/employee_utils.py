@@ -62,6 +62,25 @@ def find_max_salary(employees):
     return max_salary
 
 
+def find_range_of_salary(employees):
+    salary_range = []
+    for x in employees:
+        if salary_range.__contains__(x.salary):
+            continue
+        else:
+            salary_range.append(x.salary)
+    return salary_range
+
+
+def listed_salary_range(employees):
+    salary_range = find_range_of_salary(employees)
+    for s in salary_range:
+        print(f'Các nhân viên có mức lương {s}đ:')
+        for e in employees:
+            if e.salary == s:
+                print_employee_info(e)
+
+
 def find_employees_have_max_salary(employees):
     """Phương thức liệt kê các nhân viên có mức lương cao nhất trong danh sách."""
     print(f'========== Danh sách nhân viên có lương cao nhất ============')
