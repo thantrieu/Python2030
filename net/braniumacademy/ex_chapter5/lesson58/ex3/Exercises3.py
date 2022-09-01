@@ -28,14 +28,7 @@ class FullName:
 class Employee:
     """Lớp mô tả thông tin nhân viên."""
 
-    def __init__(self):
-        self.__phone_number = None
-        self.__email = None
-        self.__full_name = None
-        self.__emp_id = None
-        self.__salary = None
-
-    def __int__(self, emp_id, full_name, email, phone_number, salary):
+    def __int__(self, emp_id=None, full_name=None, email=None, phone_number=None, salary=None):
         self.__emp_id = emp_id
         self.__full_name = full_name
         self.__email = email
@@ -98,13 +91,9 @@ class Employee:
 
 class Manager(Employee):
     """Lớp mô tả thông tin người quản lý."""
-    def __init__(self):
-        super().__init__()
-        self.__term = None
-        self.__role = None
-        self.__quater_salary = None
 
-    def __int__(self, emp_id, full_name, email, phone_number, salary, role, term, quater_salary):
+    def __int__(self, emp_id=None, full_name=None, email=None,
+                phone_number=None, salary=None, role=None, term=None, quater_salary=None):
         super().__int__(emp_id, full_name, email, phone_number, salary)
         self.term = term
         self.role = role
