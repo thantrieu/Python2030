@@ -105,8 +105,8 @@ class Employee:
         print(f"Employee {self.__full_name} is doing {some_work}.")
 
     def __str__(self):
-        return f'{self.emp_id:<12}{self.full_name:35}' \
-               f'{self.email:25}{self.phone_number:15}{self.salary:<12}'
+        return f'{self.emp_id:<12}{self.full_name.full_name:30}' \
+               f'{self.email:30}{self.phone_number:15}{self.salary:<12}'
 
     def __eq__(self, other):
         return self.emp_id == other.emp_id
@@ -156,7 +156,7 @@ class Manager(Employee):
                0.8 * self.quater_salary
 
     def __str__(self):
-        return f'{super().__str__()}{self.term:12}{self.role:25}{self.quater_salary:12}'
+        return f'{super().__str__()}{self.term:12}{self.role:20}{self.quater_salary:12}'
 
 
 class Developer(Employee):
@@ -214,7 +214,7 @@ class Developer(Employee):
               f"cho quản lý {manager.full_name}.")
 
     def __str__(self):
-        return f'{super().__str__()}{self.role:25}{self.num_of_language:<12}' \
+        return f'{super().__str__()}{self.role:20}{self.num_of_language:<12}' \
                f'{self.num_of_project:<12}{self.monthly_kpi:<12}'
 
 
@@ -272,8 +272,8 @@ class Tester(Employee):
               f"đã report {error_name} đến dev {dev_name}.")
 
     def __str__(self):
-        return f'{super().__str__()}{self.role:25}{self.tools[0]:20}' \
-               f'{self.error_found:<12}{self.number_of_testcase():<12}'
+        return f'{super().__str__()}{self.role:20}{self.tools[0]:20}' \
+               f'{self.error_found:<12}{self.number_of_testcase:<12}'
 
 class Task:
     """Lớp mô tả công việc."""
@@ -313,7 +313,7 @@ class Task:
         self.__estimated_time = value
 
     def __str__(self):
-        return f'{self.task_id:<12}{self.task_name:25}{self.estimated_time:20}'
+        return f'{self.task_id:<12}{self.task_name:50}{self.estimated_time:20}'
 
     def __eq__(self, other):
         return self.task_id == other.task_id
@@ -352,7 +352,7 @@ class Assignment:
 
     @property
     def task(self):
-        return self.__staff
+        return self.__task
 
     @task.setter
     def task(self, value):
@@ -368,7 +368,7 @@ class Assignment:
 
     @property
     def deadline(self):
-        return self.deadline
+        return self.__deadline
 
     @deadline.setter
     def deadline(self, value):
@@ -376,14 +376,20 @@ class Assignment:
 
     @property
     def result(self):
-        return self.result
+        return self.__result
 
     @result.setter
     def result(self, value):
         self.__result = value
 
     def __str__(self):
-        return f'{self.ass_id:<12}{self.staff.emp_id:20}{self.task.task_id:12}' \
+        staff_id = ''
+        if self.staff is not None:
+            staff_id = self.staff.emp_id
+        task_id = ''
+        if self.task is not None:
+            task_id = self.task.task_id
+        return f'{self.ass_id:<12}{staff_id:20}{task_id:12}' \
                f'{self.start_time:12}{self.deadline:12}{self.result:12}'
 
 class Payroll:
