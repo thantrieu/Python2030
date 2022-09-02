@@ -108,6 +108,9 @@ class Employee:
         return f'{self.emp_id:<12}{self.full_name:35}' \
                f'{self.email:25}{self.phone_number:15}{self.salary:<12}'
 
+    def __eq__(self, other):
+        return self.emp_id == other.emp_id
+
 
 class Manager(Employee):
     """Lớp mô tả thông tin người quản lý."""
@@ -250,7 +253,7 @@ class Tester(Employee):
     def error_found(self, value):
         self.__error_found = value
 
-    @property
+    @number_of_testcase.setter
     def number_of_testcase(self, value):
         self.__number_of_testcase = value
 
@@ -311,6 +314,9 @@ class Task:
 
     def __str__(self):
         return f'{self.task_id:<12}{self.task_name:25}{self.estimated_time:20}'
+
+    def __eq__(self, other):
+        return self.task_id == other.task_id
 
 
 class Assignment:

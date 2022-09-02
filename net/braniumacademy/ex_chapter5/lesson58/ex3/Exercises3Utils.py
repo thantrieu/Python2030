@@ -18,6 +18,7 @@ def create_staff_info():
     emp.phone_number = input('Số điện thoại: ')
     emp.salary = float(input('Mức lương: '))
     emp.full_name = FullName(first, mid, last)
+    emp.emp_id = None
     return emp
 
 
@@ -25,68 +26,149 @@ def create_manager():
     """Phương thức tạo thông tin người quản lý, giám đốc."""
     staff = create_staff_info()
     manager = Manager()
-
+    manager.emp_id = staff.emp_id
+    manager.full_name = staff.full_name
+    manager.phone_number = staff.phone_number
+    manager.salary = staff.salary
+    manager.email = staff.email
+    manager.role = input('Chức vụ: ')
+    manager.term = input('Nhiệm kỳ: ')
+    manager.quater_salary = input('Lương thực lĩnh theo quý: ')
     return manager
 
 
 def create_developer():
     """Phương thức tạo thông tin cho nhân viên lập trình viên."""
-    pass
+    staff = create_staff_info()
+    dev = Developer()
+    dev.emp_id = staff.emp_id
+    dev.full_name = staff.full_name
+    dev.phone_number = staff.phone_number
+    dev.salary = staff.salary
+    dev.email = staff.email
+    dev.role = input('Chức vụ: ')
+    dev.num_of_language = input('Số ngôn ngữ lập trình thành thạo: ')
+    dev.num_of_project = input('Số project đã tham gia: ')
+    dev.monthly_kpi = input('KPI trong tháng: ')
+    return dev
 
 
 def create_tester():
     """Phương thức tạo thông tin cho nhân viên tester."""
-    pass
+    staff = create_staff_info()
+    tester = Tester()
+    tester.emp_id = staff.emp_id
+    tester.full_name = staff.full_name
+    tester.phone_number = staff.phone_number
+    tester.salary = staff.salary
+    tester.email = staff.email
+    tester.role = input('Chức vụ: ')
+    tester.error_found = input('Số lỗi phát hiện được trong tháng: ')
+    tester.number_of_testcase = input('Số testcase hoàn thành trong tháng: ')
+    tester.tools.append(input('Công cụ làm việc chính: '))
+    return tester
 
 
 def create_task():
     """Phương thức tạo thông tin đầu công việc."""
-    pass
+    task = Task()
+    task.task_id = None
+    task.task_name = input('Tên công việc: ')
+    task.estimated_time = input('Thời gian cần thiết để hoàn thành(giờ): ')
+    return task
 
 
-def create_assignment():
+def create_assignment(staffs, tasks):
     """Phương thức tạo bảng phân công công việc cho các nhân viên."""
-    pass
+    assgn = Assignment()
+    assgn.ass_id = None
+    emp_id = input("Mã nhân viên: ")
+    emp = Employee()
+    emp.emp_id = emp_id
+    staff = None
+    staff_index = staffs.index(emp)
+    if staff_index >= 0:
+        staff = staffs[staff_index]
+    else:
+        print('==> Không tồn tại nhân viên cần tìm <==')
+    task_id = input("Mã công việc: ")
+    target_task = Task()
+    target_task.task_id = task_id
+    task_index = tasks.index(target_task)
+    task = None
+    if task_index >= 0:
+        task = tasks[task_index]
+    else:
+        print('==> Không tồn tại task cần phân công <==')
+    assgn.start_time = input('Thời gian bắt đầu: ')
+    assgn.deadline = input('Thời gian kết thúc: ')
+    assgn.result = input('Kết quả: ')
+    assgn.task = task
+    assgn.staff = staff
+    return assgn
 
 
 def create_payroll():
     """Phương thức lập bảng lương cho các nhân viên trong danh sách nhân viên."""
-    pass
+    payroll = Payroll()
+    payroll.payroll_id = None
+    payroll.total_task = int(input('Tổng số các công việc: '))
+    payroll.total_finished = int(input('Số công việc đã hoàn tất: '))
+    payroll.total_unfinished = int(input('Số công việc chưa hoàn tất: '))
+    payroll.working_day = float(input('Số ngày làm việc thực tế: '))
+    return payroll
 
 
 def show_leader(staffs):
     """Phương thức hiển thị danh sách nhân viên quản lý(leader, giám đốc)."""
-    pass
+    for s in staffs:
+        # nếu đối tượng s là một đối tượng kiểu Manager
+        # thì ta hiển thị thông tin của đối tượng này ra màn hình
+        if isinstance(s, Manager):
+            print(s)
 
 
 def show_dev(staffs):
     """Phương thức hiển thị danh sách nhân viên lập trình viên."""
-    pass
+    for s in staffs:
+        if isinstance(s, Developer):
+            print(s)
 
 
 def show_tester(staffs):
     """Phương thức hiển thị danh sách nhân viên tester."""
-    pass
+    for s in staffs:
+        if isinstance(s, Tester):
+            print(s)
 
 
 def show_task(tasks):
     """Phương thức hiển thị danh sách các công việc."""
-    pass
+    for t in tasks:
+        print(t)
 
 
 def show_assignment(assignments):
     """Phương thức hiển thị danh sách bảng phân công."""
-    pass
+    for a in assignments:
+        print(a)
 
 
 def sort_assgn_by_staff_name(assments):
     """Phương thức sắp xếp bảng phân công theo tên nhân viên a-z."""
-    pass
+    assments.sort(key=lambda x: (
+        x.staff.full_name.first_name,
+        x.staff.full_name.last_name
+        )
+    )
 
 
 def sort_assgn_by_deadline(assments):
-    """Phương thức sắp xếp bảng phân công theo deadline giảm dần(từ gần deadline nhất đến xa nhất)."""
-    pass
+    """
+        Phương thức sắp xếp bảng phân công theo deadline
+        giảm dần(từ gần deadline nhất đến xa nhất).
+    """
+    assments.sort(key=lambda x: x.deadline)
 
 
 def sort_payroll_by_received_salary(payrolls):
@@ -160,9 +242,12 @@ def main_function():
                 if task is not None:
                     tasks.append(task)
             case 5:
-                assgn = create_assignment()
-                if assgn is not None:
-                    assignments.append(assgn)
+                if len(staffs) > 0 and len(tasks) > 0:
+                    assgn = create_assignment(staffs, tasks)
+                    if assgn is not None:
+                        assignments.append(assgn)
+                else:
+                    print('==> Danh sách nhân viên hoặc công việc rỗng <==')
             case 6:
                 if len(staffs) > 0:
                     show_leader(staffs)
