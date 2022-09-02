@@ -8,14 +8,25 @@ class FullName:
     @property
     def first_name(self):
         return self.__first
+    @first_name.setter
+    def first_name(self, value):
+        self.__first = value
 
     @property
     def mid_name(self):
         return self.__mid
 
+    @mid_name.setter
+    def mid_name(self, value):
+        self.__mid = value
+
     @property
     def last_name(self):
         return self.__last
+
+    @last_name.setter
+    def last_name(self, value):
+        self.__last = value
 
     @property
     def full_name(self):
@@ -88,6 +99,10 @@ class Employee:
     def work(self, some_work):
         print(f"Employee {self.__full_name} is doing {some_work}.")
 
+    def __str__(self):
+        return f'{self.emp_id:<12}{self.full_name:35}' \
+               f'{self.email:25}{self.phone_number:15}{self.salary:<12}'
+
 
 class Manager(Employee):
     """Lớp mô tả thông tin người quản lý."""
@@ -129,7 +144,11 @@ class Manager(Employee):
         print(f"Giám đốc đang duyệt văn bản {document}.")
 
     def calculate_salary(self, working_day):
-        return super().calculate_salary(working_day) + 0.8 * self.quater_salary
+        return super().calculate_salary(working_day) + \
+               0.8 * self.quater_salary
+
+    def __str__(self):
+        return f'{super().__str__()}{self.term:12}{self.role:25}{self.quater_salary:12}'
 
 
 class Developer(Employee):
@@ -182,7 +201,13 @@ class Developer(Employee):
         print(f"Lập trình viên {self.full_name} đang fix bugs task {task}.")
 
     def report(self, task, manager):
-        print(f"Lập trình viên {self.full_name} đang làm báo cáo task {task} cho quản lý {manager.full_name}.")
+        print(f"Lập trình viên {self.full_name} "
+              f"đang làm báo cáo task {task} "
+              f"cho quản lý {manager.full_name}.")
+
+    def __str__(self):
+        return f'{super().__str__()}{self.role:25}{self.num_of_language:<12}' \
+               f'{self.num_of_project:<12}{self.monthly_kpi:<12}'
 
 
 class Tester(Employee):
@@ -228,14 +253,19 @@ class Tester(Employee):
         print(f"Tester {self.full_name} đã nhận dự án {project_name}.")
 
     def prepare_testcase(self, project_name):
-        print(f"Tester {self.full_name} đang chuẩn bị testcase cho dự án {project_name}.")
+        print(f"Tester {self.full_name} "
+              f"đang chuẩn bị testcase cho dự án {project_name}.")
 
     def test(self, function):
         print(f"Tester {self.full_name} đang test chức năng {function}.")
 
     def report(self, error_name, dev_name):
-        print(f"Tester {self.full_name} đã report {error_name} đến dev {dev_name}.")
+        print(f"Tester {self.full_name} "
+              f"đã report {error_name} đến dev {dev_name}.")
 
+    def __str__(self):
+        return f'{super().__str__()}{self.role:25}{self.tools[0]:20}' \
+               f'{self.error_found:<12}{self.number_of_testcase():<12}'
 
 class Task:
     """Lớp mô tả công việc."""
@@ -273,6 +303,9 @@ class Task:
     @estimated_time.setter
     def estimated_time(self, value):
         self.__estimated_time = value
+
+    def __str__(self):
+        return f'{self.task_id:<12}{self.task_name:25}{self.estimated_time:20}'
 
 
 class Assignment:
@@ -338,6 +371,10 @@ class Assignment:
     def result(self, value):
         self.__result = value
 
+    def __str__(self):
+        return f'{self.ass_id:<12}{self.staff.emp_id:20}{self.task.task_id:12}' \
+               f'{self.start_time:12}{self.deadline:12}{self.result:12}'
+
 class Payroll:
     """Lớp mô tả thông tin về bảng lương nhân viên."""
     AUTO_ID = 1000
@@ -351,6 +388,7 @@ class Payroll:
         self.__total_unfinished = 0
         self.__total_penalty_fee = 0
         self.__received_salary = 0
+        self.__working_day = 0.0
 
     @property
     def payroll_id(self):
@@ -419,3 +457,18 @@ class Payroll:
     @received_salary.setter
     def received_salary(self, value):
         self.__received_salary = value
+
+    @property
+    def working_day(self):
+        return self.__working_day
+
+    @working_day.setter
+    def working_day(self, value):
+        self.__working_day = value
+
+    def __str__(self):
+        return f'{self.payroll_id:<12}{self.staff.emp_id:20}' \
+               f'{self.total_task:<12}' \
+               f'{self.total_finished:<12}{self.total_unfinished:<12}' \
+               f'{self.total_penalty_fee:<12}{self.received_salary:<12}' \
+               f'{self.working_day:<12}'
