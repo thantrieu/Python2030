@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import FullName
 from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Employee
 from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Manager
@@ -92,19 +94,49 @@ def create_fake_tasks():
              fake_task('Add item to cart', 2),
              fake_task('Fix bug in login logic', 1),
              fake_task('Fix bug in register logic', 1),
-             fake_task('Fix bug in payment function', 3)
+             fake_task('Fix bug in payment function', 3),
+             fake_task('Test login function', 1),
+             fake_task('Test register function', 1.5),
+             fake_task('Test change password function', 1),
+             fake_task('Test change email function', 1),
              ]
     return tasks
 
 
-def fake_assignment():
+def fake_assignment(staff, task, start, deadline, result):
     """Method create and return a fake assignment."""
-    pass
+    assgn = Assignment()
+    assgn.ass_id = None
+    assgn.task = task
+    assgn.staff = staff
+    assgn.start_time = start
+    assgn.deadline = deadline
+    assgn.result = result
+    return assgn
 
 
 def create_fake_assignments(staffs, tasks):
     assignments = []
-
+    task1 = fake_assignment(staffs[1], tasks[0], '02/09/2022 14:00', '02/09/2022 18:00', 'Completed')
+    task2 = fake_assignment(staffs[2], tasks[1], '02/09/2022 15:00', '03/09/2022 10:00', 'Completed')
+    task3 = fake_assignment(staffs[3], tasks[2], '02/09/2022 14:30', '03/09/2022 15:00', 'Completed')
+    task4 = fake_assignment(staffs[1], tasks[3], '02/09/2022 14:20', '04/09/2022 16:00', 'Completed')
+    task5 = fake_assignment(staffs[2], tasks[4], '03/09/2022 14:10', '04/09/2022 14:00', 'Completed')
+    task6 = fake_assignment(staffs[3], tasks[5], '03/09/2022 15:00', '05/09/2022 15:00', 'Completed')
+    task7 = fake_assignment(staffs[4], tasks[6], '03/09/2022 16:00', '05/09/2022 18:00', 'Completed')
+    task8 = fake_assignment(staffs[4], tasks[7], '03/09/2022 16:00', '05/09/2022 18:00', 'Completed')
+    task9 = fake_assignment(staffs[4], tasks[8], '03/09/2022 16:00', '05/09/2022 18:00', 'Completed')
+    task10 = fake_assignment(staffs[4], tasks[9], '03/09/2022 16:00', '05/09/2022 18:00', 'Completed')
+    assignments.append(task1)
+    assignments.append(task2)
+    assignments.append(task3)
+    assignments.append(task4)
+    assignments.append(task5)
+    assignments.append(task6)
+    assignments.append(task7)
+    assignments.append(task8)
+    assignments.append(task9)
+    assignments.append(task10)
     return assignments
 
 
@@ -149,7 +181,7 @@ def create_developer():
     dev.role = input('Chức vụ: ')
     dev.num_of_language = input('Số ngôn ngữ lập trình thành thạo: ')
     dev.num_of_project = input('Số project đã tham gia: ')
-    dev.monthly_kpi = input('KPI trong tháng: ')
+    # không nhập vào kpi và để đến cuối tháng xét lượng công việc hoàn thành để tính kpi
     return dev
 
 
@@ -179,27 +211,28 @@ def create_task():
     return task
 
 
+def find_task_by_id(tasks):
+    """
+        This method find and return task if it exists.
+        If not found, return None.
+    """
+    task = Task()
+    task.task_id = input("Mã công việc: ")
+    task_index = tasks.index(task)
+    if task_index >= 0:
+        return tasks[task_index]
+    return None
+
+
 def create_assignment(staffs, tasks):
     """Phương thức tạo bảng phân công công việc cho các nhân viên."""
     assgn = Assignment()
     assgn.ass_id = None
-    emp_id = input("Mã nhân viên: ")
-    emp = Employee()
-    emp.emp_id = emp_id
-    staff = None
-    staff_index = staffs.index(emp)
-    if staff_index >= 0:
-        staff = staffs[staff_index]
-    else:
+    staff = find_staff_by_id(staffs)
+    if staff is None:
         print('==> Không tồn tại nhân viên cần tìm <==')
-    task_id = input("Mã công việc: ")
-    target_task = Task()
-    target_task.task_id = task_id
-    task_index = tasks.index(target_task)
-    task = None
-    if task_index >= 0:
-        task = tasks[task_index]
-    else:
+    task = find_task_by_id(tasks)
+    if task is not None:
         print('==> Không tồn tại task cần phân công <==')
     assgn.start_time = input('Thời gian bắt đầu: ')
     assgn.deadline = input('Thời gian kết thúc: ')
@@ -209,17 +242,74 @@ def create_assignment(staffs, tasks):
     return assgn
 
 
-def create_payroll():
+def find_staff_by_id(staffs):
+    """
+        This method find staff by id then return None if not found
+        and return staff if exists.
+    """
+    staff = Employee()
+    staff.emp_id = input('Mã nhân viên: ')
+    staff_index = staffs.index(staff)
+    if staff_index >= 0:
+        return staffs[staff_index]
+    return None
+
+
+def count_task(assignments, status):
+    """This method count and return tasks have same status."""
+    counter = 0
+    for ass in assignments:
+        if ass.result.lower() == status.lower():
+            counter += 1
+    return counter
+
+
+def get_working_day(emp_id):
+    """This method get and confirm working day of each staff then return result."""
+    working_day = float(input(f'Số ngày làm việc của nhân viên mã {emp_id}: '))
+    if working_day < 0 or working_day > 33:
+        print('==> Số ngày làm việc không hợp lệ! Giá trị hợp lệ từ 0-33. <==')
+        # giả định 1 tháng đi làm 22 ngày, mỗi ngày 8h. Nếu tăng 1 ca 4h liên tục ta có 33 ngày.
+        return 0
+    return working_day
+
+
+def get_error(emp_id):
+    """This method get the number of error that a tester found. Then check the value and return."""
+    num_of_error = int(input(f'Số lỗi mà nhân viên {emp_id} tìm ra: '))
+    if num_of_error < 0 or num_of_error > 200:
+        return 0
+    return num_of_error
+
+
+def create_payrolls(staffs, assignments, payrolls):
     """
         Phương thức lập bảng lương cho các nhân viên trong danh sách nhân viên.
     """
-    payroll = Payroll()
-    payroll.payroll_id = None
-    payroll.total_task = int(input('Tổng số các công việc: '))
-    payroll.total_finished = int(input('Số công việc đã hoàn tất: '))
-    payroll.total_unfinished = int(input('Số công việc chưa hoàn tất: '))
-    payroll.working_day = float(input('Số ngày làm việc thực tế: '))
-    return payroll
+    for staff in staffs:
+        payroll = Payroll()
+        payroll.payroll_id = None
+        payroll.staff = staff
+        payroll.working_day = get_working_day(staff.emp_id)
+        for ass in assignments:
+            if ass is not None and ass.staff == staff:
+                payroll.assignments.append(ass)
+        payroll.total_task = len(payroll.assignments)
+        payroll.total_finished = count_task(payroll.assignments, "Completed")
+        payroll.total_unfinished = count_task(payroll.assignments, 'Incompleted')
+        payroll.total_penalty_fee = payroll.total_unfinished * 100
+
+        if isinstance(staff, Developer):  # nếu nhân viên là developer
+            staff.monthly_kpi = 2 * payroll.total_finished  # xét KPI cho dev
+
+        if isinstance(staff, Tester):  # nếu là tester thì cập nhật số testcase
+            staff.number_of_testcase = payroll.total_finished
+            staff.error_found = get_error(staff.emp_id)  # và số lỗi phát hiện đc
+
+        payroll.received_salary = \
+            payroll.staff.calculate_salary(payroll.working_day) - \
+            payroll.total_penalty_fee
+        payrolls.append(payroll)
 
 
 def show_leader(staffs):
@@ -298,12 +388,13 @@ def show_assignment(assignments):
     """Phương thức hiển thị danh sách bảng phân công."""
     ass_id = 'Mã BPC'  # mã bảng phân công
     emp_id = 'Mã NV'
+    emp_name = 'Tên nhân viên'
     task_id = 'Mã CV'
     start_time = 'Bắt đầu'
     deadline = 'Kết thúc'
     result = 'Kết quả'
-    title = f'{ass_id:12}{emp_id:20}{task_id:12}' \
-            f'{start_time:12}{deadline:12}{result:12}'
+    title = f'{ass_id:12}{emp_id:12}{emp_name:30}{task_id:12}' \
+            f'{start_time:25}{deadline:25}{result:25}'
     print(title)
     for a in assignments:
         print(a)
@@ -312,9 +403,9 @@ def show_assignment(assignments):
 def sort_assgn_by_staff_name(assments):
     """Phương thức sắp xếp bảng phân công theo tên nhân viên a-z."""
     assments.sort(key=lambda x: (
-                                    x.staff.full_name.first_name,
-                                    x.staff.full_name.last_name
-                                )
+        x.staff.full_name.first_name,
+        x.staff.full_name.last_name
+    )
                   )
 
 
@@ -323,22 +414,27 @@ def sort_assgn_by_deadline(assments):
         Phương thức sắp xếp bảng phân công theo deadline
         giảm dần(từ gần deadline nhất đến xa nhất).
     """
-    assments.sort(key=lambda x: x.deadline)
+    now = datetime.now()
+    datetime_format = '%H:%M %d/%m/%Y'
+    date_time_str = now.strftime(datetime_format)
+    assments.sort(key=lambda x: (date_time_str > x.deadline, x.deadline))
 
 
 def sort_payroll_by_received_salary(payrolls):
     """Phương thức sắp xếp bảng lương theo mức lương thực lĩnh giảm dần."""
-    pass
+    payrolls.sort(key=lambda x: (
+        -x.received_salary, x.staff.full_name.first_name, x.staff.full_name.last_name))
 
 
 def sort_payroll_by_staff_name(payrolls):
     """Phương thức sắp xếp bảng lương theo họ tên nhân viên a-z."""
-    pass
+    payrolls.sort(key=lambda x: (x.staff.full_name.first_name, x.staff.full_name.last_name))
 
 
 def sort_payroll_by_penalty_fee(payrolls):
     """Phương thức sắp xếp bảng lương theo phí phạt giảm dần."""
-    pass
+    payrolls.sort(key=lambda x: (
+        -x.total_penalty_fee, x.staff.full_name.first_name, x.staff.full_name.last_name))
 
 
 def listed_staff_with_highest_salary(payrolls):
@@ -349,6 +445,26 @@ def listed_staff_with_highest_salary(payrolls):
 def listed_staff_with_given_salary(payrolls):
     """Phương thức liệt kê các nhân viên có mức lương trong khoảng cho trước."""
     pass
+
+
+def show_payrolls(payrolls):
+    """This method display payroll on the screen."""
+    payroll_id = 'Mã B.Lương'
+    emp_id = 'Mã nhân viên'
+    full_name = 'Họ và tên'
+    total_task = 'Tổng C.Việc'
+    working_day = 'Số NL.Việc'
+    total_finished = 'Hoàn tất'
+    total_unfinished = 'Chưa H.Tất'
+    total_penalty_fee = 'Tiền phạt'
+    received_salary = 'Thực nhận'
+    title = f'{payroll_id:<12}{emp_id:20}{full_name:30}' \
+            f'{total_task:<12}{working_day:<12}' \
+            f'{total_finished:<12}{total_unfinished:<12}' \
+            f'{total_penalty_fee:<12}{received_salary:<12}'
+    print(title)
+    for p in payrolls:
+        print(p)
 
 
 def main_function():
@@ -370,14 +486,15 @@ def main_function():
              '10. Hiển thị danh sách bảng phân công công việc ra màn hình.\n' \
              '11. Sắp xếp danh sách bảng phân công theo tên nhân viên a-z.\n' \
              '12. Sắp xếp danh sách bảng phân công theo deadline giảm dần.\n' \
-             '13. Lập bảng lương cho nhân viên và hiển thị lên màn hình.\n' \
-             '14. Sắp xếp bảng lương theo lương thực lĩnh giảm dần, tên, họ a-z.\n' \
-             '15. Sắp xếp bảng lương theo tên nhân viên a-z.\n' \
-             '16. Sắp xếp bảng lương theo tổng tiền phạt giảm dần.\n' \
-             '17. Liệt kê các nhân viên có lương thực lĩnh cao nhất trong tháng.\n' \
-             '18. Liệt kê các nhân viên có lương thực lĩnh từ khoảng x đến y.\n' \
-             '19. Kết thúc chương trình.\n' \
-             'Xin mời chọn chức năng(1-19): '
+             '13. Lập bảng lương cho nhân viên.\n' \
+             '14. Hiển thị bảng lương lên màn hình.\n' \
+             '15. Sắp xếp bảng lương theo lương thực lĩnh giảm dần, tên, họ a-z.\n' \
+             '16. Sắp xếp bảng lương theo tên nhân viên a-z.\n' \
+             '17. Sắp xếp bảng lương theo tổng tiền phạt giảm dần.\n' \
+             '18. Liệt kê các nhân viên có lương thực lĩnh cao nhất trong tháng.\n' \
+             '19. Liệt kê các nhân viên có lương thực lĩnh từ khoảng x đến y.\n' \
+             '20. Kết thúc chương trình.\n' \
+             'Xin mời chọn chức năng(1-20): '
     while True:
         choice = int(input(option))
         match choice:
@@ -446,41 +563,45 @@ def main_function():
                     print("==> Danh sách bảng phân công rỗng <==")
             case 13:
                 if len(staffs) > 0:
-                    payroll = create_payroll()
-                    if payroll is not None:
-                        payrolls.append(payroll)
+                    create_payrolls(staffs, assignments, payrolls)
+                    print('==> Lập bảng lương hoàn tất <==')
                 else:
                     print("==> Danh sách nhân viên rỗng <==")
             case 14:
                 if len(payrolls) > 0:
-                    sort_payroll_by_received_salary(payrolls)
+                    show_payrolls(payrolls)
                 else:
                     print("==> Danh sách bảng lương rỗng <==")
             case 15:
                 if len(payrolls) > 0:
-                    sort_payroll_by_staff_name(payrolls)
+                    sort_payroll_by_received_salary(payrolls)
                 else:
                     print("==> Danh sách bảng lương rỗng <==")
             case 16:
                 if len(payrolls) > 0:
-                    sort_payroll_by_penalty_fee(payrolls)
+                    sort_payroll_by_staff_name(payrolls)
                 else:
                     print("==> Danh sách bảng lương rỗng <==")
             case 17:
                 if len(payrolls) > 0:
-                    listed_staff_with_highest_salary(payrolls)
+                    sort_payroll_by_penalty_fee(payrolls)
                 else:
                     print("==> Danh sách bảng lương rỗng <==")
             case 18:
                 if len(payrolls) > 0:
-                    listed_staff_with_given_salary(payrolls)
+                    listed_staff_with_highest_salary(payrolls)
                 else:
                     print("==> Danh sách bảng lương rỗng <==")
             case 19:
+                if len(payrolls) > 0:
+                    listed_staff_with_given_salary(payrolls)
+                else:
+                    print("==> Danh sách bảng lương rỗng <==")
+            case 20:
                 print('==> Chương trình kết thúc <==')
                 break
             case _:
-                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-15. <==')
+                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-20. <==')
 
 
 if __name__ == '__main__':

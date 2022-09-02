@@ -1,5 +1,6 @@
 class FullName:
     """Lớp mô tả thông tin họ và tên."""
+
     def __init__(self, first, mid, last):
         self.__first = first
         self.__last = last
@@ -8,6 +9,7 @@ class FullName:
     @property
     def first_name(self):
         return self.__first
+
     @first_name.setter
     def first_name(self, value):
         self.__first = value
@@ -161,6 +163,7 @@ class Manager(Employee):
 
 class Developer(Employee):
     """Lớp mô tả thông tin của lập trình viên."""
+
     def __init__(self):
         self.__role = ''
         self.__number_of_planguage = 0
@@ -212,6 +215,11 @@ class Developer(Employee):
         print(f"Lập trình viên {self.full_name} "
               f"đang làm báo cáo task {task} "
               f"cho quản lý {manager.full_name}.")
+
+    def calculate_salary(self, working_day):
+        base_salary = super().calculate_salary(working_day)
+        bonus = base_salary * 0.3 / 100 * self.monthly_kpi
+        return base_salary + bonus
 
     def __str__(self):
         return f'{super().__str__()}{self.role:20}{self.num_of_language:<12}' \
@@ -271,9 +279,15 @@ class Tester(Employee):
         print(f"Tester {self.full_name} "
               f"đã report {error_name} đến dev {dev_name}.")
 
+    def calculate_salary(self, working_day):
+        base_salary = super().calculate_salary(working_day)
+        bonus = base_salary * 0.2 / 100 * self.number_of_testcase + 50 * self.error_found
+        return base_salary + bonus
+
     def __str__(self):
         return f'{super().__str__()}{self.role:20}{self.tools[0]:20}' \
                f'{self.error_found:<12}{self.number_of_testcase:<12}'
+
 
 class Task:
     """Lớp mô tả công việc."""
@@ -330,6 +344,7 @@ class Assignment:
         self.__start_time = None
         self.__deadline = None
         self.__result = ''
+
     @property
     def ass_id(self):
         return self.__ass_id
@@ -384,13 +399,16 @@ class Assignment:
 
     def __str__(self):
         staff_id = ''
+        staff_name = ''
         if self.staff is not None:
             staff_id = self.staff.emp_id
+            staff_name = self.staff.full_name.full_name
         task_id = ''
         if self.task is not None:
             task_id = self.task.task_id
-        return f'{self.ass_id:<12}{staff_id:20}{task_id:12}' \
-               f'{self.start_time:12}{self.deadline:12}{self.result:12}'
+        return f'{self.ass_id:<12}{staff_id:12}{staff_name:30}{task_id:12}' \
+               f'{self.start_time:25}{self.deadline:25}{self.result:25}'
+
 
 class Payroll:
     """Lớp mô tả thông tin về bảng lương nhân viên."""
@@ -413,7 +431,7 @@ class Payroll:
 
     @payroll_id.setter
     def payroll_id(self, value):
-        if va is None or value == 0:
+        if value is None or value == 0:
             self.__payroll_id = Payroll.AUTO_ID + 1
             Payroll.AUTO_ID += 1
         else:
@@ -485,7 +503,7 @@ class Payroll:
 
     def __str__(self):
         return f'{self.payroll_id:<12}{self.staff.emp_id:20}' \
-               f'{self.total_task:<12}' \
+               f'{self.staff.full_name.full_name:30}' \
+               f'{self.total_task:<12}{self.working_day:<12}' \
                f'{self.total_finished:<12}{self.total_unfinished:<12}' \
-               f'{self.total_penalty_fee:<12}{self.received_salary:<12}' \
-               f'{self.working_day:<12}'
+               f'{self.total_penalty_fee:<12}{self.received_salary:<12}'
