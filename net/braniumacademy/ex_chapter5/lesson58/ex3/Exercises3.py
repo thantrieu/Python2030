@@ -339,6 +339,7 @@ class Assignment:
         self.__result = value
 
 class Payroll:
+    """Lớp mô tả thông tin về bảng lương nhân viên."""
     AUTO_ID = 1000
 
     def __init__(self):

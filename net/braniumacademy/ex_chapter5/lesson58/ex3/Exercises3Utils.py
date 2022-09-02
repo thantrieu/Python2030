@@ -118,41 +118,92 @@ if __name__ == '__main__':
         choice = int(input(option))
         match choice:
             case 1:
-                pass
+                manager = create_manager()
+                if(manager is not None):
+                    staffs.append(manager)
             case 2:
-                pass
+                dev = create_developer()
+                if dev is not None:
+                    staffs.append(dev)
             case 3:
-                pass
+                tester = create_tester()
+                if tester is not None:
+                    staffs.append(tester)
             case 4:
-                pass
+                task = create_task()
+                if task is not None:
+                    tasks.append(task)
             case 5:
-                pass
+                assgn = create_assignment()
+                if assgn is not None:
+                    assignments.append(assgn)
             case 6:
-                pass
+                if len(staffs) > 0:
+                    show_leader(staffs)
+                else:
+                    print("==> Danh sách nhân viên rỗng <==")
             case 7:
-                pass
+                if len(staffs) > 0:
+                    show_dev(staffs)
+                else:
+                    print("==> Danh sách nhân viên rỗng <==")
             case 8:
-                pass
+                if len(staffs) > 0:
+                    show_tester(staffs)
+                else:
+                    print("==> Danh sách nhân viên rỗng <==")
             case 9:
-                pass
+                if len(tasks) > 0:
+                    show_task(tasks)
+                else:
+                    print("==> Danh sách công việc rỗng <==")
             case 10:
-                pass
+                if len(assignments) > 0:
+                    show_assignment(assignments)
+                else:
+                    print("==> Danh sách bảng phân công rỗng <==")
             case 11:
-                pass
+                if len(assignments) > 0:
+                    sort_assgn_by_staff_name(assignments)
+                else:
+                    print("==> Danh sách bảng phân công rỗng <==")
             case 12:
-                pass
+                if len(assignments) > 0:
+                    sort_assgn_by_deadline(assignments)
+                else:
+                    print("==> Danh sách bảng phân công rỗng <==")
             case 13:
-                pass
+                if len(staffs) > 0:
+                    payroll = create_payroll()
+                    if payroll is not None:
+                        payrolls.append(payroll)
+                else:
+                    print("==> Danh sách nhân viên rỗng <==")
             case 14:
-                pass
+                if len(payrolls) > 0:
+                    sort_payroll_by_received_salary(payrolls)
+                else:
+                    print("==> Danh sách bảng lương rỗng <==")
             case 15:
-                pass
+                if len(payrolls) > 0:
+                    sort_payroll_by_staff_name(payrolls)
+                else:
+                    print("==> Danh sách bảng lương rỗng <==")
             case 16:
-                pass
+                if len(payrolls) > 0:
+                    sort_payroll_by_penalty_fee(payrolls)
+                else:
+                    print("==> Danh sách bảng lương rỗng <==")
             case 17:
-                pass
+                if len(payrolls) > 0:
+                    listed_staff_with_highest_salary(payrolls)
+                else:
+                    print("==> Danh sách bảng lương rỗng <==")
             case 18:
-                pass
+                if len(payrolls) > 0:
+                    listed_staff_with_given_salary(payrolls)
+                else:
+                    print("==> Danh sách bảng lương rỗng <==")
             case 19:
                 print('==> Chương trình kết thúc <==')
                 break
