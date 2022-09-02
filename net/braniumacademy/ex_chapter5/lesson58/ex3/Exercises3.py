@@ -38,6 +38,7 @@ class FullName:
 
 class Employee:
     """Lớp mô tả thông tin nhân viên."""
+    AUTO_ID = 1000
 
     def __int__(self):
         self.__emp_id = ''
@@ -52,7 +53,11 @@ class Employee:
 
     @emp_id.setter
     def emp_id(self, value):
-        self.__emp_id = value
+        if value is None or value == '':
+            self.__emp_id = f'EMP{Employee.AUTO_ID + 1}'
+            Employee.AUTO_ID += 1
+        else:
+            self.__emp_id = value
 
     @property
     def full_name(self):

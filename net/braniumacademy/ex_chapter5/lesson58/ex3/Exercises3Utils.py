@@ -1,6 +1,14 @@
 def create_manager():
     """Phương thức tạo thông tin người quản lý, giám đốc."""
-    pass
+    print('============ Nhập thông tin sinh viên ============')
+    pid = input('Số CMND/CCCD: ')
+    last = input('Họ: ')
+    mid = input('Đệm: ')
+    first = input('Name: ')
+    birth_date = input('Ngày sinh: ')
+    major = input('Chuyên ngành: ')
+    gpa = float(input('Điểm TB: '))
+    full_name = FullName(first, mid, last)
 
 
 def create_developer():
