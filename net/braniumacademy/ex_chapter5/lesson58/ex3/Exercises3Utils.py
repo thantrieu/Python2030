@@ -1,14 +1,32 @@
-def create_manager():
-    """Phương thức tạo thông tin người quản lý, giám đốc."""
+from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import FullName
+from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Employee
+from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Manager
+from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Developer
+from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Tester
+from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Task
+from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Payroll
+from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Assignment
+
+
+def create_staff_info():
+    emp = Employee()
     print('============ Nhập thông tin sinh viên ============')
-    pid = input('Số CMND/CCCD: ')
     last = input('Họ: ')
     mid = input('Đệm: ')
     first = input('Name: ')
-    birth_date = input('Ngày sinh: ')
-    major = input('Chuyên ngành: ')
-    gpa = float(input('Điểm TB: '))
-    full_name = FullName(first, mid, last)
+    emp.email = input('Email: ')
+    emp.phone_number = input('Số điện thoại: ')
+    emp.salary = float(input('Mức lương: '))
+    emp.full_name = FullName(first, mid, last)
+    return emp
+
+
+def create_manager():
+    """Phương thức tạo thông tin người quản lý, giám đốc."""
+    staff = create_staff_info()
+    manager = Manager()
+
+    return manager
 
 
 def create_developer():
@@ -36,67 +54,67 @@ def create_payroll():
     pass
 
 
-def show_leader(mstaffs):
+def show_leader(staffs):
     """Phương thức hiển thị danh sách nhân viên quản lý(leader, giám đốc)."""
     pass
 
 
-def show_dev(mstaffs):
+def show_dev(staffs):
     """Phương thức hiển thị danh sách nhân viên lập trình viên."""
     pass
 
 
-def show_tester(mstaffs):
+def show_tester(staffs):
     """Phương thức hiển thị danh sách nhân viên tester."""
     pass
 
 
-def show_task(mtasks):
+def show_task(tasks):
     """Phương thức hiển thị danh sách các công việc."""
     pass
 
 
-def show_assignment(massignments):
+def show_assignment(assignments):
     """Phương thức hiển thị danh sách bảng phân công."""
     pass
 
 
-def sort_assgn_by_staff_name(massments):
+def sort_assgn_by_staff_name(assments):
     """Phương thức sắp xếp bảng phân công theo tên nhân viên a-z."""
     pass
 
 
-def sort_assgn_by_deadline(massments):
+def sort_assgn_by_deadline(assments):
     """Phương thức sắp xếp bảng phân công theo deadline giảm dần(từ gần deadline nhất đến xa nhất)."""
     pass
 
 
-def sort_payroll_by_received_salary(m_payrolls):
+def sort_payroll_by_received_salary(payrolls):
     """Phương thức sắp xếp bảng lương theo mức lương thực lĩnh giảm dần."""
     pass
 
 
-def sort_payroll_by_staff_name(m_payrolls):
+def sort_payroll_by_staff_name(payrolls):
     """Phương thức sắp xếp bảng lương theo họ tên nhân viên a-z."""
     pass
 
 
-def sort_payroll_by_penalty_fee(m_payrolls):
+def sort_payroll_by_penalty_fee(payrolls):
     """Phương thức sắp xếp bảng lương theo phí phạt giảm dần."""
     pass
 
 
-def listed_staff_with_highest_salary(m_payrolls):
+def listed_staff_with_highest_salary(payrolls):
     """Phương thức liệt kê các nhân viên có mức lương cao nhất."""
     pass
 
 
-def listed_staff_with_given_salary(m_payrolls):
+def listed_staff_with_given_salary(payrolls):
     """Phương thức liệt kê các nhân viên có mức lương trong khoảng cho trước."""
     pass
 
 
-if __name__ == '__main__':
+def main_function():
     staffs = []  # danh sách nhân viên chứa cả giám đốc, lập trình viên, tester
     tasks = []  # danh sách công việc
     assignments = []  # danh sách bảng phân công
@@ -127,7 +145,7 @@ if __name__ == '__main__':
         match choice:
             case 1:
                 manager = create_manager()
-                if(manager is not None):
+                if (manager is not None):
                     staffs.append(manager)
             case 2:
                 dev = create_developer()
@@ -217,3 +235,7 @@ if __name__ == '__main__':
                 break
             case _:
                 print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-15. <==')
+
+
+if __name__ == '__main__':
+    main_function()
