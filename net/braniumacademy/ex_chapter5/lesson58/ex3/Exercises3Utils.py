@@ -8,6 +8,106 @@ from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Payroll
 from net.braniumacademy.ex_chapter5.lesson58.ex3.Exercises3 import Assignment
 
 
+def create_staff(key, first, last, mid, email, phone, salary,
+                 role, language=0, project=0, kpi=0, term='',
+                 quater_salary=0, tool='', error=0, testcase=0):
+    """This method create and return a fake staff infomation."""
+    if key == 'M':
+        manager = Manager()
+        manager.emp_id = None
+        manager.full_name = FullName(first=first, last=last, mid=mid)
+        manager.email = email
+        manager.phone_number = phone
+        manager.salary = salary
+        manager.role = role
+        manager.term = term
+        manager.quater_salary = quater_salary
+        return manager
+    elif key == 'D':
+        dev = Developer()
+        dev.emp_id = None
+        dev.email = email
+        dev.full_name = FullName(first=first, last=last, mid=mid)
+        dev.phone_number = phone
+        dev.salary = salary
+        dev.role = role
+        dev.num_of_project = project
+        dev.num_of_language = language
+        dev.monthly_kpi = kpi
+        return dev
+    elif key == 'T':
+        tester = Tester()
+        tester.emp_id = None
+        tester.full_name = FullName(first=first, last=last, mid=mid)
+        tester.email = email
+        tester.salary = salary
+        tester.phone_number = phone
+        tester.role = role
+        tester.tools.append(tool)
+        tester.number_of_testcase = testcase
+        tester.error_found = error
+        return tester
+    return None
+
+
+def create_fake_employees():
+    """This method create fake data for testing other functions."""
+    staffs = []
+    m = create_staff('M', 'Trung', 'Trần', 'Quốc', 'quoctrung@xmail.com',
+                     '0972123123', 50000, role='Marketing leader',
+                     term='2020-2025', quater_salary=150)
+    s1 = create_staff('D', 'Nam', 'Nguyễn', 'Văn', 'namnguyen@xmail.com',
+                      '0972123126', 25000, role='Backend dev',
+                      project=11, language=6, kpi=54)
+    s2 = create_staff('D', 'Hưng', 'Trần', 'Đức', 'duchung@xmail.com',
+                      '0972123127', 30000, role='Backend dev',
+                      project=19, language=9, kpi=64)
+    s3 = create_staff('D', 'Minh', 'Hoàng', 'Quốc', 'minhhoang@xmail.com',
+                      '0972123128', 20000, role='Backend dev',
+                      project=15, language=8, kpi=50)
+    s4 = create_staff('T', 'Nhung', 'Mai', 'Trần', 'nhungtran@xmail.com',
+                      '0972123129', 15000, role='Automation tester',
+                      error=23, tool='Selenium', testcase=300)
+    staffs.append(m)
+    staffs.append(s1)
+    staffs.append(s2)
+    staffs.append(s3)
+    staffs.append(s4)
+    return staffs
+
+
+def fake_task(name, amount):
+    """This method create and return a fake task"""
+    task = Task()
+    task.task_id = None
+    task.task_name = name
+    task.estimated_time = amount
+    return task
+
+
+def create_fake_tasks():
+    """This method create and return fake tasks."""
+    tasks = [fake_task('Add login form', 2),
+             fake_task('Add register form', 2),
+             fake_task('Add item to cart', 2),
+             fake_task('Fix bug in login logic', 1),
+             fake_task('Fix bug in register logic', 1),
+             fake_task('Fix bug in payment function', 3)
+             ]
+    return tasks
+
+
+def fake_assignment():
+    """Method create and return a fake assignment."""
+    pass
+
+
+def create_fake_assignments(staffs, tasks):
+    assignments = []
+
+    return assignments
+
+
 def create_staff_info():
     emp = Employee()
     print('============ Nhập thông tin nhân viên ============')
@@ -212,10 +312,10 @@ def show_assignment(assignments):
 def sort_assgn_by_staff_name(assments):
     """Phương thức sắp xếp bảng phân công theo tên nhân viên a-z."""
     assments.sort(key=lambda x: (
-        x.staff.full_name.first_name,
-        x.staff.full_name.last_name
-        )
-    )
+                                    x.staff.full_name.first_name,
+                                    x.staff.full_name.last_name
+                                )
+                  )
 
 
 def sort_assgn_by_deadline(assments):
@@ -252,9 +352,10 @@ def listed_staff_with_given_salary(payrolls):
 
 
 def main_function():
-    staffs = []  # danh sách nhân viên chứa cả giám đốc, lập trình viên, tester
-    tasks = []  # danh sách công việc
-    assignments = []  # danh sách bảng phân công
+    # danh sách nhân viên chứa cả giám đốc, lập trình viên, tester
+    staffs = create_fake_employees()
+    tasks = create_fake_tasks()  # danh sách công việc
+    assignments = create_fake_assignments(staffs, tasks)  # danh sách bảng phân công
     payrolls = []  # danh sách bảng lương
     option = '============================ OPTION ============================\n' \
              '1. Thêm mới một giám đốc vào danh sách nhân viên.\n' \
@@ -282,7 +383,7 @@ def main_function():
         match choice:
             case 1:
                 manager = create_manager()
-                if (manager is not None):
+                if manager is not None:
                     staffs.append(manager)
             case 2:
                 dev = create_developer()
@@ -305,26 +406,31 @@ def main_function():
                     print('==> Danh sách nhân viên hoặc công việc rỗng <==')
             case 6:
                 if len(staffs) > 0:
+                    print('==> Danh sách nhân viên quản lý <==')
                     show_leader(staffs)
                 else:
                     print("==> Danh sách nhân viên rỗng <==")
             case 7:
                 if len(staffs) > 0:
+                    print('==> Danh sách các lập trình viên <==')
                     show_dev(staffs)
                 else:
                     print("==> Danh sách nhân viên rỗng <==")
             case 8:
                 if len(staffs) > 0:
+                    print('==> Danh sách các tester <==')
                     show_tester(staffs)
                 else:
                     print("==> Danh sách nhân viên rỗng <==")
             case 9:
                 if len(tasks) > 0:
+                    print('==> Danh sách các công việc <==')
                     show_task(tasks)
                 else:
                     print("==> Danh sách công việc rỗng <==")
             case 10:
                 if len(assignments) > 0:
+                    print('==> Danh sách bảng phân công công việc <==')
                     show_assignment(assignments)
                 else:
                     print("==> Danh sách bảng phân công rỗng <==")

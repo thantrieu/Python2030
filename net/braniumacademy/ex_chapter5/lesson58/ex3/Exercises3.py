@@ -313,7 +313,7 @@ class Task:
         self.__estimated_time = value
 
     def __str__(self):
-        return f'{self.task_id:<12}{self.task_name:50}{self.estimated_time:20}'
+        return f'{self.task_id:<12}{self.task_name:50}{self.estimated_time:<20}'
 
     def __eq__(self, other):
         return self.task_id == other.task_id
