@@ -501,9 +501,9 @@ class Payroll:
     def working_day(self, value):
         self.__working_day = value
 
-    def __str__(self):
+    def __str__(self): # 12.1f: làm tròn đến 1 chữ số sau phần thập phân
         return f'{self.payroll_id:<12}{self.staff.emp_id:20}' \
                f'{self.staff.full_name.full_name:30}' \
-               f'{self.total_task:<12}{self.working_day:<12}' \
+               f'{self.total_task:<12}{self.working_day:<12.1f}' \  
                f'{self.total_finished:<12}{self.total_unfinished:<12}' \
-               f'{self.total_penalty_fee:<12}{self.received_salary:<12}'
+               f'{self.total_penalty_fee:<12.0f}{self.received_salary:<12.0f}'

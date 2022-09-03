@@ -437,14 +437,38 @@ def sort_payroll_by_penalty_fee(payrolls):
         -x.total_penalty_fee, x.staff.full_name.first_name, x.staff.full_name.last_name))
 
 
+def find_highest_received_salary(payrolls):
+    """This method find and return max received salary of staffs in a company."""
+    max_salary = 0
+    for p in payrolls:
+        if p.received_salary > max_salary:
+            max_salary = p.received_salary
+    return max_salary
+
+
 def listed_staff_with_highest_salary(payrolls):
     """Phương thức liệt kê các nhân viên có mức lương cao nhất."""
-    pass
+    max_salary = find_highest_received_salary(payrolls)
+    results = []
+    for p in payrolls:
+        if p.received_salary == max_salary:
+            results.append(p)
+    print('==> Các nhân viên lương cao nhất: <==')
+    show_payrolls(results)
 
 
 def listed_staff_with_given_salary(payrolls):
     """Phương thức liệt kê các nhân viên có mức lương trong khoảng cho trước."""
-    pass
+    start_salary = int(input('Mức lương khởi điểm: '))
+    end_salary = int(input('Mức lương tối đa: '))
+    results = []
+    for p in payrolls:
+        if start_salary <= p.received_salary <= end_salary:
+            results.append(p)
+    if len(results) == 0:
+        print('==> Không có nhân viên nào có mức lương cần tìm. <==')
+    else:
+        show_payrolls(results)
 
 
 def show_payrolls(payrolls):
