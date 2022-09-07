@@ -1,7 +1,7 @@
-from net.braniumacademy.ex_chapter5.lesson52.exercises5.student import Student
-from net.braniumacademy.ex_chapter5.lesson52.exercises5.course import Course
-from net.braniumacademy.ex_chapter5.lesson52.exercises5.subject import Subject
-from net.braniumacademy.ex_chapter5.lesson52.exercises5.transcript import Transcript
+from student import Student
+from course import Course
+from subject import Subject
+from transcript import Transcript
 
 
 def create_course(subjects):
@@ -41,7 +41,7 @@ def create_subject():
     credit = int(input("Số tín chỉ: "))
     lesson = int(input("Số tiết học: "))
     test = int(input("Số bài kiểm tra: "))
-    return Subject(id=subject_id, name=subject_name,
+    return Subject(sid=subject_id, name=subject_name,
                    credit=credit, lesson=lesson, test=test)
 
 
@@ -59,4 +59,16 @@ def create_transcript(students):
     grade1 = float(input("Điểm hệ số 1: "))
     grade2 = float(input("Điểm hệ số 2: "))
     grade3 = float(input("Điểm hệ số 3: "))
-    return Transcript(tid=transcript_id, grade1=grade1, grade2=grade2, grade3=grade3, student=student)
+    return Transcript(tid=transcript_id,
+                      grade1=grade1, grade2=grade2,
+                      grade3=grade3, student=student)
+
+
+def show_subjects(subjects):
+    if len(subjects) > 0:
+        title = f'{"Mã môn":15}{"Tên môn học":35}{"Số tín":15}{"Số tiết":15}{"Số bài KT":15}'
+        print(title)
+        for s in subjects:
+            print(f'{s.subject_id:15}{s.name:35}{s.credit:<15}{s.lesson:<15}{s.test:<15}')
+    else:
+        print('==> Danh sách môn học rỗng <==')
