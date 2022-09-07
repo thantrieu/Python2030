@@ -30,9 +30,12 @@ class Register:
     @register_time.setter
     def register_time(self, value):
         if value is not None:
-            self.__register_time = value
+            if isinstance(value, str):  # nếu là string thì ta chuyển sang datetime
+                self.__register_time = datetime.strptime(value, '%d/%m/%Y %H:%M:%S')
+            if isinstance(value, datetime):  # nếu sẵn là datetime ta chỉ cần gán thẳng
+                self.__register_time = value
         else:
-            self.__register_time = datetime.now
+            self.__register_time = datetime.now()  # về date time bạn xem chương 9 nhé
 
     @property
     def student(self):
@@ -52,4 +55,11 @@ class Register:
 
     def __str__(self):
         return f'{self.register_id:<10}{self.student.student_id:15}' \
-               f'{self.subject.subject_id:15}{self.register_time:30}'
+               f'{self.subject.subject_id:<15}' \
+               f'{self.register_time.strftime("%d/%m/%Y %H:%M:%S"):30}'
+
+    def file_output_format(self):
+        return f'{self.register_id}\n' \
+               f'{self.subject.subject_id}\n' \
+               f'{self.student.student_id}\n' \
+               f'{self.register_time}\n'

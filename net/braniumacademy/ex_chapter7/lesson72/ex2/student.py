@@ -1,5 +1,5 @@
 from person import Person
-from exercises2_utils import is_gpa_valid
+from filter import is_gpa_valid
 
 
 class Student(Person):
@@ -55,3 +55,16 @@ class Student(Person):
 
     def register(self, subject):
         print(f'Sinh viên {self.student_id} đang đăng ký môn học {subject}')
+
+    def __str__(self):
+        return f'{self.person_id:15}{self.full_name.__str__():30}' \
+               f'{self.birth_date:20}{self.student_id:15}{self.major:15}' \
+               f'{self.gpa:<15}'
+
+    def file_output_format(self):
+        return f'{self.person_id}\n' \
+               f'{self.full_name}\n' \
+               f'{self.birth_date}\n' \
+               f'{self.student_id}\n' \
+               f'{self.gpa}\n' \
+               f'{self.major}\n'

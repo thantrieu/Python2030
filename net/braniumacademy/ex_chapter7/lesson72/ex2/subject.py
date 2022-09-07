@@ -1,4 +1,4 @@
-from exercises2_utils import is_credit_valid
+from filter import is_credit_valid
 
 
 class Subject:
@@ -24,7 +24,7 @@ class Subject:
 
     @credit.setter
     def credit(self, value):
-        if is_credit_valid(value):
+        if is_credit_valid(f'{value}'):
             self.__credit = int(value)
         else:
             self.__credit = 0
@@ -43,4 +43,9 @@ class Subject:
         self.__subject_name = value
 
     def __str__(self):
-        return f'{self.subject_id:15}{self.subject_name: 30}{self.credit:<15}'
+        return f'{self.subject_id:<15}{self.subject_name:30}{self.credit:<15}'
+
+    def file_output_format(self):
+        return f'{self.subject_id}\n' \
+               f'{self.subject_name}\n' \
+               f'{self.credit}\n'

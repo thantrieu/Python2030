@@ -1,4 +1,40 @@
-from exercises2_utils import *
+from filter import is_person_id_valid, is_name_valid, is_birth_date_valid
+
+
+class FullName:
+    """Lớp mô tả thông tin đầy đủ của họ và tên."""
+
+    def __init__(self, first='', last='', mid=''):
+        self.first_name = first
+        self.last_name = last
+        self.mid_name = mid
+
+    @property
+    def first_name(self):
+        return self.__first
+
+    @first_name.setter
+    def first_name(self, value):
+        self.__first = value
+
+    @property
+    def last_name(self):
+        return self.__last
+
+    @last_name.setter
+    def last_name(self, value):
+        self.__last = value
+
+    @property
+    def mid_name(self):
+        return self.__mid
+
+    @mid_name.setter
+    def mid_name(self, value):
+        self.__mid = value
+
+    def __str__(self):
+        return f'{self.last_name} {self.mid_name} {self.first_name}'
 
 
 class Person:
@@ -27,7 +63,11 @@ class Person:
     @full_name.setter
     def full_name(self, value):
         if is_name_valid(value):
-            self.__full_name = value
+            names = value.split(' ')
+            mid = ''
+            for i in range(1, len(names) - 1):
+                mid += names[i] + ' '
+            self.__full_name = FullName(names[len(names) - 1], names[0], mid.strip())
         else:
             self.__full_name = 'No Name'
             raise ValueError('Họ và tên không hợp lệ')
@@ -45,7 +85,7 @@ class Person:
             raise ValueError('Ngày sinh không hợp lệ')
 
     def work(self, task):
-        print(self.full_name + ' is doing ' + task)
+        print(f'{self.full_name} is doing {task}')
 
     def show_info(self):
         print(f'CMND/CCCD: {self.person_id}')
