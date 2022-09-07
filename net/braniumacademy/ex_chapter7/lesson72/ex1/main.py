@@ -1,4 +1,4 @@
-from net.braniumacademy.ex_chapter7.lesson72.ex1.exercises2_utils import *
+from net.braniumacademy.ex_chapter7.lesson72.ex1.exercises1_utils import *
 
 # nhập thử cả giá trị hợp lệ và không hợp lệ xem điều gì xảy ra
 if __name__ == '__main__':

@@ -53,8 +53,10 @@ def is_name_valid(name):
         Phương thức kiểm tra họ tên có hợp lệ không.
         Giả định họ tên hợp lệ chỉ chứa kí tự chữ cái và khoảng trắng.
     """
+    if len(name.strip()) == 0:  # nếu chuỗi rỗng -> tên k hợp lệ
+        return False
     for c in name.lower():
-        if ('a' > c or c > 'z') and c != ' ':
+        if not c.isalpha() and c != ' ':
             return False
     return True
 
