@@ -3,7 +3,7 @@ from utils import *
 if __name__ == '__main__':
     students = []
     subjects = []
-    course = []
+    courses = []
     option = "=============== OPTIONS ===============\n" \
              "1. Thêm mới môn học vào danh sách môn học.\n" \
              "2. Thêm mới sinh viên vào danh sách sinh viên.\n" \
@@ -38,13 +38,18 @@ if __name__ == '__main__':
                 else:
                     print('==> Tạo mới sinh viên thất bại. <==')
             case 3:
-                pass
+                course = create_course(subjects)
+                if course is not None:
+                    courses.append(course)
+                    print('==> Tạo mới khóa học thành công. <==')
+                else:
+                    print('==> Tạo mới khóa học thất bại. <==')
             case 4:
                 show_subjects(subjects)
             case 5:
                 show_students(students)
             case 6:
-                pass
+                show_courses(courses)
             case 7:
                 pass
             case 8:
