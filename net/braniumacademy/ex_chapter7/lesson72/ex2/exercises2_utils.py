@@ -1,6 +1,5 @@
 from collections import OrderedDict
 from operator import itemgetter
-from datetime import datetime
 from register import Register
 from subject import Subject
 from student import Student
@@ -184,7 +183,7 @@ def show_subjects(subjects):
 
 def show_registers(registers):
     """Phương thức dùng để hiển thị danh sách đăng ký."""
-    title = f'{"Mã ĐK":10}{"Mã SV":15}{"Mã MH":15}{"Thời gian ĐK":30}'
+    title = f'{"Mã ĐK":10}{"Mã SV":15}{"Mã MH":15}{"Thời gian đăng ký":30}'
     print(title)
     for r in registers:
         print(r)
@@ -207,11 +206,11 @@ def find_registed_subject(registers):
 
 def find_student_by_subject(registers):
     """Phương thức tìm sinh viên đăng ký theo môn học."""
-    subject_id = int(input('Nhập mã môn học(số nguyên 3 chữ số): '))
+    subject_id = int(input('Nhập mã môn học(số nguyên 4 chữ số): '))
     result = []
     for r in registers:
         if r.subject.subject_id == subject_id:
-            result.append(r.subject)
+            result.append(r.student)
     if len(result) > 0:
         show_students(result)
     else:
@@ -228,10 +227,10 @@ def get_list_item(data, key):
 
 def print_statistic(order_dct, subjects):
     """Phương thức hiển thị kết quả thống kê."""
-    print(f'{"Tên môn":15}{"Số SV ĐK":10}')
+    print(f'{"Tên môn học":35}{"Số SV đăng ký":10}')
     for item in order_dct.keys():
         subject = get_list_item(subjects, item)
-        print(f'{subject.name:15}:{order_dct[item]:10}')
+        print(f'{subject.subject_name:35}: {order_dct[item]:<10}')
 
 
 def statistics_by_subject(registers, subjects):
@@ -252,7 +251,7 @@ def earliest_register(registers):
     for r in registers:
         if r.register_time == registers[0].register_time:
             result.append(r)
-    print('==> Bản đăng ký sớm nhất: ')
+    print('==> Các bản đăng ký sớm nhất: ')
     show_registers(result)
 
 
