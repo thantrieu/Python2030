@@ -31,13 +31,18 @@ if __name__ == '__main__':
                 else:
                     print('==> Tạo mới môn học thất bại. <==')
             case 2:
-                pass
+                student = create_student()
+                if student is not None:
+                    students.append(student)
+                    print('==> Tạo mới sinh viên thành công. <==')
+                else:
+                    print('==> Tạo mới sinh viên thất bại. <==')
             case 3:
                 pass
             case 4:
                 show_subjects(subjects)
             case 5:
-                pass
+                show_students(students)
             case 6:
                 pass
             case 7:

@@ -30,9 +30,16 @@ def create_student():
     email = input("Email: ")
     gender = input("Giới tính: ")
     faculty = input("Khoa: ")
-    return Student(sid=student_id, first=first_name, last=last_name,
-                   mid=mid_name, email=email, address=address,
-                   gender=gender, faculty=faculty)
+    student = Student()
+    student.student_id = student_id
+    student.last_name = last_name
+    student.first_name = first_name
+    student.mid_name = mid_name
+    student.gender = gender
+    student.email = email
+    student.address = address
+    student.faculty = faculty
+    return student
 
 
 def create_subject():
@@ -72,3 +79,14 @@ def show_subjects(subjects):
             print(f'{s.subject_id:15}{s.name:35}{s.credit:<15}{s.lesson:<15}{s.test:<15}')
     else:
         print('==> Danh sách môn học rỗng <==')
+
+
+def show_students(students):
+    if len(students) > 0:
+        title = f'{"Mã SV":15}{"Họ và tên":30}{"Địa chỉ":25}{"Email":25}{"Giới tính":15}{"Khoa":15}'
+        print(title)
+        for s in students:
+            full_name = f'{s.last_name} {s.mid_name} {s.first_name}'
+            print(f'{s.student_id:15}{full_name:30}{s.address:25}{s.email:25}{s.gender:15}{s.faculty:15}')
+    else:
+        print('==> Danh sách sinh viên rỗng. <==')

@@ -1,5 +1,6 @@
 class Student:
     """Lớp mô tả thông tin sinh viên."""
+
     def __int__(self, sid='', first='', mid='', last='',
                 address='', email='', gender='', faculty=''):
         self.student_id = sid
