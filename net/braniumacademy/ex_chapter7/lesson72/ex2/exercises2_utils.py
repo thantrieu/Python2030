@@ -64,5 +64,5 @@ def create_subject():
     pass
 
 
-def create_course():
+def create_register():
     pass

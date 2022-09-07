@@ -1,10 +1,7 @@
 from datetime import datetime
 
-from student import Student
-from subject import Subject
 
-
-class Course:
+class Register:
     """Lớp mô tả lớp đăng ký"""
     AUTO_ID = 100
 
