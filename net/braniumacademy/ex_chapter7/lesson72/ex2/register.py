@@ -62,4 +62,4 @@ class Register:
         return f'{self.register_id}\n' \
                f'{self.subject.subject_id}\n' \
                f'{self.student.student_id}\n' \
-               f'{self.register_time}\n'
+               f'{self.register_time.strftime("%d/%m/%Y %H:%M:%S")}\n'
