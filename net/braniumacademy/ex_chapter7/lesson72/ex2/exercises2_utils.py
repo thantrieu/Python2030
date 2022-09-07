@@ -71,7 +71,7 @@ def read_register_from_file(students, subjects):
 def find_student_by_id(students, student_id):
     """Phương thức tìm sinh viên theo mã sinh viên."""
     for s in students:
-        if s.student_id == student_id:
+        if s.student_id.lower() == student_id.lower():
             return s
     return None  # nếu k tim thấy, trả về None
 
