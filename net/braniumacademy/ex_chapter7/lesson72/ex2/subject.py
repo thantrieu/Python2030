@@ -5,7 +5,7 @@ class Subject:
     """Lớp mô tả thông tin môn học"""
     AUTO_ID = 1000
 
-    def __init__(self, sid=0, name='', credit=''):
+    def __init__(self, sid=None, name='', credit=''):
         self.subject_id = sid
         self.subject_name = name
         self.credit = credit

@@ -5,19 +5,23 @@ class Register:
     """Lớp mô tả lớp đăng ký"""
     AUTO_ID = 100
 
-    def __init__(self, cid=0, rtime=None, student=None, subject=None):
-        self.course_id = cid
+    def __init__(self, cid=None, rtime=None, student=None, subject=None):
+        self.register_id = cid
         self.register_time = rtime
         self.student = student
         self.subject = subject
 
     @property
-    def course_id(self):
-        return self.__course_id
+    def register_id(self):
+        return self.__register_id
 
-    @course_id.setter
-    def course_id(self, value):
-        self.__course_id = value
+    @register_id.setter
+    def register_id(self, value):
+        if value is None:
+            self.__register_id = Register.AUTO_ID
+            Register.AUTO_ID += 1
+        else:
+            self.__register_id = value
 
     @property
     def register_time(self):
@@ -47,5 +51,5 @@ class Register:
         self.__subject = value
 
     def __str__(self):
-        return f'{self.course_id:<10}{self.student.student_id:15}' \
+        return f'{self.register_id:<10}{self.student.student_id:15}' \
                f'{self.subject.subject_id:15}{self.register_time:30}'

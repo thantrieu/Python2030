@@ -4,9 +4,11 @@ from exercises2_utils import is_gpa_valid
 
 class Student(Person):
     """Lớp mô tả thông tin sinh viên"""
-    AUTO_ID = 1001
+    AUTO_ID = 1000
 
-    def __init__(self, sid=None, gpa='', major=''):
+    def __init__(self, pid=None, full_name='',
+                 birth_date='', sid=None, gpa='', major=''):
+        super().__init__(pid, full_name, birth_date)
         self.student_id = sid
         self.gpa = gpa
         self.major = major
