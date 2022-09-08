@@ -6,11 +6,11 @@ mydb = mysql.connector.connect(
     password='',
     database='student_register'
 )
-# sql = 'DELETE FROM student WHERE id = %s'
+# sql = 'DELETE FROM student.py WHERE id = %s'
 # data = ('SV1000',)
 mycursor = mydb.cursor()
 mycursor.execute("drop database student_register")
-# sql = 'DELETE FROM student WHERE id = %s'
+# sql = 'DELETE FROM student.py WHERE id = %s'
 # data = ('SV1005',)
 # mycursor.execute(sql, data)
 # mydb.commit()

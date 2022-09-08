@@ -6,8 +6,8 @@ mydb = mysql.connector.connect(
     password='',
     database='student_register'
 )
-sql = 'UPDATE student SET gpa =3.48 WHERE id = "SV1001"'  # KHÔNG làm như thế này
-sql = 'UPDATE student SET gpa = %s WHERE id = %s'  # hãy làm như này!
+sql = 'UPDATE student.py SET gpa =3.48 WHERE id = "SV1001"'  # KHÔNG làm như thế này
+sql = 'UPDATE student.py SET gpa = %s WHERE id = %s'  # hãy làm như này!
 data = (3.48, 'SV1001')
 mycursor = mydb.cursor()
 mycursor.execute(sql, data)

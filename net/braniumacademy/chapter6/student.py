@@ -23,7 +23,7 @@ class FullName:
 
 
 class Student:
-    """This class describe student infomation."""
+    """This class describe student.py infomation."""
 
     def __init__(self, sid, name, age, major, address, gpa):
         self.student_id = sid

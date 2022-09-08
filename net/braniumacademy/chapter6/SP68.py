@@ -10,7 +10,7 @@ def create_student(sid, gpa, first, mid, last, age, major):
 
 def create_student_xml(student):
     root = et.Element('students')
-    item = et.SubElement(root, 'student')
+    item = et.SubElement(root, 'student.py')
     et.SubElement(item, 'id').text = student.student_id
     et.SubElement(item, 'age').text = str(student.age)
     et.SubElement(item, 'major').text = student.major
@@ -36,7 +36,7 @@ def update_xml(file_name):
     tree = et.parse(file_name)
     root = tree.getroot()
     student = create_student('SV002', 3.87, 'Linh', 'Mai', 'Trần', 20, 'CNTT')
-    new_element = et.Element('student')
+    new_element = et.Element('student.py')
     et.SubElement(new_element, 'id').text = student.student_id
     et.SubElement(new_element, 'age').text = str(student.age)
     et.SubElement(new_element, 'major').text = student.major

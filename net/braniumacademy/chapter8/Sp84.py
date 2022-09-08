@@ -1,9 +1,9 @@
 import mysql.connector
-# sql = 'SELECT id, full_name, gpa FROM student'
-# sql = 'SELECT id, full_name, gpa FROM student WHERE gpa >= 3.5'
-# sql = 'SELECT * FROM student WHERE id = "SV1008"'
-# sql = 'SELECT * FROM student WHERE full_name LIKE %s AND gpa >= %s'
-# sql = 'SELECT * FROM student ORDER BY gpa DESC'
+# sql = 'SELECT id, full_name, gpa FROM student.py'
+# sql = 'SELECT id, full_name, gpa FROM student.py WHERE gpa >= 3.5'
+# sql = 'SELECT * FROM student.py WHERE id = "SV1008"'
+# sql = 'SELECT * FROM student.py WHERE full_name LIKE %s AND gpa >= %s'
+# sql = 'SELECT * FROM student.py ORDER BY gpa DESC'
 
 
 def show_students(mstudents):
@@ -17,7 +17,7 @@ mydb = mysql.connector.connect(
     password='',
     database='student_register1'
 )
-sql = 'SELECT * FROM student ORDER BY gpa DESC'
+sql = 'SELECT * FROM student.py ORDER BY gpa DESC'
 mycursor = mydb.cursor()
 mycursor.execute(sql)
 students = mycursor.fetchall()

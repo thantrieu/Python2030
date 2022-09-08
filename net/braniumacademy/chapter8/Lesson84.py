@@ -12,7 +12,7 @@ mydb = mysql.connector.connect(
     password='',
     database='student_register1'
 )
-sql = 'SELECT * FROM student WHERE id="SV1005"'
+sql = 'SELECT * FROM student.py WHERE id="SV1005"'
 mycursor = mydb.cursor()
 mycursor.execute(sql)
 students = mycursor.fetchall()

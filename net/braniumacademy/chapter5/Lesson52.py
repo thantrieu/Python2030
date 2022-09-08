@@ -1,5 +1,5 @@
 class Student:
-    """This class describe student infomation and behaviors"""
+    """This class describe student.py infomation and behaviors"""
 
     def __init__(self, student_id, full_name, major, gpa):
         self.student_id = student_id
@@ -22,15 +22,15 @@ class Student:
 
 def create_student():
     print('========================================')
-    id = input('Enter student id: ')
+    id = input('Enter student.py id: ')
     full_name = input('Enter full name: ')
-    major = input('Enter student major: ')
+    major = input('Enter student.py major: ')
     gpa = float(input('Enter gpa: '))
     return Student(student_id=id, major=major, gpa=gpa, full_name=full_name)
 
 
 students = []
-n = int(input('Enter number of student: '))
+n = int(input('Enter number of student.py: '))
 for index in range(n):
     student = create_student()
     students.append(student)

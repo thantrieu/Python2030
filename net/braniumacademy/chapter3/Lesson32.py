@@ -1,5 +1,5 @@
 # def print_student_info(first, last, mid="", age=20):
-#     """This function print student infomation"""
+#     """This function print student.py infomation"""
 #     print(f"Full name: {first} {last} {mid}")
 #     print(f"Age: {age}")
 #     print("----------------------------------")
@@ -21,7 +21,7 @@
 # print_words("Hello", "Hi", "Good", "Learning", "Python", "Branium", "Academy")
 
 def print_student_info(first, last, mid="", age=20):
-    """This function print student infomation"""
+    """This function print student.py infomation"""
     print(f"Full name: {first} {last} {mid}")
     print(f"Age: {age}")
     print("----------------------------------")

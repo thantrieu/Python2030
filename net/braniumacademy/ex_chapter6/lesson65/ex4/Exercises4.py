@@ -141,7 +141,7 @@ def find_student_max_gpa(mstudents):
 
 
 if __name__ == '__main__':
-    source = 'student.json'
+    source = 'student.py.json'
     with open(source, encoding='UTF-8') as json_reader:
         data = json_reader.read()
         students = json.loads(data, object_hook=decode_student)

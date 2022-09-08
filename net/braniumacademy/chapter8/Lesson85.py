@@ -6,7 +6,7 @@ mydb = mysql.connector.connect(
     password='',
     database='student_register'
 )
-sql = 'INSERT INTO student (id, full_name, email, gpa, major) VALUES (%s, %s, %s, %s, %s)'
+sql = 'INSERT INTO student.py (id, full_name, email, gpa, major) VALUES (%s, %s, %s, %s, %s)'
 data = [
     ('SV1000', 'Trần Trọng Anh', 'tronganh@xmail.com', 3.26, 'CNTT'),
     ('SV1001', 'Lê Văn Tấn', 'tanle@xmail.com', 3.47, 'CNTT'),

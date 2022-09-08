@@ -6,7 +6,7 @@ mydb = mysql.connector.connect(
     password='',
     database='student_register'
 )
-sql = 'DELETE FROM student WHERE id = %s'
+sql = 'DELETE FROM student.py WHERE id = %s'
 data = ('SV1002',)
 mycursor = mydb.cursor()
 mycursor.execute(sql, data)

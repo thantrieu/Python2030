@@ -15,7 +15,7 @@ def create_student():
 
 
 class StudentEncoder(json.JSONEncoder):
-    """This class encode student data to JSON format."""
+    """This class encode student.py data to JSON format."""
 
     def default(self, obj):
         return obj.__dict__

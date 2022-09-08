@@ -7,7 +7,7 @@ mydb = mysql.connector.connect(
     database='student_register'
 )
 # print(mydb)
-sql = 'SELECT * FROM student'
+sql = 'SELECT * FROM student.py'
 mycursor = mydb.cursor()
 mycursor.execute(sql)
 result = mycursor.fetchall()
