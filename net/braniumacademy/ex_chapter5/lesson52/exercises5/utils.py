@@ -1,3 +1,5 @@
+import copy
+
 from student import Student
 from course import Course
 from subject import Subject
@@ -164,6 +166,8 @@ def show_transcripts(courses):
     """This method print transcripts of each course on screen."""
     if len(courses) > 0:
         for c in courses:
+            print('======================================='
+                  '============================================')
             print(f'Mã lớp: {c.course_id}')
             print(f'Tên lớp: {c.name}')
             print(f'Số lượng SV: {len(c.transcripts)}')
@@ -216,3 +220,90 @@ def create_fake_couses(subjects):
                Course('C102', 'Android 1', 'A2-201', '10-12h', subjects[4]),
                Course('C103', 'Android 2', 'A2-105', '14-16h', subjects[4])]
     return courses
+
+
+def create_fake_transcripts(courses, students):
+    courses[0].transcripts.append(Transcript(0, students[0], 6, 9, 8))
+    courses[0].transcripts.append(Transcript(0, students[1], 7, 9, 9))
+    courses[0].transcripts.append(Transcript(0, students[2], 8, 9, 9.5))
+    courses[0].transcripts.append(Transcript(0, students[3], 10, 8, 9))
+    courses[0].transcripts.append(Transcript(0, students[4], 6, 7, 8))
+    courses[0].transcripts.append(Transcript(0, students[5], 9, 9, 8.5))
+    courses[1].transcripts.append(Transcript(0, students[0], 6, 9, 7))
+    courses[1].transcripts.append(Transcript(0, students[1], 8, 9, 8))
+    courses[1].transcripts.append(Transcript(0, students[2], 6.5, 9, 8))
+    courses[2].transcripts.append(Transcript(0, students[3], 8, 9, 9.5))
+    courses[2].transcripts.append(Transcript(0, students[1], 6, 9, 8))
+    courses[2].transcripts.append(Transcript(0, students[0], 6, 9, 8))
+    courses[3].transcripts.append(Transcript(0, students[1], 9, 9, 8.5))
+    courses[3].transcripts.append(Transcript(0, students[2], 9, 9, 8.5))
+    courses[3].transcripts.append(Transcript(0, students[3], 8, 9, 9))
+    courses[3].transcripts.append(Transcript(0, students[0], 8, 9, 9.5))
+
+
+def sort_transcripts(courses):
+    """This method create rule for sorting transcripts."""
+    for c in courses:
+        c.transcripts.sort(key=lambda x: (-x.gpa, x.student.first_name))
+
+
+def find_student_in_course(courses):
+    """This method find student"""
+    student_id = input('Mã sinh viên cần tìm: ')
+    course_id = input('Mã lớp cần tìm: ')
+    course = find_course_by_id(courses, course_id)
+    if course is None:
+        print('==> Lớp học cần tìm không tồn tại. <==')
+    else:
+        is_found = False
+        for tran in course.transcripts:
+            if tran.student.student_id == student_id:
+                print(f'==> Sinh viên mã {student_id} CÓ trong lớp học mã lớp {course_id}')
+                is_found = True
+                break
+        if not is_found:
+            print(f'==> Sinh viên mã {student_id} KHÔNG có trong lớp học mã lớp {course_id}')
+
+
+def find_student_with_max_gpa(courses):
+    """This method find and show students have max gpa."""
+    sort_transcripts(courses)
+    max_gpa = -1  # giả định giá trị max_gpa k hợp lệ
+    for c in courses:
+        for t in c.transcripts:
+            if t.gpa > max_gpa:
+                max_gpa = t.gpa
+                break
+    # nếu giá trị mặc định không đổi -> không có sv nào đc nhập điểm vào bất kì danh sách lớp nào
+    if max_gpa != -1:
+        result = copy.deepcopy(courses)  # tạo bản sao của ds các lớp học
+        for c in result:
+            c.transcripts.clear()  # xóa hết các bản ghi về bảng điểm
+        # thêm dữ liệu vào bảng điểm. Do bảng điểm gốc và copy là như nhau -> vị trí các lớp học là như nhau
+        index = 0
+        for course in courses:  # tìm các bảng điểm có điểm TB cao nhất
+            for t in course.transcripts:
+                if t.gpa == max_gpa:
+                    result[index].transcripts.append(t)  # thêm vào ds kết quả
+            index += 1
+
+        print(f'==> Điểm TB cao nhất: {max_gpa}')
+        print('==> Danh sách sinh viên có điểm cao nhất: ')
+        show_transcripts(result)
+    else:
+        print('==> Danh sách bảng điểm rỗng. <==')
+
+
+def find_student_with_given_gpa(courses):
+    """This method find transcript with given gpa."""
+    start_gpa = float(input('Điểm thấp nhất cần tìm: '))
+    end_gpa = float(input('Điểm cao nhất cần tìm: '))
+    # ý tưởng là ta tạo bản sao của ds khóa học để giữ nguyên thông tin lớp học
+    # trong đó chứa sv có bảng điểm thỏa mãn tiêu chí cần tìm.
+    result = copy.deepcopy(courses)  # tạo bản sao của danh sách lớp học
+    for c in result:
+        for t in c.transcripts:
+            if start_gpa > t.gpa or t.gpa > end_gpa:
+                c.transcripts.remove(t)  # xóa bỏ các bảng điểm không thỏa mãn
+    print('==> Danh sách bảng điểm cần tìm: <==')
+    show_transcripts(result)

@@ -37,6 +37,3 @@ class Transcript:
             self.capacity = 'Trung bình yếu'
         else:
             self.capacity = 'Trượt môn'
-
-    def __eq__(self, other):  # create rule for equals between two transcript object
-        return self.transcript_id == other.transcript_id

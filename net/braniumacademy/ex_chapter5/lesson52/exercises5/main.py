@@ -4,6 +4,8 @@ if __name__ == '__main__':
     students = create_fake_students()
     subjects = create_fake_subjects()
     courses = create_fake_couses(subjects)
+    create_fake_transcripts(courses, students)
+
     option = "=============== OPTIONS ===============\n" \
              "1. Thêm mới môn học vào danh sách môn học.\n" \
              "2. Thêm mới sinh viên vào danh sách sinh viên.\n" \
@@ -60,13 +62,15 @@ if __name__ == '__main__':
             case 9:
                 show_transcripts(courses)
             case 10:
-                pass
+                sort_transcripts(courses)
+                print('==> Danh bảng điểm sau khi sắp xếp: ')
+                show_transcripts(courses)
             case 11:
-                pass
+                find_student_in_course(courses)
             case 12:
-                pass
+                find_student_with_max_gpa(courses)
             case 13:
-                pass
+                find_student_with_given_gpa(courses)
             case 14:
                 print('==> Tạm biệt! Cảm ơn bạn đã sử dụng dịch vụ! <==')
                 break
