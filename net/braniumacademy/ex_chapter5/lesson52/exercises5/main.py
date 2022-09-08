@@ -1,9 +1,9 @@
 from utils import *
 
 if __name__ == '__main__':
-    students = []
-    subjects = []
-    courses = []
+    students = create_fake_students()
+    subjects = create_fake_subjects()
+    courses = create_fake_couses(subjects)
     option = "=============== OPTIONS ===============\n" \
              "1. Thêm mới môn học vào danh sách môn học.\n" \
              "2. Thêm mới sinh viên vào danh sách sinh viên.\n" \
@@ -51,11 +51,14 @@ if __name__ == '__main__':
             case 6:
                 show_courses(courses)
             case 7:
-                pass
+                if len(courses) > 0:
+                    add_transcript_to_course(courses, students)
+                else:
+                    print('==> Danh sách lớp học rỗng. <==')
             case 8:
-                pass
+                find_capacity(courses)
             case 9:
-                pass
+                show_transcripts(courses)
             case 10:
                 pass
             case 11:

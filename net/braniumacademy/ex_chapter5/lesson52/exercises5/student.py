@@ -1,9 +1,9 @@
 class Student:
     """Lớp mô tả thông tin sinh viên."""
 
-    def __int__(self, sid='', first='', mid='', last='',
-                address='', email='', gender='', faculty=''):
-        self.student_id = sid
+    def __init__(self, student_id='', first='', last='', mid='',
+                 address='', email='', gender='', faculty=''):
+        self.student_id = student_id
         self.first_name = first
         self.last_name = last
         self.mid_name = mid
