@@ -7,7 +7,7 @@ def create_subject_id():
 class Subject:
     AUTO_ID = 1000
 
-    def __init__(self, name='', credit=0, subject_id=0):
+    def __init__(self, subject_id=0, name='', credit=0):
         if subject_id == 0:
             self.__subject_id = create_subject_id()
         else:
@@ -28,7 +28,7 @@ class Subject:
         return self.__subject_id
 
     def __str__(self):
-        return f'{self.subject_id:<10}{self.name:15}{self.credit:<10}'
+        return f'{self.subject_id:<15}{self.name:35}{self.credit:<15}'
 
     def __eq__(self, other):
         """Hai môn học gọi là trùng khớp nếu chúng cùng mã môn."""

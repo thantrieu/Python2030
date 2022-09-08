@@ -43,8 +43,8 @@ def create_subject():
 def show_students(students):
     """Phương thức hiển thị thông tin sinh viên."""
     print('==> Danh sách sinh viên:')
-    print(f'{"CMND/CC":15}{"Họ và tên":25}{"Ngày sinh":12}'
-          f'{"Mã SV":10}{"Điểm TB":10}{"C.Ngành":15}')
+    print(f'{"CMND/CC":15}{"Họ và tên":30}{"Ngày sinh":15}'
+          f'{"Mã SV":15}{"Điểm TB":15}{"C.Ngành":15}')
     for e in students:
         print(e)
 
@@ -52,8 +52,8 @@ def show_students(students):
 def show_teacher(teachers):
     """Phương thức hiển thị thông tin giảng viên."""
     print('==> Danh sách giảng viên <==')
-    print(f'{"CMND/CC":15}{"Họ và tên":25}{"Ngày sinh":12}'
-          f'{"Mã GV":10}{"Mức lương":10}{"Chuyên môn":20}')
+    print(f'{"CMND/CC":15}{"Họ và tên":30}{"Ngày sinh":15}'
+          f'{"Mã GV":15}{"Mức lương":15}{"Chuyên môn":25}')
     for teacher in teachers:
         print(teacher)
 
@@ -61,7 +61,7 @@ def show_teacher(teachers):
 def show_subjects(subjects):
     """Phương thức hiển thị danh sách môn học."""
     print('==> Danh sách môn học:')
-    print(f'{"Mã môn":10}{"Tên môn":15}{"Số tín":<10}')
+    print(f'{"Mã môn":15}{"Tên môn":35}{"Số tín":<15}')
     for s in subjects:
         print(s)
 
@@ -99,3 +99,48 @@ def show_course(courses):
           f'{"Mã GV":10}{"Tên giảng viên":30}{"Phòng học":10}')
     for c in courses:
         print(c)
+
+
+def read_students_from_file():
+    """Phương thức đọc thông tin sv từ file."""
+    students = []
+    with open('STUDENT.DAT', encoding='UTF-8') as student_reader:
+        pid = student_reader.readline().strip()
+        while pid != '':
+            fname = student_reader.readline().strip()
+            birth_date = student_reader.readline().strip()
+            student_id = student_reader.readline().strip()
+            gpa = student_reader.readline().strip()
+            major = student_reader.readline().strip()
+            students.append(Student(pid, fname, birth_date, student_id, gpa, major))
+            pid = student_reader.readline().strip()
+    return students
+
+
+def read_teachers_from_file():
+    """Phương thức đọc thông tin giảng viên từ file."""
+    teachers = []
+    with open('LECTURER.DAT', encoding='UTF-8') as teacher_reader:
+        tid = teacher_reader.readline().strip()
+        while tid != '':
+            fname = teacher_reader.readline().strip()
+            birth_date = teacher_reader.readline().strip()
+            teacher_id = teacher_reader.readline().strip()
+            salary = int(teacher_reader.readline().strip())
+            major = teacher_reader.readline().strip()
+            teachers.append(Teacher(tid, fname, birth_date, teacher_id, salary, major))
+            tid = teacher_reader.readline().strip()
+    return teachers
+
+
+def read_subject_from_file():
+    """Phương thức đọc thông tin môn học từ file."""
+    subjects = []
+    with open('SUBJECT.DAT', encoding='UTF-8') as subject_reader:
+        subject_id = subject_reader.readline().strip()
+        while subject_id != '':
+            name = subject_reader.readline().strip()
+            credit = int(subject_reader.readline().strip())
+            subjects.append(Subject(int(subject_id), name, credit))
+            subject_id = subject_reader.readline().strip()
+    return subjects

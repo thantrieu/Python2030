@@ -1,9 +1,9 @@
 from utils import *
 
 if __name__ == '__main__':
-    students = []
-    teachers = []
-    subjects = []
+    students = read_students_from_file()
+    teachers = read_teachers_from_file()
+    subjects = read_subject_from_file()
     courses = []
     option = '============================== OPTION ==============================\n' \
              '1. Thêm mới sinh viên vào danh sách sinh viên.\n' \

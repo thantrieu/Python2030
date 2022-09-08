@@ -32,9 +32,9 @@ class Student(Person):
     @student_id.setter
     def student_id(self, value):
         if value is None:
-            self.student_id = self.__student_id = create_id()
+            self.__student_id = create_id()
         else:
-            self.student_id = value.upper()
+            self.__student_id = value.upper()
 
     @property
     def major(self):
@@ -50,7 +50,7 @@ class Student(Person):
         print(self)
 
     def __str__(self):
-        return f'{super().__str__()}{self.student_id:10}{self.gpa:<10}' \
+        return f'{super().__str__()}{self.student_id:15}{self.gpa:<15.2}' \
                f'{self.major:15}'
 
     def __eq__(self, other):

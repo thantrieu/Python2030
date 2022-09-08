@@ -49,5 +49,5 @@ class Person:
         print(self)
 
     def __str__(self):
-        return f'{self.person_id:15}{self.full_name.full_name:25}' \
-               f'{self.birth_date:12}'
+        return f'{self.person_id:15}{self.full_name.__str__():30}' \
+               f'{self.birth_date:15}'
