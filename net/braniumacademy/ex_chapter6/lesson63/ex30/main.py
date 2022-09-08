@@ -4,7 +4,8 @@ if __name__ == '__main__':
     students = read_students_from_file()
     teachers = read_teachers_from_file()
     subjects = read_subject_from_file()
-    courses = []
+    courses = read_course_from_file(teachers, subjects)
+
     option = '============================== OPTION ==============================\n' \
              '1. Thêm mới sinh viên vào danh sách sinh viên.\n' \
              '2. Thêm mới giảng viên vào danh sách giảng viên.\n' \
@@ -60,7 +61,7 @@ if __name__ == '__main__':
                 else:
                     print("==> Danh sách giảng viên rỗng. <==")
             case 9:
-                break
+                show_course(courses)
             case 10:
                 break
             case 11:

@@ -94,53 +94,89 @@ def create_course(subjects, mteachers):
 
 def show_course(courses):
     """Phương thức hiển thị danh sách các lớp học phần."""
-    print('==> Danh sách các lớp học phần: <==')
-    print(f'{"Mã lớp":10}{"Mã môn":10}{"Tên môn học":30}'
-          f'{"Mã GV":10}{"Tên giảng viên":30}{"Phòng học":10}')
-    for c in courses:
-        print(c)
+    if len(courses) > 0:
+        print('==> Danh sách các lớp học phần: <==')
+        print(f'{"Mã lớp":10}{"Tên lớp":20}{"Mã môn":10}{"Tên môn học":30}'
+              f'{"Mã GV":10}{"Tên giảng viên":30}{"Phòng học":10}')
+        for c in courses:
+            print(c)
+    else:
+        print('==> Danh sách lớp học rỗng. <==')
 
 
 def read_students_from_file():
     """Phương thức đọc thông tin sv từ file."""
     students = []
-    with open('STUDENT.DAT', encoding='UTF-8') as student_reader:
-        pid = student_reader.readline().strip()
+    with open('STUDENT.DAT', encoding='UTF-8') as reader:
+        pid = reader.readline().strip()
         while pid != '':
-            fname = student_reader.readline().strip()
-            birth_date = student_reader.readline().strip()
-            student_id = student_reader.readline().strip()
-            gpa = student_reader.readline().strip()
-            major = student_reader.readline().strip()
+            fname = reader.readline().strip()
+            birth_date = reader.readline().strip()
+            student_id = reader.readline().strip()
+            gpa = reader.readline().strip()
+            major = reader.readline().strip()
             students.append(Student(pid, fname, birth_date, student_id, gpa, major))
-            pid = student_reader.readline().strip()
+            pid = reader.readline().strip()
     return students
 
 
 def read_teachers_from_file():
     """Phương thức đọc thông tin giảng viên từ file."""
     teachers = []
-    with open('LECTURER.DAT', encoding='UTF-8') as teacher_reader:
-        tid = teacher_reader.readline().strip()
+    with open('LECTURER.DAT', encoding='UTF-8') as reader:
+        tid = reader.readline().strip()
         while tid != '':
-            fname = teacher_reader.readline().strip()
-            birth_date = teacher_reader.readline().strip()
-            teacher_id = teacher_reader.readline().strip()
-            salary = int(teacher_reader.readline().strip())
-            major = teacher_reader.readline().strip()
+            fname = reader.readline().strip()
+            birth_date = reader.readline().strip()
+            teacher_id = reader.readline().strip()
+            salary = int(reader.readline().strip())
+            major = reader.readline().strip()
             teachers.append(Teacher(tid, fname, birth_date, teacher_id, salary, major))
-            tid = teacher_reader.readline().strip()
+            tid = reader.readline().strip()
     return teachers
 
 
 def read_subject_from_file():
     """Phương thức đọc thông tin môn học từ file."""
     subjects = []
-    with open('SUBJECT.DAT', encoding='UTF-8') as subject_reader:
-        subject_id = subject_reader.readline().strip()
+    with open('SUBJECT.DAT', encoding='UTF-8') as reader:
+        subject_id = reader.readline().strip()
         while subject_id != '':
-            name = subject_reader.readline().strip()
-            credit = int(subject_reader.readline().strip())
+            name = reader.readline().strip()
+            credit = int(reader.readline().strip())
             subjects.append(Subject(int(subject_id), name, credit))
-            subject_id = subject_reader.readline().strip()
+            subject_id = reader.readline().strip()
     return subjects
+
+
+def find_teacher_by_id(teachers, teacher_id):
+    """This method find and return teacher by id if exists."""
+    for t in teachers:
+        if t.teacher_id == teacher_id:
+            return t
+    return None  # in case result not found
+
+
+def find_subject_by_id(subjects, subject_id):
+    """This method find and return subject by id if exists."""
+    for s in subjects:
+        if s.subject_id == subject_id:
+            return s
+    return None  # in case result not found
+
+
+def read_course_from_file(teachers, subjects):
+    """Phương thức đọc thông tin lớp học từ file."""
+    courses = []
+    with open('COURSE.DAT', encoding='UTF-8') as reader:
+        cid = reader.readline().strip()
+        while cid != '':
+            name = reader.readline().strip()
+            subject_id = int(reader.readline().strip())
+            teacher_id = reader.readline().strip()
+            teacher = find_teacher_by_id(teachers, teacher_id)
+            subject = find_subject_by_id(subjects, subject_id)
+            room = reader.readline().strip()
+            courses.append(Course(cid, name, subject, teacher, room))
+            cid = reader.readline().strip()
+    return courses

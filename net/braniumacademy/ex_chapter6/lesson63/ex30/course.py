@@ -8,8 +8,9 @@ class Course:
     """Lớp mô tả thông tin lớp học phần."""
     AUTO_ID = 100
 
-    def __init__(self, cid='', subject=None, teacher=None, room=''):
+    def __init__(self, cid='', name='', subject=None, teacher=None, room=''):
         self.course_id = cid
+        self.name = name
         self.subject = subject
         self.teacher = teacher
         self.room = room
@@ -25,6 +26,14 @@ class Course:
             self.__couse_id = create_course_id()
         else:
             self.__couse_id = value
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, value):
+        self.__name = value
 
     @property
     def subject(self):
@@ -59,7 +68,7 @@ class Course:
         self.__transcripts = value
 
     def __str__(self):
-        return f'{self.course_id:10}{self.subject.subject_id:10}' \
+        return f'{self.course_id:10}{self.name:20}{self.subject.subject_id:<10}' \
                f'{self.subject.name:30}{self.teacher.teacher_id:10}' \
                f'{self.teacher.full_name:30}{self.room:10}'
 
