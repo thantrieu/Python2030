@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<subjects>
+	<subject>
+		<subject_id>1000</subject_id>
+		<subject_name>Lập trình Java</subject_name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<subject_id>1001</subject_id>
+		<subject_name>Lập trình C#</subject_name>
+		<credit>3</credit>
+	</subject>
+	<subject>
+		<subject_id>1002</subject_id>
+		<subject_name>Lập trình C++</subject_name>
+		<credit>3</credit>
+	</subject>
+	<subject>
+		<subject_id>1003</subject_id>
+		<subject_name>Lập trình Python</subject_name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<subject_id>1004</subject_id>
+		<subject_name>SQL</subject_name>
+		<credit>3</credit>
+	</subject>
+	<subject>
+		<subject_id>1005</subject_id>
+		<subject_name>Phân tích thiết kế hệ thống</subject_name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<subject_id>1006</subject_id>
+		<subject_name>Lập trình Android Java</subject_name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<subject_id>1007</subject_id>
+		<subject_name>Lập trình ASP.NET</subject_name>
+		<credit>4</credit>
+	</subject>
+	<subject>
+		<subject_id>1008</subject_id>
+		<subject_name>Lập trình nhúng</subject_name>
+		<credit>3</credit>
+	</subject>
+</subjects>

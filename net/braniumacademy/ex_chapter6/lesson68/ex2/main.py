@@ -1,5 +1,4 @@
 from utils import *
-from encoders import *
 
 if __name__ == '__main__':
     students = load_students()
@@ -155,23 +154,22 @@ if __name__ == '__main__':
                     print('==> Danh sách các lớp học rỗng. <==')
             case 21:
                 if len(students) > 0:
-                    write_data_to_file(students, StudentEncoder, 'STUDENT.json')
+                    students_data = create_students_xml_data(students)
+                    student_file_name = 'student.xml'
+                    update_xml_file(students_data, student_file_name)
                     print('==> Lưu dữ liệu sinh viên ra file thành công. <==')
+                else:
+                    print('==> Danh sách sinh viên rỗng <==')
                 if len(subjects) > 0:
-                    write_data_to_file(subjects, SubjectEncoder, 'SUBJECT.json')
+                    subjects_data = create_subjects_xml_data(subjects)
+                    subject_file_name = 'subject.xml'
+                    update_xml_file(subjects_data, subject_file_name)
                     print('==> Lưu dữ liệu môn học ra file thành công. <==')
-                if len(teachers) > 0:
-                    write_data_to_file(teachers, TeacherEncoder, 'LECTURER.json')
-                    print('==> Lưu dữ liệu giảng viên ra file thành công. <==')
-                if len(courses) > 0:
-                    write_data_to_file(courses, CourseEncoder, 'COURSE.json')
-                    print('==> Lưu dữ liệu khóa học ra file thành công. <==')
-                if len(courses) > 0:
-                    transcript_data = []
-                    for c in courses:
-                        transcript_data.extend(c.transcripts)
-                    write_data_to_file(transcript_data, TranscriptEncoder, 'TRANSCRIPT.json')
-                    print('==> Lưu dữ liệu sinh bảng điểm ra file thành công. <==')
+                else:
+                    print('==> Danh sách môn học rỗng <name==')
+
+                # print('==> Lưu dữ liệu giảng viên ra file thành công. <==')
+                # print('==> Lưu dữ liệu sinh bảng điểm ra file thành công. <==')
             case 22:
                 print("==> Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy. <==")
                 break

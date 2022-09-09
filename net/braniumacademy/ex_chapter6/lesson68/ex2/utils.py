@@ -8,6 +8,7 @@ from subject import Subject
 from teacher import Teacher
 from course import Course
 from transcript import Transcript
+import xml.etree.ElementTree as et
 
 
 def create_student():
@@ -450,8 +451,35 @@ def update_student_auto_id(students):
     Student.AUTO_ID = max_id + 1
 
 
-def write_data_to_file(data, encoder, file_name):
-    """This method write given data to given text file."""
-    with open(file_name, 'w', encoding='UTF-8') as writer:
-        encoded_data = json.dumps(data, cls=encoder, indent=4, ensure_ascii=False)
-        writer.write(encoded_data)
+def create_students_xml_data(students):
+    """This method create and return elements tree data for students"""
+    root = et.Element('students')
+    for student in students:
+        new_element = et.SubElement(root, 'student')
+        et.SubElement(new_element, 'person_id').text = student.person_id
+        full_name = et.SubElement(new_element, 'full_name')
+        et.SubElement(full_name, 'first').text = student.full_name.first_name
+        et.SubElement(full_name, 'mid').text = student.full_name.mid_name
+        et.SubElement(full_name, 'last').text = student.full_name.last_name
+        et.SubElement(new_element, 'birth_date').text = student.birth_date.strftime('%d/%m/%Y')
+        et.SubElement(new_element, 'student_id').text = student.student_id
+        et.SubElement(new_element, 'gpa').text = str(student.gpa)
+        et.SubElement(new_element, 'major').text = student.major
+    et.indent(root, space='\t')
+    return str(et.tostring(root, encoding='UTF-8', xml_declaration=True), 'UTF-8')
+
+
+def create_subjects_xml_data(subjects):
+    root = et.Element('subjects')
+    for subject in subjects:
+        new_element = et.SubElement(root, 'subject')
+        et.SubElement(new_element, 'subject_id').text = str(subject.subject_id)
+        et.SubElement(new_element, 'subject_name').text = subject.name
+        et.SubElement(new_element, 'credit').text = str(subject.credit)
+    et.indent(root, space='\t')
+    return str(et.tostring(root, encoding='UTF-8', xml_declaration=True), 'UTF-8')
+
+
+def update_xml_file(data, file_name):
+    with open(file_name, 'w', encoding='UTF-8') as xml_writer:
+        xml_writer.write(data)
