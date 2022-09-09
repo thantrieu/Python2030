@@ -476,3 +476,10 @@ def update_student_auto_id(students):
         if number > max_id:
             max_id = number
     Student.AUTO_ID = max_id + 1
+
+
+def write_data_to_file(data, file_name):
+    """This method write given data to given text file."""
+    with open(file_name, 'w', encoding='UTF-8') as writer:
+        for item in data:
+            writer.write(item.output_data_format())

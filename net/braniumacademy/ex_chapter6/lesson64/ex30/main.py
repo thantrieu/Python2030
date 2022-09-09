@@ -35,8 +35,9 @@ if __name__ == '__main__':
              '18. Tìm sinh viên trong lớp theo điểm và mã lớp.\n' \
              '19. Thống kê số lượng sinh viên trong một lớp theo học lực giảm dần.\n' \
              '20. Thống kê số lượng sinh viên có học lực giỏi, xuất sắc theo từng môn.\n' \
-             '21. Kết thúc chương trình.\n' \
-             'Xin mời chọn chức năng(1-21): '
+             '21. Lưu dữ liệu ra file text.\n' \
+             '22. Kết thúc chương trình.\n' \
+             'Xin mời chọn chức năng(1-22): '
     while True:
         choice = int(input(option))
         match choice:
@@ -152,7 +153,24 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 21:
+                if len(students) > 0:
+                    write_data_to_file(students, 'STUDENT.DAT')
+                    print('==> Lưu dữ liệu sinh viên ra file thành công. <==')
+                if len(subjects) > 0:
+                    write_data_to_file(subjects, 'SUBJECT.DAT')
+                    print('==> Lưu dữ liệu môn học ra file thành công. <==')
+                if len(teachers) > 0:
+                    write_data_to_file(teachers, 'LECTURER.DAT')
+                    print('==> Lưu dữ liệu giảng viên ra file thành công. <==')
+                if len(courses) > 0:
+                    write_data_to_file(courses, 'COURSE.DAT')
+                    print('==> Lưu dữ liệu khóa học ra file thành công. <==')
+                if len(courses) > 0:
+                    for c in courses:
+                        write_data_to_file(c.transcripts, 'TRANSCRIPT.DAT')
+                    print('==> Lưu dữ liệu sinh bảng điểm ra file thành công. <==')
+            case 22:
                 print("==> Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy. <==")
                 break
             case _:
-                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-21. <==')
+                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-22. <==')
