@@ -1,3 +1,4 @@
+import copy
 from datetime import datetime
 
 from person import FullName
@@ -220,7 +221,10 @@ def fill_transcript_for_courses(courses, students):
 
 
 def show_transcripts(courses):
+    """This method print transcript on screen."""
     for c in courses:
+        if len(c.transcripts) == 0:  # nếu danh sách sv rỗng -> bỏ qua
+            continue
         print('================================'
               '=====================================')
         print(f'==> Mã lớp: {c.course_id}')
@@ -234,3 +238,44 @@ def show_transcripts(courses):
               f'{"Họ tên SV":30}{"Điểm Gpa":10}{"Học lực":15}')
         for t in c.transcripts:
             print(t)
+
+
+def find_max_gpa(courses):
+    """This method find and return max gpa of students."""
+    max_gpa = 0.0
+    for c in courses:
+        for t in c.transcripts:
+            if t.gpa > max_gpa:
+                max_gpa = t.gpa
+    return max_gpa
+
+
+def listed_student_with_max_gpa(courses):
+    """This method find and show on screen student with max gpa."""
+    max_gpa = find_max_gpa(courses)
+    result = copy.deepcopy(courses)
+    for c in result:
+        c.transcripts.clear()
+    for index in range(len(courses)):
+        for t in courses[index].transcripts:
+            if t.gpa == max_gpa:
+                result[index].transcripts.append(t)
+    show_transcripts(result)
+
+
+def find_student_in_course(courses):
+    """This method find and display student with given gpa on screen."""
+    course_id = input('Mã lớp cần tìm: ')
+    start_gpa = float(input('Điểm gpa tối thiểu: '))
+    end_gpa = float(input('Điểm gpa tối đa: '))
+    course = copy.deepcopy(courses[courses.index(Course(cid=course_id))])
+    if course is not None:
+        result = []
+        for t in course.transcripts:
+            if start_gpa <= t.gpa <= end_gpa:
+                result.append(t)
+        course.transcripts = result
+        show_transcripts([course])
+    else:
+        print('==> Không tồn tại lớp học cần tìm. <==')
+

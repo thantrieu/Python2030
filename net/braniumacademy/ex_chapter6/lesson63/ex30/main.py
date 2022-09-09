@@ -90,13 +90,24 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 15:
-                break
+                if len(courses) > 0:
+                    course_id = input('Mã lớp cần sắp xếp: ')
+                    for i in range(len(courses)):
+                        if courses[i].course_id == course_id:
+                            courses[i].transcripts.sort(key=lambda x: -x.gpa)
+                            show_transcripts([courses[i]])
+                            break
+                else:
+                    print('==> Danh sách các lớp học rỗng. <==')
             case 16:
-                break
+                if len(courses) > 0:
+                    listed_student_with_max_gpa(courses)
+                else:
+                    print('==> Danh sách các lớp học rỗng. <==')
             case 17:
                 break
             case 18:
-                break
+                find_student_in_course(courses)
             case 19:
                 break
             case 20:
