@@ -116,7 +116,7 @@ if __name__ == '__main__':
                     print('==> Danh sách các lớp học rỗng. <==')
             case 19:
                 if len(courses) > 0:
-                    stat_student_in_course(subjects, courses)
+                    stat_student_in_course(courses)
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 20:

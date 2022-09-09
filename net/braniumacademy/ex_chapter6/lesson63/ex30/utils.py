@@ -102,8 +102,8 @@ def show_course(courses):
         print('==> Danh sách các lớp học phần: <==')
         print(f'{"Mã lớp":10}{"Tên lớp":20}{"Mã môn":10}{"Tên môn học":30}'
               f'{"Mã GV":10}{"Tên giảng viên":30}{"Phòng học":10}')
-        for c in courses:
-            print(c)
+        for course in courses:
+            print(course)
     else:
         print('==> Danh sách lớp học rỗng. <==')
 
@@ -222,29 +222,29 @@ def fill_transcript_for_courses(courses, students):
 
 def show_transcripts(courses):
     """This method print transcript on screen."""
-    for c in courses:
-        if len(c.transcripts) == 0:  # nếu danh sách sv rỗng -> bỏ qua
+    for course in courses:
+        if len(course.transcripts) == 0:  # nếu danh sách sv rỗng -> bỏ qua
             continue
         print('================================'
               '=====================================')
-        print(f'==> Mã lớp: {c.course_id}')
-        print(f'==> Tên lớp: {c.name}')
-        print(f'==> Phòng học: {c.room}')
-        print(f'==> Môn học: {c.subject.name}')
-        print(f'==> Giảng viên: {c.teacher.full_name}')
-        print(f'==> Số lượng sinh viên: {len(c.transcripts)}')
+        print(f'==> Mã lớp: {course.course_id}')
+        print(f'==> Tên lớp: {course.name}')
+        print(f'==> Phòng học: {course.room}')
+        print(f'==> Môn học: {course.subject.name}')
+        print(f'==> Giảng viên: {course.teacher.full_name}')
+        print(f'==> Số lượng sinh viên: {len(course.transcripts)}')
         print('==> Danh sách bảng điểm của lớp: ')
         print(f'{"Mã BĐ":10}{"Mã SV":10}'
               f'{"Họ tên SV":30}{"Điểm Gpa":10}{"Học lực":15}')
-        for t in c.transcripts:
+        for t in course.transcripts:
             print(t)
 
 
 def find_max_gpa(courses):
     """This method find and return max gpa of students."""
     max_gpa = 0.0
-    for c in courses:
-        for t in c.transcripts:
+    for course in courses:
+        for t in course.transcripts:
             if t.gpa > max_gpa:
                 max_gpa = t.gpa
     return max_gpa
@@ -254,8 +254,8 @@ def listed_student_with_max_gpa(courses):
     """This method find and show on screen student with max gpa."""
     max_gpa = find_max_gpa(courses)
     result = copy.deepcopy(courses)
-    for c in result:
-        c.transcripts.clear()
+    for course in result:
+        course.transcripts.clear()
     for index in range(len(courses)):
         for t in courses[index].transcripts:
             if t.gpa == max_gpa:
@@ -283,9 +283,9 @@ def find_student_in_course(courses):
 def find_max_gpa_by_subject(courses, subject):
     """This method find max gpa of student in courses by subject."""
     max_gpa = 0.0
-    for c in courses:
-        if c.subject == subject:
-            for t in c.transcripts:
+    for course in courses:
+        if course.subject == subject:
+            for t in course.transcripts:
                 if t.gpa > max_gpa:
                     max_gpa = t.gpa
     return max_gpa
@@ -293,8 +293,8 @@ def find_max_gpa_by_subject(courses, subject):
 
 def is_subject_have_couse(courses, subject):
     """This method check wether a given subject has any course or not."""
-    for c in courses:
-        if c.subject == subject:
+    for course in courses:
+        if course.subject == subject:
             return True
     return False
 
@@ -306,9 +306,9 @@ def find_highest_gpa_by_subject(subjects, courses):
             # tìm điểm Gpa lớn nhất của môn học
             max_gpa = find_max_gpa_by_subject(courses, s)
             result = []
-            for c in courses:
-                if c.subject == s and len(c.transcripts) > 0:
-                    for t in c.transcripts:
+            for course in courses:
+                if course.subject == s and len(course.transcripts) > 0:
+                    for t in course.transcripts:
                         if t.gpa == max_gpa:
                             result.append(t.student)
             print(f'==> Mã môn: {s.subject_id}')
@@ -322,9 +322,49 @@ def find_highest_gpa_by_subject(subjects, courses):
                 show_students(result)
 
 
-def stat_student_in_course(subjects, courses):
+def find_course_by_id(courses, course_id):
+    """This method find and return course by id."""
+    if len(courses) == 0:
+        return None
+    index = courses.index(Course(cid=course_id))
+    if index >= 0:
+        return courses[index]
+    else:
+        return None  # if not found
+
+
+def stat_student_in_course(courses):
     """This method statistic number of student in each level from highest to lowest."""
-    pass
+    course_id = input('Mã lớp cần xem thống kê: ')
+    print('============================================')
+    course = find_course_by_id(courses, course_id)
+    my_dict = {
+        "Xuất sắc": 0,
+        "Giỏi": 0,
+        "Khá": 0,
+        "Trung bình": 0,
+        "Yếu": 0
+    }
+    for t in course.transcripts:
+        if t.capacity == "Xuất sắc":
+            my_dict["Xuất sắc"] += 1
+        elif t.capacity == "Giỏi":
+            my_dict["Giỏi"] += 1
+        elif t.capacity == "Khá":
+            my_dict["Khá"] += 1
+        elif t.capacity == "Trung bình":
+            my_dict["Trung bình"] += 1
+        elif t.capacity == "Yếu":
+            my_dict["Yếu"] += 1
+    print(f'Mã lớp học: {course.course_id}')
+    print(f'Tên lớp học: {course.name}')
+    print(f'Môn học: {course.subject.name}')
+    print(f'Phòng học: {course.room}')
+    print(f'Số lượng SV: {len(course.transcripts)}')
+    print('==> Kết quả thống kê: ')
+    print(f'{"Học lực":15}: {"Số lượng":10}')
+    for key, value in my_dict.items():
+        print(f'{key:15}: {value:<10}')
 
 
 def stat_student_by_subjects(subjects, courses):
@@ -333,9 +373,9 @@ def stat_student_by_subjects(subjects, courses):
     for s in subjects:
         num_of_student = 0
         if is_subject_have_couse(courses, s):
-            for c in courses:
-                if c.subject == s and len(c.transcripts) > 0:
-                    for t in c.transcripts:
+            for course in courses:
+                if course.subject == s and len(course.transcripts) > 0:
+                    for t in course.transcripts:
                         if t.gpa >= 3.2:  # find all student with gpa >= 3.2
                             num_of_student += 1
         print(f'==> Mã môn: {s.subject_id}')
