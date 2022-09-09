@@ -279,3 +279,44 @@ def find_student_in_course(courses):
     else:
         print('==> Không tồn tại lớp học cần tìm. <==')
 
+
+def find_max_gpa_by_subject(courses, subject):
+    """This method find max gpa of student in courses by subject."""
+    max_gpa = 0.0
+    for c in courses:
+        if c.subject == subject:
+            for t in c.transcripts:
+                if t.gpa > max_gpa:
+                    max_gpa = t.gpa
+    return max_gpa
+
+
+def is_subject_have_couse(courses, subject):
+    """This method check wether a given subject has any course or not."""
+    for c in courses:
+        if c.subject == subject:
+            return True
+    return False
+
+
+def find_highest_gpa_by_subject(subjects, courses):
+    """This method find and display students have max gpa for each subject on screen."""
+    for s in subjects:
+        if is_subject_have_couse(courses, s):
+            # tìm điểm Gpa lớn nhất của môn học
+            max_gpa = find_max_gpa_by_subject(courses, s)
+            result = []
+            for c in courses:
+                if c.subject == s and len(c.transcripts) > 0:
+                    for t in c.transcripts:
+                        if t.gpa == max_gpa:
+                            result.append(t.student)
+            print(f'==> Mã môn: {s.subject_id}')
+            print(f'==> Tên môn: {s.name}')
+            print(f'==> Số tín: {s.credit}')
+            print(f'==> Điểm cao nhất: {max_gpa}')
+            if len(result) == 0:
+                print('==> Môn học này không có sinh viên nào đăng ký. <==')
+            else:
+                print('==> Danh sac sinh viên có điểm cao nhất: ')
+                show_students(result)

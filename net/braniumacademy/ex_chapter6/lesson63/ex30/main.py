@@ -105,7 +105,7 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 17:
-                break
+                find_highest_gpa_by_subject(subjects, courses)
             case 18:
                 find_student_in_course(courses)
             case 19:
