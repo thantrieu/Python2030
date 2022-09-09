@@ -22,7 +22,7 @@ class Course:
 
     @course_id.setter
     def course_id(self, value):
-        if value == '':
+        if value == '' or value is None:
             self.__couse_id = create_course_id()
         else:
             self.__couse_id = value

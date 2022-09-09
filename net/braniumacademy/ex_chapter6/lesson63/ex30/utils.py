@@ -20,7 +20,7 @@ def create_student():
     major = input('Chuyên ngành: ')
     gpa = float(input('Điểm TB: '))
     full_name = FullName(first, mid, last)
-    return Student(pid, full_name, birth_date, gpa, major)
+    return Student(pid, full_name, birth_date, None, major, gpa)
 
 
 def create_teacher():
@@ -41,7 +41,7 @@ def create_subject():
     """Phương thức nhập thông tin và tạo mới đối tượng môn học."""
     name = input('Tên môn học: ')
     credit = int(input('Số tín chỉ: '))
-    return Subject(name, credit)
+    return Subject(0, name, credit)
 
 
 def show_students(students):
@@ -383,3 +383,91 @@ def stat_student_by_subjects(subjects, courses):
         print(f'==> Số tín: {s.credit}')
         print(f'==> Số sv giỏi và xuất sắc: {num_of_student}')
         print('============================================')
+
+
+def create_new_course(subjects, teachers):
+    """This method create and return a new course."""
+    course_name = input("Tên lớp: ")
+    subject_id = int(input("Mã môn học: "))
+    teacher_id = input('Mã giảng viên: ')
+    subject = find_subject_by_id(subjects, subject_id)
+    teacher = find_teacher_by_id(teachers, teacher_id)
+    if subject is None:
+        print('==> Môn học không tồn tại. <==')
+        return None
+    if teacher is None:
+        print('==> Giảng viên không tồn tại. <==')
+        return None
+    room = input('Tên phòng học: ')
+    return Course(cid='', name=course_name,
+                  subject=subject, teacher=teacher, room=room)
+
+
+def create_new_transcript(courses, students):
+    """This method create and return a transcript."""
+    course_id = input('Mã lớp: ')
+    course = find_course_by_id(courses, course_id)
+    if course is None:
+        print('==> Lớp học không tồn tại. <==')
+        return None
+    student_id = input('Mã sinh viên: ')
+    student = find_student_by_id(students, student_id)
+    if student is None:
+        print('==> Sinh viên không tồn tại. <==')
+        return None
+    tran = Transcript()
+    tran.transcript_id = 0
+    tran.student = student
+    tran.course_id = course_id
+    tran.gpa = float(input('Điểm Gpa hệ 4: '))
+    tran.calculate_capacity()
+    course.transcripts.append(tran)
+
+
+def update_course_auto_id(courses):
+    """This method update auto id of course."""
+    max_id = 0
+    for c in courses:
+        number = int(c.course_id[1:])
+        if number > max_id:
+            max_id = number
+    Course.AUTO_ID = max_id + 1
+
+
+def update_subject_auto_id(subjects):
+    """This method update auto id of subject."""
+    max_id = 0
+    for s in subjects:
+        if s.subject_id > max_id:
+            max_id = s.subject_id
+    Subject.AUTO_ID = max_id + 1
+
+
+def update_transcript_auto_id(courses):
+    """This method update auto id of subject."""
+    max_id = 0
+    for c in courses:
+        for t in c.transcripts:
+            if t.transcript_id > max_id:
+                max_id = t.transcript_id
+    Transcript.AUTO_ID = max_id + 1
+
+
+def update_teacher_auto_id(teachers):
+    """This method update auto id of teacher."""
+    max_id = 0
+    for t in teachers:
+        number = int(t.teacher_id[2:])
+        if number > max_id:
+            max_id = number
+    Teacher.AUTO_ID = max_id + 1
+
+
+def update_student_auto_id(students):
+    """This method update auto id of student."""
+    max_id = 0
+    for s in students:
+        number = int(s.student_id[2:])
+        if number > max_id:
+            max_id = number
+    Student.AUTO_ID = max_id + 1

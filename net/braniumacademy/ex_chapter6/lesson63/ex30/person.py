@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class FullName:
     def __init__(self, first, mid, last):
         self.__first = first
@@ -37,7 +40,7 @@ class FullName:
 
 
 class Person:
-    def __init__(self, pid='', full_name='', dob=''):
+    def __init__(self, pid='', full_name='', dob=None):
         self.person_id = pid
         self.full_name = full_name
         self.birth_date = dob
@@ -79,7 +82,10 @@ class Person:
 
     @birth_date.setter
     def birth_date(self, value):
-        self.__birth_date = value
+        if isinstance(value, datetime):
+            self.__birth_date = value
+        else:
+            self.__birth_date = datetime.strptime(value, '%d/%m/%Y')
 
     @person_id.setter
     def person_id(self, value):

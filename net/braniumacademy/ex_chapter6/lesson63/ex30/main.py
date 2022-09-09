@@ -7,6 +7,13 @@ if __name__ == '__main__':
     courses = read_course_from_file(teachers, subjects)
     fill_transcript_for_courses(courses, students)
 
+    # update auto increment id for classes:
+    update_course_auto_id(courses)
+    update_student_auto_id(students)
+    update_subject_auto_id(subjects)
+    update_teacher_auto_id(teachers)
+    update_transcript_auto_id(courses)
+
     option = '============================== OPTION ==============================\n' \
              '1. Thêm mới sinh viên vào danh sách sinh viên.\n' \
              '2. Thêm mới giảng viên vào danh sách giảng viên.\n' \
@@ -35,17 +42,37 @@ if __name__ == '__main__':
         match choice:
             case 1:
                 new_student = create_student()
-                students.append(new_student)
+                if new_student is None:
+                    print('==> Tạo sinh viên thất bại. <==')
+                else:
+                    students.append(new_student)
+                    print('==> Tạo sinh viên thành công. <==')
             case 2:
                 new_teacher = create_teacher()
-                teachers.append(new_teacher)
+                if new_teacher is None:
+                    print('==> Tạo mới giảng viên thất bại. <==')
+                else:
+                    teachers.append(new_teacher)
+                    print('==> Tạo mới giảng viên thành công. <==')
             case 3:
                 subject = create_subject()
-                subjects.append(subject)
+                if subject is None:
+                    print('==> Tạo mới môn học thất bại. <==')
+                else:
+                    subjects.append(subject)
+                    print('==> Tạo mới môn học thành công. <==')
             case 4:
-                break
+                course = create_new_course(subjects, teachers)
+                if course is None:
+                    print('==> Tạo khóa học thất bại. <==')
+                else:
+                    courses.append(course)
+                    print('==> Tạo khóa học thành công. <==')
             case 5:
-                break
+                if len(courses) > 0:
+                    create_new_transcript(courses, students)
+                else:
+                    print('==> Danh sách các lớp học trống. <==')
             case 6:
                 if len(students) > 0:
                     show_students(students)

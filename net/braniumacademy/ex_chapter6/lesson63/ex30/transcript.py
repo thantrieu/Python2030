@@ -53,6 +53,18 @@ class Transcript:
     def capacity(self, value):
         self.__capacity = value
 
+    def calculate_capacity(self):
+        if 3.6 <= self.gpa <= 4.0:
+            self.capacity = 'Xuất sắc'
+        elif self.gpa >= 3.2:
+            self.capacity = 'Giỏi'
+        elif self.gpa >= 2.6:
+            self.capacity = 'Khá'
+        elif self.gpa >= 2.0:
+            self.capacity = 'Trung bình'
+        else:
+            self.capacity = 'Yếu'
+
     def __str__(self):
         return f'{self.transcript_id:<10}{self.student.student_id:10}' \
                f'{self.student.full_name.__str__():30}{self.gpa:<10}{self.capacity:15}'
