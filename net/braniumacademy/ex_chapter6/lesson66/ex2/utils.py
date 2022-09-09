@@ -1,6 +1,6 @@
 import copy
 import json
-from datetime import datetime
+from decoders import *
 
 from person import FullName
 from student import Student
@@ -109,48 +109,30 @@ def show_course(courses):
         print('==> Danh sách lớp học rỗng. <==')
 
 
-def read_students_from_file():
+def load_students():
     """Phương thức đọc thông tin sv từ file."""
     students = []
-    with open('STUDENT.DAT', encoding='UTF-8') as reader:
-        pid = reader.readline().strip()
-        while pid != '':
-            fname = reader.readline().strip()
-            birth_date = datetime.strptime(reader.readline().strip(), '%d/%m/%Y')
-            student_id = reader.readline().strip()
-            gpa = float(reader.readline().strip())
-            major = reader.readline().strip()
-            students.append(Student(pid, fname, birth_date, student_id, major, gpa))
-            pid = reader.readline().strip()
+    with open('STUDENT.json', encoding='UTF-8') as reader:
+        data = reader.read()
+        students.extend(json.loads(data, object_hook=decode_student))
     return students
 
 
-def read_teachers_from_file():
+def load_teachers():
     """Phương thức đọc thông tin giảng viên từ file."""
     teachers = []
-    with open('LECTURER.DAT', encoding='UTF-8') as reader:
-        tid = reader.readline().strip()
-        while tid != '':
-            fname = reader.readline().strip()
-            birth_date = reader.readline().strip()
-            teacher_id = reader.readline().strip()
-            salary = int(reader.readline().strip())
-            major = reader.readline().strip()
-            teachers.append(Teacher(tid, fname, birth_date, teacher_id, salary, major))
-            tid = reader.readline().strip()
+    with open('LECTURER.json', encoding='UTF-8') as reader:
+        data = reader.read()
+        teachers.extend(json.loads(data, object_hook=decode_teacher))
     return teachers
 
 
-def read_subject_from_file():
+def load_subjects():
     """Phương thức đọc thông tin môn học từ file."""
     subjects = []
-    with open('SUBJECT.DAT', encoding='UTF-8') as reader:
-        subject_id = reader.readline().strip()
-        while subject_id != '':
-            name = reader.readline().strip()
-            credit = int(reader.readline().strip())
-            subjects.append(Subject(int(subject_id), name, credit))
-            subject_id = reader.readline().strip()
+    with open('SUBJECT.json', encoding='UTF-8') as reader:
+        data = reader.read()
+        subjects.extend(json.loads(data, object_hook=decode_subject))
     return subjects
 
 
@@ -170,20 +152,15 @@ def find_subject_by_id(subjects, subject_id):
     return None  # in case result not found
 
 
-def read_course_from_file(teachers, subjects):
+def load_courses(teachers, subjects):
     """Phương thức đọc thông tin lớp học từ file."""
     courses = []
-    with open('COURSE.DAT', encoding='UTF-8') as reader:
-        cid = reader.readline().strip()
-        while cid != '':
-            name = reader.readline().strip()
-            subject_id = int(reader.readline().strip())
-            teacher_id = reader.readline().strip()
-            teacher = find_teacher_by_id(teachers, teacher_id)
-            subject = find_subject_by_id(subjects, subject_id)
-            room = reader.readline().strip()
-            courses.append(Course(cid, name, subject, teacher, room))
-            cid = reader.readline().strip()
+    with open('COURSE.json', encoding='UTF-8') as reader:
+        data = reader.read()
+        courses.extend(json.loads(data, object_hook=decode_course))
+    for c in courses:  # update lại mã giảng viên, môn học thành đối tượng giảng viên, môn học
+        c.subject = find_subject_by_id(subjects, c.subject)
+        c.teacher = find_teacher_by_id(teachers, c.teacher)
     return courses
 
 
@@ -195,26 +172,20 @@ def find_student_by_id(students, student_id):
     return None
 
 
-def read_transcripts_from_file(students):
+def load_transcripts(students):
     """This method read and return transcript data in the file."""
     transcripts = []
-    with open('TRANSCRIPT.DAT', encoding='UTF-8') as reader:
-        tran_id = reader.readline().strip()
-        while tran_id != '':
-            tran = Transcript()
-            tran.transcript_id = int(tran_id)
-            tran.course_id = reader.readline().strip()
-            tran.student = find_student_by_id(students, reader.readline().strip())
-            tran.gpa = float(reader.readline().strip())
-            tran.capacity = reader.readline().strip()
-            transcripts.append(tran)
-            tran_id = reader.readline().strip()
+    with open('TRANSCRIPT.json', encoding='UTF-8') as reader:
+        data = reader.read()
+        transcripts.extend(json.loads(data, object_hook=decode_transcript))
+    for t in transcripts:  # update lại thông tin sinh viên của từng bảng điểm
+        t.student = find_student_by_id(students, t.student)
     return transcripts
 
 
 def fill_transcript_for_courses(courses, students):
     """This method fill transcript """
-    transcripts = read_transcripts_from_file(students)
+    transcripts = load_transcripts(students)
     for i in range(len(courses)):
         for j in range(len(transcripts)):
             if courses[i].course_id == transcripts[j].course_id:

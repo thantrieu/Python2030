@@ -2,10 +2,10 @@ from utils import *
 from encoders import *
 
 if __name__ == '__main__':
-    students = read_students_from_file()
-    teachers = read_teachers_from_file()
-    subjects = read_subject_from_file()
-    courses = read_course_from_file(teachers, subjects)
+    students = load_students()
+    teachers = load_teachers()
+    subjects = load_subjects()
+    courses = load_courses(teachers, subjects)
     fill_transcript_for_courses(courses, students)
 
     # update auto increment id for classes:
