@@ -268,16 +268,21 @@ def find_student_in_course(courses):
     course_id = input('Mã lớp cần tìm: ')
     start_gpa = float(input('Điểm gpa tối thiểu: '))
     end_gpa = float(input('Điểm gpa tối đa: '))
-    course = copy.deepcopy(courses[courses.index(Course(cid=course_id))])
-    if course is not None:
-        result = []
-        for t in course.transcripts:
-            if start_gpa <= t.gpa <= end_gpa:
-                result.append(t)
-        course.transcripts = result
-        show_transcripts([course])
+    index = courses.index(Course(cid=course_id))
+    if index >= 0:
+        target_course = courses[index]
+        course = copy.deepcopy(target_course)
+        if course is not None:
+            result = []
+            for t in course.transcripts:
+                if start_gpa <= t.gpa <= end_gpa:
+                    result.append(t)
+            course.transcripts = result
+            show_transcripts([course])
+        else:
+            print('==> Không tồn tại lớp học cần tìm. <==')
     else:
-        print('==> Không tồn tại lớp học cần tìm. <==')
+        print('==> Mã lớp không đúng! <==')
 
 
 def find_max_gpa_by_subject(courses, subject):
