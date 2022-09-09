@@ -5,6 +5,7 @@ if __name__ == '__main__':
     teachers = read_teachers_from_file()
     subjects = read_subject_from_file()
     courses = read_course_from_file(teachers, subjects)
+    fill_transcript_for_courses(courses, students)
 
     option = '============================== OPTION ==============================\n' \
              '1. Thêm mới sinh viên vào danh sách sinh viên.\n' \
@@ -63,7 +64,7 @@ if __name__ == '__main__':
             case 9:
                 show_course(courses)
             case 10:
-                break
+                show_transcripts(courses)
             case 11:
                 break
             case 12:

@@ -10,8 +10,8 @@ def create_id():
 class Student(Person):
     AUTO_ID = 1000
 
-    def __init__(self, pid='', full_name=None,
-                 dob=None, gpa=0.0, major='', student_id=None):
+    def __init__(self, pid='', full_name=None, dob=None,
+                 student_id=None, major='', gpa=0.0):
         super().__init__(pid, full_name, dob)
         self.student_id = student_id
         self.__gpa = gpa

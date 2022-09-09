@@ -3,6 +3,7 @@ from student import Student
 from subject import Subject
 from teacher import Teacher
 from course import Course
+from transcript import Transcript
 
 
 def create_student():
@@ -113,9 +114,9 @@ def read_students_from_file():
             fname = reader.readline().strip()
             birth_date = reader.readline().strip()
             student_id = reader.readline().strip()
-            gpa = reader.readline().strip()
+            gpa = float(reader.readline().strip())
             major = reader.readline().strip()
-            students.append(Student(pid, fname, birth_date, student_id, gpa, major))
+            students.append(Student(pid, fname, birth_date, student_id, major, gpa))
             pid = reader.readline().strip()
     return students
 
@@ -180,3 +181,54 @@ def read_course_from_file(teachers, subjects):
             courses.append(Course(cid, name, subject, teacher, room))
             cid = reader.readline().strip()
     return courses
+
+
+def find_student_by_id(students, student_id):
+    """This method find and return student by id if exists."""
+    for s in students:
+        if s.student_id == student_id:
+            return s
+    return None
+
+
+def read_transcripts_from_file(students):
+    """This method read and return transcript data in the file."""
+    transcripts = []
+    with open('TRANSCRIPT.DAT', encoding='UTF-8') as reader:
+        tran_id = reader.readline().strip()
+        while tran_id != '':
+            tran = Transcript()
+            tran.transcript_id = int(tran_id)
+            tran.course_id = reader.readline().strip()
+            tran.student = find_student_by_id(students, reader.readline().strip())
+            tran.gpa = float(reader.readline().strip())
+            tran.capacity = reader.readline().strip()
+            transcripts.append(tran)
+            tran_id = reader.readline().strip()
+    return transcripts
+
+
+def fill_transcript_for_courses(courses, students):
+    """This method fill transcript """
+    transcripts = read_transcripts_from_file(students)
+    for i in range(len(courses)):
+        for j in range(len(transcripts)):
+            if courses[i].course_id == transcripts[j].course_id:
+                courses[i].transcripts.append(transcripts[j])
+
+
+def show_transcripts(courses):
+    for c in courses:
+        print('================================'
+              '=====================================')
+        print(f'==> Mã lớp: {c.course_id}')
+        print(f'==> Tên lớp: {c.name}')
+        print(f'==> Phòng học: {c.room}')
+        print(f'==> Môn học: {c.subject.name}')
+        print(f'==> Giảng viên: {c.teacher.full_name}')
+        print(f'==> Số lượng sinh viên: {len(c.transcripts)}')
+        print('==> Danh sách bảng điểm của lớp: ')
+        print(f'{"Mã BĐ":10}{"Mã SV":10}'
+              f'{"Họ tên SV":30}{"Điểm Gpa":10}{"Học lực":15}')
+        for t in c.transcripts:
+            print(t)

@@ -2,8 +2,9 @@ class Transcript:
     """Lớp mô tả thông tin về bảng điểm."""
     AUTO_ID = 100
 
-    def __int__(self, tid=0, student=None, gpa=0.0, capacity=''):
-        self.transcript_id = tid
+    def __int__(self, tran_id=0, course_id='', student=None, gpa=0.0, capacity=''):
+        self.transcript_id = tran_id
+        self.course_id = course_id
         self.student = student
         self.gpa = gpa
         self.capacity = capacity
@@ -19,6 +20,14 @@ class Transcript:
             Transcript.AUTO_ID += 1
         else:
             self.__transcript_id = value
+
+    @property
+    def course_id(self):
+        return self.__course_id
+
+    @course_id.setter
+    def course_id(self, value):
+        self.__course_id = value
 
     @property
     def student(self):
@@ -45,8 +54,8 @@ class Transcript:
         self.__capacity = value
 
     def __str__(self):
-        return f'{self.transcript_id:10}{self.student.student_id:10}' \
-               f'{self.gpa:<10}{self.capacity:15}'
+        return f'{self.transcript_id:<10}{self.student.student_id:10}' \
+               f'{self.student.full_name:30}{self.gpa:<10}{self.capacity:15}'
 
     def __eq__(self, other):
         return self.__transcript_id == other.transcript_id
