@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from person import FullName
 from student import Student
 from subject import Subject
@@ -112,7 +114,7 @@ def read_students_from_file():
         pid = reader.readline().strip()
         while pid != '':
             fname = reader.readline().strip()
-            birth_date = reader.readline().strip()
+            birth_date = datetime.strptime(reader.readline().strip(), '%d/%m/%Y')
             student_id = reader.readline().strip()
             gpa = float(reader.readline().strip())
             major = reader.readline().strip()

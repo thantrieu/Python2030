@@ -66,13 +66,29 @@ if __name__ == '__main__':
             case 10:
                 show_transcripts(courses)
             case 11:
-                break
+                if len(students) > 0:
+                    students.sort(key=lambda x: (x.full_name.first_name, x.full_name.last_name))
+                    show_students(students)
+                else:
+                    print('==> Danh sách sinh viên rỗng. <==')
             case 12:
-                break
+                if len(students) > 0:
+                    students.sort(key=lambda x: x.birth_date)
+                    show_students(students)
+                else:
+                    print('==> Danh sách sinh viên rỗng. <==')
             case 13:
-                break
+                if len(subjects) > 0:
+                    subjects.sort(key=lambda x: x.name)
+                    show_subjects(subjects)
+                else:
+                    print('==> Danh sách môn học viên rỗng. <==')
             case 14:
-                break
+                if len(courses) > 0:
+                    courses.sort(key=lambda x: x.room)
+                    show_course(courses)
+                else:
+                    print('==> Danh sách các lớp học rỗng. <==')
             case 15:
                 break
             case 16:

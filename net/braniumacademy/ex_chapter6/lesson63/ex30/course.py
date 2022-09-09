@@ -70,7 +70,7 @@ class Course:
     def __str__(self):
         return f'{self.course_id:10}{self.name:20}{self.subject.subject_id:<10}' \
                f'{self.subject.name:30}{self.teacher.teacher_id:10}' \
-               f'{self.teacher.full_name:30}{self.room:10}'
+               f'{self.teacher.full_name.full_name:30}{self.room:10}'
 
     def __eq__(self, other):
         return other.course_id == self.course_id
