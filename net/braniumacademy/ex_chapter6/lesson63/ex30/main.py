@@ -105,13 +105,25 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 17:
-                find_highest_gpa_by_subject(subjects, courses)
+                if len(courses) > 0:
+                    find_highest_gpa_by_subject(subjects, courses)
+                else:
+                    print('==> Danh sách các lớp học rỗng. <==')
             case 18:
-                find_student_in_course(courses)
+                if len(courses) > 0:
+                    find_student_in_course(courses)
+                else:
+                    print('==> Danh sách các lớp học rỗng. <==')
             case 19:
-                break
+                if len(courses) > 0:
+                    stat_student_in_course(subjects, courses)
+                else:
+                    print('==> Danh sách các lớp học rỗng. <==')
             case 20:
-                break
+                if len(courses) > 0:
+                    stat_student_by_subjects(subjects, courses)
+                else:
+                    print('==> Danh sách các lớp học rỗng. <==')
             case 21:
                 print("==> Chương trình kết thúc. <==")
                 break

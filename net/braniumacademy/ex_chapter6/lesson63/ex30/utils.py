@@ -320,3 +320,26 @@ def find_highest_gpa_by_subject(subjects, courses):
             else:
                 print('==> Danh sac sinh viên có điểm cao nhất: ')
                 show_students(result)
+
+
+def stat_student_in_course(subjects, courses):
+    """This method statistic number of student in each level from highest to lowest."""
+    pass
+
+
+def stat_student_by_subjects(subjects, courses):
+    """This method statistic number of very good and excillent student in each subject."""
+    print('============================================')
+    for s in subjects:
+        num_of_student = 0
+        if is_subject_have_couse(courses, s):
+            for c in courses:
+                if c.subject == s and len(c.transcripts) > 0:
+                    for t in c.transcripts:
+                        if t.gpa >= 3.2:  # find all student with gpa >= 3.2
+                            num_of_student += 1
+        print(f'==> Mã môn: {s.subject_id}')
+        print(f'==> Tên môn: {s.name}')
+        print(f'==> Số tín: {s.credit}')
+        print(f'==> Số sv giỏi và xuất sắc: {num_of_student}')
+        print('============================================')
