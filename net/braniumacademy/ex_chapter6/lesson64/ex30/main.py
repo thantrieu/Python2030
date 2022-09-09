@@ -166,8 +166,10 @@ if __name__ == '__main__':
                     write_data_to_file(courses, 'COURSE.DAT')
                     print('==> Lưu dữ liệu khóa học ra file thành công. <==')
                 if len(courses) > 0:
+                    transcript_data = []
                     for c in courses:
-                        write_data_to_file(c.transcripts, 'TRANSCRIPT.DAT')
+                        transcript_data.extend(c.transcripts)
+                    write_data_to_file(transcript_data, 'TRANSCRIPT.DAT')
                     print('==> Lưu dữ liệu sinh bảng điểm ra file thành công. <==')
             case 22:
                 print("==> Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy. <==")
