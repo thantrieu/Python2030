@@ -1,0 +1,122 @@
+[
+    {
+        "person_id": "012305999990",
+        "full_name": {
+            "first": "Anh",
+            "mid": "Tuấn",
+            "last": "Trần"
+        },
+        "birth_date": "25/03/2005",
+        "student_id": "SV1000",
+        "gpa": 3.25,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305999993",
+        "full_name": {
+            "first": "Khải",
+            "mid": "Quang",
+            "last": "Ngô"
+        },
+        "birth_date": "15/07/2005",
+        "student_id": "SV1001",
+        "gpa": 3.55,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305999991",
+        "full_name": {
+            "first": "Thúy",
+            "mid": "Thanh",
+            "last": "Nguyễn"
+        },
+        "birth_date": "10/12/2005",
+        "student_id": "SV1002",
+        "gpa": 3.75,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305999992",
+        "full_name": {
+            "first": "Tuấn",
+            "mid": "Công",
+            "last": "Lê"
+        },
+        "birth_date": "16/09/2005",
+        "student_id": "SV1003",
+        "gpa": 3.15,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305999995",
+        "full_name": {
+            "first": "Hoa",
+            "mid": "Thanh",
+            "last": "Nguyễn"
+        },
+        "birth_date": "12/12/2005",
+        "student_id": "SV1004",
+        "gpa": 3.37,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305999997",
+        "full_name": {
+            "first": "Trường",
+            "mid": "Đắc",
+            "last": "Mai"
+        },
+        "birth_date": "23/07/2005",
+        "student_id": "SV1005",
+        "gpa": 3.41,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305999999",
+        "full_name": {
+            "first": "Yến",
+            "mid": "Hải",
+            "last": "Hoàng"
+        },
+        "birth_date": "25/03/2005",
+        "student_id": "SV1006",
+        "gpa": 3.26,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305999998",
+        "full_name": {
+            "first": "Minh",
+            "mid": "Công Nhật",
+            "last": "Lê"
+        },
+        "birth_date": "11/08/2005",
+        "student_id": "SV1007",
+        "gpa": 3.77,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305994990",
+        "full_name": {
+            "first": "Minh",
+            "mid": "Hoài",
+            "last": "Hồ"
+        },
+        "birth_date": "12/07/2006",
+        "student_id": "SV1008",
+        "gpa": 3.55,
+        "major": "CNTT"
+    },
+    {
+        "person_id": "012305959991",
+        "full_name": {
+            "first": "Nhân",
+            "mid": "Đức",
+            "last": "Triệu"
+        },
+        "birth_date": "13/08/2006",
+        "student_id": "SV1009",
+        "gpa": 3.88,
+        "major": "CNTT"
+    }
+]

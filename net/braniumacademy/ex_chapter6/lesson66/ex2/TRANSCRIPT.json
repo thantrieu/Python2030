@@ -1,0 +1,30 @@
+[
+    {
+        "transcript_id": 114,
+        "course_id": "C107",
+        "student_id": "SV1006",
+        "gpa": 3.46,
+        "capacity": "Giỏi"
+    },
+    {
+        "transcript_id": 115,
+        "course_id": "C107",
+        "student_id": "SV1007",
+        "gpa": 3.06,
+        "capacity": "Khá"
+    },
+    {
+        "transcript_id": 116,
+        "course_id": "C107",
+        "student_id": "SV1000",
+        "gpa": 3.26,
+        "capacity": "Giỏi"
+    },
+    {
+        "transcript_id": 117,
+        "course_id": "C107",
+        "student_id": "SV1001",
+        "gpa": 3.34,
+        "capacity": "Giỏi"
+    }
+]
