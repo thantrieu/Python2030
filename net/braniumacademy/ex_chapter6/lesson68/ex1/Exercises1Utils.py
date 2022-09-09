@@ -11,7 +11,7 @@ def parse_xml(file_name):
     """
     tree = et.parse(file_name)
     root = tree.getroot()
-    mstudents = []
+    students = []
     for item in root:
         pid = item[0].text
         first = item[1][0].text
@@ -22,8 +22,8 @@ def parse_xml(file_name):
         gpa = float(item[4].text)
         major = item[5].text
         full_name = FullName(first, mid, last)
-        mstudents.append(Student(pid, full_name, birth_date, gpa, major, student_id))
-    return mstudents
+        students.append(Student(pid, full_name, birth_date, gpa, major, student_id))
+    return students
 
 
 def create_student():
@@ -45,7 +45,7 @@ def load_students():
     file_name = 'student.xml'
     tree = et.parse(file_name)
     root = tree.getroot()
-    mstudents = []
+    students = []
     for item in root:
         pid = item[0].text
         first = item[1][0].text
@@ -56,13 +56,13 @@ def load_students():
         gpa = float(item[4].text)
         major = item[5].text
         full_name = FullName(first, mid, last)
-        mstudents.append(Student(pid, full_name, birth_date, gpa, major, student_id))
-    return mstudents
+        students.append(Student(pid, full_name, birth_date, gpa, major, student_id))
+    return students
 
 
-def create_students_xml_data(mstudents):
+def create_students_xml_data(students):
     root = et.Element('students')
-    for student in mstudents:
+    for student in students:
         new_element = et.SubElement(root, 'student')
         et.SubElement(new_element, 'id').text = student.person_id
         full_name = et.SubElement(new_element, 'full_name')
@@ -92,18 +92,18 @@ def load_subjects():
     file_name = 'subject.xml'
     tree = et.parse(file_name)
     root = tree.getroot()
-    msubjects = []
+    subjects = []
     for item in root:
         subject_id = int(item[0].text)
         subject_name = item[1].text
         credit = int(item[2].text)
-        msubjects.append(Subject(subject_id=subject_id, name=subject_name, credit=credit))
-    return msubjects
+        subjects.append(Subject(subject_id=subject_id, name=subject_name, credit=credit))
+    return subjects
 
 
-def create_subjects_xml_data(msubjects):
+def create_subjects_xml_data(subjects):
     root = et.Element('subjects')
-    for subject in msubjects:
+    for subject in subjects:
         new_element = et.SubElement(root, 'subject')
         et.SubElement(new_element, 'id').text = str(subject.subject_id)
         et.SubElement(new_element, 'name').text = subject.name
@@ -112,16 +112,16 @@ def create_subjects_xml_data(msubjects):
     return str(et.tostring(root, encoding='UTF-8', xml_declaration=True), 'UTF-8')
 
 
-def create_register(mstudents, msubjects):
+def create_register(students, subjects):
     student_id = input('Mã sinh viên: ').upper()
     subject_id = int(input('Mã môn học(số nguyên 4 chữ số): '))
     student = None
     subject = None
-    for e in mstudents:
+    for e in students:
         if e.student_id == student_id:
             student = e
             break
-    for item in msubjects:
+    for item in subjects:
         if item.subject_id == subject_id:
             subject = item
             break
@@ -134,15 +134,15 @@ def create_register(mstudents, msubjects):
     return Register(student=student, subject=subject)
 
 
-def update_register(mregister, mstudents, msubjects):
-    for register in mregister:
+def update_register(register, students, subjects):
+    for register in register:
         student = None
         subject = None
-        for e in mstudents:
+        for e in students:
             if e.student_id == register.student:
                 student = e
                 break
-        for item in msubjects:
+        for item in subjects:
             if item.subject_id == register.subject:
                 subject = item
                 break
@@ -150,39 +150,39 @@ def update_register(mregister, mstudents, msubjects):
         register.subject = subject
 
 
-def find_subject_by_id(msubjects, subject_id):
-    for item in msubjects:
+def find_subject_by_id(subjects, subject_id):
+    for item in subjects:
         if item.subject_id == subject_id:
             return item
     return None
 
 
-def find_student_by_id(mstudents, student_id):
-    for item in mstudents:
+def find_student_by_id(students, student_id):
+    for item in students:
         if item.student_id == student_id:
             return item
     return None
 
 
-def load_registers(mstudents, msubjects):
+def load_registers(students, subjects):
     file_name = 'register.xml'
     tree = et.parse(file_name)
     root = tree.getroot()
-    mregisters = []
+    registers = []
     for item in root:
         register_id = int(item[0].text)
         subject_id = int(item[1].text)
         student_id = item[2].text
         register_time = item[3].text
-        student = find_student_by_id(mstudents, student_id)
-        subject = find_subject_by_id(msubjects, subject_id)
-        mregisters.append(Register(register_id, student, subject, register_time))
-    return mregisters
+        student = find_student_by_id(students, student_id)
+        subject = find_subject_by_id(subjects, subject_id)
+        registers.append(Register(register_id, student, subject, register_time))
+    return registers
 
 
-def create_register_xml_data(mregisters):
+def create_register_xml_data(registers):
     root = et.Element('registers')
-    for register in mregisters:
+    for register in registers:
         new_element = et.SubElement(root, 'register')
         et.SubElement(new_element, 'id').text = str(register.register_id)
         et.SubElement(new_element, 'subject_id').text = str(register.subject.subject_id)
@@ -192,42 +192,42 @@ def create_register_xml_data(mregisters):
     return str(et.tostring(root, encoding='UTF-8', xml_declaration=True), 'UTF-8')
 
 
-def is_register_exist(mregisters, r):
+def is_register_exist(registers, r):
     """Kiểm tra xem bản đăng ký đã tồn tại trước đó chưa."""
-    for item in mregisters:
+    for item in registers:
         if item == r:
             return True
     return False
 
 
-def show_students(mstudents):
+def show_students(students):
     print('==> Danh sách sinh viên:')
     print(f'{"CMND/CC":15}{"Họ và tên":25}{"Ngày sinh":12}'
           f'{"Mã SV":10}{"Điểm TB":10}{"C.Ngành":15}')
-    for e in mstudents:
+    for e in students:
         print(e)
 
 
-def show_subjects(msubjects):
+def show_subjects(subjects):
     print('==> Danh sách môn học:')
     print(f'{"Mã môn":10}{"Tên môn":35}{"Số tín":<10}')
-    for s in msubjects:
+    for s in subjects:
         print(s)
 
 
-def show_registers(mregisters):
+def show_registers(registers):
     print('==> Danh sách đăng ký:')
     print(f'{"Mã ĐK":10}{"Mã SV":10}{"Tên SV":25}'
           f'{"Mã Môn":<10}{"Tên Môn":30}{"Thời Gian ĐK":25}')
-    for r in mregisters:
+    for r in registers:
         print(r)
 
 
-def find_registed_subject(mregisters):
-    sort_registers(mregisters)
+def find_registed_subject(registers):
+    sort_registers(registers)
     student_id = input('Nhập mã sinh viên: ').upper()
     local_result = []
-    for r in mregisters:
+    for r in registers:
         if r.student.student_id == student_id:
             local_result.append(r.subject)
     if len(local_result) > 0:
@@ -237,17 +237,17 @@ def find_registed_subject(mregisters):
         print(f'==> Sinh viên mã {student_id} không đăng ký môn học nào.')
 
 
-def sort_registers(mregisters):
-    mregisters.sort(key=lambda x: (x.register_time.year, x.register_time.month,
+def sort_registers(registers):
+    registers.sort(key=lambda x: (x.register_time.year, x.register_time.month,
                                    x.register_time.day, x.register_time.hour,
                                    x.register_time.minute, x.register_time.second)
                     )
 
 
-def find_student_by_subject(mregisters):
+def find_student_by_subject(registers):
     subject_id = int(input('Nhập mã môn học(số nguyên 4 chữ số): '))
     local_result = []
-    for r in mregisters:
+    for r in registers:
         if r.subject.subject_id == subject_id:
             local_result.append(r.student)
     if len(local_result) > 0:
@@ -263,52 +263,52 @@ def get_list_item(data, key):
     return None
 
 
-def print_statistic(order_dct, msubjects):
+def print_statistic(order_dct, subjects):
     print(f'{"Tên môn":35}{"Số SV ĐK":12}')
     for item in order_dct.keys():
-        subject = get_list_item(msubjects, item)
+        subject = get_list_item(subjects, item)
         print(f'{subject.name:35}{order_dct[item]:<12}')
 
 
-def statistics_by_subject(mregisters, msubjects):
+def statistics_by_subject(registers, subjects):
     subject_dct = {}
-    for r in mregisters:
+    for r in registers:
         if r.subject.subject_id not in subject_dct:
             subject_dct[r.subject.subject_id] = 1
         else:
             subject_dct[r.subject.subject_id] += 1
     order_dct = OrderedDict(sorted(subject_dct.items(), key=itemgetter(1), reverse=True))
-    print_statistic(order_dct, msubjects)
+    print_statistic(order_dct, subjects)
 
 
-def earliest_register(mregisters):
+def earliest_register(registers):
     local_result = []
-    for r in mregisters:
-        if r.register_time == mregisters[0].register_time:
+    for r in registers:
+        if r.register_time == registers[0].register_time:
             local_result.append(r)
     print('==> Bản đăng ký sớm nhất: ')
     show_registers(local_result)
 
 
-def latest_register(mregisters):
+def latest_register(registers):
     local_result = []
-    size = len(mregisters)
-    for r in mregisters:
-        if r.register_time == mregisters[size - 1].register_time:
+    size = len(registers)
+    for r in registers:
+        if r.register_time == registers[size - 1].register_time:
             local_result.append(r)
     print('==> Bản đăng ký muộn nhất: ')
     show_registers(local_result)
 
 
-def remove_register(mregisters):
+def remove_register(registers):
     student_id = input('Nhập mã sinh viên: ').upper()
     subject_id = int(input('Nhập mã môn học: '))
     index = 0
     is_success = False
-    for item in mregisters:
+    for item in registers:
         if student_id == item.student.student_id and \
                 subject_id == item.subject.subject_id:
-            mregisters.pop(index)
+            registers.pop(index)
             is_success = True
             break
         index += 1

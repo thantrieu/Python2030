@@ -30,22 +30,29 @@ if __name__ == '__main__':
                 new_student = utils.create_student()
                 if new_student is not None:
                     students.append(new_student)
+                    print('==> Tạo mới sinh viên thành công. <==')
                 else:
-                    print('==> Tạo sinh viên thất bại <==')
+                    print('==> Tạo mới sinh viên thất bại <==')
             case 2:
                 new_subject = utils.create_subject()
-                subjects.append(new_subject)
+                if new_subject is not None:
+                    subjects.append(new_subject)
+                    print('==> Tạo mới môn học thành công. <==')
+                else:
+                    print('==> Tạo mới môn học thất bại <==')
+
             case 3:
                 new_register = utils.create_register(students, subjects)
                 if new_register is not None:
                     if not utils.is_register_exist(registers, new_register):
                         registers.append(new_register)
+                        print('==> Tạo mới bảng đăng ký thành công. <==')
                     else:
                         print(f'==> Sinh viên mã '
                               f'{new_register.student.student_id} '
                               f'đã đăng ký môn học này.')
                 else:
-                    print('==> Tạo bản đăng ký thất bại.')
+                    print('==> Tạo mới bản đăng ký thất bại.')
             case 4:
                 if len(students) > 0:
                     students.sort(key=lambda x: (x.full_name.first_name, x.full_name.last_name))
@@ -127,22 +134,25 @@ if __name__ == '__main__':
                     students_data = utils.create_students_xml_data(students)
                     student_file_name = 'student.xml'
                     utils.update_xml_file(students_data, student_file_name)
+                    print('==> Lưu dữ liệu sinh viên ra file thành công. <==')
                 else:
                     print('==> Danh sách sinh viên rỗng <==')
                 if len(subjects) > 0:
                     subjects_data = utils.create_subjects_xml_data(subjects)
                     subject_file_name = 'subject.xml'
                     utils.update_xml_file(subjects_data, subject_file_name)
+                    print('==> Lưu dữ liệu môn học ra file thành công. <==')
                 else:
-                    print('==> Danh sách môn học rỗng <name==')
+                    print('==> Danh sách môn học rỗng <==')
                 if len(registers) > 0:
                     register_data = utils.create_register_xml_data(registers)
                     register_file_name = 'register.xml'
                     utils.update_xml_file(register_data, register_file_name)
+                    print('==> Lưu dữ liệu bảng đăng ký ra file thành công. <==')
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
             case 17:
-                print('==> Chương trình kết thúc <==')
+                print('==> Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy! <==')
                 break
             case _:
-                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-17. <==')
+                print('==> Lựa chọn không hợp lệ. Vui lòng nhập giá trị số từ 1-17. <==')
