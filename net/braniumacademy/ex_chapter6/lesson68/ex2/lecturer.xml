@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<teachers>
+	<teacher>
+		<person_id>012305999890</person_id>
+		<full_name>
+			<first>Anh</first>
+			<mid>Tuấn</mid>
+			<last>Trần</last>
+		</full_name>
+		<birth_date>25/03/1990</birth_date>
+		<teacher_id>GV1001</teacher_id>
+		<salary>15600</salary>
+		<expertise>Lập trình Java</expertise>
+	</teacher>
+	<teacher>
+		<person_id>012305999891</person_id>
+		<full_name>
+			<first>Khải</first>
+			<mid>Quang</mid>
+			<last>Ngô</last>
+		</full_name>
+		<birth_date>15/07/1991</birth_date>
+		<teacher_id>GV1002</teacher_id>
+		<salary>17800</salary>
+		<expertise>Lập trình Android</expertise>
+	</teacher>
+	<teacher>
+		<person_id>012305999892</person_id>
+		<full_name>
+			<first>Công</first>
+			<mid>Thành</mid>
+			<last>Lê</last>
+		</full_name>
+		<birth_date>20/04/1992</birth_date>
+		<teacher_id>GV1003</teacher_id>
+		<salary>19500</salary>
+		<expertise>Lập trình NodeJS</expertise>
+	</teacher>
+	<teacher>
+		<person_id>012305999893</person_id>
+		<full_name>
+			<first>Duyên</first>
+			<mid>Thị</mid>
+			<last>Lưu</last>
+		</full_name>
+		<birth_date>30/07/1993</birth_date>
+		<teacher_id>GV1004</teacher_id>
+		<salary>17800</salary>
+		<expertise>Lập trình ASP.NET</expertise>
+	</teacher>
+	<teacher>
+		<person_id>012305999894</person_id>
+		<full_name>
+			<first>Hà</first>
+			<mid>Thị Hồng</mid>
+			<last>Đào</last>
+		</full_name>
+		<birth_date>16/03/1995</birth_date>
+		<teacher_id>GV1005</teacher_id>
+		<salary>19600</salary>
+		<expertise>Lập trình C++</expertise>
+	</teacher>
+	<teacher>
+		<person_id>012305999896</person_id>
+		<full_name>
+			<first>Cường</first>
+			<mid>Đức</mid>
+			<last>Trần</last>
+		</full_name>
+		<birth_date>25/07/1996</birth_date>
+		<teacher_id>GV1006</teacher_id>
+		<salary>14500</salary>
+		<expertise>Lập trình C#</expertise>
+	</teacher>
+	<teacher>
+		<person_id>012305999895</person_id>
+		<full_name>
+			<first>Nam</first>
+			<mid>Đình</mid>
+			<last>Lương</last>
+		</full_name>
+		<birth_date>10/08/1994</birth_date>
+		<teacher_id>GV1007</teacher_id>
+		<salary>16660</salary>
+		<expertise>Lập trình nhúng</expertise>
+	</teacher>
+</teachers>

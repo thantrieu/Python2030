@@ -171,7 +171,7 @@ if __name__ == '__main__':
                     for c in courses:
                         transcript_data.extend(c.transcripts)
                     write_data_to_file(transcript_data, TranscriptEncoder, 'TRANSCRIPT.json')
-                    print('==> Lưu dữ liệu sinh bảng điểm ra file thành công. <==')
+                    print('==> Lưu dữ liệu bảng điểm ra file thành công. <==')
             case 22:
                 print("==> Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy. <==")
                 break

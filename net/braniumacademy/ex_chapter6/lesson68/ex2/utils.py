@@ -452,7 +452,7 @@ def update_student_auto_id(students):
 
 
 def create_students_xml_data(students):
-    """This method create and return elements tree data for students"""
+    """This method create and return elements tree data for students."""
     root = et.Element('students')
     for student in students:
         new_element = et.SubElement(root, 'student')
@@ -470,12 +470,59 @@ def create_students_xml_data(students):
 
 
 def create_subjects_xml_data(subjects):
+    """This method create and return elements tree data for subjects."""
     root = et.Element('subjects')
     for subject in subjects:
         new_element = et.SubElement(root, 'subject')
         et.SubElement(new_element, 'subject_id').text = str(subject.subject_id)
         et.SubElement(new_element, 'subject_name').text = subject.name
         et.SubElement(new_element, 'credit').text = str(subject.credit)
+    et.indent(root, space='\t')
+    return str(et.tostring(root, encoding='UTF-8', xml_declaration=True), 'UTF-8')
+
+
+def create_teachers_xml_data(teachers):
+    """This method create and return elements tree data for students."""
+    root = et.Element('teachers')
+    for teacher in teachers:
+        new_element = et.SubElement(root, 'teacher')
+        et.SubElement(new_element, 'person_id').text = teacher.person_id
+        full_name = et.SubElement(new_element, 'full_name')
+        et.SubElement(full_name, 'first').text = teacher.full_name.first_name
+        et.SubElement(full_name, 'mid').text = teacher.full_name.mid_name
+        et.SubElement(full_name, 'last').text = teacher.full_name.last_name
+        et.SubElement(new_element, 'birth_date').text = teacher.birth_date.strftime('%d/%m/%Y')
+        et.SubElement(new_element, 'teacher_id').text = teacher.teacher_id
+        et.SubElement(new_element, 'salary').text = str(teacher.salary)
+        et.SubElement(new_element, 'expertise').text = teacher.expertise
+    et.indent(root, space='\t')
+    return str(et.tostring(root, encoding='UTF-8', xml_declaration=True), 'UTF-8')
+
+
+def create_course_xml_data(courses):
+    """This method create and return elements tree data for students."""
+    root = et.Element('courses')
+    for course in courses:
+        new_element = et.SubElement(root, 'course')
+        et.SubElement(new_element, 'course_id').text = course.course_id
+        et.SubElement(new_element, 'name').text = course.name
+        et.SubElement(new_element, 'subject_id').text = str(course.subject.subject_id)
+        et.SubElement(new_element, 'teacher_id').text = course.teacher.teacher_id
+        et.SubElement(new_element, 'room').text = course.room
+    et.indent(root, space='\t')
+    return str(et.tostring(root, encoding='UTF-8', xml_declaration=True), 'UTF-8')
+
+
+def create_transcript_xml_data(transcripts):
+    """This method create and return elements tree data for students."""
+    root = et.Element('transcripts')
+    for tran in transcripts:
+        new_element = et.SubElement(root, 'transcript')
+        et.SubElement(new_element, 'transcript_id').text = str(tran.transcript_id)
+        et.SubElement(new_element, 'course_id').text = tran.course_id
+        et.SubElement(new_element, 'student_id').text = tran.student.student_id
+        et.SubElement(new_element, 'gpa').text = str(tran.gpa)
+        et.SubElement(new_element, 'capacity').text = tran.capacity
     et.indent(root, space='\t')
     return str(et.tostring(root, encoding='UTF-8', xml_declaration=True), 'UTF-8')
 

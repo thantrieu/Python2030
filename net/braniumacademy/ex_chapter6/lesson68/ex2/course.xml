@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<courses>
+	<course>
+		<course_id>C100</course_id>
+		<name>Java 1</name>
+		<subject_id>1000</subject_id>
+		<teacher_id>GV1001</teacher_id>
+		<room>A2-101</room>
+	</course>
+	<course>
+		<course_id>C101</course_id>
+		<name>Java 1</name>
+		<subject_id>1000</subject_id>
+		<teacher_id>GV1001</teacher_id>
+		<room>A2-102</room>
+	</course>
+	<course>
+		<course_id>C102</course_id>
+		<name>Java 1</name>
+		<subject_id>1000</subject_id>
+		<teacher_id>GV1001</teacher_id>
+		<room>A2-104</room>
+	</course>
+	<course>
+		<course_id>C103</course_id>
+		<name>Java 2</name>
+		<subject_id>1000</subject_id>
+		<teacher_id>GV1002</teacher_id>
+		<room>A2-101</room>
+	</course>
+	<course>
+		<course_id>C104</course_id>
+		<name>Java 2</name>
+		<subject_id>1000</subject_id>
+		<teacher_id>GV1002</teacher_id>
+		<room>A2-102</room>
+	</course>
+	<course>
+		<course_id>C105</course_id>
+		<name>Java 2</name>
+		<subject_id>1000</subject_id>
+		<teacher_id>GV1002</teacher_id>
+		<room>A2-104</room>
+	</course>
+	<course>
+		<course_id>C106</course_id>
+		<name>C++ 1</name>
+		<subject_id>1002</subject_id>
+		<teacher_id>GV1005</teacher_id>
+		<room>A2-105</room>
+	</course>
+	<course>
+		<course_id>C107</course_id>
+		<name>C++ 2</name>
+		<subject_id>1002</subject_id>
+		<teacher_id>GV1005</teacher_id>
+		<room>A2-105</room>
+	</course>
+</courses>

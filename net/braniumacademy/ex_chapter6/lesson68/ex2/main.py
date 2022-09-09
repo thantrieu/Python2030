@@ -166,10 +166,31 @@ if __name__ == '__main__':
                     update_xml_file(subjects_data, subject_file_name)
                     print('==> Lưu dữ liệu môn học ra file thành công. <==')
                 else:
-                    print('==> Danh sách môn học rỗng <name==')
-
-                # print('==> Lưu dữ liệu giảng viên ra file thành công. <==')
-                # print('==> Lưu dữ liệu sinh bảng điểm ra file thành công. <==')
+                    print('==> Danh sách môn học rỗng <==')
+                if len(teachers) > 0:
+                    teacher_data = create_teachers_xml_data(teachers)
+                    file_name = 'lecturer.xml'
+                    update_xml_file(teacher_data, file_name)
+                    print('==> Lưu dữ liệu giảng viên ra file thành công. <==')
+                else:
+                    print('==> Danh sách giảng viên trống. <==')
+                if len(courses) > 0:
+                    course_data = create_course_xml_data(courses)
+                    file_name = 'course.xml'
+                    update_xml_file(course_data, file_name)
+                    print('==> Lưu dữ liệu các lớp học ra file thành công. <==')
+                else:
+                    print('==> Danh sách các lớp học trống. <==')
+                if len(courses) > 0:
+                    transcripts = []
+                    for c in courses:
+                        transcripts.extend(c.transcripts)
+                    course_data = create_transcript_xml_data(transcripts)
+                    file_name = 'transcript.xml'
+                    update_xml_file(course_data, file_name)
+                    print('==> Lưu dữ liệu sinh bảng điểm ra file thành công. <==')
+                else:
+                    print('==> Danh sách các lớp học trống. <==')
             case 22:
                 print("==> Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy. <==")
                 break
