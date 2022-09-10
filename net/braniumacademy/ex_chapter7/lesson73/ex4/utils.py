@@ -5,14 +5,26 @@ from student import Student
 
 def create_student():
     student_id = input('Mã sinh viên: ')
-    if not is_student_id_valid(student_id):
-        raise ValueError('Mã sinh viên không hợp lệ')
+    try:
+        if is_student_id_valid(student_id):
+            print('==> Mã học sinh hợp lệ!')
+    except ValueError as e:
+        print(e)
+        student_id = None
     full_name = input('Họ và tên: ')
-    if not is_name_valid(full_name):
-        raise ValueError('Họ và tên không hợp lệ')
+    try:
+        if is_name_valid(full_name):
+            print('==> Họ và tên hợp lệ')
+    except ValueError as e:
+        print(e)
+        full_name = None
     age_str = input("Tuổi: ")
-    if not is_age_valid(age_str):
-        raise ValueError('Tuổi không hợp lệ')
+    try:
+        if is_age_valid(age_str):
+            print('==> Tuổi hợp lệ')
+    except ValueError as e:
+        print(e)
+        age_str = '0'
     age = int(age_str)
     math_str = input('Điểm toán(hệ 10): ')
     physic_str = input('Điểm lý(hệ 10): ')
@@ -44,7 +56,7 @@ def is_age_valid(age_str):
     """
     for c in age_str:
         if c < '0' or c > '9':
-            return False
+            raise ValueError(f'Tuổi không hợp lệ: {age_str}')
     return True
 
 
@@ -54,10 +66,10 @@ def is_name_valid(name):
         Giả định họ tên hợp lệ chỉ chứa kí tự chữ cái và khoảng trắng.
     """
     if len(name.strip()) == 0:  # nếu chuỗi rỗng -> tên k hợp lệ
-        return False
+        raise ValueError(f'Họ và tên không hợp lệ: {name}')
     for c in name.lower():
         if not c.isalpha() and c != ' ':
-            return False
+            raise ValueError(f'Họ và tên không hợp lệ: {name}')
     return True
 
 
@@ -66,9 +78,9 @@ def is_student_id_valid(student_id):
         Phương thức kiểm tra xem mã sinh viên có hợp lệ không.
         Mã hợp lệ chỉ chứa chữ cái và số.
     """
-    for c in student_id.lower():
-        if c < '0' or c > '9' and ('a' > c or c > 'z'):
-            return False
+    if not student_id.isalnum():
+        raise ValueError(f'Mã học sinh không hợp lệ: {student_id}. '
+                         f'Ví dụ mã hợp lệ: HS1030')
     return True
 
 
