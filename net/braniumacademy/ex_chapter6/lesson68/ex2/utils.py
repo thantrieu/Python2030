@@ -1,6 +1,4 @@
 import copy
-import json
-from decoders import *
 
 from person import FullName
 from student import Student
@@ -113,27 +111,53 @@ def show_course(courses):
 def load_students():
     """Phương thức đọc thông tin sv từ file."""
     students = []
-    with open('STUDENT.json', encoding='UTF-8') as reader:
-        data = reader.read()
-        students.extend(json.loads(data, object_hook=decode_student))
+    tree = et.parse('student.xml')
+    root = tree.getroot()
+    for item in root:
+        pid = item[0].text
+        first = item[1][0].text
+        mid = item[1][1].text
+        last = item[1][2].text
+        birth_date = item[2].text
+        student_id = item[3].text
+        gpa = float(item[4].text)
+        major = item[5].text
+        full_name = FullName(first, mid, last)
+        student = Student(pid, full_name, birth_date, student_id, major, gpa)
+        students.append(student)
     return students
 
 
 def load_teachers():
     """Phương thức đọc thông tin giảng viên từ file."""
     teachers = []
-    with open('LECTURER.json', encoding='UTF-8') as reader:
-        data = reader.read()
-        teachers.extend(json.loads(data, object_hook=decode_teacher))
+    tree = et.parse('lecturer.xml')
+    root = tree.getroot()
+    for item in root:
+        pid = item[0].text
+        first = item[1][0].text
+        mid = item[1][1].text
+        last = item[1][2].text
+        birth_date = item[2].text
+        teacher_id = item[3].text
+        salary = int(item[4].text)
+        expertise = item[5].text
+        full_name = FullName(first, mid, last)
+        teacher = Teacher(pid, full_name, birth_date, teacher_id, salary, expertise)
+        teachers.append(teacher)
     return teachers
 
 
 def load_subjects():
     """Phương thức đọc thông tin môn học từ file."""
     subjects = []
-    with open('SUBJECT.json', encoding='UTF-8') as reader:
-        data = reader.read()
-        subjects.extend(json.loads(data, object_hook=decode_subject))
+    tree = et.parse('subject.xml')
+    root = tree.getroot()
+    for item in root:
+        subject_id = int(item[0].text)
+        subject_name = item[1].text
+        credit = int(item[2].text)
+        subjects.append(Subject(subject_id, subject_name, credit))
     return subjects
 
 
@@ -156,9 +180,16 @@ def find_subject_by_id(subjects, subject_id):
 def load_courses(teachers, subjects):
     """Phương thức đọc thông tin lớp học từ file."""
     courses = []
-    with open('COURSE.json', encoding='UTF-8') as reader:
-        data = reader.read()
-        courses.extend(json.loads(data, object_hook=decode_course))
+    tree = et.parse('course.xml')
+    root = tree.getroot()
+    for item in root:
+        course_id = item[0].text
+        course_name = item[1].text
+        subject_id = int(item[2].text)
+        teacher_id = item[3].text
+        room = item[4].text
+        course = Course(course_id, course_name, subject_id, teacher_id, room)
+        courses.append(course)
     for c in courses:  # update lại mã giảng viên, môn học thành đối tượng giảng viên, môn học
         c.subject = find_subject_by_id(subjects, c.subject)
         c.teacher = find_teacher_by_id(teachers, c.teacher)
@@ -176,9 +207,16 @@ def find_student_by_id(students, student_id):
 def load_transcripts(students):
     """This method read and return transcript data in the file."""
     transcripts = []
-    with open('TRANSCRIPT.json', encoding='UTF-8') as reader:
-        data = reader.read()
-        transcripts.extend(json.loads(data, object_hook=decode_transcript))
+    tree = et.parse('transcript.xml')
+    root = tree.getroot()
+    for item in root:
+        tran = Transcript()
+        tran.transcript_id = int(item[0].text)
+        tran.course_id = item[1].text
+        tran.student = item[2].text
+        tran.gpa = float(item[3].text)
+        tran.capacity = item[4].text
+        transcripts.append(tran)
     for t in transcripts:  # update lại thông tin sinh viên của từng bảng điểm
         t.student = find_student_by_id(students, t.student)
     return transcripts

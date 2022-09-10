@@ -78,6 +78,48 @@
 		<capacity>Giỏi</capacity>
 	</transcript>
 	<transcript>
+		<transcript_id>118</transcript_id>
+		<course_id>C102</course_id>
+		<student_id>SV1000</student_id>
+		<gpa>3.38</gpa>
+		<capacity>Giỏi</capacity>
+	</transcript>
+	<transcript>
+		<transcript_id>119</transcript_id>
+		<course_id>C102</course_id>
+		<student_id>SV1005</student_id>
+		<gpa>3.16</gpa>
+		<capacity>Khá</capacity>
+	</transcript>
+	<transcript>
+		<transcript_id>120</transcript_id>
+		<course_id>C102</course_id>
+		<student_id>SV1001</student_id>
+		<gpa>3.65</gpa>
+		<capacity>Xuất sắc</capacity>
+	</transcript>
+	<transcript>
+		<transcript_id>121</transcript_id>
+		<course_id>C102</course_id>
+		<student_id>SV1003</student_id>
+		<gpa>3.12</gpa>
+		<capacity>Khá</capacity>
+	</transcript>
+	<transcript>
+		<transcript_id>122</transcript_id>
+		<course_id>C102</course_id>
+		<student_id>SV1004</student_id>
+		<gpa>3.44</gpa>
+		<capacity>Giỏi</capacity>
+	</transcript>
+	<transcript>
+		<transcript_id>123</transcript_id>
+		<course_id>C102</course_id>
+		<student_id>SV1002</student_id>
+		<gpa>3.68</gpa>
+		<capacity>Xuất sắc</capacity>
+	</transcript>
+	<transcript>
 		<transcript_id>111</transcript_id>
 		<course_id>C106</course_id>
 		<student_id>SV1003</student_id>
