@@ -1,46 +1,61 @@
 import copy
 from datetime import datetime
 
-from person import FullName
 from student import Student
 from subject import Subject
 from teacher import Teacher
 from course import Course
 from transcript import Transcript
+from filters import *
 
 
 def create_student():
     """Phương thức nhập và tạo mới đối tượng sinh viên."""
     print('============ Nhập thông tin sinh viên ============')
     pid = input('Số CMND/CCCD: ')
-    last = input('Họ: ')
-    mid = input('Đệm: ')
-    first = input('Tên: ')
+    full_name = input('Họ tên đầy đủ: ')
+    if not is_name_valid(full_name):
+        raise ValueError(f'Họ tên không hợp lệ: {full_name}.'
+                         f'Họ tên chỉ được chứa chữ cái và khoảng trắng.')
     birth_date = input('Ngày sinh: ')
+    if not is_birth_date_valid(birth_date):
+        raise ValueError(f'Ngày sinh không đúng định dạng: {birth_date}. '
+                         f'Định dạng đúng: 15/10/2000.')
     major = input('Chuyên ngành: ')
-    gpa = float(input('Điểm TB: '))
-    full_name = FullName(first, mid, last)
-    return Student(pid, full_name, birth_date, None, major, gpa)
+    gpa = input('Điểm TB: ')
+    if not is_gpa_valid(gpa):
+        raise ValueError(f'Điểm gpa không hợp lệ: {gpa}. '
+                         f'Điểm gpa hợp lệ trong khoảng [0.0, 4.0]')
+    return Student(pid, full_name, birth_date, None, major, float(gpa))
 
 
 def create_teacher():
     """Phương thức nhập thông tin và tạo mới đối tượng giảng viên."""
     print('============ Nhập thông tin giảng viên ============')
     pid = input('Số CMND/CCCD: ')
-    last = input('Họ: ')
-    mid = input('Đệm: ')
-    first = input('Tên: ')
+    full_name = input('Họ tên đầy đủ: ')
+    if not is_name_valid(full_name):
+        raise ValueError(f'Họ tên không hợp lệ: {full_name}. '
+                         f'Họ tên chỉ được chứa chữ cái và khoảng trắng.')
     birth_date = input('Ngày sinh: ')
+    if not is_birth_date_valid(birth_date):
+        raise ValueError(f'Ngày sinh không đúng định dạng: {birth_date}. '
+                         f'Định dạng đúng: 15/10/2000.')
     expertise = input('Chuyên môn: ')
-    salary = float(input('Mức lương: '))
-    full_name = FullName(first, mid, last)
-    return Teacher(pid, full_name, birth_date, None, salary, expertise)
+    salary = input('Mức lương: ')
+    if not is_salary_valid(salary):
+        raise ValueError(f'Mức lương không hợp lệ: {salary}. '
+                         f'Lương phải là số nguyên.')
+    return Teacher(pid, full_name, birth_date, None, int(salary), expertise)
 
 
 def create_subject():
     """Phương thức nhập thông tin và tạo mới đối tượng môn học."""
     name = input('Tên môn học: ')
-    credit = int(input('Số tín chỉ: '))
+    credit = input('Số tín chỉ: ')
+    if not is_credit_valid(credit):
+        raise ValueError(f'Số tín chỉ không hợp lệ: {credit}. '
+                         f'Giá trị hợp lệ từ 1-15.')
     return Subject(0, name, credit)
 
 
@@ -73,7 +88,7 @@ def show_subjects(subjects):
 def find_teacher(teachers, teacher_id):
     """Phương thức tìm giảng viên trong danh sách giảng viên cho trước."""
     for e in teachers:
-        if e.teacher_id == teacher_id:
+        if e.teacher_id.lower() == teacher_id.lower():
             return e
     return None
 
@@ -84,16 +99,6 @@ def find_subject(subjects, subject_id):
         if e.subject_id == subject_id:
             return e
     return None
-
-
-def create_course(subjects, mteachers):
-    """Phương thức tạo mới một lớp học phần."""
-    teacher_id = input('Mã giảng viên: ')
-    target_teacher = find_teacher(mteachers, teacher_id)
-    subject_id = input('Mã môn học: ')
-    target_subject = find_subject(subjects, subject_id)
-    room = input('Phòng học: ')
-    return Course('', target_subject, target_teacher, room)
 
 
 def show_course(courses):
@@ -156,7 +161,7 @@ def read_subject_from_file():
 def find_teacher_by_id(teachers, teacher_id):
     """This method find and return teacher by id if exists."""
     for t in teachers:
-        if t.teacher_id == teacher_id:
+        if t.teacher_id.lower() == teacher_id.lower():
             return t
     return None  # in case result not found
 
@@ -189,7 +194,7 @@ def read_course_from_file(teachers, subjects):
 def find_student_by_id(students, student_id):
     """This method find and return student by id if exists."""
     for s in students:
-        if s.student_id == student_id:
+        if s.student_id.lower() == student_id.lower():
             return s
     return None
 
@@ -266,9 +271,18 @@ def listed_student_with_max_gpa(courses):
 def find_student_in_course(courses):
     """This method find and display student with given gpa on screen."""
     course_id = input('Mã lớp cần tìm: ')
+    if not is_course_id_valid(course_id):
+        raise ValueError(f'Mã lớp không đúng: {course_id}. '
+                         f'Ví dụ mã lớp hợp lệ: C105.')
     start_gpa = float(input('Điểm gpa tối thiểu: '))
+    if not is_gpa_valid(f'{start_gpa}'):
+        raise ValueError(f'Điểm gpa không đúng: {start_gpa}. '
+                         f'Ví dụ điểm gpa hợp lệ: 3.26.')
     end_gpa = float(input('Điểm gpa tối đa: '))
-    index = courses.index(Course(cid=course_id))
+    if not is_gpa_valid(f'{end_gpa}'):
+        raise ValueError(f'Điểm gpa không đúng: {end_gpa}. '
+                         f'Ví dụ điểm gpa hợp lệ: 3.26.')
+    index = courses.index(Course(cid=course_id.upper()))
     if index >= 0:
         target_course = courses[index]
         course = copy.deepcopy(target_course)
@@ -327,11 +341,23 @@ def find_highest_gpa_by_subject(subjects, courses):
                 show_students(result)
 
 
+def sort_course(courses):
+    course_id = input('Mã lớp cần sắp xếp: ')
+    if not is_course_id_valid(course_id):
+        raise ValueError(f'Mã lớp không đúng: {course_id}. '
+                         f'Ví dụ mã lớp hợp lệ: C105.')
+    for i in range(len(courses)):
+        if courses[i].course_id == course_id.upper():
+            courses[i].transcripts.sort(key=lambda x: -x.gpa)
+            show_transcripts([courses[i]])
+            break
+
+
 def find_course_by_id(courses, course_id):
     """This method find and return course by id."""
     if len(courses) == 0:
         return None
-    index = courses.index(Course(cid=course_id))
+    index = courses.index(Course(cid=course_id.upper()))
     if index >= 0:
         return courses[index]
     else:
@@ -341,6 +367,9 @@ def find_course_by_id(courses, course_id):
 def stat_student_in_course(courses):
     """This method statistic number of student in each level from highest to lowest."""
     course_id = input('Mã lớp cần xem thống kê: ')
+    if not is_course_id_valid(course_id):
+        raise ValueError(f'Mã lớp không đúng: {course_id}. '
+                         f'Ví dụ mã lớp hợp lệ: C105.')
     print('============================================')
     course = find_course_by_id(courses, course_id)
     my_dict = {
@@ -393,9 +422,15 @@ def stat_student_by_subjects(subjects, courses):
 def create_new_course(subjects, teachers):
     """This method create and return a new course."""
     course_name = input("Tên lớp: ")
-    subject_id = int(input("Mã môn học: "))
+    subject_id = input("Mã môn học: ")
+    if not is_subject_id_valid(subject_id):
+        raise ValueError(f'Mã môn học không đúng: {subject_id}. '
+                         f'Ví dụ mã hợp lệ: 1005.')
     teacher_id = input('Mã giảng viên: ')
-    subject = find_subject_by_id(subjects, subject_id)
+    if not is_teacher_id_valid(teacher_id):
+        raise ValueError(f'Mã giảng viên không đúng: {teacher_id}. '
+                         f'Ví dụ mã hợp lệ: GV1005')
+    subject = find_subject_by_id(subjects, int(subject_id))
     teacher = find_teacher_by_id(teachers, teacher_id)
     if subject is None:
         print('==> Môn học không tồn tại. <==')
@@ -411,11 +446,17 @@ def create_new_course(subjects, teachers):
 def create_new_transcript(courses, students):
     """This method create and return a transcript."""
     course_id = input('Mã lớp: ')
+    if not is_course_id_valid(course_id):
+        raise ValueError(f'Mã lớp không đúng: {course_id}. '
+                         f'Ví dụ về mã lớp hợp lệ: C102.')
     course = find_course_by_id(courses, course_id)
     if course is None:
         print('==> Lớp học không tồn tại. <==')
         return None
     student_id = input('Mã sinh viên: ')
+    if not is_student_id_valid(student_id):
+        raise ValueError(f'Mã sinh viên không đúng: {student_id}. '
+                         f'Ví dụ mã hợp lệ: SV1005')
     student = find_student_by_id(students, student_id)
     if student is None:
         print('==> Sinh viên không tồn tại. <==')
@@ -424,7 +465,11 @@ def create_new_transcript(courses, students):
     tran.transcript_id = 0
     tran.student = student
     tran.course_id = course_id
-    tran.gpa = float(input('Điểm Gpa hệ 4: '))
+    gpa = input('Điểm Gpa hệ 4: ')
+    if not is_gpa_valid(gpa):
+        raise ValueError(f'Điểm không hợp lệ: {gpa}. '
+                         f'Ví dụ điểm hợp lệ: 3.25.')
+    tran.gpa = float(gpa)
     tran.calculate_capacity()
     course.transcripts.append(tran)
 

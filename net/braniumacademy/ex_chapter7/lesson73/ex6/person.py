@@ -36,11 +36,14 @@ class FullName:
         return self.__str__()
 
     def __str__(self):
-        return f'{self.last_name} {self.mid_name} {self.first_name}'
+        if self.mid_name == '':
+            return f'{self.last_name} {self.first_name}'
+        else:
+            return f'{self.last_name} {self.mid_name} {self.first_name}'
 
 
 class Person:
-    def __init__(self, pid='', full_name='', dob=None):
+    def __init__(self, pid='', full_name=None, dob=None):
         self.person_id = pid
         self.full_name = full_name
         self.birth_date = dob
@@ -69,11 +72,11 @@ class Person:
 
     @full_name.setter
     def full_name(self, value):
-        if isinstance(value, str):
+        if isinstance(value, str):  # nếu họ tên là chuỗi kí tự thì tách nó ra
             name = value.split(' ')
-            first = name[len(name) - 1]
-            last = name[0]
-            mid = ''
+            first = name[len(name) - 1]  # phần tên
+            last = name[0]              # phần họ
+            mid = ''                    # phần tên đệm
             for i in range(1, len(name) - 1):
                 mid += name[i] + ' '
             self.__full_name = FullName(first, mid.strip(), last)

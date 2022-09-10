@@ -17,18 +17,6 @@ def is_name_valid(name):
         return False
 
 
-def is_person_id_valid(person_id):
-    """
-        Phương thức kiểm tra xem mã số CMND/CCCD có hợp lệ không.
-        Mã hợp lệ nếu chỉ chứa chữ cái và số.
-    """
-    if len(person_id.strip()) == 0:  # nếu chuỗi rỗng -> id ko hợp lệ
-        return False
-    if not person_id.isalnum():  # nếu số cmnd/cccd có kí tự khác số và chữ cái
-        return False  # mã k hợp lệ
-    return True
-
-
 def is_birth_date_valid(birth_date):
     """Phương thức kiểm tra xem ngày sinh có hợp lệ không."""
     if len(birth_date.strip()) < 10:
@@ -43,8 +31,8 @@ def is_gpa_valid(gpa_str):
     """Phương thức kiểm tra xem giá trị gpa có hợp lệ không."""
     if len(gpa_str.strip()) == 0:
         return False
-    pattern = '^\\d.\\d{1,2}$'  # chi tiết bạn vui lòng xem bài học 9.1
-    if re.match(pattern, gpa_str):
+    pattern = '^\\d{1}.\\d{1,2}$'  # chi tiết bạn vui lòng xem bài học 9.1
+    if re.match(pattern, gpa_str) and 0.0 <= float(gpa_str) <= 4.0:
         return True
     else:
         return False
@@ -63,4 +51,45 @@ def is_salary_valid(salary_str):
     """Phương thức kiểm tra mức lương có hợp lệ không."""
     if salary_str.strip().isdigit() and int(salary_str) > 0:  # nếu là các con số
         return True
+    return False
+
+
+def is_subject_id_valid(subject_id):
+    """Phương thức kiểm tra mã môn học có hợp lệ không."""
+    if subject_id.isdigit() and int(subject_id) >= 1000:
+        return True
+    return False
+
+
+def is_transcript_id_valid(transcript_id):
+    """Phương thức kiểm tra mã bảng điểm có hợp lệ không."""
+    if transcript_id.isdigit() and int(transcript_id) >= 100:
+        return True
+    return False
+
+
+def is_student_id_valid(student_id):
+    """Phương thức kiểm tra mã sinh viên có hợp lệ không."""
+    pattern = '^SV\\d{4}$'
+    if len(student_id) == 6 and re.match(pattern, student_id, re.IGNORECASE):
+        if int(student_id[2:]) >= 1000:
+            return True
+    return False
+
+
+def is_teacher_id_valid(teacher_id):
+    """Phương thức kiểm tra mã giảng viên có hợp lệ không."""
+    pattern = '^GV\\d{4}$'
+    if len(teacher_id) == 6 and re.match(pattern, teacher_id, re.IGNORECASE):
+        if int(teacher_id[2:]) >= 1001:
+            return True
+    return False
+
+
+def is_course_id_valid(course_id):
+    """Phương thức kiểm tra mã lớp học có hợp lệ không."""
+    pattern = '^C\\d{3}$'
+    if len(course_id) == 4 and re.match(pattern, course_id, re.IGNORECASE):
+        if int(course_id[1:]) >= 100:
+            return True
     return False

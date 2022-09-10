@@ -42,36 +42,52 @@ if __name__ == '__main__':
         choice = int(input(option))
         match choice:
             case 1:
-                new_student = create_student()
-                if new_student is None:
-                    print('==> Tạo sinh viên thất bại. <==')
-                else:
-                    students.append(new_student)
-                    print('==> Tạo sinh viên thành công. <==')
+                try:
+                    new_student = create_student()
+                    if new_student is None:
+                        print('==> Tạo sinh viên thất bại. <==')
+                    else:
+                        students.append(new_student)
+                        print('==> Tạo sinh viên thành công. <==')
+                except ValueError as e:
+                    print(e)
             case 2:
-                new_teacher = create_teacher()
-                if new_teacher is None:
-                    print('==> Tạo mới giảng viên thất bại. <==')
-                else:
-                    teachers.append(new_teacher)
-                    print('==> Tạo mới giảng viên thành công. <==')
+                try:
+                    new_teacher = create_teacher()
+                    if new_teacher is None:
+                        print('==> Tạo mới giảng viên thất bại. <==')
+                    else:
+                        teachers.append(new_teacher)
+                        print('==> Tạo mới giảng viên thành công. <==')
+                except ValueError as e:
+                    print(e)
             case 3:
-                subject = create_subject()
-                if subject is None:
-                    print('==> Tạo mới môn học thất bại. <==')
-                else:
-                    subjects.append(subject)
-                    print('==> Tạo mới môn học thành công. <==')
+                try:
+                    subject = create_subject()
+                    if subject is None:
+                        print('==> Tạo mới môn học thất bại. <==')
+                    else:
+                        subjects.append(subject)
+                        print('==> Tạo mới môn học thành công. <==')
+                except ValueError as e:
+                    print(e)
             case 4:
-                course = create_new_course(subjects, teachers)
-                if course is None:
-                    print('==> Tạo khóa học thất bại. <==')
-                else:
-                    courses.append(course)
-                    print('==> Tạo khóa học thành công. <==')
+                try:
+                    course = create_new_course(subjects, teachers)
+                    if course is None:
+                        print('==> Tạo khóa học thất bại. <==')
+                    else:
+                        courses.append(course)
+                        print('==> Tạo khóa học thành công. <==')
+                except ValueError as e:
+                    print(e)
             case 5:
                 if len(courses) > 0:
-                    create_new_transcript(courses, students)
+                    try:
+                        create_new_transcript(courses, students)
+                        print('==> Tạo mới bảng điểm thành công! <==')
+                    except ValueError as e:
+                        print(e)
                 else:
                     print('==> Danh sách các lớp học trống. <==')
             case 6:
@@ -119,12 +135,10 @@ if __name__ == '__main__':
                     print('==> Danh sách các lớp học rỗng. <==')
             case 15:
                 if len(courses) > 0:
-                    course_id = input('Mã lớp cần sắp xếp: ')
-                    for i in range(len(courses)):
-                        if courses[i].course_id == course_id:
-                            courses[i].transcripts.sort(key=lambda x: -x.gpa)
-                            show_transcripts([courses[i]])
-                            break
+                    try:
+                        sort_course(courses)
+                    except ValueError as e:
+                        print(e)
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 16:
@@ -139,12 +153,18 @@ if __name__ == '__main__':
                     print('==> Danh sách các lớp học rỗng. <==')
             case 18:
                 if len(courses) > 0:
-                    find_student_in_course(courses)
+                    try:
+                        find_student_in_course(courses)
+                    except ValueError as e:
+                        print(e)
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 19:
                 if len(courses) > 0:
-                    stat_student_in_course(courses)
+                    try:
+                        stat_student_in_course(courses)
+                    except ValueError as e:
+                        print(e)
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 20:
