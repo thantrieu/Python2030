@@ -20,7 +20,7 @@ class Student:
         try:
             if is_student_id_valid(value):
                 self.__student_id = value
-        except ValueError as e:
+        except StudentIdError as e:
             print(e)
             self.__student_id = None
 
@@ -33,7 +33,7 @@ class Student:
         try:
             if is_name_valid(value):
                 self.__full_name = value
-        except ValueError as e:
+        except FullNameError as e:
             print(e)
             self.__full_name = None
 
@@ -46,7 +46,7 @@ class Student:
         try:
             if is_age_valid(value):
                 self.__age = int(value)
-        except ValueError as e:
+        except StudentAgeError as e:
             print(e)
             self.__age = 0
 
@@ -59,7 +59,7 @@ class Student:
         try:
             if is_grade_valid(value):
                 self.__math = float(value)
-        except ValueError as e:
+        except GradeError as e:
             print(e)
             self.__math = 0.0
 
@@ -72,7 +72,7 @@ class Student:
         try:
             if is_grade_valid(value):
                 self.__physic = float(value)
-        except ValueError as e:
+        except GradeError as e:
             print(e)
             self.__physic = 0.0
 
@@ -85,7 +85,7 @@ class Student:
         try:
             if is_grade_valid(value):
                 self.__english = float(value)
-        except ValueError as e:
+        except GradeError as e:
             print(e)
             self.__english = 0.0
 
@@ -93,6 +93,9 @@ class Student:
         name = self.full_name
         if self.full_name is None:
             name = "None"
-        return f'{self.student_id:12}{name:30}' \
+        sid = 'None'
+        if self.student_id is not None:
+            sid = self.student_id
+        return f'{sid:12}{name:30}' \
                f'{self.age:<12}{self.math:<12.2f}' \
                f'{self.physic:<12.2f}{self.english:<12.2f}'
