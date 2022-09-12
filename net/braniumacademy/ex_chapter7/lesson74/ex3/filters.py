@@ -1,20 +1,20 @@
 import re
+from exceptions import *
 
 
 def is_name_valid(name):
     """
         Phương thức kiểm tra họ tên có hợp lệ không.
         Giả định họ tên hợp lệ chỉ chứa kí tự chữ cái và khoảng trắng.
+        Độ dài tên hợp lệ từ 2-30 kí tự.
     """
-    if len(name.strip()) == 0:  # nếu chuỗi rỗng -> tên k hợp lệ
-        return False
     if 2 <= len(name) <= 30:
         for c in name.lower():
             if not c.isalpha() and c != ' ':
-                return False
+                raise FullNameError(name, 'Họ và tên chứa kí tự không hợp lệ')
         return True
     else:
-        return False
+        raise FullNameError(name, 'Họ và tên quá ngắn hoặc quá dài')
 
 
 def is_birth_date_valid(birth_date):
@@ -24,7 +24,7 @@ def is_birth_date_valid(birth_date):
     pattern = '^\\d{2}/\\d{2}/\\d{4}$'  # chi tiết bạn vui lòng xem bài học 9.1
     if re.match(pattern, birth_date.strip()):
         return True
-    return False
+    raise BirthDateError(birth_date, 'Ngày sinh không đúng định dạng')
 
 
 def is_gpa_valid(gpa_str):

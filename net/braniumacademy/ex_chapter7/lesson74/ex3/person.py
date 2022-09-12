@@ -1,4 +1,5 @@
-from datetime import datetime
+from utils import *
+from filters import *
 
 
 class FullName:
@@ -73,13 +74,18 @@ class Person:
     @full_name.setter
     def full_name(self, value):
         if isinstance(value, str):  # nếu họ tên là chuỗi kí tự thì tách nó ra
-            name = value.split(' ')
-            first = name[len(name) - 1]  # phần tên
-            last = name[0]              # phần họ
-            mid = ''                    # phần tên đệm
-            for i in range(1, len(name) - 1):
-                mid += name[i] + ' '
-            self.__full_name = FullName(first, mid.strip(), last)
+            try:
+                if is_name_valid(value):
+                    name = value.split(' ')
+                    first = name[len(name) - 1]  # phần tên
+                    last = name[0]  # phần họ
+                    mid = ''  # phần tên đệm
+                    for i in range(1, len(name) - 1):
+                        mid += name[i] + ' '
+                    self.__full_name = FullName(first, mid.strip(), last)
+            except FullNameError as e:
+                print(e)
+                self.__full_name = "No Name"
         else:
             self.__full_name = value
 
@@ -88,7 +94,12 @@ class Person:
         if isinstance(value, datetime):
             self.__birth_date = value
         else:
-            self.__birth_date = datetime.strptime(value, '%d/%m/%Y')
+            try:
+                if is_birth_date_valid(value):
+                    self.__birth_date = datetime.strptime(value, '%d/%m/%Y')
+            except BirthDateError as e:
+                self.birth_date = datetime.strptime(value, '01/01/2000')
+                print(e)
 
     @person_id.setter
     def person_id(self, value):
