@@ -1,4 +1,4 @@
-from filter import is_person_id_valid, is_name_valid, is_birth_date_valid
+from filter import *
 
 
 class FullName:
@@ -62,15 +62,18 @@ class Person:
 
     @full_name.setter
     def full_name(self, value):
-        if is_name_valid(value):
-            names = value.split(' ')
-            mid = ''
-            for i in range(1, len(names) - 1):
-                mid += names[i] + ' '
-            self.__full_name = FullName(names[len(names) - 1], names[0], mid.strip())
-        else:
+        try:
+            if isinstance(value, str) and is_name_valid(value):
+                names = value.split(' ')
+                mid = ''
+                for i in range(1, len(names) - 1):
+                    mid += names[i] + ' '
+                self.__full_name = FullName(names[len(names) - 1], names[0], mid.strip())
+            elif isinstance(value, FullName):
+                self.__full_name = value
+        except FullNameError as e:
+            print(e)
             self.__full_name = 'No Name'
-            raise ValueError('Họ và tên không hợp lệ')
 
     @property
     def birth_date(self):
@@ -78,11 +81,12 @@ class Person:
 
     @birth_date.setter
     def birth_date(self, value):
-        if is_birth_date_valid(value):
-            self.__birth_date = value
-        else:
-            self.__birth_date = None
-            raise ValueError('Ngày sinh không hợp lệ')
+        try:
+            if isinstance(value, str) and is_birth_date_valid(value):
+                self.__birth_date = value
+        except BirthDateError as e:
+            print(e)
+            self.__birth_date = '01/01/2020'
 
     def work(self, task):
         print(f'{self.full_name} is doing {task}')

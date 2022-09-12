@@ -3,6 +3,7 @@ from operator import itemgetter
 from register import Register
 from subject import Subject
 from student import Student
+from filter import *
 
 
 def create_student():
@@ -60,7 +61,7 @@ def read_register_from_file(students, subjects):
         while register_id != '':
             subject_id = int(register_reader.readline())
             student_id = register_reader.readline().strip()  # ở đây phải strip để loại bỏ kí tự \n ở cuối dòng
-            student = find_student_by_id(students, student_id)
+            student = find_student_by_id(students, f'{student_id}')
             subject = find_subject_by_id(subjects, subject_id)
             register_time = register_reader.readline().strip()
             registers.append(Register(int(register_id), register_time, student, subject))
@@ -87,24 +88,38 @@ def find_subject_by_id(subjects, subject_id):
 def is_register_exists(registers, student_id, subject_id):
     """Phương thức kiểm tra xem sinh viên x đã đăng ký môn học y chưa."""
     for reg in registers:
-        if reg.subject.subject_id == subject_id and reg.student.student_id == student_id:
+        if reg.subject.subject_id == subject_id and reg.student.student_id == student_id.upper():
             return True  # nếu đã đăng ký, trả về True
     return False  # chưa đăng ký, trả về false
 
 
 def create_register(registers, students, subjects):
     """Phương thức tạo thông tin đăng ký môn học của sv."""
+    student = None
+    subject = None
     student_id = input('Mã sinh viên: ')
-    subject_id = int(input('Mã môn học(số nguyên 4 chữ số): '))
-    student = find_student_by_id(students, student_id)
-    subject = find_subject_by_id(subjects, subject_id)
-    if student is None:
-        print(f'==> Sinh viên mã \'{student_id}\' không tồn tại.')
+    try:
+        if is_student_id_valid(student_id):
+            student = find_student_by_id(students, student_id)
+            if student is None:
+                print(f'==> Sinh viên mã \'{student_id}\' không tồn tại.')
+                return None
+    except StudentIdError as e:
+        print(e)
         return None
-    if subject is None:
-        print(f'==> Môn học mã \'{subject_id}\' không tồn tại.')
+
+    subject_id = input('Mã môn học(số nguyên 4 chữ số): ')
+    try:
+        if is_subject_id_valid(subject_id):
+            subject = find_subject_by_id(subjects, int(subject_id))
+            if subject is None:
+                print(f'==> Môn học mã \'{subject_id}\' không tồn tại.')
+                return None
+    except SubjectIdError as e:
+        print(e)
         return None
-    if is_register_exists(registers, student_id, subject_id):
+
+    if is_register_exists(registers, student_id, int(subject_id)):
         print(f'==> Sinh viên mã {student_id} đã đăng ký môn học {subject_id} trước đó.')
         return None
     else:
@@ -133,27 +148,37 @@ def sort_registers(registers):
 def update_student_name(students):
     """Phương thức dùng để cập nhật tên sinh viên theo mã sinh viên cho trước."""
     student_id = input('Mã sinh viên cần cập nhật: ')
-    student = find_student_by_id(students, student_id)
-    if student is not None:
-        full_name = input('Họ và tên mới: ')
-        try:
-            student.full_name = full_name
-            print('==> Cập nhật điểm cho sinh viên thành công! <==')
-        except ValueError as e:
-            print(e)
+    try:
+        if is_student_id_valid(student_id):
+            student = find_student_by_id(students, student_id)
+            if student is not None:
+                full_name = input('Họ và tên mới: ')
+                try:
+                    if is_subject_name_valid(full_name):
+                        student.full_name = full_name
+                        print('==> Cập nhật điểm cho sinh viên thành công! <==')
+                except FullNameError as e:
+                    print(e)
+    except StudentIdError as e:
+        print(e)
 
 
 def update_student_gpa(students):
     """Phương thức dùng để cập nhật điểm Gpa theo mã sv cho trước."""
     student_id = input('Mã sinh viên cần cập nhật: ')
-    student = find_student_by_id(students, student_id)
-    if student is not None:
-        gpa_str = input('Điểm Gpa thay thế: ')
-        try:
-            student.gpa = gpa_str
-            print('==> Cập nhật điểm cho sinh viên thành công! <==')
-        except ValueError as e:
-            print(e)
+    try:
+        if is_student_id_valid(student_id):
+            student = find_student_by_id(students, student_id)
+            if student is not None:
+                gpa_str = input('Điểm Gpa thay thế: ')
+                try:
+                    if is_gpa_valid(gpa_str):
+                        student.gpa = gpa_str
+                        print('==> Cập nhật điểm cho sinh viên thành công! <==')
+                except GpaError as e:
+                    print(e)
+    except StudentIdError as e:
+        print(e)
 
 
 def save_data(items, file_name):
@@ -192,29 +217,38 @@ def show_registers(registers):
 def find_registed_subject(registers):
     """Phương thức dùng để tìm môn học đã đăng ký."""
     sort_registers(registers)
-    student_id = input('Nhập mã sinh viên: ')
-    result = []
-    for r in registers:
-        if r.student.student_id == student_id:
-            result.append(r.subject)
-    if len(result) > 0:
-        print(f'==> Danh sách môn học sinh viên mã {student_id} đã đăng ký: ')
-        show_subjects(result)
-    else:
-        print(f'==> Sinh viên mã {student_id} không đăng ký môn học nào.')
+    student_id = input('Nhập mã sinh viên: ').strip().upper()
+    try:
+        if is_student_id_valid(student_id):
+            result = []
+            for r in registers:
+                if r.student.student_id == student_id:
+                    result.append(r.subject)
+            if len(result) > 0:
+                print(f'==> Danh sách môn học sinh viên mã {student_id} đã đăng ký: ')
+                show_subjects(result)
+            else:
+                print(f'==> Sinh viên mã {student_id} không đăng ký môn học nào.')
+    except StudentIdError as e:
+        print(e)
 
 
 def find_student_by_subject(registers):
     """Phương thức tìm sinh viên đăng ký theo môn học."""
     subject_id = int(input('Nhập mã môn học(số nguyên 4 chữ số): '))
-    result = []
-    for r in registers:
-        if r.subject.subject_id == subject_id:
-            result.append(r.student)
-    if len(result) > 0:
-        show_students(result)
-    else:
-        print(f'==> Môn học mã {subject_id} không có sinh viên đăng ký.')
+    try:
+        if is_subject_id_valid(f'{subject_id}'):
+            result = []
+            for r in registers:
+                if r.subject.subject_id == subject_id:
+                    result.append(r.student)
+            if len(result) > 0:
+                print(f'==> Danh sách sinh viên đã đăng ký môn học mã {subject_id}: ')
+                show_students(result)
+            else:
+                print(f'==> Môn học mã {subject_id} không có sinh viên đăng ký.')
+    except SubjectIdError as e:
+        print(e)
 
 
 def get_list_item(data, key):
@@ -292,3 +326,66 @@ def update_register_auto_id(registers):
         if reg.register_id > max_id:
             max_id = reg.register_id
     Register.AUTO_ID = max_id + 1
+
+
+def update_subject_name(subjects):
+    """Phương thức cập nhật tên môn học theo mã môn cho trước."""
+    subject_id = input('Mã môn học cần cập nhật: ')
+    try:
+        if is_subject_id_valid(subject_id):
+            subject = find_subject_by_id(subjects, int(subject_id))
+            if subject is not None:
+                name = input('Tên môn học thay thế: ')
+                try:
+                    if is_subject_name_valid(name):
+                        subject.subject_name = name
+                        print('==> Cập nhật tên môn học thành công! <==')
+                except SubjectNameError as e:
+                    print(e)
+    except SubjectIdError as e:
+        print(e)
+
+
+def update_subject_credit(subjects):
+    """Phương thức cập nhật số tín chỉ cho môn học theo mã môn cho trước."""
+    subject_id = input('Mã môn học cần cập nhật: ')
+    try:
+        if is_subject_id_valid(subject_id):
+            subject = find_subject_by_id(subjects, int(subject_id))
+            if subject is not None:
+                credit = input('Số tín chỉ thay thế(số nguyên dương): ')
+                try:
+                    if is_credit_valid(credit):
+                        subject.credit = credit
+                        print('==> Cập nhật số tín chỉ cho môn học thành công! <==')
+                except CreditError as e:
+                    print(e)
+    except SubjectIdError as e:
+        print(e)
+
+
+def find_register_by_id(registers, reg_id):
+    """Phương thức tìm bản đăng ký theo mã đk."""
+    for r in registers:
+        if r.register_id == reg_id:
+            return r
+    return None
+
+
+def remove_register(registers):
+    """Phương thức xóa bản đăng ký theo mã đăng ký cho trước."""
+    reg_id = input('Mã bản đăng ký cần xóa: ')
+    try:
+        if is_register_id_valid(reg_id):
+            confirm = input('Bạn chắc chắn muốn xóa bản đăng ký này(Y/N)?')
+            if confirm.lower() == 'y' or confirm.lower() == 'yes':
+                reg = find_register_by_id(registers, int(reg_id))
+                if reg is not None:
+                    registers.remove(reg)
+                    print('==> Xóa bản đăng ký thành công! <==')
+                else:
+                    print('==> Không tìm thấy bản đăng ký cần xóa! <==')
+            else:
+                print('==> Việc xóa bản đăng ký đã được hủy bỏ <==')
+    except RegisterIdError as e:
+        print(e)

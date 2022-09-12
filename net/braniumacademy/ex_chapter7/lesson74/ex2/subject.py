@@ -1,4 +1,4 @@
-from filter import is_credit_valid
+from filter import *
 
 
 class Subject:
@@ -24,11 +24,12 @@ class Subject:
 
     @credit.setter
     def credit(self, value):
-        if is_credit_valid(f'{value}'):
-            self.__credit = int(value)
-        else:
+        try:
+            if is_credit_valid(f'{value}'):
+                self.__credit = int(value)
+        except CreditError as e:
             self.__credit = 0
-            raise ValueError('Số tín chỉ không hợp lệ')
+            print(e)
 
     @subject_id.setter
     def subject_id(self, value):
@@ -36,11 +37,21 @@ class Subject:
             self.__subject_id = Subject.AUTO_ID
             Subject.AUTO_ID += 1
         else:
-            self.__subject_id = value
+            try:
+                if is_subject_id_valid(f'{value}'):
+                    self.__subject_id = value
+            except SubjectIdError as e:
+                print(e)
+                self.__subject_id = 0
 
     @subject_name.setter
     def subject_name(self, value):
-        self.__subject_name = value
+        try:
+            if is_subject_name_valid(value):
+                self.__subject_name = value
+        except SubjectNameError as e:
+            print(e)
+            self.__subject_name = 'No Name'
 
     def __str__(self):
         return f'{self.subject_id:<15}{self.subject_name:30}{self.credit:<15}'

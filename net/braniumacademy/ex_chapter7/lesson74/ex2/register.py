@@ -1,4 +1,5 @@
 from datetime import datetime
+from filter import *
 
 
 class Register:
@@ -21,7 +22,12 @@ class Register:
             self.__register_id = Register.AUTO_ID
             Register.AUTO_ID += 1
         else:
-            self.__register_id = value
+            try:
+                if is_register_id_valid(f'{value}'):
+                    self.__register_id = value
+            except RegisterIdError as e:
+                print(e)
+                self.__register_id = 0
 
     @property
     def register_time(self):

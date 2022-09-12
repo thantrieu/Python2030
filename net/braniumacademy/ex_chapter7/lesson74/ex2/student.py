@@ -1,5 +1,5 @@
 from person import Person
-from filter import is_gpa_valid
+from filter import *
 
 
 class Student(Person):
@@ -23,7 +23,12 @@ class Student(Person):
             self.__student_id = f'SV{Student.AUTO_ID}'
             Student.AUTO_ID += 1
         else:
-            self.__student_id = value
+            try:
+                if is_student_id_valid(value):
+                    self.__student_id = value
+            except StudentIdError as e:
+                print(e)
+                self.__student_id = None
 
     @property
     def gpa(self):
@@ -31,10 +36,12 @@ class Student(Person):
 
     @gpa.setter
     def gpa(self, value):
-        if is_gpa_valid(value):
-            self.__gpa = value
-        else:
-            self.__gpa = 0.0
+        try:
+            if is_gpa_valid(value):
+                self.__gpa = float(value)
+        except GpaError as e:
+            print(e)
+            self.__gpa = 0
 
     @property
     def major(self):

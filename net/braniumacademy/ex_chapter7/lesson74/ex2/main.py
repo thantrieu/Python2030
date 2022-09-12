@@ -1,4 +1,4 @@
-from exercises5_utils import *
+from utils import *
 
 if __name__ == '__main__':
     students = read_students_from_file()
@@ -23,11 +23,14 @@ if __name__ == '__main__':
              '12. Thống kê số lượng sinh viên đăng ký theo từng môn học.\n' \
              '13. Cho biết thông tin bản ghi đăng ký sớm nhất.\n' \
              '14. Cho biết thông tin bản ghi đăng ký muộn nhất.\n' \
-             '15. Cập nhật họ tên cho sinh viên theo mã sinh viên.\n' \
-             '16. Cập nhật điểm cho sinh viên theo mã sinh viên.\n' \
-             '17. Lưu dữ liệu và file.\n' \
-             '18. Kết thúc chương trình.\n' \
-             'Xin mời chọn chức năng(1-18): '
+             '15. Cập tên môn học theo mã môn học.\n' \
+             '16. Cập nhật số tín chỉ theo mã môn học.\n' \
+             '17. Cập nhật họ và tên SV theo mã sinh viên.\n' \
+             '18. Cập nhật điểm cho sinh viên theo mã sinh viên.\n' \
+             '19. xóa bỏ một bản đăng ký theo mã đăng ký.\n' \
+             '20. Lưu dữ liệu và file.\n' \
+             '21. Kết thúc chương trình.\n' \
+             'Xin mời chọn chức năng(1-21): '
     while True:
         choice = int(input(option))
         match choice:
@@ -116,10 +119,21 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
             case 15:
-                update_student_name(students)
+                if len(subjects) > 0:
+                    update_subject_name(subjects)
             case 16:
-                update_student_gpa(students)
+                if len(subjects) > 0:
+                    update_subject_credit(subjects)
             case 17:
+                if len(students) > 0:
+                    update_student_name(students)
+            case 18:
+                if len(students) > 0:
+                    update_student_gpa(students)
+            case 19:
+                if len(registers) > 0:
+                    remove_register(registers)
+            case 20:
                 if len(students) > 0:
                     save_data(students, 'STUDENT.DAT')
                     print('==> Ghi danh sách sinh viên ra file thành công! <==')
@@ -129,7 +143,7 @@ if __name__ == '__main__':
                 if len(registers) > 0:
                     save_data(registers, 'REGISTER.DAT')
                     print('==> Ghi danh sách đăng ký ra file thành công! <==')
-            case 18:
+            case 21:
                 print('==> WOOHO... Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy! <==')
                 break
             case _:
