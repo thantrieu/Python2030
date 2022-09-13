@@ -211,4 +211,4 @@ if __name__ == '__main__':
                 print("==> Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy. <==")
                 break
             case _:
-                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-22. <==')
+                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-30. <==')

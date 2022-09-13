@@ -270,32 +270,35 @@ def listed_student_with_max_gpa(courses):
 def find_student_in_course(courses):
     """This method find and display student with given gpa on screen."""
     course_id = input('Mã lớp cần tìm: ')
-    if not is_course_id_valid(course_id):
-        raise ValueError(f'Mã lớp không đúng: {course_id}. '
-                         f'Ví dụ mã lớp hợp lệ: C105.')
-    start_gpa = float(input('Điểm gpa tối thiểu: '))
-    if not is_gpa_valid(f'{start_gpa}'):
-        raise ValueError(f'Điểm gpa không đúng: {start_gpa}. '
-                         f'Ví dụ điểm gpa hợp lệ: 3.26.')
-    end_gpa = float(input('Điểm gpa tối đa: '))
-    if not is_gpa_valid(f'{end_gpa}'):
-        raise ValueError(f'Điểm gpa không đúng: {end_gpa}. '
-                         f'Ví dụ điểm gpa hợp lệ: 3.26.')
-    index = courses.index(Course(cid=course_id.upper()))
-    if index >= 0:
-        target_course = courses[index]
-        course = copy.deepcopy(target_course)
-        if course is not None:
-            result = []
-            for t in course.transcripts:
-                if start_gpa <= t.gpa <= end_gpa:
-                    result.append(t)
-            course.transcripts = result
-            show_transcripts([course])
-        else:
-            print('==> Không tồn tại lớp học cần tìm. <==')
-    else:
-        print('==> Mã lớp không đúng! <==')
+    try:
+        if is_course_id_valid(course_id):
+            start_gpa = float(input('Điểm gpa tối thiểu: '))
+            try:
+                if is_gpa_valid(f'{start_gpa}'):
+                    end_gpa = float(input('Điểm gpa tối đa: '))
+                    try:
+                        if is_gpa_valid(f'{end_gpa}'):
+                            index = courses.index(Course(cid=course_id.upper()))
+                            if index >= 0:
+                                target_course = courses[index]
+                                course = copy.deepcopy(target_course)
+                                if course is not None:
+                                    result = []
+                                    for t in course.transcripts:
+                                        if start_gpa <= t.gpa <= end_gpa:
+                                            result.append(t)
+                                    course.transcripts = result
+                                    show_transcripts([course])
+                                else:
+                                    print('==> Không tồn tại lớp học cần tìm. <==')
+                            else:
+                                print('==> Mã lớp không đúng! <==')
+                    except GpaError as e:
+                        print(e)
+            except GpaError as e:
+                print(e)
+    except CourseIdError as e:
+        print(e)
 
 
 def find_max_gpa_by_subject(courses, subject):
@@ -342,14 +345,15 @@ def find_highest_gpa_by_subject(subjects, courses):
 
 def sort_course(courses):
     course_id = input('Mã lớp cần sắp xếp: ')
-    if not is_course_id_valid(course_id):
-        raise ValueError(f'Mã lớp không đúng: {course_id}. '
-                         f'Ví dụ mã lớp hợp lệ: C105.')
-    for i in range(len(courses)):
-        if courses[i].course_id == course_id.upper():
-            courses[i].transcripts.sort(key=lambda x: -x.gpa)
-            show_transcripts([courses[i]])
-            break
+    try:
+        if is_course_id_valid(course_id):
+            for i in range(len(courses)):
+                if courses[i].course_id == course_id.strip().upper():
+                    courses[i].transcripts.sort(key=lambda x: -x.gpa)
+                    show_transcripts([courses[i]])
+                    break
+    except CourseIdError as e:
+        print(e)
 
 
 def find_course_by_id(courses, course_id):
@@ -366,38 +370,39 @@ def find_course_by_id(courses, course_id):
 def stat_student_in_course(courses):
     """This method statistic number of student in each level from highest to lowest."""
     course_id = input('Mã lớp cần xem thống kê: ')
-    if not is_course_id_valid(course_id):
-        raise ValueError(f'Mã lớp không đúng: {course_id}. '
-                         f'Ví dụ mã lớp hợp lệ: C105.')
-    print('============================================')
-    course = find_course_by_id(courses, course_id)
-    my_dict = {
-        "Xuất sắc": 0,
-        "Giỏi": 0,
-        "Khá": 0,
-        "Trung bình": 0,
-        "Yếu": 0
-    }
-    for t in course.transcripts:
-        if t.capacity == "Xuất sắc":
-            my_dict["Xuất sắc"] += 1
-        elif t.capacity == "Giỏi":
-            my_dict["Giỏi"] += 1
-        elif t.capacity == "Khá":
-            my_dict["Khá"] += 1
-        elif t.capacity == "Trung bình":
-            my_dict["Trung bình"] += 1
-        elif t.capacity == "Yếu":
-            my_dict["Yếu"] += 1
-    print(f'Mã lớp học: {course.course_id}')
-    print(f'Tên lớp học: {course.name}')
-    print(f'Môn học: {course.subject.name}')
-    print(f'Phòng học: {course.room}')
-    print(f'Số lượng SV: {len(course.transcripts)}')
-    print('==> Kết quả thống kê: ')
-    print(f'{"Học lực":15}: {"Số lượng":10}')
-    for key, value in my_dict.items():
-        print(f'{key:15}: {value:<10}')
+    try:
+        if is_course_id_valid(course_id):
+            print('============================================')
+            course = find_course_by_id(courses, course_id)
+            my_dict = {
+                "Xuất sắc": 0,
+                "Giỏi": 0,
+                "Khá": 0,
+                "Trung bình": 0,
+                "Yếu": 0
+            }
+            for t in course.transcripts:
+                if t.capacity == "Xuất sắc":
+                    my_dict["Xuất sắc"] += 1
+                elif t.capacity == "Giỏi":
+                    my_dict["Giỏi"] += 1
+                elif t.capacity == "Khá":
+                    my_dict["Khá"] += 1
+                elif t.capacity == "Trung bình":
+                    my_dict["Trung bình"] += 1
+                elif t.capacity == "Yếu":
+                    my_dict["Yếu"] += 1
+            print(f'Mã lớp học: {course.course_id}')
+            print(f'Tên lớp học: {course.name}')
+            print(f'Môn học: {course.subject.name}')
+            print(f'Phòng học: {course.room}')
+            print(f'Số lượng SV: {len(course.transcripts)}')
+            print('==> Kết quả thống kê: ')
+            print(f'{"Học lực":15}: {"Số lượng":10}')
+            for key, value in my_dict.items():
+                print(f'{key:15}: {value:<10}')
+    except CourseIdError as e:
+        print(e)
 
 
 def stat_student_by_subjects(subjects, courses):
