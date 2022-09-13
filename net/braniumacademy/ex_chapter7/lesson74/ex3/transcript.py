@@ -1,8 +1,11 @@
+from filters import *
+
+
 class Transcript:
     """Lớp mô tả thông tin về bảng điểm."""
     AUTO_ID = 100
 
-    def __int__(self, tran_id=0, course_id='', student=None, gpa=0.0, capacity=''):
+    def __init__(self, tran_id=0, course_id='', student=None, gpa=0.0, capacity=''):
         self.transcript_id = tran_id
         self.course_id = course_id
         self.student = student
@@ -19,7 +22,12 @@ class Transcript:
             self.__transcript_id = Transcript.AUTO_ID
             Transcript.AUTO_ID += 1
         else:
-            self.__transcript_id = value
+            try:
+                if is_transcript_id_valid(f'{value}'):
+                    self.__transcript_id = value
+            except TranscriptIdError as e:
+                print(e)
+                self.__transcript_id = 0
 
     @property
     def course_id(self):
@@ -27,7 +35,12 @@ class Transcript:
 
     @course_id.setter
     def course_id(self, value):
-        self.__course_id = value
+        try:
+            if is_course_id_valid(value):
+                self.__course_id = value
+        except CourseIdError as e:
+            print(e)
+            self.__course_id = None
 
     @property
     def student(self):

@@ -1,4 +1,5 @@
 from student import Person
+from filters import *
 
 
 def create_teacher_id():
@@ -16,8 +17,8 @@ class Teacher(Person):
                  teacher_id=None, salary=0, expertise=''):
         super().__init__(pid, full_name, dob)
         self.teacher_id = teacher_id
-        self.__salary = salary
-        self.__expertise = expertise
+        self.salary = salary
+        self.expertise = expertise
 
     @property
     def teacher_id(self):
@@ -28,7 +29,12 @@ class Teacher(Person):
         if value is None:
             self.__teacher_id = create_teacher_id()
         else:
-            self.__teacher_id = value
+            try:
+                if is_teacher_id_valid(value):
+                    self.__teacher_id = value
+            except TeacherIdError as e:
+                print(e)
+                self.__teacher_id = None
 
     @property
     def salary(self):
@@ -36,7 +42,12 @@ class Teacher(Person):
 
     @salary.setter
     def salary(self, value):
-        self.__salary = value
+        try:
+            if is_salary_valid(f'{value}'):
+                self.__salary = value
+        except SalaryError as e:
+            print(e)
+            self.__salary = 0
 
     @property
     def expertise(self):

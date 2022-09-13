@@ -205,12 +205,11 @@ def read_transcripts_from_file(students):
     with open('TRANSCRIPT.DAT', encoding='UTF-8') as reader:
         tran_id = reader.readline().strip()
         while tran_id != '':
-            tran = Transcript()
-            tran.transcript_id = int(tran_id)
-            tran.course_id = reader.readline().strip()
-            tran.student = find_student_by_id(students, reader.readline().strip())
-            tran.gpa = float(reader.readline().strip())
-            tran.capacity = reader.readline().strip()
+            course_id = reader.readline().strip()
+            student = find_student_by_id(students, reader.readline().strip())
+            tran = Transcript(int(tran_id), course_id,
+                              student, float(reader.readline().strip()),
+                              reader.readline().strip())
             transcripts.append(tran)
             tran_id = reader.readline().strip()
     return transcripts

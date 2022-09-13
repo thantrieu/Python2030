@@ -1,4 +1,5 @@
 from person import Person
+from filters import *
 
 
 def create_id():
@@ -14,8 +15,8 @@ class Student(Person):
                  student_id=None, major='', gpa=0.0):
         super().__init__(pid, full_name, dob)
         self.student_id = student_id
-        self.__gpa = gpa
-        self.__major = major
+        self.gpa = gpa
+        self.major = major
 
     @property
     def gpa(self):
@@ -23,7 +24,12 @@ class Student(Person):
 
     @gpa.setter
     def gpa(self, value):
-        self.__gpa = value
+        try:
+            if is_gpa_valid(f'{value}'):
+                self.__gpa = value
+        except GpaError as e:
+            print(e)
+            self.__gpa = 0
 
     @property
     def student_id(self):
@@ -34,7 +40,12 @@ class Student(Person):
         if value is None:
             self.__student_id = create_id()
         else:
-            self.__student_id = value.upper()
+            try:
+                if is_student_id_valid(value):
+                    self.__student_id = value.upper()
+            except StudentIdError as e:
+                print(e)
+                self.__student_id = None
 
     @property
     def major(self):
@@ -61,3 +72,7 @@ class Student(Person):
         return f'{self.person_id}\n{self.full_name.full_name}\n' \
                f'{self.birth_date.strftime("%d/%m/%Y")}\n' \
                f'{self.student_id}\n{self.gpa}\n{self.major}\n'
+
+    @major.setter
+    def major(self, value):
+        self.__major = value

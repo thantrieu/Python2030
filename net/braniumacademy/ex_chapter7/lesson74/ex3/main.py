@@ -36,8 +36,8 @@ if __name__ == '__main__':
              '19. Thống kê số lượng sinh viên trong một lớp theo học lực giảm dần.\n' \
              '20. Thống kê số lượng sinh viên có học lực giỏi, xuất sắc theo từng môn.\n' \
              '21. Lưu dữ liệu ra file text.\n' \
-             '22. Kết thúc chương trình.\n' \
-             'Xin mời chọn chức năng(1-22): '
+             '30. Kết thúc chương trình.\n' \
+             'Xin mời chọn chức năng(1-30): '
     while True:
         choice = int(input(option))
         match choice:
@@ -173,6 +173,22 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 21:
+                pass
+            case 22:
+                pass
+            case 23:
+                pass
+            case 24:
+                pass
+            case 25:
+                pass
+            case 26:
+                pass
+            case 27:
+                pass
+            case 28:
+                pass
+            case 29:
                 if len(students) > 0:
                     write_data_to_file(students, 'STUDENT.DAT')
                     print('==> Lưu dữ liệu sinh viên ra file thành công. <==')
@@ -191,7 +207,7 @@ if __name__ == '__main__':
                         transcript_data.extend(c.transcripts)
                     write_data_to_file(transcript_data, 'TRANSCRIPT.DAT')
                     print('==> Lưu dữ liệu sinh bảng điểm ra file thành công. <==')
-            case 22:
+            case 30:
                 print("==> Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy. <==")
                 break
             case _:

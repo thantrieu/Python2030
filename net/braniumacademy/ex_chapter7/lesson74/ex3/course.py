@@ -1,3 +1,6 @@
+from filters import *
+
+
 def create_course_id():
     couse_id = f'C{Course.AUTO_ID}'
     Course.AUTO_ID += 1
@@ -18,14 +21,19 @@ class Course:
 
     @property
     def course_id(self):
-        return self.__couse_id
+        return self.__course_id
 
     @course_id.setter
     def course_id(self, value):
         if value == '' or value is None:
-            self.__couse_id = create_course_id()
+            self.__course_id = create_course_id()
         else:
-            self.__couse_id = value
+            try:
+                if is_course_id_valid(value):
+                    self.__course_id = value
+            except CourseIdError as e:
+                print(e)
+                self.__course_id = None
 
     @property
     def name(self):
