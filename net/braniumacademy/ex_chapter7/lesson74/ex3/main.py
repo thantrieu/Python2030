@@ -35,7 +35,15 @@ if __name__ == '__main__':
              '18. Tìm sinh viên trong lớp theo điểm và mã lớp.\n' \
              '19. Thống kê số lượng sinh viên trong một lớp theo học lực giảm dần.\n' \
              '20. Thống kê số lượng sinh viên có học lực giỏi, xuất sắc theo từng môn.\n' \
-             '21. Lưu dữ liệu ra file text.\n' \
+             '21. Cập nhật điểm TB tích lũy cho sinh viên theo mã sinh viên.\n' \
+             '22. Cập nhật số tín chỉ cho môn học theo mã môn học.\n' \
+             '23. Cập nhật lương cho giảng viên theo mã giảng viên.\n' \
+             '24. Xóa một môn học khỏi danh sách môn học theo mã môn.\n' \
+             '25. Xóa một sinh viên khỏi danh sách sinh viên theo mã sinh viên.\n' \
+             '26. Xóa một giảng viên khỏi danh sách giảng viên theo mã giảng viên.\n' \
+             '27. Xóa một lớp học khỏi danh sách lớp theo mã lớp.\n' \
+             '28. Xóa một bảng điểm khỏi danh sách bảng điểm.\n' \
+             '29. Lưu dữ liệu ra file text.\n' \
              '30. Kết thúc chương trình.\n' \
              'Xin mời chọn chức năng(1-30): '
     while True:
@@ -173,7 +181,7 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách các lớp học rỗng. <==')
             case 21:
-                pass
+                update_student_gpa(students)
             case 22:
                 pass
             case 23:

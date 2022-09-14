@@ -344,6 +344,7 @@ def find_highest_gpa_by_subject(subjects, courses):
 
 
 def sort_course(courses):
+    """This method sort transcripts in a given course."""
     course_id = input('Mã lớp cần sắp xếp: ')
     try:
         if is_course_id_valid(course_id):
@@ -532,3 +533,22 @@ def write_data_to_file(data, file_name):
     with open(file_name, 'w', encoding='UTF-8') as writer:
         for item in data:
             writer.write(item.output_data_format())
+
+
+def update_student_gpa(students):
+    """This method update gpa of given student."""
+    student_id = input('Mã sinh viên cần cập nhật: ')
+    try:
+        if is_student_id_valid(student_id):
+            student = find_student_by_id(students, student_id)
+            if student is not None:
+                gpa = input('Điểm gpa thay thế: ')
+                try:
+                    if is_gpa_valid(gpa):
+                        student.gpa = float(gpa)
+                except GpaError as e:
+                    print(e)
+            else:
+                print('==> Sinh viên không tồn tại <==')
+    except StudentIdError as e:
+        print(e)
