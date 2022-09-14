@@ -183,9 +183,9 @@ if __name__ == '__main__':
             case 21:
                 update_student_gpa(students)
             case 22:
-                pass
+                update_credit(subjects)
             case 23:
-                pass
+                update_salary(teachers)
             case 24:
                 pass
             case 25:

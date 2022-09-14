@@ -80,7 +80,7 @@ class Transcript:
 
     def __str__(self):
         return f'{self.transcript_id:<10}{self.student.student_id:10}' \
-               f'{self.student.full_name.__str__():30}{self.gpa:<10}{self.capacity:15}'
+               f'{self.student.full_name.__str__():30}{self.gpa:<10.3}{self.capacity:15}'
 
     def __eq__(self, other):
         return self.__transcript_id == other.transcript_id

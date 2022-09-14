@@ -546,9 +546,49 @@ def update_student_gpa(students):
                 try:
                     if is_gpa_valid(gpa):
                         student.gpa = float(gpa)
+                        print('==> Cập nhật điểm thành công! <==')
                 except GpaError as e:
                     print(e)
             else:
                 print('==> Sinh viên không tồn tại <==')
     except StudentIdError as e:
+        print(e)
+
+
+def update_credit(subjects):
+    """This method update credit for given subject."""
+    subject_id = input('Mã môn học: ')
+    try:
+        if is_subject_id_valid(subject_id):
+            subject = find_subject_by_id(subjects, int(subject_id))
+            if subject is not None:
+                credit = input('Số tín chỉ thay thế: ')
+                try:
+                    if is_credit_valid(credit):
+                        subject.credit = int(credit)
+                        print('==> Cập nhật số tín chỉ thành công! <==')
+                except CreditError as e:
+                    print(e)
+            else:
+                print('==> Môn học cần update không tồn tại. <==')
+    except SubjectIdError as e:
+        print(e)
+
+
+def update_salary(teachers):
+    teacher_id = input('Mã giảng viên cần cập nhật: ')
+    try:
+        if is_teacher_id_valid(teacher_id):
+            teacher = find_teacher_by_id(teachers, teacher_id)
+            if teacher is not None:
+                salary = input('Mức lương thay thế: ')
+                try:
+                    if is_salary_valid(salary):
+                        teacher.salary = int(salary)
+                        print('==> Cập nhật mức lương thành công! <==')
+                except SalaryError as e:
+                    print(e)
+            else:
+                print('==> Giảng viên này không tồn tại! <==')
+    except TeacherIdError as e:
         print(e)

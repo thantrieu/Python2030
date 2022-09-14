@@ -61,7 +61,7 @@ class Student(Person):
         print(self)
 
     def __str__(self):
-        return f'{super().__str__()}{self.student_id:15}{self.gpa:<15.2}' \
+        return f'{super().__str__()}{self.student_id:15}{self.gpa:<15.3}' \
                f'{self.major:15}'
 
     def __eq__(self, other):
