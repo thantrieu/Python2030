@@ -5,8 +5,8 @@ if __name__ == '__main__':
     teachers = read_teachers_from_file()
     subjects = read_subject_from_file()
     courses = read_course_from_file(teachers, subjects)
-    fill_transcript_for_courses(courses, students)
-
+    transcripts = read_transcripts_from_file(students)
+    fill_transcript_for_courses(courses, transcripts)
     # update auto increment id for classes:
     update_course_auto_id(courses)
     update_student_auto_id(students)
@@ -187,15 +187,15 @@ if __name__ == '__main__':
             case 23:
                 update_salary(teachers)
             case 24:
-                pass
+                remove_subject_by_id(subjects)
             case 25:
-                pass
+                remove_student_by_id(students)
             case 26:
-                pass
+                remove_teacher_by_id(teachers)
             case 27:
-                pass
+                remove_course_by_id(courses)
             case 28:
-                pass
+                remove_transcript_by_id(transcripts, courses)
             case 29:
                 if len(students) > 0:
                     write_data_to_file(students, 'STUDENT.DAT')

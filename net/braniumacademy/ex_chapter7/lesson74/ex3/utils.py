@@ -215,13 +215,13 @@ def read_transcripts_from_file(students):
     return transcripts
 
 
-def fill_transcript_for_courses(courses, students):
-    """This method fill transcript """
-    transcripts = read_transcripts_from_file(students)
+def fill_transcript_for_courses(courses, transcripts):
+    """This method assign transcripts into courses."""
     for i in range(len(courses)):
         for j in range(len(transcripts)):
             if courses[i].course_id == transcripts[j].course_id:
                 courses[i].transcripts.append(transcripts[j])
+    return transcripts
 
 
 def show_transcripts(courses):
@@ -576,6 +576,7 @@ def update_credit(subjects):
 
 
 def update_salary(teachers):
+    """This method update salary for given teacher."""
     teacher_id = input('Mã giảng viên cần cập nhật: ')
     try:
         if is_teacher_id_valid(teacher_id):
@@ -591,4 +592,117 @@ def update_salary(teachers):
             else:
                 print('==> Giảng viên này không tồn tại! <==')
     except TeacherIdError as e:
+        print(e)
+
+
+def remove_subject_by_id(subjects):
+    """This method remove a subject by id."""
+    if len(subjects) == 0:
+        print('==> Danh sách môn học trống <==')
+        return
+    subject_id = input('Mã môn học cần xóa: ')
+    try:
+        if is_subject_id_valid(subject_id):
+            subject = find_subject_by_id(subjects, int(subject_id))
+            if subject is not None:
+                confirm = input('Bạn có chắc chắn mốn xóa không?(Y/N) ')
+                if confirm.lower() == 'y' or confirm.lower() == 'yes':
+                    subjects.remove(subject)
+                    print('==> Xóa môn học thành công <==')
+            else:
+                print('==> Môn học này không tồn tại! <==')
+    except SubjectIdError as e:
+        print(e)
+
+
+def remove_student_by_id(students):
+    """This method remove a student by id."""
+    if len(students) == 0:
+        print('==> Danh sách sinh viên trống <==')
+        return
+    student_id = input('Mã sinh viên cần xóa: ')
+    try:
+        if is_student_id_valid(student_id):
+            student = find_student_by_id(students, student_id)
+            if student is not None:
+                confirm = input('Bạn có chắc chắn mốn xóa không?(Y/N) ')
+                if confirm.lower() == 'y' or confirm.lower() == 'yes':
+                    students.remove(student)
+                    print('==> Xóa sinh viên thành công <==')
+            else:
+                print('==> Sinh viên này không tồn tại! <==')
+    except StudentIdError as e:
+        print(e)
+
+
+def remove_teacher_by_id(teachers):
+    """This method remove a teacher by id."""
+    if len(teachers) == 0:
+        print('==> Danh sách giảng viên trống <==')
+        return
+    teacher_id = input('Mã giảng viên cần xóa: ')
+    try:
+        if is_teacher_id_valid(teacher_id):
+            teacher = find_teacher_by_id(teachers, teacher_id)
+            if teacher is not None:
+                confirm = input('Bạn có chắc chắn mốn xóa không?(Y/N) ')
+                if confirm.lower() == 'y' or confirm.lower() == 'yes':
+                    teachers.remove(teacher)
+                    print('==> Xóa giảng viên thành công <==')
+            else:
+                print('==> Giảng viên này không tồn tại! <==')
+    except TeacherIdError as e:
+        print(e)
+
+
+def remove_course_by_id(courses):
+    """This method remove a course by id."""
+    if len(courses) == 0:
+        print('==> Danh sách lơ học trống <==')
+        return
+    course_id = input('Mã lớp học cần xóa: ')
+    try:
+        if is_course_id_valid(course_id):
+            course = find_course_by_id(courses, course_id)
+            if course is not None:
+                confirm = input('Bạn có chắc chắn mốn xóa không?(Y/N) ')
+                if confirm.lower() == 'y' or confirm.lower() == 'yes':
+                    courses.remove(course)
+                    print('==> Xóa lớp học thành công <==')
+            else:
+                print('==> Lớp học này không tồn tại! <==')
+    except CourseIdError as e:
+        print(e)
+
+
+def find_transcript_by_id(transcripts, transcript_id):
+    """This method find and return transcript by id."""
+    for t in transcripts:
+        if t.transcript_id == transcript_id:
+            return t
+    return None  # if not found
+
+
+def remove_transcript_by_id(transcripts, courses):
+    """This method remove a transcript by id."""
+    if len(transcripts) == 0:
+        print('==> Danh sách bảng điểm trống <==')
+        return
+    transcript_id = input('Mã bảng điểm cần xóa: ')
+    try:
+        if is_transcript_id_valid(transcript_id):
+            transcript = find_transcript_by_id(transcripts, int(transcript_id))
+            if transcript is not None:
+                confirm = input('Bạn có chắc chắn mốn xóa không?(Y/N) ')
+                if confirm.lower() == 'y' or confirm.lower() == 'yes':
+                    transcripts.remove(transcript)
+                    # xóa cả trong danh sách lớp để đảm bảo không sót lại dữ liệu thừa
+                    for c in courses:
+                        for t in c.transcripts:
+                            if t == transcript:
+                                c.transcripts.remove(t)
+                    print('==> Xóa bảng điểm thành công <==')
+            else:
+                print('==> Bảng điểm này không tồn tại! <==')
+    except TranscriptIdError as e:
         print(e)
