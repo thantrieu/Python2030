@@ -9,9 +9,8 @@ def is_name_valid(name):
         Độ dài tên hợp lệ từ 2-30 kí tự.
     """
     if 2 <= len(name) <= 30:
-        for c in name.lower():
-            if not c.isalpha() and c != ' ':
-                raise FullNameError(name, 'Họ và tên chứa kí tự không hợp lệ')
+        if re.match(r'\W+|.*[0-9_]+.*', name, re.UNICODE):
+            raise FullNameError(name, 'Họ và tên chứa kí tự không hợp lệ')
         return True
     else:
         raise FullNameError(name, 'Họ và tên quá ngắn hoặc quá dài')
@@ -31,7 +30,7 @@ def is_gpa_valid(gpa_str):
     """Phương thức kiểm tra xem giá trị gpa có hợp lệ không."""
     if len(gpa_str.strip()) == 0:
         raise GpaError(gpa_str, 'Điểm gpa không được để trống')
-    pattern = '^\\d{1}.\\d{1,2}$'  # chi tiết bạn vui lòng xem bài học 9.1
+    pattern = '^\\d{1}.\\d{1,2}|\\d$'  # chi tiết bạn vui lòng xem bài học 9.1
     if re.match(pattern, gpa_str) and 0.0 <= float(gpa_str) <= 4.0:
         return True
     else:
@@ -42,28 +41,28 @@ def is_credit_valid(credit_str):
     """Phương thức kiểm tra số tín chỉ có hợp lệ không."""
     if len(credit_str.strip()) == 0:
         raise CreditError(credit_str, 'Số tín chỉ không thể bỏ trống')
-    if credit_str.isdigit() and 1 <= int(credit_str) <= 15:
+    if re.match(r'\d+', credit_str) and 1 <= int(credit_str) <= 15:
         return True
     raise CreditError(credit_str, 'Số tín chỉ không hợp lệ')
 
 
 def is_salary_valid(salary_str):
     """Phương thức kiểm tra mức lương có hợp lệ không."""
-    if salary_str.strip().isdigit() and int(salary_str) > 0:  # nếu là các con số
+    if re.match(r'\d+', salary_str) and int(salary_str) > 0:  # nếu là các con số > 0
         return True
     raise SalaryError(salary_str, 'Mức lương không hợp lệ')
 
 
 def is_subject_id_valid(subject_id):
     """Phương thức kiểm tra mã môn học có hợp lệ không."""
-    if subject_id.isdigit() and int(subject_id) >= 1000:
+    if re.match(r'\d+', subject_id) and int(subject_id) >= 1000:
         return True
     raise SubjectIdError(subject_id, 'Mã môn học không hợp lệ')
 
 
 def is_transcript_id_valid(transcript_id):
     """Phương thức kiểm tra mã bảng điểm có hợp lệ không."""
-    if transcript_id.isdigit() and int(transcript_id) >= 100:
+    if re.match(r'\d+', transcript_id) and int(transcript_id) >= 100:
         return True
     raise TranscriptIdError(transcript_id, 'Mã bảng đăng ký không hơp lệ')
 
