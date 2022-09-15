@@ -11,9 +11,8 @@ def is_name_valid(name):
         raise FullNameError(name, 'Họ và tên quá ngắn')
     if len(name.strip()) > 40:
         raise FullNameError(name, 'Họ và tên quá dài')
-    for c in name.lower():
-        if not c.isalpha() and c != ' ':
-            raise FullNameError(name, 'Họ và tên chứa kí tự không hợp lệ')
+    elif re.match(r'\W+|.*[0-9_]+.*', name, re.UNICODE):
+        raise FullNameError(name, f'Họ và tên chứa kí tự không hợp lệ')
     return True
 
 
@@ -24,11 +23,10 @@ def is_subject_name_valid(name):
     """
     if len(name.strip()) < 2:
         raise SubjectNameError(name, 'Tên môn học quá ngắn')
-    if len(name.strip()) > 50:
+    elif len(name.strip()) > 50:
         raise SubjectNameError(name, 'Tên môn học quá dài')
-    for c in name.lower():
-        if not c.isalnum() and c != ' ' and c != '+' and c != '#' and c != '.':
-            raise SubjectNameError(name, 'Tên môn học không hợp lệ')
+    elif not re.match(r'\w+|.*[+#.].*', name):
+        raise SubjectNameError(name, 'Tên môn học không hợp lệ')
     return True
 
 
@@ -46,7 +44,7 @@ def is_person_id_valid(person_id):
 
 def is_birth_date_valid(birth_date):
     """Phương thức kiểm tra xem ngày sinh có hợp lệ không."""
-    if len(birth_date.strip()) < 10:
+    if len(birth_date.strip()) != 10:
         raise BirthDateError(birth_date, 'Ngày sinh không đúng định dạng')
     pattern = '^\\d{2}/\\d{2}/\\d{4}$'  # chi tiết bạn vui lòng xem bài học 9.1
     if re.match(pattern, birth_date.strip()):
@@ -58,7 +56,7 @@ def is_gpa_valid(gpa_str):
     """Phương thức kiểm tra xem giá trị gpa có hợp lệ không."""
     if len(gpa_str.strip()) == 0:
         raise GpaError(gpa_str, 'Điểm gpa không được để trống')
-    pattern = '^\\d.\\d{1,2}$'  # chi tiết bạn vui lòng xem bài học 9.1
+    pattern = '^\\d.\\d{1,2}|\\d$'  # chi tiết bạn vui lòng xem bài học 9.1
     if re.match(pattern, gpa_str):
         return True
     else:
@@ -69,7 +67,7 @@ def is_student_id_valid(student_id):
     """Phương thức kiểm tra mã sinh viên cho trước có hợp lệ không."""
     if len(student_id) == 0:
         raise StudentIdError(student_id, 'Mã sinh viên rỗng')
-    pattern = 'SV\\d{4}'
+    pattern = '^SV\\d{4}$'
     if re.match(pattern, student_id, re.IGNORECASE) and int(student_id[2:]) >= 1000:
         return True
     raise StudentIdError(student_id, 'Mã sinh viên không hợp lệ')
@@ -79,7 +77,7 @@ def is_credit_valid(credit_str):
     """Phương thức kiểm tra số tín chỉ có hợp lệ không."""
     if len(credit_str.strip()) == 0:
         raise CreditError(credit_str, 'Số tín chỉ không thể để trống')
-    if credit_str.isdigit():
+    if re.match(r'\d+', credit_str):
         return True
     raise CreditError(credit_str, 'Số tín chỉ không hợp lệ')
 

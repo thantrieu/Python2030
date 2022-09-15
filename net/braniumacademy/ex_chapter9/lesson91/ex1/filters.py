@@ -32,7 +32,7 @@ def is_name_valid(name):
     """
     if len(name.strip()) < 2 or len(name.strip()) > 30:  # nếu chuỗi rỗng -> tên k hợp lệ
         raise FullNameError(name, f'Họ và tên phải có từ 2-30 kí tự')
-    elif not re.match(r'\w+', name, re.IGNORECASE):
+    elif re.match(r'\W+|.*[0-9_]+.*', name, re.UNICODE):
         raise FullNameError(name, f'Họ và tên chứa kí tự không hợp lệ')
     return True
 
