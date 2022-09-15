@@ -4,7 +4,7 @@ from utils import *
 if __name__ == '__main__':
     try:
         student = create_student()
-        print('Thông tin sinh viên:')
+        print('==> Thông tin học sinh: <==')
         show_student_info(student)
     except ValueError as e:
         print(e)
