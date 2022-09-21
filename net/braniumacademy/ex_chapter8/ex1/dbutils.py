@@ -258,3 +258,19 @@ def find_subject_by_student_id(student_id):
     my_cursor = conn.cursor()
     my_cursor.execute(sql)
     return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def find_student_by_subject_id(subject_id):
+    """
+    Hàm tìm và trả về danh sách các sinh viên đã đăng ký môn học x.
+    :param subject_id: mã môn cần tìm
+    :return: các sv đã đk môn học có mã x
+    """
+    conn = get_db_connect()
+    sql = f'SELECT s.* ' \
+          f'FROM register r, student s ' \
+          f'WHERE r.subject_id=\'{subject_id}\' ' \
+          f'AND s.student_id = r.student_id;'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc

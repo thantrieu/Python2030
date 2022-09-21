@@ -256,7 +256,7 @@ def show_registers(registers):
         print(r)
 
 
-def find_registed_subject(registers):
+def find_registed_subject():
     """Phương thức dùng để tìm môn học đã đăng ký."""
     student_id = input('Nhập mã sinh viên: ').strip().upper()
     try:
@@ -274,15 +274,16 @@ def find_registed_subject(registers):
         print(e)
 
 
-def find_student_by_subject(registers):
+def find_student_by_subject(students):
     """Phương thức tìm sinh viên đăng ký theo môn học."""
     subject_id = int(input('Nhập mã môn học(số nguyên 4 chữ số): '))
     try:
         if is_subject_id_valid(f'{subject_id}'):
             result = []
-            for r in registers:
-                if r.subject.subject_id == subject_id:
-                    result.append(r.student)
+            data = find_student_by_subject_id(subject_id)
+            for d in data:
+                student = find_student_by_id(students, d[0])
+                result.append(student)
             if len(result) > 0:
                 print(f'==> Danh sách sinh viên đã đăng ký môn học mã {subject_id}: ')
                 show_students(result)

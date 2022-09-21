@@ -100,12 +100,12 @@ if __name__ == '__main__':
                     print('==> Danh sách đăng ký rỗng <==')
             case 10:
                 if len(registers) > 0:
-                    find_registed_subject(registers)
+                    find_registed_subject()
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
             case 11:
                 if len(registers) > 0:
-                    find_student_by_subject(registers)
+                    find_student_by_subject(students)
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
             case 12:
