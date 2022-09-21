@@ -21,16 +21,21 @@ if __name__ == '__main__':
              '10. Liệt kê danh sách môn học mà sinh viên đăng ký.\n' \
              '11. Liệt kê danh sách sinh viên đăng ký theo mã môn.\n' \
              '12. Thống kê số lượng sinh viên đăng ký theo từng môn học.\n' \
-             '13. Cho biết thông tin bản ghi đăng ký sớm nhất.\n' \
-             '14. Cho biết thông tin bản ghi đăng ký muộn nhất.\n' \
-             '15. Cập tên môn học theo mã môn học.\n' \
-             '16. Cập nhật số tín chỉ theo mã môn học.\n' \
-             '17. Cập nhật họ và tên SV theo mã sinh viên.\n' \
-             '18. Cập nhật điểm cho sinh viên theo mã sinh viên.\n' \
-             '19. xóa bỏ một bản đăng ký theo mã đăng ký.\n' \
-             '20. Lưu dữ liệu và file.\n' \
-             '21. Kết thúc chương trình.\n' \
-             'Xin mời chọn chức năng(1-21): '
+             '13. Thống kê số lượng sinh viên theo từng thành phố.\n' \
+             '14. Liệt kê các sinh viên có điểm TB >= 3.2.\n' \
+             '15. Liệt kê các sinh viên cùng tên, cùng thành phố và cùng năm sinh.\n' \
+             '16. Liệt kê top 5 sinh viên đăng ký sớm nhất.\n' \
+             '17. Liệt kê top 5 sinh viên có điểm TB cao nhất..\n' \
+             '18. Tìm các sinh viên có điểm TB cao thứ 2.\n' \
+             '19. Liệt kê danh sách các sinh viên đăng ký nhiều môn học nhất.\n' \
+             '20. Liệt kê danh sách các sinh viên không đăng ký môn học nào.\n' \
+             '21. Cho biết thông tin bản ghi của bản đăng ký sớm nhất.\n' \
+             '22. Cho biết thông tin bản ghi của bản đăng ký muộn nhất.\n' \
+             '23. Cập nhật họ và tên cho sinh viên theo mã sinh viên. Có xử lý ngoại lệ.\n' \
+             '24. Cập nhật điểm cho sinh viên theo mã sinh viên. Có xử lý ngoại lệ.\n' \
+             '26. Lưu dữ liệu và file.\n' \
+             '25. Kết thúc chương trình.\n' \
+             'Xin mời chọn chức năng(1-25): '
     while True:
         choice = int(input(option))
         match choice:
@@ -146,11 +151,7 @@ if __name__ == '__main__':
             case 21:
                 print('==> WOOHO... Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy! <==')
                 break
-            case 22:
-                table_name = 'register'
-                column_name = 'id'
-                record_id = input('Mã Môn học cần kiểm tra dạng 1000: ').strip()
-                result = is_recourd_existed(table_name, column_name, record_id)
-                print(result)
+            case 25:
+                print('==> Chương trình kết thúc. <==')
             case _:
                 print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-18. <==')
