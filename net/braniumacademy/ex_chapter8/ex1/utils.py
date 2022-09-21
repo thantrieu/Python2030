@@ -1,5 +1,3 @@
-from collections import OrderedDict
-from operator import itemgetter
 from register import Register
 from subject import Subject
 from student import Student
@@ -14,9 +12,11 @@ def create_student():
     pid = input('Số CMND/CCCD: ')
     name = input('Họ và tên: ')
     birth_date = input('Ngày sinh: ')
+    address = input('Địa chỉ(vd phường 5-Quận 7-HCM city): ')
+    email = input('Email: ')
     major = input('Chuyên ngành: ')
     gpa = input('Điểm TB: ')
-    return Student(pid, name, birth_date, None, gpa, major)
+    return Student(pid, name, birth_date, address, None, email, gpa, major)
 
 
 def find_full_name_by_id(list_name, name_id):
@@ -336,6 +336,17 @@ def latest_register(registers):
             result.append(r)
     print('==> Bản đăng ký muộn nhất: ')
     show_registers(result)
+
+
+def stat_student_by_city():
+    """
+    Hàm thống kê lượng sv theo từng thành phố.
+    :return: None
+    """
+    result = stat_number_of_student_by_city()
+    print(f'{"Thành phố":25}{"Lượng SV":15}')
+    for r in result:
+        print(f'{r[0]:25}{r[1]:<15}')
 
 
 def update_student_auto_id(students):

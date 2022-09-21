@@ -114,33 +114,38 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
             case 13:
+                if len(students) > 0:
+                    stat_student_by_city()
+                else:
+                    print('==> Danh sách sinh viên rỗng <==')
+            case 14:
                 if len(registers) > 0:
                     sort_registers(registers)
                     earliest_register(registers)
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
-            case 14:
+            case 15:
                 if len(registers) > 0:
                     sort_registers(registers)
                     latest_register(registers)
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
-            case 15:
-                if len(subjects) > 0:
-                    update_subject_name(subjects)
             case 16:
                 if len(subjects) > 0:
-                    update_subject_credit(subjects)
+                    update_subject_name(subjects)
             case 17:
-                if len(students) > 0:
-                    update_student_name(students)
+                if len(subjects) > 0:
+                    update_subject_credit(subjects)
             case 18:
                 if len(students) > 0:
-                    update_student_gpa(students)
+                    update_student_name(students)
             case 19:
+                if len(students) > 0:
+                    update_student_gpa(students)
+            case 20:
                 if len(registers) > 0:
                     remove_register(registers)
-            case 20:
+            case 21:
                 if len(students) > 0:
                     save_students(students)
                     print('==> Ghi danh sách sinh viên ra CSDL thành công! <==')
@@ -150,10 +155,8 @@ if __name__ == '__main__':
                 if len(registers) > 0:
                     save_registers(registers)
                     print('==> Ghi danh sách đăng ký ra CSDL thành công! <==')
-            case 21:
+            case 25:
                 print('==> WOOHO... Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy! <==')
                 break
-            case 25:
-                print('==> Chương trình kết thúc. <==')
             case _:
                 print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-18. <==')

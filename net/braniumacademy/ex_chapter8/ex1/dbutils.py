@@ -291,3 +291,19 @@ def stat_register_by_subject():
     my_cursor = conn.cursor()
     my_cursor.execute(sql)
     return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def stat_number_of_student_by_city():
+    """
+    Hàm thống kê số lượng sv ở từng thành phố.
+    :return: số lượng sv từng thành phố sx giảm dần
+    """
+    conn = get_db_connect()
+    sql = f'SELECT a.city, COUNT(s.student_id) AS number_student ' \
+          f'FROM address a, student s ' \
+          f'WHERE a.id=s.address_id ' \
+          f'GROUP BY a.city ' \
+          f'ORDER BY number_student DESC;'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
