@@ -384,22 +384,40 @@ def update_register_auto_id(registers):
     Register.AUTO_ID = max_id + 1
 
 
-def update_subject_name(subjects):
-    """Phương thức cập nhật tên môn học theo mã môn cho trước."""
-    subject_id = input('Mã môn học cần cập nhật: ')
-    try:
-        if is_subject_id_valid(subject_id):
-            subject = find_subject_by_id(subjects, int(subject_id))
-            if subject is not None:
-                name = input('Tên môn học thay thế: ')
-                try:
-                    if is_subject_name_valid(name):
-                        subject.subject_name = name
-                        print('==> Cập nhật tên môn học thành công! <==')
-                except SubjectNameError as e:
-                    print(e)
-    except SubjectIdError as e:
-        print(e)
+def top5_register_earliest(students):
+    """
+    Hàm thống kê top 5 sv đăng ký sớm nhất.
+    :param students: danh sách sinh viên
+    :return: None
+    """
+    result = find_top5_earliest()
+    title = f'{"CMND/CCCD":15}' \
+            f'{"Họ và tên":30}{"Địa chỉ":35}' \
+            f'{"Ngày sinh":20}{"Mã SV":15}' \
+            f'{"Email":30}{"C.Ngành":15}' \
+            f'{"Gpa":15}{"Thời gian ĐK":35}'
+    print(title)
+    for r in result:
+        student = find_student_by_id(students, r[0])
+        print(f'{student}{r[1]}')
+
+
+def top5_register_latest(students):
+    """
+        Hàm thống kê top 5 sv đăng ký muộn nhất.
+        :param students: danh sách sinh viên
+        :return: None
+        """
+    result = find_top5_latest()
+    title = f'{"CMND/CCCD":15}' \
+            f'{"Họ và tên":30}{"Địa chỉ":35}' \
+            f'{"Ngày sinh":20}{"Mã SV":15}' \
+            f'{"Email":30}{"C.Ngành":15}' \
+            f'{"Gpa":15}{"Thời gian ĐK":35}'
+    print(title)
+    for r in result:
+        student = find_student_by_id(students, r[0])
+        print(f'{student}{r[1]}')
 
 
 def update_subject_credit(subjects):

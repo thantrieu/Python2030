@@ -324,6 +324,36 @@ def find_good_student():
     return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
 
 
+def find_top5_earliest():
+    """
+    Hàm tìm top 5 sinh viên đăng ký sớm nhất
+    :return: danh sách sinh viên thỏa mãn
+    """
+    conn = get_db_connect()
+    sql = f'SELECT r.student_id, r.register_time ' \
+          f'FROM register r ' \
+          f'ORDER BY r.register_time ASC ' \
+          f'LIMIT 5;'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def find_top5_latest():
+    """
+    Hàm tìm top 5 sinh viên đăng ký muộn nhất
+    :return: danh sách sinh viên thỏa mãn
+    """
+    conn = get_db_connect()
+    sql = f'SELECT r.student_id, r.register_time ' \
+          f'FROM register r ' \
+          f'ORDER BY r.register_time DESC ' \
+          f'LIMIT 5;'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
 def student_in_same_city():
     """
     Hàm liệt kê các sv cùng 1 thành phố.

@@ -129,10 +129,11 @@ if __name__ == '__main__':
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
             case 16:
-                pass
+                if len(students) > 0:
+                    top5_register_earliest(students)
             case 17:
-                if len(subjects) > 0:
-                    update_subject_name(subjects)
+                if len(students) > 0:
+                    top5_register_latest(students)
             case 18:
                 if len(subjects) > 0:
                     update_subject_credit(subjects)
