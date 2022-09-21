@@ -164,6 +164,13 @@ def sort_registers(registers):
                    )
 
 
+def stat_student_same_city():
+    result = student_in_same_city()
+    print('==> Danh sách sinh viên cùng thành phố: <==')
+    for r in result:
+        print(r)
+
+
 def update_student_name(students):
     """Phương thức dùng để cập nhật tên sinh viên theo mã sinh viên cho trước."""
     student_id = input('Mã sinh viên cần cập nhật: ')
@@ -421,20 +428,20 @@ def find_register_by_id(registers, reg_id):
     return None
 
 
-def remove_register(registers):
-    """Phương thức xóa bản đăng ký theo mã đăng ký cho trước."""
-    reg_id = input('Mã bản đăng ký cần xóa: ')
-    try:
-        if is_register_id_valid(reg_id):
-            confirm = input('Bạn chắc chắn muốn xóa bản đăng ký này(Y/N)?')
-            if confirm.lower() == 'y' or confirm.lower() == 'yes':
-                reg = find_register_by_id(registers, int(reg_id))
-                if reg is not None:
-                    registers.remove(reg)
-                    print('==> Xóa bản đăng ký thành công! <==')
-                else:
-                    print('==> Không tìm thấy bản đăng ký cần xóa! <==')
-            else:
-                print('==> Việc xóa bản đăng ký đã được hủy bỏ <==')
-    except RegisterIdError as e:
-        print(e)
+def stat_good_students():
+    data = find_good_student()
+    students = []
+    list_bith_date = get_all_birth_date()
+    list_full_name = get_all_full_name()
+    list_address = get_all_address()
+    for s in data:
+        name = find_full_name_by_id(list_full_name, s[2])
+        fname = FullName(name[0], name[1], name[3], name[2])
+        addr = find_address_by_id(list_address, s[3])
+        address = Address(addr[0], addr[3], addr[1], addr[2])
+        dob = find_birth_date_by_id(list_bith_date, s[4])
+        birth_date = BirthDate(dob[0], dob[1], dob[2], dob[3])
+        students.append(Student(s[1], fname, birth_date,
+                                address, s[0], s[5], s[6], s[7]))
+    print('==> Danh sách sinh viên loại giỏi trở lên: ')
+    show_students(students)

@@ -307,3 +307,36 @@ def stat_number_of_student_by_city():
     my_cursor = conn.cursor()
     my_cursor.execute(sql)
     return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def find_good_student():
+    """
+    Hàm tìm danh sách sinh viên có điểm TB >= 3.2
+    :return: danh sách sinh viên thỏa mãn
+    """
+    conn = get_db_connect()
+    sql = f'SELECT * ' \
+          f'FROM student ' \
+          f'WHERE gpa >= 3.2 ' \
+          f'ORDER BY gpa DESC;'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def student_in_same_city():
+    """
+    Hàm liệt kê các sv cùng 1 thành phố.
+    :return: số lượng sv từng thành phố sx giảm dần
+    """
+    conn = get_db_connect()
+    sql = 'WITH cities AS (SELECT city FROM address) ' \
+          'SELECT a.city, s.* FROM ' \
+          'address a INNER JOIN student s ' \
+          'ON a.id = s.address_id, cities ' \
+          'WHERE a.city = cities.city ' \
+          'GROUP BY a.city, s.student_id ' \
+          'ORDER BY a.city ASC;'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
