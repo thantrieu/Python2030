@@ -110,7 +110,7 @@ if __name__ == '__main__':
                     print('==> Danh sách đăng ký rỗng <==')
             case 12:
                 if len(registers) > 0:
-                    statistics_by_subject(registers, subjects)
+                    statistics_by_subject()
                 else:
                     print('==> Danh sách đăng ký rỗng <==')
             case 13:

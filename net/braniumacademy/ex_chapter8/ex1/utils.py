@@ -309,16 +309,12 @@ def print_statistic(order_dct, subjects):
         print(f'{subject.subject_name:35}: {order_dct[item]:<10}')
 
 
-def statistics_by_subject(registers, subjects):
+def statistics_by_subject():
     """Phương thức thống kê sv đăng ký theo môn học."""
-    subject_dct = {}
-    for r in registers:
-        if r.subject.subject_id not in subject_dct:
-            subject_dct[r.subject.subject_id] = 1
-        else:
-            subject_dct[r.subject.subject_id] += 1
-    order_dct = OrderedDict(sorted(subject_dct.items(), key=itemgetter(1), reverse=True))
-    print_statistic(order_dct, subjects)
+    result = stat_register_by_subject()
+    print(f'{"Mã môn học":15}{"Tên môn học":35}{"Số SV đăng ký":15}')
+    for item in result:
+        print(f'{item[0]:<15}{item[1]:35}{item[2]:<15}')
 
 
 def earliest_register(registers):

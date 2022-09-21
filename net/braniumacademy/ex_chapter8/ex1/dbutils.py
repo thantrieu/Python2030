@@ -274,3 +274,20 @@ def find_student_by_subject_id(subject_id):
     my_cursor = conn.cursor()
     my_cursor.execute(sql)
     return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def stat_register_by_subject():
+    """
+    Hàm thống kê số lượng đăng ký theo từng môn học.
+    Sx giảm dần theo số lượng đk
+    :return: danh sách kết quả thống kê đc
+    """
+    conn = get_db_connect()
+    sql = f'SELECT s.id, s.name, COUNT(r.student_id) AS number_register ' \
+          f'FROM register r, subject s ' \
+          f'WHERE r.subject_id=s.id ' \
+          f'GROUP BY s.id, s.name ' \
+          f'ORDER BY number_register DESC;'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
