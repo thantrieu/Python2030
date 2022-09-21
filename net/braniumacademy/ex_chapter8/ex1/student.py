@@ -77,11 +77,3 @@ class Student(Person):
                f'{self.address.__str__():35}' \
                f'{self.birth_date.__str__():20}{self.student_id:15}' \
                f'{self.email:30}{self.major:15}{self.gpa:<15}'
-
-    def file_output_format(self):
-        return f'({self.student_id},' \
-               f'{self.person_id},' \
-               f'{self.full_name},' \
-               f'{self.birth_date},' \
-               f'{self.gpa},' \
-               f'{self.major})'

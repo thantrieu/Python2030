@@ -249,7 +249,8 @@ def show_subjects(subjects):
 
 def show_registers(registers):
     """Phương thức dùng để hiển thị danh sách đăng ký."""
-    title = f'{"Mã ĐK":10}{"Mã SV":15}{"Mã MH":15}{"Thời gian đăng ký":30}'
+    title = f'{"Mã ĐK":10}{"Mã sinh viên":15}{"Tên sinh viên":35}' \
+            f'{"Mã môn học":15}{"Tên môn học":35}{"Thời gian đăng ký":30}'
     print(title)
     for r in registers:
         print(r)
@@ -257,14 +258,13 @@ def show_registers(registers):
 
 def find_registed_subject(registers):
     """Phương thức dùng để tìm môn học đã đăng ký."""
-    sort_registers(registers)
     student_id = input('Nhập mã sinh viên: ').strip().upper()
     try:
         if is_student_id_valid(student_id):
             result = []
-            for r in registers:
-                if r.student.student_id == student_id:
-                    result.append(r.subject)
+            data = find_subject_by_student_id(student_id)
+            for d in data:
+                result.append(Subject(d[0], d[1], d[2]))
             if len(result) > 0:
                 print(f'==> Danh sách môn học sinh viên mã {student_id} đã đăng ký: ')
                 show_subjects(result)

@@ -125,6 +125,13 @@ def insert_birth_date(data):
 
 
 def find_full_name_by_data(first, mid, last):
+    """
+    Hàm tìm thông tin họ tên cho trước đã tồn tại trong CSDL chưa.
+    :param first: tên
+    :param mid: đệm
+    :param last: họ
+    :return: Dòng dữ liệu truy vấn được
+    """
     conn = get_db_connect()
     sql = f'SELECT * FROM full_name ' \
           f'WHERE first_name =\'{first}\' ' \
@@ -184,6 +191,13 @@ def insert_subject(data):
 
 
 def is_recourd_existed(table_name, column_name, record_id):
+    """
+    Hàm kiểm tra xem bản ghi trong bảng cho trước đã tồn tại chưa
+    :param table_name: tên bảng
+    :param column_name: tên cột cần ktra
+    :param record_id: giá trị của cột tương ứng
+    :return: True nếu bản ghi đã tồn tại và False nếu ngược lại
+    """
     conn = get_db_connect()
     sql = f'SELECT * FROM {table_name} WHERE {column_name}=\'{record_id}\''
     my_cursor = conn.cursor()
@@ -211,6 +225,13 @@ def insert_register(data):
 
 
 def is_register_existed(student_id, subject_id):
+    """
+    Hàm kiểm tra xem bản đăng ký của một sinh viên nào đó đã có trong bảng đăng ký chưa.
+    Mỗi sinh viên với 1 môn học trong 1 kỳ học chỉ được đăng ký 1 lần duy nhất.
+    :param student_id: mã sinh viên
+    :param subject_id: mã môn mà sv đó đăng ký
+    :return: True nếu sinh viên x đã đăng ký môn học y và False nếu ngược lại.
+    """
     conn = get_db_connect()
     sql = f'SELECT * FROM register ' \
           f'WHERE student_id=\'{student_id}\' ' \
@@ -221,3 +242,19 @@ def is_register_existed(student_id, subject_id):
     if row is not None:
         return True
     return False
+
+
+def find_subject_by_student_id(student_id):
+    """
+    Hàm tìm và trả về danh sách các môn học mà sinh viên có mã cho trước đã đăng ký.
+    :param student_id: mã sinh viên cần tìm
+    :return: các môn học mà sv mã x đã đăng ký
+    """
+    conn = get_db_connect()
+    sql = f'SELECT s.* ' \
+          f'FROM register r, subject s ' \
+          f'WHERE r.student_id=\'{student_id}\' ' \
+          f'AND s.id = r.subject_id;'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc

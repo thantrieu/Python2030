@@ -33,7 +33,6 @@ if __name__ == '__main__':
              '22. Cho biết thông tin bản ghi của bản đăng ký muộn nhất.\n' \
              '23. Cập nhật họ và tên cho sinh viên theo mã sinh viên. Có xử lý ngoại lệ.\n' \
              '24. Cập nhật điểm cho sinh viên theo mã sinh viên. Có xử lý ngoại lệ.\n' \
-             '26. Lưu dữ liệu và file.\n' \
              '25. Kết thúc chương trình.\n' \
              'Xin mời chọn chức năng(1-25): '
     while True:
@@ -43,6 +42,7 @@ if __name__ == '__main__':
                 try:
                     new_student = create_student()
                     students.append(new_student)
+                    save_students([new_student])  # insert this student into table student
                     print('==> Tạo mới sinh viên thành công! <==')
                 except ValueError as e:
                     print(e)
@@ -50,6 +50,7 @@ if __name__ == '__main__':
                 try:
                     new_subject = create_subject()
                     subjects.append(new_subject)
+                    save_subjects([new_subject])  # insert into table subject
                     print('==> Tạo mới môn học thành công! <==')
                 except ValueError as e:
                     print(e)
@@ -57,6 +58,7 @@ if __name__ == '__main__':
                 new_register = create_register(registers, students, subjects)
                 if new_register is not None:
                     registers.append(new_register)
+                    save_registers([new_register])
                     print('==> Đăng ký môn học thành công! <==')
                 else:
                     print('==> Tạo bản đăng ký thất bại.')

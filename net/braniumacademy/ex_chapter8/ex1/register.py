@@ -61,11 +61,6 @@ class Register:
 
     def __str__(self):
         return f'{self.register_id:<10}{self.student.student_id:15}' \
-               f'{self.subject.subject_id:<15}' \
+               f'{self.student.full_name.__str__():35}{self.subject.subject_id:<15}' \
+               f'{self.subject.subject_name:35}' \
                f'{self.register_time.strftime("%d/%m/%Y %H:%M:%S"):30}'
-
-    def file_output_format(self):
-        return f'{self.register_id}\n' \
-               f'{self.subject.subject_id}\n' \
-               f'{self.student.student_id}\n' \
-               f'{self.register_time.strftime("%d/%m/%Y %H:%M:%S")}\n'
