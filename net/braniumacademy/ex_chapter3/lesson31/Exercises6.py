@@ -74,11 +74,12 @@ def factorize_primes2(n):
     print()
 
 
-number = int(input("Enter an integer number: "))
-print(f"Next prime number: {next_prime_number(number)}")
-result = previous_prime_number(number)
-print(f"Previous prime number: {'NOT AVAILABLE' if result < 0 else result}")
-print("Factor n into prime factors: ")
-factorize_primes(number)
-print("Factor n into prime factors v2: ")
-factorize_primes2(number)
+if __name__ == '__main__':
+    number = int(input("Enter an integer number: "))
+    print(f"Next prime number: {next_prime_number(number + 1)}")
+    result = previous_prime_number(number - 1)
+    print(f"Previous prime number: {'NOT AVAILABLE' if result < 0 else result}")
+    print("Factor n into prime factors: ")
+    factorize_primes(number)
+    print("Factor n into prime factors v2: ")
+    factorize_primes2(number)
