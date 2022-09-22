@@ -136,7 +136,7 @@ if __name__ == '__main__':
                     top5_register_latest(students)
             case 18:
                 if len(subjects) > 0:
-                    update_subject_credit(subjects)
+                    stat_scond_max_gpa(students)
             case 19:
                 if len(registers) > 0:
                     stat_most_register_students(students)

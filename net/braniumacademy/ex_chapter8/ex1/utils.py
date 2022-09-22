@@ -226,8 +226,23 @@ def student_not_register(students):
         print(student)
 
 
+def stat_scond_max_gpa(students):
+    result = find_second_max_gpa()
+    print('==> Danh sách sinh viên có điểm TB cao thứ hai: ')
+    title = f'{"CMND/CCCD":15}' \
+            f'{"Họ và tên":30}{"Địa chỉ":35}' \
+            f'{"Ngày sinh":20}{"Mã SV":15}' \
+            f'{"Email":30}{"C.Ngành":15}' \
+            f'{"Gpa":15}'
+    print(title)
+    for r in result:
+        student = find_student_by_id(students, r[0])
+        print(student)
+
+
 def stat_most_register_students(students):
     result = student_most_register()
+    print('==> Danh sách sinh viên đăng ký sớm nhất: ')
     title = f'{"CMND/CCCD":15}' \
             f'{"Họ và tên":30}{"Địa chỉ":35}' \
             f'{"Ngày sinh":20}{"Mã SV":15}' \

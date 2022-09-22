@@ -392,7 +392,6 @@ def student_most_register():
     Hàm tìm các sinh viên đăng ký nhiều môn học nhất
     :return: danh sách sinh viên thỏa mãn
     """
-    print('==> Danh sách sinh viên đăng ký sớm nhất: ')
     conn = get_db_connect()
     sql = 'SELECT student_id, COUNT(*) AS reg_number ' \
           'FROM register ' \
@@ -406,3 +405,22 @@ def student_most_register():
     my_cursor = conn.cursor()
     my_cursor.execute(sql)
     return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def find_second_max_gpa():
+    """
+    Hàm tìm danh sách sinh viên có điểm TB cao thứ hai.
+    :return: Danh sách sinh viên thỏa mãn
+    """
+    sql = 'SELECT student_id FROM student ' \
+          'where gpa = (' \
+          'SELECT MIN(res.gpa) ' \
+          'FROM (SELECT gpa FROM student ' \
+          'GROUP BY gpa ' \
+          'ORDER BY gpa DESC ' \
+          'LIMIT 2) res' \
+          ');'
+    conn = get_db_connect()
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()
