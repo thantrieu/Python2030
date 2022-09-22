@@ -370,3 +370,39 @@ def student_in_same_city():
     my_cursor = conn.cursor()
     my_cursor.execute(sql)
     return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def student_zero_register():
+    """
+    Hàm tìm các sinh viên không đăng ký môn học nào
+    :return: danh sách sinh viên thỏa mãn
+    """
+    conn = get_db_connect()
+    sql = f'SELECT s.student_id ' \
+          f'FROM student s ' \
+          f'WHERE s.student_id NOT IN ' \
+          f'(SELECT student_id FROM register);'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc
+
+
+def student_most_register():
+    """
+    Hàm tìm các sinh viên đăng ký nhiều môn học nhất
+    :return: danh sách sinh viên thỏa mãn
+    """
+    print('==> Danh sách sinh viên đăng ký sớm nhất: ')
+    conn = get_db_connect()
+    sql = 'SELECT student_id, COUNT(*) AS reg_number ' \
+          'FROM register ' \
+          'GROUP BY student_id ' \
+          'HAVING reg_number = (' \
+          'SELECT COUNT(*) AS reg_number ' \
+          'FROM register r ' \
+          'GROUP BY r.student_id ' \
+          'ORDER BY reg_number DESC LIMIT 1' \
+          ');'
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()  # lấy hết các bản ghi tìm đc

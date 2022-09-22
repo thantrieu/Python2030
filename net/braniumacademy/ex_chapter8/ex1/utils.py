@@ -207,6 +207,38 @@ def update_student_gpa(students):
         print(e)
 
 
+def student_not_register(students):
+    """
+    Hàm hiển thị danh sách sinh viên không đăng ký môn học nào cả.
+    :param students: danh sách sinh viên
+    :return: None
+    """
+    print("==> Danh sách sinh viên không đăng ký môn học nào: ")
+    result = student_zero_register()
+    title = f'{"CMND/CCCD":15}' \
+            f'{"Họ và tên":30}{"Địa chỉ":35}' \
+            f'{"Ngày sinh":20}{"Mã SV":15}' \
+            f'{"Email":30}{"C.Ngành":15}' \
+            f'{"Gpa":15}'
+    print(title)
+    for r in result:
+        student = find_student_by_id(students, r[0])
+        print(student)
+
+
+def stat_most_register_students(students):
+    result = student_most_register()
+    title = f'{"CMND/CCCD":15}' \
+            f'{"Họ và tên":30}{"Địa chỉ":35}' \
+            f'{"Ngày sinh":20}{"Mã SV":15}' \
+            f'{"Email":30}{"C.Ngành":15}' \
+            f'{"Gpa":15}{"Số môn ĐK":15}'
+    print(title)
+    for r in result:
+        student = find_student_by_id(students, r[0])
+        print(f'{student}{r[1]:<15}')
+
+
 def save_students(students):
     """Phương thức lưu dữ liệu kiểu x ra database tương ứng"""
     for s in students:

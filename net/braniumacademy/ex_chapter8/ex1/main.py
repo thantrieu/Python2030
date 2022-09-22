@@ -138,11 +138,11 @@ if __name__ == '__main__':
                 if len(subjects) > 0:
                     update_subject_credit(subjects)
             case 19:
-                if len(students) > 0:
-                    update_student_name(students)
+                if len(registers) > 0:
+                    stat_most_register_students(students)
             case 20:
-                if len(students) > 0:
-                    update_student_gpa(students)
+                if len(registers) > 0:
+                    student_not_register(students)
             case 21:
                 if len(registers) > 0:
                     sort_registers(registers)
