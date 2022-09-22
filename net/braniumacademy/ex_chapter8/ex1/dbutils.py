@@ -7,7 +7,7 @@ def get_db_connect():
         host='localhost',
         user='root',
         password='',
-        database='python_exercises_chapter8'
+        database='python_exercises_chapter8'  # thay bằng tên CSDL trên máy tính cá nhân của bạn
     )
     return mydb
 
