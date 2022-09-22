@@ -156,7 +156,7 @@ def update_student_name(students):
                 try:
                     if is_subject_name_valid(full_name):
                         student.full_name = full_name
-                        print('==> Cập nhật điểm cho sinh viên thành công! <==')
+                        print('==> Cập nhật họ tên cho sinh viên thành công! <==')
                 except FullNameError as e:
                     print(e)
     except StudentIdError as e:

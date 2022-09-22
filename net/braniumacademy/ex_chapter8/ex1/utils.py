@@ -177,11 +177,13 @@ def update_student_name(students):
     try:
         if is_student_id_valid(student_id):
             student = find_student_by_id(students, student_id)
+            old_name = student.full_name
             if student is not None:
                 full_name = input('Họ và tên mới: ')
                 try:
                     if is_subject_name_valid(full_name):
                         student.full_name = full_name
+                        update_student_name_db(old_name, student.full_name)
                         print('==> Cập nhật điểm cho sinh viên thành công! <==')
                 except FullNameError as e:
                     print(e)
@@ -200,6 +202,7 @@ def update_student_gpa(students):
                 try:
                     if is_gpa_valid(gpa_str):
                         student.gpa = gpa_str
+                        update_gpa(student.student_id, student.gpa)
                         print('==> Cập nhật điểm cho sinh viên thành công! <==')
                 except GpaError as e:
                     print(e)
@@ -374,9 +377,10 @@ def statistics_by_subject():
 def earliest_register(registers):
     """Phương thức tìm sinh viên đăng ký sớm nhất."""
     result = []
-    for r in registers:
-        if r.register_time == registers[0].register_time:
-            result.append(r)
+    record = find_earliest()
+    for r in record:
+        register = find_register_by_id(registers, r[0])
+        result.append(register)
     print('==> Các bản đăng ký sớm nhất: ')
     show_registers(result)
 
@@ -384,11 +388,11 @@ def earliest_register(registers):
 def latest_register(registers):
     """Phương thức tìm sinh viên đăng ký muộn nhất."""
     result = []
-    size = len(registers)
-    for r in registers:
-        if r.register_time == registers[size - 1].register_time:
-            result.append(r)
-    print('==> Bản đăng ký muộn nhất: ')
+    record = find_latest()
+    for r in record:
+        register = find_register_by_id(registers, r[0])
+        result.append(register)
+    print('==> Các bản đăng ký muộn nhất: ')
     show_registers(result)
 
 

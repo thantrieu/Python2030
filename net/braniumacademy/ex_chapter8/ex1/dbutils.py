@@ -424,3 +424,72 @@ def find_second_max_gpa():
     my_cursor = conn.cursor()
     my_cursor.execute(sql)
     return my_cursor.fetchall()
+
+
+def find_earliest():
+    """
+    Hàm tìm danh sách bản ghi đăng ký sớm nhất
+    :return: danh sách các bản đăng ký sớm nhất
+    """
+    sql = 'SELECT id FROM register ' \
+          'where register_time = (' \
+          'SELECT register_time FROM register ' \
+          'ORDER BY register_time ASC ' \
+          'LIMIT 1' \
+          ');'
+    conn = get_db_connect()
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()
+
+
+def find_latest():
+    """
+    Hàm tìm danh sách bản ghi đăng ký muộn nhất
+    :return: danh sách các bản đăng ký muộn nhất
+    """
+    sql = 'SELECT id FROM register ' \
+          'where register_time = (' \
+          'SELECT register_time FROM register ' \
+          'ORDER BY register_time DESC ' \
+          'LIMIT 1' \
+          ');'
+    conn = get_db_connect()
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    return my_cursor.fetchall()
+
+
+def update_student_name_db(old, name):
+    """
+    Hàm cập nhật thông tin họ tên mới cho sinh viên
+    :param name: tên mới
+    :param old: tên cũ
+    :return: None
+    """
+    old_record = find_full_name_by_data(old.first_name, old.mid_name, old.last_name)
+    sql = f'UPDATE full_name ' \
+          f'SET first_name=\'{name.first_name}\',' \
+          f'last_name=\'{name.last_name}\',' \
+          f'mid_name=\'{name.mid_name}\'' \
+          f'WHERE id = \'{old_record[0]}\''
+    conn = get_db_connect()
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    conn.commit()
+
+
+def update_gpa(student_id, gpa):
+    """
+    Hàm cập nhật điểm cho sinh viên cho trước vào bảng student.
+    :param student_id: mã sv cần update điểm
+    :param gpa: điểm gpa mới
+    :return: None
+    """
+    sql = f'UPDATE student ' \
+          f'SET gpa=\'{gpa}\' ' \
+          f'WHERE student_id = \'{student_id}\''
+    conn = get_db_connect()
+    my_cursor = conn.cursor()
+    my_cursor.execute(sql)
+    conn.commit()
