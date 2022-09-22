@@ -33,8 +33,9 @@ if __name__ == '__main__':
              '22. Cho biết thông tin bản ghi của bản đăng ký muộn nhất.\n' \
              '23. Cập nhật họ và tên cho sinh viên theo mã sinh viên. Có xử lý ngoại lệ.\n' \
              '24. Cập nhật điểm cho sinh viên theo mã sinh viên. Có xử lý ngoại lệ.\n' \
-             '25. Kết thúc chương trình.\n' \
-             'Xin mời chọn chức năng(1-25): '
+             '25. Lưu dữ liệu vào CSDL.\n' \
+             '26. Kết thúc chương trình.\n' \
+             'Xin mời chọn chức năng(1-26): '
     while True:
         choice = int(input(option))
         match choice:
@@ -160,7 +161,17 @@ if __name__ == '__main__':
                 if len(students) > 0:
                     update_student_gpa(students)
             case 25:
+                if len(students) > 0:
+                    save_students(students)
+                    print('==> Ghi danh sách sinh viên ra CSDL thành công! <==')
+                if len(subjects) > 0:
+                    save_subjects(subjects)
+                    print('==> Ghi danh sách môn học ra CSDL thành công! <==')
+                if len(registers) > 0:
+                    save_registers(registers)
+                    print('==> Ghi danh sách đăng ký ra CSDL thành công! <==')
+            case 26:
                 print('==> WOOHO... Cảm ơn bạn đã sử dụng dịch vụ của Branium Academy! <==')
                 break
             case _:
-                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-25. <==')
+                print('==> Lựa chọn không hợp lệ. Vui lòng nhập số 1-26. <==')
