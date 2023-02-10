@@ -17,7 +17,7 @@ else:
     delta = b * b - 4 * a * c
     if delta < 0:
         print("NO SOLUTION")
-    if delta == 0:
+    elif delta == 0:
         print(-b / (2 * a))
     else:
         print(f"{(-b - math.sqrt(delta)) / (2 * a)} {(-b + math.sqrt(delta)) / (2 * a)}")
